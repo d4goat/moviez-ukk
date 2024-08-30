@@ -1,0 +1,79 @@
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+declare module 'vue-router' {
+    interface RouteMeta {
+        pageTitle?: string
+        permission?: string
+    }
+}
+
+const routes: Array<RouteRecordRaw> = [
+    {
+        path: '/register',
+        name: 'register',
+        meta: {
+            pageTitle: 'Register'
+        },
+        component: () => import('@/Pages/auth/SignUp.vue'),
+    },
+    {
+        path: '/',
+        name: 'home',
+        component: () => import('@/Layouts/MainLayout.vue'),
+        meta: {
+            pageTitle: 'Home'
+        },
+        children: [
+            {
+                path: '/',
+                name: 'dashboard',
+                meta: {
+                    pageTitle: 'Dashboard'
+                },
+                component: () => import('@/Pages/Dashboard.vue'),
+            },
+        ]
+    }
+];
+
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes,
+
+    scrollBehavior(to) {
+        if(to.hash) {
+            return {
+                el: to.hash,
+                top: 0,
+                behavior: 'smooth'
+            };
+        } else {
+            return {
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            }
+        }
+    }
+});
+
+router.beforeEach(async (to, from, next) => {
+    if(to.name){
+        NProgress.start();
+    }
+
+    if (to.meta.pageTitle) {
+        document.title = `${to.meta.pageTitle}`;
+    } else {
+        document.title = import.meta.env.VITE_APP_NAME as string;
+    }
+    next()
+});
+
+router.afterEach(() => {
+    NProgress.done()
+})
+
+export default router;
