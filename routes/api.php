@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('auth')->group(function () {
    Route::post('register', [AuthController::class, 'register'])->withoutMiddleware('auth');
+   Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth');
 });

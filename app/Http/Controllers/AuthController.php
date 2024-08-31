@@ -5,9 +5,67 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->post(), [
+                'email' => 'required|email|max:255',
+                'password' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
+            if (!$token = auth()->attempt($validator->validated())) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Email / Password salah!'
+                ], 401);
+            }
+
+            $user = auth()->user();
+
+            $role = $user->role;
+
+            if ($role->id === 1) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login Berhasil',
+                    'user' => auth()->user(),
+                    'token' => $token,
+                    'role' => $role
+                ]);
+            } elseif ($role->id === 2) { {
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Login Berhasil',
+                        'user' => auth()->user(),
+                        'token' => $token,
+                        'role' => $role
+                    ]);
+                }
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function register(Request $request)
     {
         try {

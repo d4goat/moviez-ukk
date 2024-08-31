@@ -18,6 +18,7 @@ import  vueDebounce  from "vue-debounce";
 import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
 import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import '@fortawesome/fontawesome-free/css/all.css'
 
 // import "@/core/plugins/prismjs";
 const app = createApp(App);

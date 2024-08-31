@@ -3,7 +3,7 @@ import JWTService from "@/core/services/JwtService";
 import { formDataToObject } from "./utils"
 
 const axios = Axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_APP_API_URL,
     transformRequest: Axios.defaults.transformRequest
 });
 

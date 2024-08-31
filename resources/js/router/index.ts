@@ -11,6 +11,14 @@ declare module 'vue-router' {
 
 const routes: Array<RouteRecordRaw> = [
     {
+        path: '/login',
+        name: 'login',
+        meta: {
+            pageTitle: 'Login'
+        },
+        component: () => import('@/Pages/auth/SignIn.vue'),
+    },
+    {
         path: '/register',
         name: 'register',
         meta: {

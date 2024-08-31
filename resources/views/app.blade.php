@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>D-Moviez</title>
-        
-
-        <!-- Fonts -->
+        <link rel="icon" href="/images/bg-2.jpg" type="image/x-icon">
 
         @vite('resources/js/main.ts')
     </head>

@@ -54,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    protected $appends = ['permisson', 'role'];
+    protected $appends = ['permission', 'role'];
 
     protected static function booted()
     {
@@ -84,8 +84,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->roles()->first();
     }
 
-    // public function getPermissionAttribute()
-    // {
-    //     return $this->getAllPermissions()->pluck('name');
-    // }
+    public function getPermissionAttribute()
+    {
+        return $this->getAllPermissions()->pluck('name');
+    }
 }

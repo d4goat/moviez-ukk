@@ -1,4 +1,5 @@
 import { toast } from "vue3-toastify";
+import $ from "jquery";
 
 function checkElem(elem) {
     if (typeof elem === "string") {
