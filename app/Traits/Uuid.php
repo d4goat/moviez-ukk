@@ -20,7 +20,7 @@ trait Uuid
         });
     }
 
-    public function findByUuid($uuid)
+    public static function findByUuid($uuid)
     {
         return static::where('uuid', '=', $uuid)->first();
     }

@@ -18,6 +18,7 @@ const formSchema = Yup.object().shape({
 })
 
 function submit () {
+    block(document.getElementById('form-register'));
     const formData = new FormData();
     formData.append('name', user.value.name);
     formData.append('phone', user.value.phone);
@@ -28,7 +29,6 @@ function submit () {
         formData.append('password_confirmation', user.value.passwordConfirmation);
     }
 
-    block(document.getElementById('form-register'));
 
     axios({
         method: 'post',
@@ -39,12 +39,10 @@ function submit () {
         }
     })
     .then(() => {
-        unblock(document.getElementById('form-register'));
         toast.success("Registrasi berhasil!");
         formRef.value.resetForm();
     })
     .catch((error: any) => {
-        formRef.value.setErrors(error.response.data.errors);
         toast.error(error.response.data.message);
     })
     .finally(() => {
@@ -56,80 +54,71 @@ function submit () {
 </script>
 
 <template>
-    <main>
-        <div class="h-screen w-full">
-            <img src="/images/bg-2.jpg" class="absolute md:pl-36 inset-0 w-full h-full object-cover" alt="">
-            <div class="w-[43%] h-full bg-gray-200 z-10 absolute top-0 left-0 p-6 items-center justify-center">
-                <div class="w-full h-full flex items-center justify-center">
-                    <div class="w-full max-w-md flex flex-col border-[1px] border-gray-700 rounded-xl p-6 space-y-4">
-                        <!-- begin:title -->
-                        <h2 class="text-xl font-semibold mb-7 text-center">Registrasi</h2>
-                        <!-- end:title -->
-
-                        <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" class="flex flex-col gap-5">
-                            <!-- begin:input -->
-                            <div class="flex flex-col gap-3">
-                                <!-- begin:title:input -->
-                                <label class="text-lg font-medium">Nama</label>
-                                <!-- end:title:input -->
-                                 <div class="flex flex-col">
-                                     <Field  name="name" type="text" autocomplete="off" v-model="user.name" class="border p-2 rounded bg-transparent" placeholder="Masukkan Nama" />
-                                     <ErrorMessage name="name" class="text-red-500" />
-                                </div>
-                            </div>
-                            <!-- end:input -->
-                            <!-- begin:input -->
-                            <div class="flex flex-col gap-3">
-                                <!-- begin:title:input -->
-                                <label class="text-lg font-medium">Email</label>
-                                <!-- end:title:input -->
-                                 <div class="flex flex-col">
-                                     <Field  name="email" type="text" autocomplete="off" v-model="user.email" class="border p-2 rounded bg-transparent" placeholder="Masukkan Email" />
-                                     <ErrorMessage name="email" class="text-red-500" />
-                                </div>
-                            </div>
-                            <!-- end:input -->
-                            <!-- begin:input -->
-                            <div class="flex flex-col gap-3">
-                                <!-- begin:title:input -->
-                                <label class="text-lg font-medium">No Telepon</label>
-                                <!-- end:title:input -->
-                                 <div class="flex flex-col">
-                                     <Field  name="phone" type="text" autocomplete="off" v-model="user.phone" class="border p-2 rounded bg-transparent" placeholder="Masukkan No Telepon" />
-                                     <ErrorMessage name="phone" class="text-red-500" />
-                                </div>
-                            </div>
-                            <!-- end:input -->
-                            <!-- begin:input -->
-                            <div class="flex flex-col gap-3">
-                                <!-- begin:title:input -->
-                                <label class="text-lg font-medium">Password</label>
-                                <!-- end:title:input -->
-                                 <div class="flex flex-col">
-                                     <Field  name="password" type="password" autocomplete="off" v-model="user.password" class="border p-2 rounded bg-transparent" placeholder="Masukkan Password" />
-                                     <ErrorMessage name="password" class="text-red-500" />
-                                </div>
-                            </div>
-                            <!-- end:input -->
-                            <!-- begin:input -->
-                            <div class="flex flex-col gap-3">
-                                <!-- begin:title:input -->
-                                <label class="text-lg font-medium">Konfirmasi Password</label>
-                                <!-- end:title:input -->
-                                 <div class="flex flex-col">
-                                     <Field  name="passwordConfirmation" type="password" autocomplete="off" v-model="user.passwordConfirmation" class="border p-2 rounded bg-transparent" placeholder="Masukkan Konfirmasi Password" />
-                                     <ErrorMessage name="passwordConfirmation" class="text-red-500" />
-                                </div>
-                            </div>
-                            <!-- end:input -->
-
-                            <div class="flex w-full justify-center mt-3">
-                                <button type="submit" class="bg-sky-600 p-4 rounded-lg text-white text-semibold text-md">Registrasi</button>
-                            </div>
-                        </VForm>
+    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef"  id="form-register" class="w-full h-full flex items-center justify-center">
+        <div class="w-full max-w-md flex flex-col border-[1px] border-gray-700 rounded-xl p-6 space-y-4">
+            <!-- begin:title -->
+            <h2 class="text-xl font-semibold mb-7 text-center">Registrasi</h2>
+            <!-- end:title -->
+            <div class="flex flex-col gap-5">
+                <!-- begin:input -->
+                <div class="flex flex-col gap-3">
+                    <!-- begin:title:input -->
+                    <label class="text-lg font-medium">Nama</label>
+                    <!-- end:title:input -->
+                     <div class="flex flex-col">
+                         <Field  name="name" type="text" autocomplete="off" v-model="user.name" class="border p-2 rounded bg-transparent" placeholder="Masukkan Nama" />
+                         <ErrorMessage name="name" class="text-red-500" />
                     </div>
+                </div>
+                <!-- end:input -->
+                <!-- begin:input -->
+                <div class="flex flex-col gap-3">
+                    <!-- begin:title:input -->
+                    <label class="text-lg font-medium">Email</label>
+                    <!-- end:title:input -->
+                     <div class="flex flex-col">
+                         <Field  name="email" type="text" autocomplete="off" v-model="user.email" class="border p-2 rounded bg-transparent" placeholder="Masukkan Email" />
+                         <ErrorMessage name="email" class="text-red-500" />
+                    </div>
+                </div>
+                <!-- end:input -->
+                <!-- begin:input -->
+                <div class="flex flex-col gap-3">
+                    <!-- begin:title:input -->
+                    <label class="text-lg font-medium">No Telepon</label>
+                    <!-- end:title:input -->
+                     <div class="flex flex-col">
+                         <Field  name="phone" type="text" autocomplete="off" v-model="user.phone" class="border p-2 rounded bg-transparent" placeholder="Masukkan No Telepon" />
+                         <ErrorMessage name="phone" class="text-red-500" />
+                    </div>
+                </div>
+                <!-- end:input -->
+                <!-- begin:input -->
+                <div class="flex flex-col gap-3">
+                    <!-- begin:title:input -->
+                    <label class="text-lg font-medium">Password</label>
+                    <!-- end:title:input -->
+                     <div class="flex flex-col">
+                         <Field  name="password" type="password" autocomplete="off" v-model="user.password" class="border p-2 rounded bg-transparent" placeholder="Masukkan Password" />
+                         <ErrorMessage name="password" class="text-red-500" />
+                    </div>
+                </div>
+                <!-- end:input -->
+                <!-- begin:input -->
+                <div class="flex flex-col gap-3">
+                    <!-- begin:title:input -->
+                    <label class="text-lg font-medium">Konfirmasi Password</label>
+                    <!-- end:title:input -->
+                     <div class="flex flex-col">
+                         <Field  name="passwordConfirmation" type="password" autocomplete="off" v-model="user.passwordConfirmation" class="border p-2 rounded bg-transparent" placeholder="Masukkan Konfirmasi Password" />
+                         <ErrorMessage name="passwordConfirmation" class="text-red-500" />
+                    </div>
+                </div>
+                <!-- end:input -->
+                <div class="flex w-full justify-center mt-3">
+                    <button type="submit" class="bg-sky-600 p-4 rounded-lg text-white text-semibold text-md">Registrasi</button>
                 </div>
             </div>
         </div>
-    </main>
+    </VForm>
 </template>

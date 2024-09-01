@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             pageTitle: 'Login'
         },
-        component: () => import('@/Pages/auth/SignIn.vue'),
+        component: () => import('@/Pages/auth/Index.vue'),
     },
     {
         path: '/register',
@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             pageTitle: 'Register'
         },
-        component: () => import('@/Pages/auth/SignUp.vue'),
+        component: () => import('@/Pages/auth/Index.vue'),
     },
     {
         path: '/',
