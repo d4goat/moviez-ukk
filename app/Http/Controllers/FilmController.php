@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FilmRequest;
 use App\Models\Film;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,11 @@ class FilmController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Film::when();
+        $data = Film::when($request->search, function (Builder $query, string $search){
+            $query->where('title', 'LIKE', "%$search%");
+        })->paginate($per, ['*', DB::raw('@no := +1 AS no')]);
+        
+        return response()->json($data);
     }
 
     /**
@@ -29,8 +34,8 @@ class FilmController extends Controller
     {
         $validate = $request->validated();
 
-        if($request->hasFile('trailer')){
-            $validate['trailer'] = $request->file('trailer')->store('video', 'public');
+        if($request->hasFile('poster')){
+            $validate['poster'] = $request->file('poster')->store('image', 'public');
         }
 
         $film = Film::create($validate);
@@ -69,15 +74,15 @@ class FilmController extends Controller
         $film = Film::findByUuid($uuid);
         $validate = $request->validated();
 
-        if($request->hasFile('trailer')){
-            if($film->trailer){
-                Storage::delete('public/'.$film->trailer);
+        if($request->hasFile('poster')){
+            if($film->poster){
+                Storage::delete('public/'.$film->poster);
             }
-            $validate['trailer'] = $request->file('trailer')->store('video', 'public');
+            $validate['poster'] = $request->file('poster')->store('image', 'public');
         } else {
-            if($film->trailer){
-                Storage::delete('public/'.$film->trailer);
-                $validate['trailer'] = null;
+            if($film->poster){
+                Storage::delete('public/'.$film->poster);
+                $validate['poster'] = null;
             }
         }
 

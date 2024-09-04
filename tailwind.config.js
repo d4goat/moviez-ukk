@@ -16,6 +16,10 @@ export default {
                 'dark-bg' : '#171717',
                 'gradient-left' : '#00d69a',
                 'gradient-right' : '#229ae0',
+                component: '#14171c',
+                dropdown: '#26272e',
+                text: '#000000',
+                border: '#414141',
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],

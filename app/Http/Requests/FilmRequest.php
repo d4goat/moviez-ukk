@@ -22,13 +22,12 @@ class FilmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required|string|max:255'],
-            'description' => ['required|string'],
-            'duration' => ['required|numeric'],
-            'genre' => ['required|string'],
-            'poster' => ['required|string'],
-            'trailer' => ['required|file|mimes:mp4'],
-            'release_date' => ['required|date'],
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'duration' => 'required|numeric',
+            'poster' => 'required|file|mimes:jpg,png,jpeg',
+            'trailer' => 'required|string',
+            'release_date' => 'required|date',
         ];
     }
 }

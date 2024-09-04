@@ -13,6 +13,7 @@ import Inputmask from "inputmask";
 import { initApexCharts } from "@/core/plugins/apexcharts";
 import { initInlineSvg } from "@/core/plugins/inline-svg";
 import { initVeeValidate } from "@/core/plugins/vee-validate";
+import $ from "jquery";
 
 import  vueDebounce  from "vue-debounce";
 import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
@@ -20,12 +21,22 @@ import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import '@fortawesome/fontawesome-free/css/all.css'
 
+import FileUpload from '@/components/FIleUpload.vue';
+import Select2 from '@/components/Select2.vue';
+import Paginate from '@/components/Paginate.vue';
+import DatePicker from '@/components/DatePicker.vue';
+
 // import "@/core/plugins/prismjs";
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.use(ElementPlus);
+
+app.component("file-upload", FileUpload);
+app.component("select2", Select2);
+app.component("paginate", Paginate);
+app.component("date-picker", DatePicker);
 
 app.use(vueDebounce, {
     lock: true,
