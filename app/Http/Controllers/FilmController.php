@@ -39,6 +39,7 @@ class FilmController extends Controller
         }
 
         $film = Film::create($validate);
+        $film->genreFilms()->sync($request->genre_film_id);
 
         if($film){
             return response()->json([
@@ -73,6 +74,8 @@ class FilmController extends Controller
     {
         $film = Film::findByUuid($uuid);
         $validate = $request->validated();
+
+        $film->genreFilms()->sync($request->genre_film_id);
 
         if($request->hasFile('poster')){
             if($film->poster){

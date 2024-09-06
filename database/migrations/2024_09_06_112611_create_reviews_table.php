@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->date('tanggal');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('show_time_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('show_time_id')->references('id')->on('show_times')->onDelete('cascade');
+            $table->unsignedBigInteger('film_id');
+            $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
+            $table->string('review');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('reviews');
     }
 };
