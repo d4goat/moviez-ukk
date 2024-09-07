@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookedSeatController;
+use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
@@ -30,4 +32,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
    Route::post('genre', [GenreController::class, 'index']);
    Route::post('genre/store', [GenreController::class, 'store']);
    Route::apiResource('genre', GenreController::class)->except('index', 'store');
+
+   Route::post('cinema', [CinemaController::class, 'index']);
+   Route::post('cinema/store', [CinemaController::class, 'store']);
+   Route::apiResource('cinema', CinemaController::class)->except('index', 'store');
+
+   Route::post('booked-seat', [BookedSeatController::class, 'index']);
+   Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
+   Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
 });
