@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,11 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
-   Route::post('film', [FilmController::class, 'index'])->withoutMiddleware(['auth', 'verified']);
-   Route::post('film/store', [FilmController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
-   Route::apiResource('film', FilmController::class)->except('index', 'store')->withoutMiddleware(['auth', 'verified']);
+   Route::post('film', [FilmController::class, 'index']);
+   Route::post('film/store', [FilmController::class, 'store']);
+   Route::apiResource('film', FilmController::class)->except('index', 'store');
+
+   Route::post('genre', [GenreController::class, 'index']);
+   Route::post('genre/store', [GenreController::class, 'store']);
+   Route::apiResource('genre', GenreController::class)->except('index', 'store');
 });

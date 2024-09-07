@@ -126,7 +126,6 @@ import axios from "@/libs/axios";
 import { block, unblock } from "@/libs/utils";
 import { toast } from "vue3-toastify";
 import $ from "jquery";
-// import { table } from "console";
 
 export default defineComponent({
     props: {
