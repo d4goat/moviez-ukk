@@ -19,9 +19,12 @@ import { RouterView } from 'vue-router'
                         <router-link class="hover:text-green-600 transition-all" :to="'/'">contact</router-link>
                     </ul>
                 </div>
-                <div class="mx-10 w-1/5">
+                <div class="mx-10 w-1/5 flex gap-4">
                     <ul>
                         <router-link :to="'/register'">Register</router-link>
+                    </ul>
+                    <ul>
+                        <router-link :to="'/login'" >Login</router-link>
                     </ul>
                 </div>
             </div>

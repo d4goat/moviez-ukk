@@ -6,11 +6,13 @@ import { block, unblock } from '@/libs/utils';
 import * as Yup from "yup";
 import { toast } from 'vue3-toastify';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
 const formRef = ref()
 const user = ref<User>({} as User);
 const store = useAuthStore()
 const showPw = ref(false)
+const router = useRouter()
 
 const formSchema = Yup.object().shape({
     email: Yup.string().email('Invalid Email').required().label('Email'),
@@ -24,6 +26,7 @@ function submit() {
         .then((response: any) => {
             store.setAuth(response.data.user, response.data.token);
             toast.success("Login berhasil!");
+            router.push('/')
         })
         .catch((err: any) => {
             toast.error(err.response.data.message);

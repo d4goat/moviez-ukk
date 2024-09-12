@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->date('tanggal');
+            $table->string('quantity');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('show_time_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

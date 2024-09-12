@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('duration');
+            $table->string('producer');
+            $table->string('director');
+            $table->string('writer');
             $table->string('poster')->nullable();
             $table->string('trailer')->nullable();
             $table->date('release_date')->nullable();

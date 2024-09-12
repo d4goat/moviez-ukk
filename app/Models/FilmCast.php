@@ -6,11 +6,13 @@ use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Promotion extends Model
+class FilmCast extends Model
 {
     use HasFactory, Uuid;
-    
-    public function bookings(){
-        return $this->hasMany(Booking::class);
+
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at']; 
+
+    public function films(){
+        return $this->belongsTo(Film::class);
     }
 }

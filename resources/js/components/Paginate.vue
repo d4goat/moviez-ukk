@@ -16,7 +16,7 @@
         <form @submit.prevent="refetch" class="w-full sm:w-auto">
           <input
             type="search"
-            class="form-control form-control-solid"
+            class="form-control form-control-solid rounded"
             placeholder="Search ..."
             v-model="search"
             v-debounce="onSearch"
@@ -26,7 +26,7 @@
   
       <div class="overflow-x-auto mt-4">
         <table class="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
-          <thead class="bg-gray-200">
+          <thead class="">
             <tr
               v-for="headerGroup in table.getHeaderGroups()"
               :key="headerGroup.id"
@@ -85,7 +85,7 @@
               @click="page = data?.current_page - 1"
               class="page-link cursor-pointer"
             >
-              <i class="previous"></i>
+              <i class="previous">Previous</i>
             </span>
           </li>
           <li

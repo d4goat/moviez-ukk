@@ -25,4 +25,8 @@ class Film extends Model
     public function getGenreFilmIdAttribute(){
         return $this->genreFilms->pluck('genre_film_is');
     }
+
+    public function casts(){
+        return $this->hasMany(FilmCast::class);
+    }
 }

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookedSeatController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\FilmCastsController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Http\Request;
@@ -40,4 +42,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
    Route::post('booked-seat', [BookedSeatController::class, 'index']);
    Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
+   
+   Route::post('booking', [BookingController::class, 'index']);
+   Route::post('booking/store', [BookingController::class, 'store']);
+   Route::apiResource('booking', BookingController::class)->except('index', 'store');
+
+   Route::post('film-cast', [FilmCastsController::class, 'index']);
+   Route::post('film-cast/store', [FilmCastsController::class, 'store']);
+   Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store')->withoutMiddleware(['auth', 'verified']);
 });
