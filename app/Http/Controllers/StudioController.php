@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReviewRequest;
-use App\Models\Review;
+use App\Http\Requests\StudioRequest;
+use App\Models\Studio;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReviewController extends Controller
+class StudioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,9 @@ class ReviewController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Review::when($request->search, function (Builder $query, string $search){
-            $query->whereHas('users', function (Builder $query) use ($search){
+        $data = Studio::with('cinemas')->when($request->search, function (Builder $query, string $search){
+            $query->where('name', 'LIKE', "%$search%")
+            ->orHwereHas('cinemas', function ($query) use ($search){
                 $query->where('name', 'LIKE', "%$search%");
             });
         })->paginate($per, ['*', DB::raw("@no := @no + 1 AS no")]);
@@ -31,58 +32,59 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReviewRequest $request)
+    public function store(StudioRequest $request)
     {
         $validated = $request->validated();
-        $review = Review::create($validated);
-        if(!$review){
+        $studio = Studio::create($validated);
+
+        if(!$studio){
             return response()->json([
                 'success' => false,
-                'message' => 'Failed create review'
+                'message' => 'Failed create data'
             ]);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'Success create review',
-            'data' => $review
+            'message' => 'Success create data',
+            'data' => $studio
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($uuid)
+    public function show(string $uuid)
     {
-        $review = Review::findByUuid($uuid);
+        $data = Studio::findByUuid($uuid);
 
-        if(!$review){
+        if(!$data) {
             return response()->json([
                 'success' => false,
-                'message' => 'Data not found'
+                'message' => 'Error fetching data'
             ]);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'success fetching data',
-            'data' => $review
-        ]);
+            'message' => 'Success fetching data',
+            'data' => $data
+        ]); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ReviewRequest $request, string $uuid)
+    public function update(StudioRequest $request, string $uuid)
     {
-        $data = Review::findByUuid($uuid);
-
-        if(!$data){
+        $data = Studio::findByUuid($uuid);
+        if(!$uuid){
             return response()->json([
                 'success' => false,
                 'message' => 'Data not found'
             ]);
         }
+
         $validated = $request->validated();
 
         if($data->update($validated)){
@@ -94,7 +96,7 @@ class ReviewController extends Controller
         } else{
             return response()->json([
                 'success' => false,
-                'message' => 'Failed update data'
+                'message' => 'failed update data'
             ]);
         }
     }
@@ -102,9 +104,9 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($uuid)
+    public function destroy(string $uuid)
     {
-        $data = Review::findByUuid($uuid);
+        $data = Studio::findByUuid($uuid);
 
         if(!$data){
             return response()->json([
@@ -116,7 +118,7 @@ class ReviewController extends Controller
         $data->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Success delete data'
+            'message' => 'success delete data'
         ]);
     }
 }

@@ -10,6 +10,9 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SeatController;
+use App\Http\Controllers\ShowtimeController;
+use App\Http\Controllers\StudioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,19 +32,11 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
    Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
-   Route::post('film', [FilmController::class, 'index']);
-   Route::post('film/store', [FilmController::class, 'store']);
-   Route::apiResource('film', FilmController::class)->except('index', 'store');
-
-   Route::post('genre', [GenreController::class, 'index']);
-   Route::post('genre/store', [GenreController::class, 'store']);
-   Route::apiResource('genre', GenreController::class)->except('index', 'store');
-
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {   
    Route::post('cinema', [CinemaController::class, 'index']);
    Route::post('cinema/store', [CinemaController::class, 'store']);
    Route::apiResource('cinema', CinemaController::class)->except('index', 'store');
-
+   
    Route::post('booked-seat', [BookedSeatController::class, 'index']);
    Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
@@ -49,11 +44,19 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
    Route::post('booking', [BookingController::class, 'index']);
    Route::post('booking/store', [BookingController::class, 'store']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
+   
+   Route::post('film', [FilmController::class, 'index']);
+   Route::post('film/store', [FilmController::class, 'store']);
+   Route::apiResource('film', FilmController::class)->except('index', 'store');
 
    Route::post('film-cast', [FilmCastsController::class, 'index']);
    Route::post('film-cast/store', [FilmCastsController::class, 'store']);
-   Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store')->withoutMiddleware(['auth', 'verified']);
-
+   Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store');
+   
+   Route::post('genre', [GenreController::class, 'index']);
+   Route::post('genre/store', [GenreController::class, 'store']);
+   Route::apiResource('genre', GenreController::class)->except('index', 'store');
+   
    Route::post('payment', [PaymentController::class, 'index']);
    Route::post('payment/store', [PaymentController::class, 'store']);
    Route::apiResource('payment', PaymentController::class)->except('index', 'store');
@@ -64,5 +67,18 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
 
    Route::post('review', [ReviewController::class, 'index']);
    Route::post('review/store', [ReviewController::class, 'store']);
+
    Route::apiResource('review', ReviewController::class)->except('index', 'store');
+
+   Route::post('seat', [SeatController::class, 'index']);
+   Route::post('seat/store', [SeatController::class, 'store']);
+   Route::apiResource('seat', SeatController::class)->except('index', 'store');
+
+   Route::post('show-time', [ShowtimeController::class, 'index']);
+   Route::post('show-time/store', [ShowtimeController::class, 'store']);
+   Route::apiResource('show-time', ShowtimeController::class)->except('index', 'store');
+
+   Route::post('studio', [StudioController::class, 'index']);
+   Route::post('studio/store', [StudioController::class, 'store']);
+   Route::apiResource('studio', StudioController::class)->except('index', 'store');
 });

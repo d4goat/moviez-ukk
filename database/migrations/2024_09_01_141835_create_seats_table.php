@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('seat_number');
             $table->unsignedBigInteger('studio_id');
             $table->foreign('studio_id')->references('id')->on('studios')->onDelete('cascade');
-            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
