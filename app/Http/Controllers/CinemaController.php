@@ -23,7 +23,7 @@ class CinemaController extends Controller
             $query->where('name', 'LIKE', "%$search%")
                 ->orWhere('city', 'LIKE', "%$search%")
                 ->orWhere('address', 'LIKE', "%$search%");
-        })->paginate($per, ['*', DB::raw('@no := +1 AS no')]);
+            })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);
     }

@@ -10,6 +10,8 @@ class ShowTime extends Model
 {
     use HasFactory, Uuid;
 
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
+
     public function films(){
         return $this->belongsTo(Film::class);
     }

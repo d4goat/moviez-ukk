@@ -10,6 +10,8 @@ class Studio extends Model
 {
     use HasFactory, Uuid;
 
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
+
     public function seats(){
         return $this->hasMany(Seats::class);
     }

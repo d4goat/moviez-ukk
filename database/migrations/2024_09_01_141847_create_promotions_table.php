@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->decimal('discount')->nullable();
             $table->string('code')->nullable();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

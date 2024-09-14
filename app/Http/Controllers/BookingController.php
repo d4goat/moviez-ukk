@@ -24,7 +24,7 @@ class BookingController extends Controller
                 $q->where('tanggal', 'LIKE', "%$search%")
                 ->orWhere('nama', 'LIKE', "%$search%");
             });
-        })->paginate($per, ['*', DB::raw('@no := +1 AS no')]);
+        })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);
     }

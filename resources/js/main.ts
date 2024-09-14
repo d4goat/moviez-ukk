@@ -21,7 +21,7 @@ import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import '@fortawesome/fontawesome-free/css/all.css'
 
-import FileUpload from '@/components/FIleUpload.vue';
+import FileUpload from '@/components/FileUpload.vue';
 import Select2 from '@/components/Select2.vue';
 import Paginate from '@/components/Paginate.vue';
 import DatePicker from '@/components/DatePicker.vue';

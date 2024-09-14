@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FilmCastRequest;
-use App\Models\FilmCast;
+use App\Http\Requests\PromotionRequest;
+use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class FilmCastsController extends Controller
+class PromotionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $per = $request->per ?? 10;
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = FilmCast::with('films')->when($request->search, function (Builder $query, string $search){
-            $query->whereHas('films', function ($q) use ($search){
-                $q->where('cast_name', 'LIKE', "%$search%")
-                ->orWhere('name', 'LIKE', "%$search%");
-            });
+        $data = Promotion::when($request->search, function (Builder $query, string $search){
+            $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%")
+            ->orWhere('start_date', 'LIKE', "%$search%")
+            ->orWhere('end_date', 'LIKE', "%$search%");
         })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);
@@ -32,23 +31,22 @@ class FilmCastsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FilmCastRequest $request)
+    public function store(PromotionRequest $request)
     {
         $validated = $request->validated();
+        $data = Promotion::create($validated);
 
-        $filmCast = FilmCast::create($validated);
-
-        if(!$filmCast){
+        if(!$data){
             return response()->json([
                 'success' => false,
-                'message' => 'failed create data film cast'
+                'message' => 'Failed create promotion'
             ]);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'success create data film cast',
-            'data' => $filmCast
+            'message' => 'Success create promotion',
+            'data' => $data
         ]);
     }
 
@@ -57,16 +55,17 @@ class FilmCastsController extends Controller
      */
     public function show(string $uuid)
     {
-        $data = FilmCast::findByUuid($uuid);
+        $data = Promotion::findByUuid($uuid);
+
         if(!$data){
             return response()->json([
                 'success' => false,
-                'message' => 'data not found'
+                'message' => 'Data not found'
             ]);
         }
+
         return response()->json([
             'success' => true,
-            'message' => 'success fetching data film cast',
             'data' => $data
         ]);
     }
@@ -74,42 +73,50 @@ class FilmCastsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FilmCastRequest $request, string $uuid)
+    public function update(PromotionRequest $request, string $id)
     {
-        $filmCast = FilmCast::findByUuid($uuid);
-        if(!$filmCast){
+        $data = Promotion::findByUuid($id);
+        if(!$data){
             return response()->json([
-                'message' => 'data not found'
+                'success' => false,
+                'message' => 'Data not found'
             ]);
         }
 
         $validated = $request->validated();
-        if($filmCast->update($validated)){
+
+        if($data->update($validated)){
             return response()->json([
                 'success' => true,
-                'message' => 'success update data film cast',
-                'data' => $filmCast
-            ], 200);
+                'message' => 'Success update promotion',
+                'data' => $data
+            ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'failed update data film cast'
-            ], 422 || 500);
+                'message' => 'Failed update promotion'
+            ]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($uuid)
+    public function destroy(string $uuid)
     {
-        $filmCast = FilmCast::findByUuid($uuid);
-        if($filmCast){
-            $filmCast->delete();
+        $data = Promotion::findByUuid($uuid);
+        if(!$data){
             return response()->json([
-                'success' => true,
-                'message' => 'success delete data'
+                'success' => false,
+                'message' => 'Data not found'
             ]);
         }
+
+        $data->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success delete promotion'
+        ]);
     }
 }

@@ -21,7 +21,7 @@ class GenreController extends Controller
         DB::statement('set @no=0' . $per * $page);
         $data = Genre::when($request->search, function (Builder $query, string $search){
             $query->where('name', 'LIKE', "%$search%");
-        })->paginate($per, ['*', DB::raw('@no := +1 AS no')]);
+        })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);
     }

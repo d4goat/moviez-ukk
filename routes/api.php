@@ -7,6 +7,9 @@ use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\FilmCastsController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,4 +53,16 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {
    Route::post('film-cast', [FilmCastsController::class, 'index']);
    Route::post('film-cast/store', [FilmCastsController::class, 'store']);
    Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store')->withoutMiddleware(['auth', 'verified']);
+
+   Route::post('payment', [PaymentController::class, 'index']);
+   Route::post('payment/store', [PaymentController::class, 'store']);
+   Route::apiResource('payment', PaymentController::class)->except('index', 'store');
+
+   Route::post('promotion', [PromotionController::class, 'index']);
+   Route::post('promotion/store', [PromotionController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
+   Route::apiResource('promotion', PromotionController::class)->except('index', 'store');
+
+   Route::post('review', [ReviewController::class, 'index']);
+   Route::post('review/store', [ReviewController::class, 'store']);
+   Route::apiResource('review', ReviewController::class)->except('index', 'store');
 });

@@ -22,7 +22,7 @@ class FilmController extends Controller
         DB::statement('set @no=0' . $per * $page);
         $data = Film::when($request->search, function (Builder $query, string $search){
             $query->where('title', 'LIKE', "%$search%");
-        })->paginate($per, ['*', DB::raw('@no := +1 AS no')]);
+        })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
         
         return response()->json($data);
     }

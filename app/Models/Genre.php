@@ -10,6 +10,8 @@ class Genre extends Model
 {
     use HasFactory, Uuid;
 
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
+
     public function films(){
         return $this->belongsToMany(Film::class, 'pivot_genre_films');
     }

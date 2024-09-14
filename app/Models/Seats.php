@@ -10,6 +10,8 @@ class Seats extends Model
 {
     use HasFactory, Uuid;
 
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
+
     public function studios(){
         return $this->belongsTo(Studio::class);
     }
