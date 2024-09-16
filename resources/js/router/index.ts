@@ -12,24 +12,6 @@ declare module 'vue-router' {
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
-        name: 'dashboard',
-        component: () => import("@/Layouts/AdminLayout.vue"),
-        meta: {
-            pageTitle: 'Dashboard'
-        },
-        children: [
-            {
-                path: '/',
-                name: 'dashboard',
-                meta: {
-                    pageTitle: 'Dashboard'
-                },
-                component: () => import('@/Pages/Dashboard.vue'),
-            }
-        ]
-    },
-    {
         path: '/login',
         name: 'login',
         meta: {
@@ -46,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/Pages/auth/Index.vue'),
     },
     {
-        path: '/landing',
+        path: '/',
         name: 'home',
         component: () => import('@/Layouts/AdminLayout.vue'),
         meta: {

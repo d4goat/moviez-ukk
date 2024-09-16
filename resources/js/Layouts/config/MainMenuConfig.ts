@@ -9,6 +9,7 @@ interface MenuItem {
 
 const MainMenuConfig: Array<MenuItem> = [
     {
+        heading: "Admin",
         pages: [
             {
                 heading: "Dashboard",
