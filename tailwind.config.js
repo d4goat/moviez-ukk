@@ -13,13 +13,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                'dark-bg' : '#171717',
+                'dark-bg' : '#0f1014',
                 'gradient-left' : '#00d69a',
                 'gradient-right' : '#229ae0',
-                component: '#14171c',
-                dropdown: '#26272e',
-                text: '#000000',
-                border: '#414141',
+                'component': '#14171c',
+                'dropdown': '#26272e',
+                'text': '#000000',
+                'border': '#414141',
+                'cinema' : '#B9250C'
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],

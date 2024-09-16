@@ -54,12 +54,12 @@ function submit () {
 </script>
 
 <template>
-    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef"  id="form-register" class="w-full h-full flex items-center justify-center">
-        <div class="w-full max-w-md flex flex-col border-[1px] border-gray-700 rounded-xl p-6 space-y-4">
+    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef"  id="form-register" class="w-full h-full flex justify-center">
+        <div class="w-full max-w-md flex flex-col border-gray-700 rounded-xl p-6 space-y-4">
             <!-- begin:title -->
-            <h2 class="text-xl font-semibold mb-7 text-center">Registrasi</h2>
+            <span class="text-xl font-semibold mb-7 text-center">Registrasi</span>
             <!-- end:title -->
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-3">
                 <!-- begin:input -->
                 <div class="flex flex-col gap-3">
                     <!-- begin:title:input -->

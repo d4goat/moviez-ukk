@@ -2,11 +2,11 @@
     <div :id="id">
       <div class="flex justify-between gap-2 flex-wrap mb-4">
         <div class="flex gap-4 items-center">
-          <label for="limit" class="form-label">
+          <label for="limit" class="text-sm font-semibold">
             Showing of
           </label>
           <select2
-            class="w-20 form-select-solid"
+            class="w-20"
             v-model="per"
             placeholder="Per"
             :options="[5, 10, 25, 50, 100]"
@@ -16,7 +16,7 @@
         <form @submit.prevent="refetch" class="w-full sm:w-auto">
           <input
             type="search"
-            class="form-control form-control-solid rounded"
+            class="text-gray-500 rounded-md bg-[#222329] focus:ring-0 focus:border-none border-none"
             placeholder="Search ..."
             v-model="search"
             v-debounce="onSearch"
@@ -25,17 +25,17 @@
       </div>
   
       <div class="overflow-x-auto mt-4">
-        <table class="min-w-full table-auto border-collapse border border-gray-200 rounded-lg">
+        <table class="min-w-full">
           <thead class="">
             <tr
               v-for="headerGroup in table.getHeaderGroups()"
               :key="headerGroup.id"
-              class="text-left border-b border-gray-200"
+              class="text-left bg-[#222329] text-gray-300"
             >
               <th
                 v-for="header in headerGroup.headers"
                 :key="header.id"
-                class="py-4 px-2"
+                class="px-4 py-3"
               >
                 <FlexRender
                   :render="header.isPlaceholder ? null : header.column.columnDef.header"
@@ -49,12 +49,12 @@
               <tr
                 v-for="row in table.getRowModel().rows"
                 :key="`row.${row.original.uuid}`"
-                class="hover:bg-gray-100"
+                class="hover:bg-[#212228] bg-[#1a1c21]"
               >
                 <td
                   v-for="cell in row.getVisibleCells()"
                   :key="`cell.${cell.id}.${cell.row.original.uuid}`"
-                  class="py-4 px-2"
+                  class="p-4"
                 >
                   <FlexRender
                     :render="cell.column.columnDef.cell"
@@ -78,34 +78,34 @@
         </div>
         <ul class="flex gap-2">
           <li
-            class="page-item"
+            class="py-1 px-[12px] rounded-md"
             :class="{ 'opacity-50 pointer-events-none': data?.current_page == 1 || !data }"
           >
             <span
               @click="page = data?.current_page - 1"
               class="page-link cursor-pointer"
             >
-              <i class="previous">Previous</i>
+              <i class="fa fa-angle-left"></i>
             </span>
           </li>
           <li
             v-for="item in pagination"
             :key="item"
             @click="page = item"
-            class="page-item"
-            :class="{ 'bg-blue-500 text-white': item === page }"
+            class="py-1 px-[12px] rounded-md"
+            :class="{ 'bg-blue-600 text-white': item === page }"
           >
             <span class="page-link cursor-pointer">{{ item }}</span>
           </li>
           <li
-            class="page-item"
+            class="py-1 px-[12px] rounded-md"
             :class="{ 'opacity-50 pointer-events-none': data?.current_page == data?.last_page || !data }"
           >
             <span
               @click="page = data?.current_page + 1"
               class="page-link cursor-pointer"
             >
-              <i class="next"></i>
+              <i class="fa fa-angle-right"></i>
             </span>
           </li>
         </ul>

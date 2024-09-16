@@ -51,16 +51,19 @@ function togglePass(ev: MouseEvent) {
 </script>
 
 <template>
-    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="submit" class="flex justify-center items-center w-full h-full">
-        <div class="w-full max-w-md flex flex-col border-[1px] border-gray-700 rounded-xl p-6 space-y-4">
-            <h2 class="text-2xl font-bold text-center mb-7">Login</h2>
+    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="submit" class="flex justify-center bg-[#171717] items-center w-full h-full">
+        <div class="w-full h-full max-w-lg flex flex-col justify-evenly rounded-xl p-6 space-y-4">
+            <div class="font-medium text-center mb-7 flex flex-col">
+                <span class="text-3xl">Login</span>
+                <i class="text-4xl text-cinema">Cinema51</i>
+            </div>
             <!-- begin:form -->
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-4">
                 <!-- begin:input -->
                 <div class="flex flex-col gap-3">
-                    <label class="text-sm font-semibold">Email</label>
+                    <label class="text-xl font-semibold">Email</label>
                     <div class="flex flex-col gap-2">
-                        <Field autocomplete="off" class="bg-transparent focus:border-gray-600 border-[1px] border-gray-700 rounded-md p-2" name="email"
+                        <Field autocomplete="off" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" name="email"
                             type="email" placeholder="Masukkan Email Anda" v-model="user.email" />
                         <ErrorMessage class="text-red-500" name="email" />
                     </div>
@@ -68,10 +71,10 @@ function togglePass(ev: MouseEvent) {
                     <!-- end:input -->
                     <!-- begin:input -->
                     <div class="flex flex-col gap-3">
-                        <label class="text-sm font-semibold">Password</label>
+                        <label class="text-xl font-semibold">Password</label>
                         <div class="relative flex flex-col gap-2">
                             <div class="flex relative flex-col">
-                                <Field autocomplete="off" class="bg-transparent focus:border-gray-600 border-[1px] border-gray-700 rounded-md p-2"
+                                <Field autocomplete="off" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3"
                                 name="password" type="password" placeholder="Masukkan Password Anda"
                                 v-model="user.password" />
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
@@ -83,7 +86,10 @@ function togglePass(ev: MouseEvent) {
                     </div>
                     <!-- end:input -->
                     <div class="flex w-full justify-center mt-3">
-                       <button type="submit" class="bg-sky-700 py-3 px-6 rounded-lg text-white text-semibold text-sm">Login</button>
+                       <button type="submit" class="bg-cinema py-[10px] w-1/3 rounded-lg text-white text-semibold text-md">Login</button>
+                    </div>
+                    <div class="flex w-full justify-center text-center text-lg">
+                        <span>Don't have an account yet? <router-link :to="{name: 'register'}" class="text-cinema"><br> Register Now</router-link></span>
                     </div>
             </div>
         </div>
