@@ -26,7 +26,7 @@ function submit() {
         .then((response: any) => {
             store.setAuth(response.data.user, response.data.token);
             toast.success("Login berhasil!");
-            router.push('/')
+            router.push('/admin/dashboard')
         })
         .catch((err: any) => {
             toast.error(err.response.data.message);
@@ -61,7 +61,7 @@ function togglePass(ev: MouseEvent) {
             <div class="flex flex-col gap-4">
                 <!-- begin:input -->
                 <div class="flex flex-col gap-3">
-                    <label class="text-xl font-semibold">Email</label>
+                    <label class="text-lg font-poppins">Email</label>
                     <div class="flex flex-col gap-2">
                         <Field autocomplete="off" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" name="email"
                             type="email" placeholder="Masukkan Email Anda" v-model="user.email" />
@@ -71,7 +71,7 @@ function togglePass(ev: MouseEvent) {
                     <!-- end:input -->
                     <!-- begin:input -->
                     <div class="flex flex-col gap-3">
-                        <label class="text-xl font-semibold">Password</label>
+                        <label class="text-lg font-poppins">Password</label>
                         <div class="relative flex flex-col gap-2">
                             <div class="flex relative flex-col">
                                 <Field autocomplete="off" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3"
@@ -89,7 +89,7 @@ function togglePass(ev: MouseEvent) {
                        <button type="submit" class="bg-cinema py-[10px] w-1/3 rounded-lg text-white text-semibold text-md">Login</button>
                     </div>
                     <div class="flex w-full justify-center text-center text-lg">
-                        <span>Don't have an account yet? <router-link :to="{name: 'register'}" class="text-cinema"><br> Register Now</router-link></span>
+                        <span>Don't have an account yet? <router-link :to="{name: 'sign-in'}" class="text-cinema"><br> Register Now</router-link></span>
                     </div>
             </div>
         </div>

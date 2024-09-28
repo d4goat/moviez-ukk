@@ -16,7 +16,7 @@
             <paginate
             ref="paginateRef"
             id="table-article"
-            url="/admin/film"
+            url="/master/film"
             :columns="columns"
             ></paginate>
         </div>

@@ -13,7 +13,7 @@ const MainMenuConfig: Array<MenuItem> = [
         pages: [
             {
                 heading: "Dashboard",
-                route: "/dashboard",
+                route: "/admin/dashboard",
                 name: "/admin/dashboard"
             },
         ],
@@ -28,6 +28,11 @@ const MainMenuConfig: Array<MenuItem> = [
                 route: "/admin/dashboard",
                 name: "master",
                 sub: [
+                    {
+                        heading: 'Users',
+                        name: 'master-users',
+                        route: '/admin/dashboard/master/users',
+                    },
                     {
                         heading: "Cinema",
                         name: "master-cinema",

@@ -2,8 +2,8 @@
     <div class="h-screen w-full">
         <img src="/images/rows-red-seats-theater.jpg" class="absolute md:pl-36 inset-0 w-full h-full object-cover" alt="">
         <div class="w-[43%] h-full bg-dark-bg text-white z-10 absolute top-0 left-0 items-center justify-center">
-            <SignIn v-if="currentPath === '/login'" />
-            <SignUp v-if="currentPath === '/register'" />
+            <SignIn v-if="currentPath === '/sign-in'" />
+            <SignUp v-if="currentPath === '/sign-up'" />
         </div>
     </div>
 </template>

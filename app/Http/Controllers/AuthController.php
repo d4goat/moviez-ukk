@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(['user' => auth()->user()]);
     }
 
     public function login(Request $request)
@@ -96,5 +96,10 @@ class AuthController extends Controller
                 'message' => $e->getMessage()
             ], 422);
         }
+    }
+
+    public function logout(){
+        auth()->logout();
+        return response()->json(['success' => true, 'message' => 'berhasil logout']);
     }
 }

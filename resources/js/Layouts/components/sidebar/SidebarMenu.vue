@@ -53,7 +53,7 @@ const isSubmenuOpen = (menuItem: any) => {
 
 <template>
     <aside
-    class="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-dark-bg duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+    class="absolute left-0 top-0 z-9999 flex h-screen w-62.5 flex-col overflow-y-hidden bg-dark-bg border-r-2 border-gray-600 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
     :class="{
       'translate-x-0': sidebarStore.isSidebarOpen,
       '-translate-x-full': !sidebarStore.isSidebarOpen
@@ -61,7 +61,7 @@ const isSubmenuOpen = (menuItem: any) => {
     ref="target"
   >
     <!-- SIDEBAR HEADER -->
-    <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+    <div class="flex items-center justify-between gap-2 px-6 py-4 lg:py-6.5">
         <router-link to="/" class="mx-3">
             <span class="text-cinema text-3xl font-medium">Cinema51</span>
         </router-link>
@@ -85,19 +85,19 @@ const isSubmenuOpen = (menuItem: any) => {
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
       <!-- Sidebar Menu -->
-      <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+      <nav class="mt-2 pb-2 px-3 lg:mt-4 lg:px-6">
         <template v-for="(item, i) in MainMenuConfig" :key="i">
           <div v-if="item.heading ">
-            <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">{{ translate(item.heading) }}</h3>
+            <h3 class="mb-2 ml-4 text-sm font-medium text-bodydark2">{{ translate(item.heading) }}</h3>
 
-            <ul class="mb-6 flex flex-col gap-1.5">
+            <ul class="mb-3 flex flex-col gap-1.5">
               <template v-for="(menuItem, j) in item.pages" :key="j">
                 <li v-if="menuItem.heading ">
                   <router-link
                     v-if="menuItem.route"
                     :to="menuItem.route"
                     class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                    :class="{ 'bg-graydark dark:bg-meta-4': $route.path === menuItem.route }"
+                  :class="{ 'bg-graydark dark:bg-meta-4': $route.path === menuItem.route }"
                   >
                     <span>{{ translate(menuItem.heading) }}</span>
                   </router-link>
@@ -127,13 +127,13 @@ const isSubmenuOpen = (menuItem: any) => {
                       />
                     </svg>
                   </a>
-                  <div v-show="isSubmenuOpen(menuItem)" class="mt-4 pl-6">
-                    <ul class="mb-5.5 flex flex-col gap-2.5">
+                  <div v-show="isSubmenuOpen(menuItem)" class="mt-2 pl-6">
+                    <ul class="mb-5.5 flex flex-col gap-2">
                       <li v-for="(subItem, k) in menuItem.sub" :key="k">
                         <router-link
                           v-if="subItem.route "
                           :to="subItem.route"
-                          class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                          class="group relative flex items-center gap-2.5 rounded-md px-2 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                           :class="{ 'text-white': $route.path === subItem.route }"
                         >
                           {{ translate(subItem.heading || subItem.sectionTitle) }}

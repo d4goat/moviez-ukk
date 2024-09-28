@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-red-600">
+    <div>
         cok
     </div>
 </template>

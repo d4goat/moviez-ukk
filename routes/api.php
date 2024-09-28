@@ -13,6 +13,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\ShowtimeController;
 use App\Http\Controllers\StudioController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +28,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->prefix('auth')->group(function () {
+Route::middleware(['auth', 'json'])->prefix('auth')->group(function () {
    Route::post('register', [AuthController::class, 'register'])->withoutMiddleware('auth');
    Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth');
+   Route::delete('logout', [AuthController::class, 'logout']);
+   Route::get('me', [AuthController::class, 'me']);
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function() {   
+Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {   
+   Route::post('users', [UserController::class, 'index']);
+   Route::post('users/store', [UserController::class, 'store']);
+   Route::apiResource('users', UserController::class)->except('index', 'store');
+
    Route::post('cinema', [CinemaController::class, 'index']);
    Route::post('cinema/store', [CinemaController::class, 'store']);
    Route::apiResource('cinema', CinemaController::class)->except('index', 'store');

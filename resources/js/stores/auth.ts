@@ -21,7 +21,7 @@ export interface User {
 export const useAuthStore = defineStore("auth", () => {
     const error = ref<null | string>(null)
     const user = ref<User>({} as User)
-    const isAuthenticated = ref<boolean>(false)
+    const isAuthenticated = ref(false)
 
     function setAuth(authUser: User, token = ""){
         isAuthenticated.value = true
@@ -55,7 +55,19 @@ export const useAuthStore = defineStore("auth", () => {
             ApiService.setHeader();
             await ApiService.delete("auth/logout");
             purgeAuth();
-        } 
+        } else {
+            purgeAuth()
+        }
+    }
+
+    async function register(credentials: User) {
+        return ApiService.post("auth/register", credentials)
+            .then(({ data }) => {
+                setAuth(data.user, data.token);
+            })
+            .catch(({ response }) => {
+                error.value = response.data.message;
+            });
     }
 
     async function verifyAuth(){
@@ -80,6 +92,7 @@ export const useAuthStore = defineStore("auth", () => {
         isAuthenticated,
         setAuth,
         purgeAuth,
+        register,
         login,
         logout,
         verifyAuth

@@ -12,53 +12,71 @@ declare module 'vue-router' {
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/login',
-        name: 'login',
+        path: '/sign-in',
+        name: 'sign-in',
         meta: {
-            pageTitle: 'Login'
+            pageTitle: 'sign-in'
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },
     {
-        path: '/register',
-        name: 'register',
+        path: '/sign-up',
+        name: 'sign-up',
         meta: {
-            pageTitle: 'Register'
+            pageTitle: 'sign-up'
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },
     {
         path: '/',
-        name: 'home',
+        name: 'dashboard',
         component: () => import('@/Layouts/AdminLayout.vue'),
         meta: {
-            pageTitle: 'Home'
+            middleware: 'auth'
         },
         children: [
             {
-                path: '/landing',
+                path: '/admin/dashboard',
                 name: 'dashboard',
                 meta: {
-                    pageTitle: 'Dashboard'
+                    pageTitle: 'Dashboard',
+                    breadcrumbs: ['Dashboard']
                 },
-                component: () => import('@/Pages/Dashboard.vue'),
+                component: () => import('@/Pages/dashboard/Dashboard.vue'),
             },
             {
-                path: '/testing',
-                name: 'testing',
-                component: () => import('@/Layouts/Layoutss.vue'),
+                path: '/admin/dashboard/master/users',
+                name: 'master.users',
+                meta: {
+                    pageTitle: 'Users',
+                    breadcrumbs: ['Master', 'Users']
+                },
+                component: () => import('@/Pages/dashboard/master/users/Index.vue'), 
             }
         ]
     },
-    // {
-    //     path: '/landing',
-    //     name: 'landing.page',
-    //     component: () => import('@/Pages/users/Landing.vue'),
-    // },
     {
-        path: '/404',
-        name: '404',
-        component: () => import('@/Pages/errors/Error404.vue'),
+        path: '/',
+        component: () => import('@/Layouts/MainLayout.vue'),
+        children: [
+            {
+                path: '/landing',
+                name: 'landing.page',
+                component: () => import('@/Pages/users/Landing.vue'),
+            },
+        ]
+    },
+    {
+        path: '/',
+        component: () => import('@/Layouts/SystemLayout.vue'),
+        children: [
+            {
+                path: '/404',
+                name: '404',
+                component: () => import('@/Pages/errors/Error404.vue'),
+            },
+        
+        ]
     },
     {
         path: "/:pathMatch(.*)*",
@@ -102,6 +120,7 @@ router.beforeEach(async (to, from, next) => {
         document.title = import.meta.env.VITE_APP_NAME as string;
     }
 
+    if (!auth.isAuthenticated) await auth.verifyAuth();
 
     if (to.meta.middleware == "auth") {
         if (auth.isAuthenticated) {

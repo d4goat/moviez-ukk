@@ -10,9 +10,9 @@ const sidebarStore = useSidebarStore()
 
 <template>
   <header
-    class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
+    class="sticky top-0 z-999 flex w-full bg-dark-bg drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
   >
-    <div class="flex flex-grow items-center py-4 px-4 shadow-2 md:px-6 2xl:px-11">
+    <div class="flex flex-grow items-center py-3 px-4 shadow-2 md:px-6 2xl:px-11">
       <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
         <!-- Hamburger Toggle BTN -->
         <button

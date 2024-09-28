@@ -21,10 +21,10 @@ import { RouterView } from 'vue-router'
                 </div>
                 <div class="mx-10 w-1/5 flex gap-4">
                     <ul>
-                        <router-link :to="'/register'">Register</router-link>
+                        <router-link :to="'/sign-up'">Sign Up</router-link>
                     </ul>
                     <ul>
-                        <router-link :to="'/login'" >Login</router-link>
+                        <router-link :to="'/sign-in'" >Sign In</router-link>
                     </ul>
                 </div>
             </div>

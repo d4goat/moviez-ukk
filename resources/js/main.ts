@@ -10,6 +10,7 @@ import i18n from "@/core/plugins/i18n";
 import Inputmask from "inputmask";
 
 //imports for app initialization
+import ApiService from './core/services/ApiService';
 import { initApexCharts } from "@/core/plugins/apexcharts";
 import { initInlineSvg } from "@/core/plugins/inline-svg";
 import { initVeeValidate } from "@/core/plugins/vee-validate";
@@ -90,6 +91,7 @@ app.component("VForm", VForm);
 app.component("Field", Field);
 app.component("ErrorMessage", ErrorMessage);
 
+ApiService.init(app);
 initApexCharts(app);
 initInlineSvg(app);
 initVeeValidate();

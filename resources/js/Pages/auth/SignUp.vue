@@ -5,9 +5,11 @@ import type { User } from '@/types';
 import * as Yup from "yup";
 import { toast } from 'vue3-toastify';
 import { block, unblock } from '@/libs/utils';
+import { useRouter } from 'vue-router';
 
 const user = ref<User>({} as User);
 const formRef = ref()
+const router = useRouter()
 
 const formSchema = Yup.object().shape({
     name: Yup.string().required(),
@@ -41,6 +43,7 @@ function submit () {
     .then(() => {
         toast.success("Registrasi berhasil!");
         formRef.value.resetForm();
+        router.push('/sign-in')
     })
     .catch((error: any) => {
         toast.error(error.response.data.message);
