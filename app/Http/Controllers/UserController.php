@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -33,7 +34,12 @@ class UserController extends Controller
     {
         $validated = $request->validated();
 
+        $validated['role_id'] = 2;
+
+        $role = Role::findById($validated['role_id']);
+
         $user = User::create($validated);
+        $user->assignRole($role);
 
         if(!$user){
             return response()->json([
@@ -78,8 +84,12 @@ class UserController extends Controller
         }
 
         $validate = $request->validated();
+        $validate['role_id'] = 2;
+
+        $role = Role::findById($validate['role_id']);
 
         if($data->update($validate)){
+            $data->syncRoles($role);
             return response()->json([
                 'success' => true,
                 'message' => 'Success update data',
