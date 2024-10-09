@@ -52,7 +52,7 @@ function togglePass(ev: MouseEvent) {
 
 <template>
     <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="submit" class="flex justify-center bg-[#171717] items-center w-full h-full">
-        <div class="w-full h-full max-w-lg flex flex-col justify-evenly rounded-xl p-6 space-y-4">
+        <div class="w-full h-full max-w-lg flex flex-col justify-evenly rounded-xl space-y-4">
             <div class="font-medium text-center mb-7 flex flex-col">
                 <span class="text-3xl">Login</span>
                 <i class="text-4xl text-cinema">Cinema51</i>
@@ -89,7 +89,7 @@ function togglePass(ev: MouseEvent) {
                        <button type="submit" class="bg-cinema py-[10px] w-1/3 rounded-lg text-white text-semibold text-md">Login</button>
                     </div>
                     <div class="flex w-full justify-center text-center text-lg">
-                        <span>Don't have an account yet? <router-link :to="{name: 'sign-in'}" class="text-cinema"><br> Register Now</router-link></span>
+                        <span>Don't have an account yet? <router-link :to="{name: 'sign-up'}" class="text-cinema"><br> Register Now</router-link></span>
                     </div>
             </div>
         </div>

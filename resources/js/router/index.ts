@@ -52,6 +52,15 @@ const routes: Array<RouteRecordRaw> = [
                     breadcrumbs: ['Master', 'Users']
                 },
                 component: () => import('@/Pages/dashboard/master/users/Index.vue'), 
+            },
+            {
+                path: '/admin/dashboard/master/cinema',
+                name: 'master.cinema',
+                meta: {
+                    pageTitle: 'cinema',
+                    breadcrumbs: ['Master', 'cinema']
+                },
+                component: () => import('@/Pages/dashboard/master/cinema/Index.vue'),
             }
         ]
     },
