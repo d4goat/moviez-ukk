@@ -2,11 +2,11 @@
     <div :id="id">
       <div class="flex justify-between gap-2 flex-wrap mb-4">
         <div class="flex gap-4 items-center">
-          <label for="limit" class="text-sm font-semibold">
+          <label htmlfor="limit" class="form-label">
             Showing of
           </label>
           <select2
-            class="w-20"
+            class="w-22 form-select-solid"
             v-model="per"
             placeholder="Per"
             :options="[5, 10, 25, 50, 100]"
@@ -24,8 +24,8 @@
         </form>
       </div>
   
-      <div class="overflow-x-auto mt-4">
-        <table class="min-w-full">
+      <div class="overflow-x-auto mt-4 table-responsive">
+        <table class="min-w-full rounded">
           <thead class="">
             <tr
               v-for="headerGroup in table.getHeaderGroups()"
@@ -239,3 +239,44 @@ export default defineComponent({
 })
 </script>
   
+<style scoped>
+:deep(.select2-container--default) {
+  width: auto !important;
+  min-width: fit-content;
+}
+
+:deep(.select2-container--default .select2-selection--single),
+:deep(.select2-container--default .select2-selection--multiple) {
+  min-width: 100%;
+}
+
+:deep(.select2-container--default .select2-dropdown) {
+  min-width: 100%;
+  width: auto !important;
+  max-width: none;
+}
+
+:deep(.select2-container--default .select2-results) {
+  min-width: fit-content;
+}
+
+:deep(.select2-container--default .select2-results__options) {
+  white-space: nowrap;
+}
+
+:deep(.select2-container--default .select2-results__option) {
+  padding: 0.75rem 1.25rem;
+}
+
+/* Override untuk select dengan lebar kecil */
+:deep(.w-22.select2-container),
+:deep(.w-22 + .select2-container) {
+  width: 5rem !important;
+  min-width: 5rem !important;
+}
+
+:deep(.w-22 + .select2-container .select2-dropdown) {
+  min-width: 5rem;
+  max-width: none;
+}
+</style>

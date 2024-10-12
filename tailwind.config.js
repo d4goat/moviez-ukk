@@ -19,6 +19,7 @@ export default {
         },
         extend: {
             colors: {
+                'sidebar' : '#0d0e12',
                 'dark-bg': '#0f1014',
                 'gradient-left': '#00d69a',
                 'gradient-right': '#229ae0',

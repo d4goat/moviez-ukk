@@ -57,7 +57,7 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/admin/dashboard/master/cinema',
                 name: 'master.cinema',
                 meta: {
-                    pageTitle: 'cinema',
+                    pageTitle: 'Cinema',
                     breadcrumbs: ['Master', 'cinema']
                 },
                 component: () => import('@/Pages/dashboard/master/cinema/Index.vue'),

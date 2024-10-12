@@ -53,7 +53,7 @@ const isSubmenuOpen = (menuItem: any) => {
 
 <template>
     <aside
-    class="absolute left-0 top-0 z-9999 flex h-screen w-62.5 flex-col overflow-y-hidden bg-dark-bg border-r-2 border-gray-600 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+    class="absolute left-0 top-0 z-9999 flex h-screen w-60 flex-col overflow-y-hidden bg-sidebar border-r-2 border-gray-600 duration-300 ease-linear dark:bg-dark-bg lg:static lg:translate-x-0"
     :class="{
       'translate-x-0': sidebarStore.isSidebarOpen,
       '-translate-x-full': !sidebarStore.isSidebarOpen
