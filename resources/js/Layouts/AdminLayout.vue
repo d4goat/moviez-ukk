@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen overflow-hidden">
+    <div class="flex h-screen overflow-hidden bg-dark-bg">
         <!-- ===== Sidebar Start ===== -->
         <SidebarMenu />
         <!-- ===== Sidebar End ===== -->
@@ -12,7 +12,7 @@
     
           <!-- ===== Main Content Start ===== -->
           <main>
-            <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 bg-dark-bg text-bodydark1">
+            <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 text-bodydark1">
               <router-view></router-view>
             </div>
           </main>

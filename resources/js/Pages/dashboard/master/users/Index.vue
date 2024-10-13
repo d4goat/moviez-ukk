@@ -67,8 +67,8 @@ watch(openForm, (val) => {
         @refresh="refresh"
         />
 
-        <div class="w-full h-full flex-col space-y-4"> 
-            <div class="border-b-[1px] border-body flex justify-between items-center py-3">
+        <div class="w-full h-full flex-col rounded-lg space-y-4"> 
+            <div class="border-b-[1px] border-body flex justify-between items-center p-4">
                 <h2>Users List</h2>
                 <button 
                     type="button" 
@@ -80,7 +80,7 @@ watch(openForm, (val) => {
                 <i class="fa-solid fa-plus"></i>
                 </button>
             </div>   
-            <div class="w-full h-full">
+            <div class="w-full h-full py-2 px-4">
                 <paginate 
                     ref="paginateRef"
                     id="table-user"

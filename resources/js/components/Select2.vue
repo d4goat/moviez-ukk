@@ -158,7 +158,7 @@ export default {
         display: flex;
         height: auto !important;
         align-items: center;
-        padding: 0.5rem;
+        padding: 0.775rem;
         border-radius: 0.375rem;
         @apply dark:bg-dropdown bg-white border-[#6e6e6e] focus:ring-[#6e6e6e];
     }

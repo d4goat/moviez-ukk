@@ -57,77 +57,67 @@ function submit () {
 </script>
 
 <template>
-    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef"  id="form-register" class="w-full h-full flex justify-center bg-[#171717] items-center">
-        <div class="w-full max-w-lg flex flex-col justify-evenly space-y-2">
-            <!-- begin:title -->
-             <div class="font-medium text-center flex flex-col">
-                 <span class="text-2xl">Registrasi</span>
-                <i class="text-4xl text-cinema">Cinema51</i>
-            </div>
-            <!-- end:title -->
+    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" id="form-register" class="w-full h-full min-h-screen flex justify-center bg-[#171717] items-center p-4">
+        <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center space-y-4 sm:space-y-6">
+          <!-- begin:title -->
+          <div class="font-medium text-center flex flex-col mb-4">
+            <span class="text-xl sm:text-2xl">Registrasi</span>
+            <i class="text-3xl sm:text-4xl text-cinema">Cinema51</i>
+          </div>
+          <!-- end:title -->
+          <div class="flex flex-col gap-3">
+            <!-- begin:input -->
             <div class="flex flex-col gap-2">
-                <!-- begin:input -->
-                <div class="flex flex-col gap-3">
-                    <!-- begin:title:input -->
-                    <label class="text-lg font-poppins">Nama</label>
-                    <!-- end:title:input -->
-                     <div class="flex flex-col">
-                         <Field  name="name" type="text" autocomplete="off" v-model="user.name" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" placeholder="Masukkan Nama" />
-                         <ErrorMessage name="name" class="text-red-500" />
-                    </div>
-                </div>
-                <!-- end:input -->
-                <!-- begin:input -->
-                <div class="flex flex-col gap-3">
-                    <!-- begin:title:input -->
-                    <label class="text-lg font-medium">Email</label>
-                    <!-- end:title:input -->
-                     <div class="flex flex-col">
-                         <Field  name="email" type="text" autocomplete="off" v-model="user.email" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" placeholder="Masukkan Email" />
-                         <ErrorMessage name="email" class="text-red-500" />
-                    </div>
-                </div>
-                <!-- end:input -->
-                <!-- begin:input -->
-                <div class="flex flex-col gap-3">
-                    <!-- begin:title:input -->
-                    <label class="text-lg font-medium">No Telepon</label>
-                    <!-- end:title:input -->
-                     <div class="flex flex-col">
-                         <Field  name="phone" type="text" autocomplete="off" v-model="user.phone" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" placeholder="Masukkan No Telepon" />
-                         <ErrorMessage name="phone" class="text-red-500" />
-                    </div>
-                </div>
-                <!-- end:input -->
-                <!-- begin:input -->
-                <div class="flex flex-col gap-3">
-                    <!-- begin:title:input -->
-                    <label class="text-lg font-medium">Password</label>
-                    <!-- end:title:input -->
-                     <div class="flex flex-col">
-                         <Field  name="password" type="password" autocomplete="off" v-model="user.password" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" placeholder="Masukkan Password" />
-                         <ErrorMessage name="password" class="text-red-500" />
-                    </div>
-                </div>
-                <!-- end:input -->
-                <!-- begin:input -->
-                <div class="flex flex-col gap-3">
-                    <!-- begin:title:input -->
-                    <label class="text-lg font-medium">Konfirmasi Password</label>
-                    <!-- end:title:input -->
-                     <div class="flex flex-col">
-                         <Field  name="passwordConfirmation" type="password" autocomplete="off" v-model="user.passwordConfirmation" class="bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3" placeholder="Masukkan Konfirmasi Password" />
-                         <ErrorMessage name="passwordConfirmation" class="text-red-500" />
-                    </div>
-                </div>
-                <!-- end:input -->
-                <div class="flex w-full justify-center mt-4">
-                    <button type="submit" class="bg-cinema py-[10px] w-1/3 rounded-lg text-white text-semibold text-md">Register</button>
-                 </div>
-                 <div class="flex w-full justify-center text-center text-lg">
-                     <span>Already have an account yet? <router-link :to="{name: 'sign-in'}" class="text-cinema">Login Now</router-link></span>
-                 </div>
+              <label class="text-base sm:text-lg font-poppins">Nama</label>
+              <div class="flex flex-col">
+                <Field name="name" type="text" autocomplete="off" v-model="user.name" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-2.5 sm:p-3 text-sm sm:text-base" placeholder="Masukkan Nama" />
+                <ErrorMessage name="name" class="text-red-500 text-xs sm:text-sm mt-1" />
+              </div>
             </div>
+            <!-- end:input -->
+            <!-- begin:input -->
+            <div class="flex flex-col gap-2">
+              <label class="text-base sm:text-lg font-medium">Email</label>
+              <div class="flex flex-col">
+                <Field name="email" type="text" autocomplete="off" v-model="user.email" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-2.5 sm:p-3 text-sm sm:text-base" placeholder="Masukkan Email" />
+                <ErrorMessage name="email" class="text-red-500 text-xs sm:text-sm mt-1" />
+              </div>
+            </div>
+            <!-- end:input -->
+            <!-- begin:input -->
+            <div class="flex flex-col gap-2">
+              <label class="text-base sm:text-lg font-medium">No Telepon</label>
+              <div class="flex flex-col">
+                <Field name="phone" type="text" autocomplete="off" v-model="user.phone" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-2.5 sm:p-3 text-sm sm:text-base" placeholder="Masukkan No Telepon" />
+                <ErrorMessage name="phone" class="text-red-500 text-xs sm:text-sm mt-1" />
+              </div>
+            </div>
+            <!-- end:input -->
+            <!-- begin:input -->
+            <div class="flex flex-col gap-2">
+              <label class="text-base sm:text-lg font-medium">Password</label>
+              <div class="flex flex-col">
+                <Field name="password" type="password" autocomplete="off" v-model="user.password" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-2.5 sm:p-3 text-sm sm:text-base" placeholder="Masukkan Password" />
+                <ErrorMessage name="password" class="text-red-500 text-xs sm:text-sm mt-1" />
+              </div>
+            </div>
+            <!-- end:input -->
+            <!-- begin:input -->
+            <div class="flex flex-col gap-2">
+              <label class="text-base sm:text-lg font-medium">Konfirmasi Password</label>
+              <div class="flex flex-col">
+                <Field name="passwordConfirmation" type="password" autocomplete="off" v-model="user.passwordConfirmation" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-2.5 sm:p-3 text-sm sm:text-base" placeholder="Masukkan Konfirmasi Password" />
+                <ErrorMessage name="passwordConfirmation" class="text-red-500 text-xs sm:text-sm mt-1" />
+              </div>
+            </div>
+            <!-- end:input -->
+            <div class="flex w-full justify-center mt-6">
+              <button type="submit" class="bg-cinema py-2 px-4 w-full sm:w-2/3 md:w-1/2 rounded-lg text-white font-semibold text-sm sm:text-base">Register</button>
+            </div>
+            <div class="flex w-full justify-center text-center text-sm sm:text-base">
+              <span>Already have an account? <router-link :to="{name: 'sign-in'}" class="text-cinema">Login Now</router-link></span>
+            </div>
+          </div>
         </div>
-    </VForm>
+      </VForm>
 </template>

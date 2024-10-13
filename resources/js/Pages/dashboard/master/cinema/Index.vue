@@ -67,12 +67,12 @@ watch(openForm, (val) => {
 </script>
 
 <template>
-    <div>
+    <div class="border-b-[1px] border-body pb-3">
         <Form :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
 
-        <div class="w-full h-full flex-col space-y-4"> 
-            <div class="border-b-[1px] border-body flex justify-between items-center py-3">
-                <h2>Cinemas List</h2>
+        <div class="w-full h-full flex-col rounded-lg space-y-4"> 
+            <div class="border-b-[1px] border-body flex justify-between items-center p-4">
+                <h2 class="text-xl">Cinemas List</h2>
                 <button 
                     type="button" 
                     class="bg-blue-600 text-bodydark1 py-2 px-4 rounded hover:bg-blue-700"
@@ -83,7 +83,7 @@ watch(openForm, (val) => {
                 <i class="fa-solid fa-plus"></i>
                 </button>
             </div>   
-            <div class="w-full h-full">
+            <div class="w-full h-full py-2 px-4">
                 <paginate 
                     ref="paginateRef"
                     id="table-user"

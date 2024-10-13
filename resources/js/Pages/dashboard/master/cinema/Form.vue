@@ -6,7 +6,6 @@ import * as Yup from 'yup'
 import { toast } from 'vue3-toastify';
 import { unblock, block } from '@/libs/utils';
 import type { Cinema } from '@/types';
-import { id } from 'element-plus/es/locale/index.mjs';
 
 const props = defineProps({
     selected: {
@@ -78,29 +77,70 @@ const cities = computed(() =>
         text: item.name
     }))
 )
+
+onMounted(()  => {
+    if(props.selected){
+        getEdit()
+    }
+})
 </script>
 
 <template>
-    <VForm>
-        <div class="col-md-6">
-            <label class="form-label required">Jabatan</label>
-            <Field
-                autocomplete="off"
-                name="city"
-                class="form-control form-control-solid"
-                v-model="cinema.city"
-            >
-                <select2
-                    class="form-select-solid"
-                    placeholder="Pilih"
-                    :options="cities"
-                    v-model="cinema.city"
-                ></select2>
-            </Field>
-            <div class="fv-plugins-message-container">
-                <div class="fv-help-block">
-                    <ErrorMessage name="city" />
+    <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" id="form-cinema">
+        <div class="card bg-dark-bg shadow-3 shadow-white text-bodydark1">
+            <div class="card-header align-items-center flex justify-between my-3">
+                <h2> {{ selected ? 'Edit' : 'Tambah' }} Cinema </h2>
+                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
+                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 flex flex-col mb-3">
+                        <label class="form-label">Name</label>
+                        <Field 
+                            autocomplete="off"
+                            name="name"
+                            type="text"
+                            placeholder="Masukkan Cinema Name"
+                            class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-3"
+                            v-model="cinema.name"
+                        />
+                        <ErrorMessage name="name" class="text-red-500" />
+                    </div>
+                    <div class="col-md-4 flex flex-col mb-3">
+                        <label class="form-label required">City</label>
+                        <Field
+                            autocomplete="off"
+                            name="city"
+                            class="form-control form-control-solid"
+                            v-model="cinema.city"
+                        >
+                            <select2
+                                class="form-select-solid"
+                                placeholder="Select Cinema City"
+                                :options="cities"
+                                v-model="cinema.city"
+                            ></select2>
+                        </Field>
+                        <ErrorMessage name="city" class="text-red-500" />
+                    </div>
+                    <div class="col-md-4 flex flex-col mb-3">
+                        <label class="form-label">Address</label>
+                        <Field 
+                            autocomplete="off"
+                            name="address"
+                            type="text"
+                            placeholder="Masukkan Cinema Address"
+                            class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-3"
+                            v-model="cinema.address"
+                        />
+                        <ErrorMessage name="address" class="text-red-500" />
+                    </div>
                 </div>
+            </div>
+            <div class="card-footer flex">
+                <button type="submit" class="btn btn-md my-3 ms-auto btn-primary text-white">Submit</button>
             </div>
         </div>
     </VForm>

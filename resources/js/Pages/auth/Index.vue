@@ -1,7 +1,7 @@
 <template>
-    <div class="h-screen w-full">
+    <div class="h-full w-full">
         <img src="/images/rows-red-seats-theater.jpg" class="absolute md:pl-36 inset-0 w-full h-full object-cover" alt="">
-        <div class="w-[43%] h-full bg-dark-bg text-white z-10 absolute top-0 left-0 items-center justify-center">
+        <div class="sm:w-[43%] h-full text-white z-10 absolute left-0 items-center justify-center">
             <SignIn v-if="currentPath === '/sign-in'" />
             <SignUp v-if="currentPath === '/sign-up'" />
         </div>
