@@ -86,7 +86,7 @@ watch(openForm, (val) => {
             <div class="w-full h-full py-2 px-4">
                 <paginate 
                     ref="paginateRef"
-                    id="table-user"
+                    id="table-cinemas"
                     url="/master/cinema"
                     :columns="columns"
                 ></paginate>
