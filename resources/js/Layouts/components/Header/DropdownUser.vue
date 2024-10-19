@@ -20,10 +20,6 @@ onClickOutside(target, () => {
       @click.prevent="dropdownOpen = !dropdownOpen"
       type="button"
     >
-      <span class="hidden text-right lg:block">
-        <span class="block text-sm font-medium text-black dark:text-white">{{ user?.name }}</span>
-        <span class="block text-xs font-medium text-black dark:text-white"> {{ user?.email }} </span>
-      </span>
 
       <span class="h-12 w-12 rounded-full">
         <img src="/images/user/user-01.png" alt="User" />

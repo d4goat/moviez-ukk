@@ -29,11 +29,6 @@ const MainMenuConfig: Array<MenuItem> = [
                 name: "master",
                 sub: [
                     {
-                        heading: 'Users',
-                        name: 'master-users',
-                        route: '/admin/dashboard/master/users',
-                    },
-                    {
                         heading: "Cinema",
                         name: "master-cinema",
                         route: "/admin/dashboard/master/cinema",
@@ -83,10 +78,10 @@ const MainMenuConfig: Array<MenuItem> = [
                         ]
                     },
                     {
-                        heading: "User",
-                        name: "master-user",
-                        route: "/admin/dashboard/master/user",
-                    }
+                        heading: 'Users',
+                        name: 'master-users',
+                        route: '/admin/dashboard/master/users',
+                    },
                 ]
             }   
         ]

@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/sign-in',
         name: 'sign-in',
         meta: {
-            pageTitle: 'sign-in'
+            pageTitle: 'Sign-In'
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },
@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/sign-up',
         name: 'sign-up',
         meta: {
-            pageTitle: 'sign-up'
+            pageTitle: 'Sign-Up'
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },
@@ -40,7 +40,6 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'dashboard',
                 meta: {
                     pageTitle: 'Dashboard',
-                    breadcrumbs: ['Dashboard']
                 },
                 component: () => import('@/Pages/dashboard/Dashboard.vue'),
             },
@@ -67,9 +66,27 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'master.film',
                 meta: {
                     pageTitle: 'Film',
-                    breadcrumb: ['Master', 'Films']
+                    breadcrumbs: ['Master', 'Films']
                 },
                 component: () => import('@/Pages/dashboard/master/film/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/master/genre',
+                name: 'master.genre',
+                meta: {
+                    pageTitle: 'Genre',
+                    breadcrumbs: ['Master', 'Genre']
+                },
+                component: () => import('@/Pages/dashboard/master/genre/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/master/promotion',
+                name: 'master.promotion',
+                meta: {
+                    pageTitle: 'Promotion',
+                    breadcrumbs: ['Master', 'Promotion']
+                },
+                component: () => import('@/Pages/dashboard/master/promotion/Index.vue')
             }
         ]
     },

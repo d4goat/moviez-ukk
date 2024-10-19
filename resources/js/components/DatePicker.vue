@@ -1,8 +1,7 @@
 <template>
     <flat-pickr
         v-bind="$props"
-        :class="`bg-transparent ${$props.class}`"
-        style="border-color: transparent !important;"
+        :class="`form-control form-control-solid text-white focus:bg-[#232323] ${$props.class}`"
     />
 </template>
 
@@ -30,7 +29,7 @@ export default defineComponent({
 /* Flatpickr with Tailwind CSS */
 
 :root {
-    --flatpickr-width: 280px;
+    --flatpickr-width: 300px;
     --flatpickr-width-week-numbers: 325px;
     --flatpickr-day-height: 36px;
     --flatpickr-time-height: 46px;
@@ -38,7 +37,7 @@ export default defineComponent({
   
   /* Container */
   .flatpickr-calendar {
-    @apply w-[var(--flatpickr-width)] border-0 rounded-none shadow-lg bg-white;
+    @apply w-[var(--flatpickr-width)] border-0 rounded-none shadow-lg bg-component;
   }
   
   /* Remove arrows */
@@ -75,7 +74,7 @@ export default defineComponent({
   
   .flatpickr-months .flatpickr-prev-month,
   .flatpickr-months .flatpickr-next-month {
-    @apply flex items-center justify-center rounded top-4;
+    @apply flex items-center justify-center rounded top-5;
   }
   
   .flatpickr-months .flatpickr-prev-month svg,
@@ -83,10 +82,11 @@ export default defineComponent({
     @apply fill-gray-500;
   }
   
-  .flatpickr-months .flatpickr-prev-month:hover,
+/**  .flatpickr-months .flatpickr-prev-month:hover,
   .flatpickr-months .flatpickr-next-month:hover {
     @apply bg-gray-100;
   }
+*/
   
   .flatpickr-months .flatpickr-prev-month:hover svg,
   .flatpickr-months .flatpickr-next-month:hover svg {
@@ -104,7 +104,7 @@ export default defineComponent({
   
   /* Month selector */
   .flatpickr-current-month {
-    @apply font-semibold;
+    @apply font-medium;
   }
   
   .flatpickr-current-month .numInputWrapper {
@@ -120,12 +120,9 @@ export default defineComponent({
   }
   
   .flatpickr-current-month .flatpickr-monthDropdown-months {
-    @apply border-0 bg-white text-base text-gray-700 font-semibold py-2 px-3 mr-2 outline-none rounded appearance-none;
+    @apply border-0 text-base text-gray-200 font-medium px-3 mr-2 outline-none rounded appearance-none;
   }
   
-  .flatpickr-current-month .flatpickr-monthDropdown-months:hover {
-    @apply bg-gray-100;
-  }
   
   .flatpickr-current-month .flatpickr-monthDropdown-month {
     @apply text-base text-gray-700 font-semibold bg-transparent outline-none p-0;
@@ -140,12 +137,12 @@ export default defineComponent({
   }
   
   .flatpickr-current-month input.cur-year {
-    @apply text-gray-700 text-lg py-2 px-3 font-semibold outline-none;
+    @apply text-gray-700 text-lg py-1 px-3 font-medium outline-none;
   }
   
   /* Week days */
   span.flatpickr-weekday {
-    @apply text-gray-800 text-base font-bold;
+    @apply text-gray-400 text-base font-medium;
   }
   
   /* Time */
@@ -212,7 +209,7 @@ export default defineComponent({
   
   /* Day */
   .flatpickr-day {
-    @apply text-base rounded shadow-none h-[var(--flatpickr-day-height)] w-full max-w-full m-0 leading-[var(--flatpickr-day-height)] text-gray-600 mt-0;
+    @apply text-base rounded shadow-none h-[var(--flatpickr-day-height)] w-full max-w-full m-0 leading-[var(--flatpickr-day-height)] text-gray-400 mt-0;
   }
   
   .flatpickr-day.inRange,
@@ -232,7 +229,7 @@ export default defineComponent({
   
   /* Today */
   .flatpickr-day.today {
-    @apply bg-gray-100 text-gray-600 border-transparent;
+    @apply  text-gray-300 border-transparent;
   }
   
   .flatpickr-day.today:hover,
@@ -259,7 +256,7 @@ export default defineComponent({
   .flatpickr-day.selected.nextMonthDay,
   .flatpickr-day.startRange.nextMonthDay,
   .flatpickr-day.endRange.nextMonthDay {
-    @apply bg-blue-500 text-white border-transparent;
+    @apply bg-gray-900 text-blue-500 border-transparent;
   }
   
   /* Disabled */
@@ -270,7 +267,7 @@ export default defineComponent({
   .flatpickr-day.notAllowed,
   .flatpickr-day.notAllowed.prevMonthDay,
   .flatpickr-day.notAllowed.nextMonthDay {
-    @apply text-gray-400 bg-transparent border-transparent;
+    @apply text-gray-600 bg-transparent border-transparent;
   }
   
   .flatpickr-day.flatpickr-disabled,

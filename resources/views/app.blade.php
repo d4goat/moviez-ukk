@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>D-Moviez</title>
-        <link rel="icon" href="/images/bg-2.jpg" type="image/x-icon">
+        <link rel="icon" href="/images/react-redux.png" type="image/x-icon">
 
         @vite('resources/js/main.ts')
         <link rel="preconnect" href="https://fonts.googleapis.com">
