@@ -19,11 +19,13 @@ class FilmCastsController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = FilmCast::with('films')->when($request->search, function (Builder $query, string $search){
+        $data = FilmCast::with('film')->when($request->search, function (Builder $query, string $search){
             $query->whereHas('films', function ($q) use ($search){
                 $q->where('cast_name', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%");
             });
+        })->whereHas('film', function ($q) use ($request){
+            $q->where('uuid', $request->uuid);
         })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);

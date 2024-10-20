@@ -4,6 +4,7 @@ import { createColumnHelper } from '@tanstack/vue-table';
 import type { Film } from '@/types'
 import { useDelete } from '@/libs/hooks';
 import Form from './Form.vue'
+import { useRouter } from 'vue-router';
 
 const column = createColumnHelper<Film>()
 const paginateRef = ref<any>(null)
@@ -13,6 +14,8 @@ const openForm = ref<boolean>(false)
 const { delete: deleteFilm } = useDelete({
     onSuccess: () => paginateRef?.value.refetch()
 })
+
+const router = useRouter()
 
 const columns = [
     column.accessor('no', {
@@ -34,6 +37,14 @@ const columns = [
     column.accessor('uuid', {
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-2' }, [
+            h('button', 
+            {
+                class: 'btn btn-sm btn-success flex items-center',
+                onClick: () => router.push({name: 'master.film.cast', params: { uuid: cell.getValue() }})
+            }, [
+                h('i', { class: 'la la-users fs-3' }),
+                h('span', { class: 'ml-2' }, 'Cast')
+            ]),
             h('button', 
                 {
                     class: 'btn btn-sm btn-info',

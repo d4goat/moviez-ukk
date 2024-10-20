@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class CinemaController extends Controller
 {
+
+    public function get(){
+        return response()->json(['data' => Cinema::all()]);
+    }
     /**
      * Display a listing of the resource.
      */

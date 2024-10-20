@@ -19,10 +19,10 @@ class StudioController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Studio::with('cinemas')->when($request->search, function (Builder $query, string $search){
+        $data = Studio::with(['cinema'])->when($request->search, function (Builder $query, string $search){
             $query->where('name', 'LIKE', "%$search%")
-            ->orHwereHas('cinemas', function ($query) use ($search){
-                $query->where('name', 'LIKE', "%$search%");
+            ->orWhereHas('cinema', function ($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%");
             });
         })->paginate($per, ['*', DB::raw("@no := @no + 1 AS no")]);
 

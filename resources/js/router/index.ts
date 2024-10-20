@@ -68,7 +68,16 @@ const routes: Array<RouteRecordRaw> = [
                     pageTitle: 'Film',
                     breadcrumbs: ['Master', 'Films']
                 },
-                component: () => import('@/Pages/dashboard/master/film/Index.vue')
+                component: () => import('@/Pages/dashboard/master/film/Index.vue'),
+            },
+            {
+                path: '/admin/dashboard/master/film/:uuid/cast',
+                name: 'master.film.cast',
+                meta: {
+                    pageTitle: 'Film-Cast',
+                    breadcrumbs: ['Master', 'Films', 'Cast']
+                },
+                component: () => import('@/Pages/dashboard/master/film/cast/INdex.vue')
             },
             {
                 path: '/admin/dashboard/master/genre',
@@ -87,6 +96,15 @@ const routes: Array<RouteRecordRaw> = [
                     breadcrumbs: ['Master', 'Promotion']
                 },
                 component: () => import('@/Pages/dashboard/master/promotion/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/master/studio',
+                name: 'master.studio',
+                meta: {
+                    pageTitle: 'Studio',
+                    breadcrumbs: ['Master', 'Studio']
+                },
+                component: () => import('@/Pages/dashboard/master/studio/Index.vue')
             }
         ]
     },

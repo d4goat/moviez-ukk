@@ -12,7 +12,7 @@ class FilmCast extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at']; 
 
-    public function films(){
+    public function film(){
         return $this->belongsTo(Film::class);
     }
 }

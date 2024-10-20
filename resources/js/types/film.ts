@@ -1,4 +1,4 @@
-interface Film {
+export interface Film {
     id: number;
     uuid: string;
     title: string;
@@ -10,4 +10,11 @@ interface Film {
     poster?: string;
     trailer?: string;
     release_date?: Date;
+}
+
+export interface FilmCast{
+    id: number;
+    uuid: string;
+    cast_name: string;
+    film_id: number;
 }
