@@ -19,12 +19,20 @@ class ShowtimeController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = ShowTime::with(['films', 'studios.cinemas'])->when($request->search, function(Builder $query, string $search){
-           $query->whereHas('films', function ($query) use($search){
-               $query->where('name', 'LIKE', "%$search%");
-           })->orWhereHas('studios.cinemas', function ($query) use($search){
+        $data = ShowTime::with(['film', 'studio.cinemas'])->when($request->search, function(Builder $query, string $search){
+           $query->whereHas('film', function ($query) use($search){
+               $query->where('title', 'LIKE', "%$search%");
+           })->orWhereHas('studio', function ($query) use($search){
                $query->where('name', 'LIKE', "%$search%");
            });
+        })->when($request->uuid_film != 0, function ($q) use ($request){
+            $q->whereHas('film', function ($q) use ($request){
+                $q->where('uuid', $request->uuid_film);
+            });
+        })->when($request->uuid_studio != 0, function ($q) use ($request){
+            $q->whereHas('studio', function ($q) use ($request){
+                $q->where('uuid', $request->uuid_studio);
+            });
         })->paginate($per, ['*', DB::raw("@no := @no + 1 AS no")]);
         return response()->json($data);
     }

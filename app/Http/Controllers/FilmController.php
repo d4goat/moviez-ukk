@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
 {
+    public function get(){
+        return response()->json(['data' => Film::all()]);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -74,7 +74,7 @@ watch(openForm, (val) => {
                     type="button" 
                     class="bg-blue-600 text-bodydark1 py-2 px-4 rounded hover:bg-blue-700"
                     v-if="!openForm"
-                    @click="openForm = true"    
+                    @click="openForm = true"
                 >
                 Add
                 <i class="fa-solid fa-plus"></i>

@@ -35,7 +35,7 @@
               <th
                 v-for="header in headerGroup.headers"
                 :key="header.id"
-                class="px-4 py-3"
+                class="px-4 py-3 font-medium"
               >
                 <FlexRender
                   :render="header.isPlaceholder ? null : header.column.columnDef.header"

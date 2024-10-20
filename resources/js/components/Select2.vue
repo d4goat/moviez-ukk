@@ -172,6 +172,11 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: #AEB7C0 !important;
+    }
+
+    .select2-selection__arrow {
+        display: none !important;
     }
 
     .select2-selection__placeholder {

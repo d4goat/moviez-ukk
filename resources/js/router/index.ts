@@ -77,7 +77,16 @@ const routes: Array<RouteRecordRaw> = [
                     pageTitle: 'Film-Cast',
                     breadcrumbs: ['Master', 'Films', 'Cast']
                 },
-                component: () => import('@/Pages/dashboard/master/film/cast/INdex.vue')
+                component: () => import('@/Pages/dashboard/master/film/cast/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/master/film/:uuid_film/:uuid_studio/show-time',
+                name: 'master.film.show-time',
+                meta: {
+                    pageTitle: 'Film-Showtime',
+                    breadcrumbs: ['Master', 'Films', 'Showtime'],
+                },
+                component: () => import('@/Pages/dashboard/master/film/show_time/Index.vue')
             },
             {
                 path: '/admin/dashboard/master/genre',

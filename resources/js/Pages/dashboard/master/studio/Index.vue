@@ -63,7 +63,7 @@ watch(openForm, (val: any) => {
         <div class="w-full h-full flex flex-col rounded-xl space-y-4">
             <div class="border-b-[1px] border-body flex justify-between items-center p-4">
                 <h2 class="text-xl">Studio List</h2>
-                <button type="button" @click="openForm = true" class="btn btn-md btn-primary">
+                <button type="button" @click="openForm = true" v-if="!openForm" class="btn btn-md btn-primary">
                     <i class="las la-plus"></i>
                     Add
                 </button>

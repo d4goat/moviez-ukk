@@ -46,6 +46,14 @@ const columns = [
                 h('span', { class: 'ml-2' }, 'Cast')
             ]),
             h('button', 
+            {
+                class: 'btn btn-sm btn-primary flex items-center',
+                onClick: () => router.push({name: 'master.film.show-time', params: { uuid_film: cell.getValue(), uuid_studio: 0 }})
+            }, [
+                h('i', { class: 'la la-clock fs-3' }),
+                h('span', { class: 'ml-2' }, 'Showtime')
+            ]),
+            h('button', 
                 {
                     class: 'btn btn-sm btn-info',
                     onClick: () => {

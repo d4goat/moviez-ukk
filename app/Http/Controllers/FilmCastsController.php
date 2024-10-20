@@ -19,8 +19,8 @@ class FilmCastsController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = FilmCast::with('film')->when($request->search, function (Builder $query, string $search){
-            $query->whereHas('films', function ($q) use ($search){
+        $data = FilmCast::with(['film'])->when($request->search, function (Builder $query, string $search){
+            $query->whereHas('film', function ($q) use ($search){
                 $q->where('cast_name', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%");
             });
