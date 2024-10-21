@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('studio_id');
             $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
             $table->foreign('studio_id')->references('id')->on('studios')->onDelete('cascade');
-            $table->string('show_time');
+            $table->string('start_time');
             $table->string('end_time');
             $table->timestamps();
         });

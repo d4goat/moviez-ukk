@@ -24,7 +24,7 @@ class Showtimerequest extends FormRequest
         return [
             'film_id' => 'required',
             'studio_id' => 'required',
-            'show_time' => 'required',
+            'start_time' => 'required',
             'end_time' => 'required'
         ];
     }

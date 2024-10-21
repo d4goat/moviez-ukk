@@ -2,14 +2,43 @@
 import { useAuthStore } from '@/stores/auth';
 import { onClickOutside } from '@vueuse/core'
 import { ref, onMounted } from 'vue'
+import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
 
 const target = ref(null)
 const dropdownOpen = ref(false)
-const { user } = useAuthStore()
+const store = useAuthStore()
+const router = useRouter()
 
 onClickOutside(target, () => {
   dropdownOpen.value = false
 })
+
+const logOut = () => {
+  Swal.fire({
+        icon: "warning",
+        text: "Apakah Anda yakin ingin keluar?",
+        showCancelButton: true,
+        confirmButtonText: "Ya, Keluar",
+        cancelButtonText: "Batal",
+        reverseButtons: true,
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: 'btn font-medium btn-primary',
+          cancelButton: 'btn font-medium btn-danger',
+        }
+    }).then((result: any) => {
+        if (result.isConfirmed) {
+            store.logout();
+            Swal.fire({
+                icon: "success",
+                text: "Berhasil keluar",
+            }).then(() => {
+                router.push({ name: "sign-in" });
+            });
+        }
+    });
+}
 
 </script>
 
@@ -123,6 +152,7 @@ onClickOutside(target, () => {
       </ul>
       <button
         class="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        @click="logOut"
       >
         <svg
           class="fill-current"

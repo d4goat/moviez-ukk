@@ -6,3 +6,101 @@
     background-color: #883FFF;
     border-color: #883FFF;
 }
+
+html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown),
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.modal-open) {
+	overflow-y: initial !important;
+
+	&:not(.sweetalert2-nopadding) {
+		padding-right: 0 !important; 
+	}
+}
+
+.swal2-popup {
+	background-color: #26272e;
+	padding: 2rem;
+
+	.swal2-title {
+		font-weight: 500;
+		font-size: 1.3rem;
+		color: #26272e;
+	}
+
+	.swal2-html-container,
+	.swal2-content {
+		font-weight: normal;
+		font-size: 1.1rem;
+		margin-top: 1.5rem;
+		color: #AEB7C0;
+	}
+
+	.btn {
+		margin: 15px 5px 0;
+	}
+
+	.swal2-styled {
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	.swal2-actions {
+		margin: 1.5rem auto 1rem auto;
+	}
+}
+
+.swal2-container {
+	overflow-y: hidden !important;
+
+	&.swal2-shown {
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+	.swal2-html-container {
+		max-height: 200px;
+		overflow: auto;
+	}
+}
+
+body.swal2-height-auto {
+	height: 100% !important;
+}
+
+.swal2-icon {
+	&.swal2-warning {
+    	border-color: yellow;
+    	color: yellow;
+	}
+
+	&.swal2-error {
+    	border-color: red;
+    	color: red;
+
+		[class^=swal2-x-mark-line] {
+			background-color: red;
+		}
+	}
+
+	&.swal2-success {
+    	border-color: green;
+    	color: green;
+
+		[class^=swal2-success-line] {
+			background-color: green;
+		}
+
+		.swal2-success-ring {
+			border-color: rgba(0, 128, 0, 0.3);
+		}
+	}
+
+	&.swal2-info {
+    	border-color: purple;
+    	color: purple;
+	}
+
+	&.swal2-question {
+    	border-color: rgb(0, 81, 255);
+    	color: rgb(0, 81, 255);
+	}
+}

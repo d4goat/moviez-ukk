@@ -19,7 +19,7 @@ class ShowtimeController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = ShowTime::with(['film', 'studio.cinemas'])->when($request->search, function(Builder $query, string $search){
+        $data = ShowTime::with(['film', 'studio.cinema'])->when($request->search, function(Builder $query, string $search){
            $query->whereHas('film', function ($query) use($search){
                $query->where('title', 'LIKE', "%$search%");
            })->orWhereHas('studio', function ($query) use($search){

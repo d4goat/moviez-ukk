@@ -87,6 +87,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('show-time/store', [ShowtimeController::class, 'store']);
    Route::apiResource('show-time', ShowtimeController::class)->except('index', 'store');
 
+   Route::get('studio', [StudioController::class, 'get']);
    Route::post('studio', [StudioController::class, 'index']);
    Route::post('studio/store', [StudioController::class, 'store']);
    Route::apiResource('studio', StudioController::class)->except('index', 'store');

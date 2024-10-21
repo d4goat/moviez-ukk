@@ -33,8 +33,15 @@ const columns = [
     column.accessor('film.title', {
         header: 'Film'
     }),
-    column.accessor('studio.name', {
-        header: 'Studio'
+    column.accessor('studio', {
+        header: 'Studio',
+        cell: (cell:  any) => h('div', { class: 'flex gap-2' },
+            [
+                h('span', { class: 'text-sm' }, cell.getValue().name),
+                h('span', { class: 'text-sm' }, ' - '),
+                h('span', { class: 'text-sm' }, cell.getValue().cinema.name)
+            ]
+        )
     }),
     column.accessor('start_time', {
         header: 'Start Time'

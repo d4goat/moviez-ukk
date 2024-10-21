@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class StudioController extends Controller
 {
+
+    public function get(){
+        return response()->json(['data' => Studio::all()]);
+    }
     /**
      * Display a listing of the resource.
      */

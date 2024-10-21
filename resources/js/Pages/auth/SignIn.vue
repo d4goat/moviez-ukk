@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { toast } from 'vue3-toastify';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { useMutation } from '@tanstack/vue-query';
 
 const formRef = ref()
 const user = ref<User>({} as User);
@@ -36,6 +37,26 @@ function submit() {
         })
 }
 
+const { mutate: login, isLoading, isSuccess } = useMutation(
+  (data: any) => axios.post("/auth/login", data),
+  {
+    onMutate: () => {
+      block(document.getElementById('form-login'));
+    },
+    onSuccess: async (res: any) => {
+      store.setAuth(res.data.user, res.data.token);
+      toast.success("Login berhasil!");
+      router.push('/admin/dashboard')
+    },
+    onError: (err: any) => {
+      toast.error(err.response.data.message);
+    },
+    onSettled: () => {
+      unblock(document.getElementById('form-login'));
+    }
+  }
+)
+
 function togglePass(ev: MouseEvent) {
     const type = document.querySelector<HTMLInputElement>(["input[name=password]"]);
 
@@ -51,7 +72,7 @@ function togglePass(ev: MouseEvent) {
 </script>
 
 <template>
-    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="submit" class="flex justify-center bg-[#171717] items-center min-h-screen w-full p-4">
+    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="login" class="flex justify-center bg-[#171717] items-center min-h-screen w-full p-4">
         <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center rounded-xl space-y-6 p-6">
           <div class="font-medium text-center mb-4 flex flex-col">
             <span class="text-2xl sm:text-3xl">Login</span>
@@ -86,7 +107,13 @@ function togglePass(ev: MouseEvent) {
             </div>
             <!-- end:input -->
             <div class="flex w-full justify-center mt-4">
-              <button type="submit" class="bg-cinema py-2 w-full sm:w-1/3 rounded-lg text-white  text-sm sm:text-base">Login</button>
+              <button type="submit" 
+                class="bg-cinema py-2.5 w-full sm:w-1/3 rounded-lg text-white text-md sm:text-base" :class="isLoading ? 'flex p-2 justify-center' : 'block'">
+                <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+                <span v-if="!isLoading">Login</span>
+              </button>
             </div>
             <div class="flex w-full justify-center text-center text-sm sm:text-base">
               <span>Don't have an account yet? <router-link :to="{name: 'sign-up'}" class="text-cinema"><br> Register Now</router-link></span>
