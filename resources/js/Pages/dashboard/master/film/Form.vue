@@ -92,6 +92,29 @@
                     </div>
                     <!-- End:Input -->
                     <!-- Begin:Input -->
+                    <div class="flex flex-col mb-3">
+                        <label class="form-label">Film Genre</label>
+                        <div class="space-x-2">
+                            <label 
+                                v-for="genre in genres" 
+                                :key="genre.id" 
+                                :for="'genre_' + genre.id"
+                                class="" 
+                                id="genres"
+                            >
+                                <input 
+                                    type="checkbox"
+                                    :id="'genre_' + genre.id"
+                                    :value="genre.id"
+                                    v-model="film.genre_film_id"
+                                    name="genre_film_id"
+                                    class="form-check-input focus:ring-0 mb-2 p-1.5"
+                                    >
+                                    <span class="text-lg font-semibold pl-2 "> {{ genre.text }} </span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Begin:Input -->
                     <div class="col-md-12 flex flex-col mb-3">
                         <label class="form-label">Poster</label>
                         <Field autocomplete="off" name="poster" type="text" placeholder="Masukkan Film Poster"
@@ -112,12 +135,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import * as Yup from 'yup'
 import type { Film } from '@/types'
 import axios from '@/libs/axios';
 import { toast } from 'vue3-toastify';
 import { unblock, block } from '@/libs/utils';
+import { useGenre } from '@/services';
 
 const props = defineProps({
     selected: {
@@ -126,7 +150,9 @@ const props = defineProps({
     }
 })
 
-const film = ref<Film>({} as Film)
+const film = ref<Film>({
+    genre_film_id: []
+} as Film)
 const fileTypes = ref(['image/jpg', 'image/png', 'image/jpeg']);
 const poster = ref<any>([])
 
@@ -171,6 +197,9 @@ function submit() {
     formData.append('director', film.value.director)
     formData.append('writer', film.value.writer)
     formData.append('release_date', film.value.release_date)
+    film.value.genre_film_id.forEach((gen: any) => {
+        formData.append('genre_film_id[]', gen)
+    })
 
     if (poster.value.length) {
         formData.append('poster', poster?.value[0].file)
@@ -203,6 +232,14 @@ function submit() {
         console.error(error.response.data.message)
     }).finally(() => unblock(document.getElementById('form-film')))
 }
+
+const film_genre = useGenre()
+const genres = computed(() => 
+    film_genre.data.value?.map((item: any) => ({
+        id: item.id,
+        text: item.name
+    }))
+)
 
 onMounted(() => {
     if (props.selected) getEdit()

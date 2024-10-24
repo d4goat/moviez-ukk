@@ -38,7 +38,7 @@ class FilmController extends Controller
         $validate = $request->validated();
 
         if($request->hasFile('poster')){
-            $validate['poster'] = $request->file('poster')->store('image', 'public');
+            $validate['poster'] = $request->file('poster')->store('poster', 'public');
         }
 
         $film = Film::create($validate);
@@ -63,10 +63,14 @@ class FilmController extends Controller
      */
     public function show($uuid)
     {
-        $film = Film::findByUuid($uuid);
+        $film = Film::with(['genreFilms'])->where('uuid', $uuid)->first();
+
+        $genre = $film->genre_film_id;
 
         return response()->json([
-            'data' => $film
+            'success' => true,
+            'message' => 'successfully fetch data',
+            'data' => $film,
         ]);
     }
 

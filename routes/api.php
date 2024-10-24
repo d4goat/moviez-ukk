@@ -62,6 +62,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('film-cast/store', [FilmCastsController::class, 'store']);
    Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store');
    
+   Route::get('genre', [GenreController::class, 'get']);
    Route::post('genre', [GenreController::class, 'index']);
    Route::post('genre/store', [GenreController::class, 'store']);
    Route::apiResource('genre', GenreController::class)->except('index', 'store');

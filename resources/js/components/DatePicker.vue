@@ -1,7 +1,7 @@
 <template>
     <flat-pickr
         v-bind="$props"
-        :class="`form-control form-control-solid text-white focus:bg-[#232323] ${$props.class}`"
+        :class="`form-control form-control-solid text-white focus:bg-[#232323] bg-[#232323] ${$props.class}`"
     />
 </template>
 

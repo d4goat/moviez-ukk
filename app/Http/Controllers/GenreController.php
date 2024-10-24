@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class GenreController extends Controller
 {
+
+    public function get(){
+        return response()->json(['data' => Genre::all()]);
+    }
     /**
      * Display a listing of the resource.
      */

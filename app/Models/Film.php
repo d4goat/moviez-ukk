@@ -23,7 +23,7 @@ class Film extends Model
     }
 
     public function getGenreFilmIdAttribute(){
-        return $this->genreFilms->pluck('genre_film_is');
+        return $this->genreFilms->pluck('id');
     }
 
     public function casts(){

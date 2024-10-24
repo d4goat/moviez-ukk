@@ -32,14 +32,14 @@
                     <div class="col-md-3 flex flex-col mb-3">
                         <label class="form-label">Start Time</label>
                         <Field name="start_time" autocomplete="off" v-model="show_time.start_time" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert Start Time">
-                            <date-picker v-model="show_time.start_time" class="bg-[#232323] rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
+                            <date-picker v-model="show_time.start_time" class="rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
                         </Field>
                         <ErrorMessage name="start_time" class="text-red-500" />
                     </div>
                     <div class="col-md-3 flex flex-col mb-3">
                         <label class="form-label">End Time</label>
                         <Field name="end_time" autocomplete="off" v-model="show_time.end_time" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert End Time">
-                            <date-picker v-model="show_time.end_time" class="bg-[#232323] rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
+                            <date-picker v-model="show_time.end_time" class="rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
                         </Field>
                         <ErrorMessage name="end_time" class="text-red-500" />
                     </div>
@@ -86,7 +86,7 @@ const formSchema = Yup.object().shape({
 function getEdit(){
     block(document.getElementById('form-show_time'))
 
-    axios.get(`/master/show_time/${props.selected}`)
+    axios.get(`/master/show-time/${props.selected}`)
     .then(({data}: any) => {
         show_time.value = data.data
     }).catch((error: any) => {
