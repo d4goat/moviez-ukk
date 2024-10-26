@@ -20,9 +20,11 @@ class ReviewController extends Controller
 
         DB::statement('set @no=0' . $per * $page);
         $data = Review::when($request->search, function (Builder $query, string $search){
-            $query->whereHas('users', function (Builder $query) use ($search){
+            $query->whereHas('user', function (Builder $query) use ($search){
                 $query->where('name', 'LIKE', "%$search%");
             });
+        })->whereHas('film', function ($q) use ($request){
+            $q->where('uuid', $request->uuid_film);
         })->paginate($per, ['*', DB::raw("@no := @no + 1 AS no")]);
 
         return response()->json($data);

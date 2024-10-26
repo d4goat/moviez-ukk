@@ -4,11 +4,13 @@ import { useDelete } from '@/libs/hooks';
 import Form from './Form.vue';
 import { createColumnHelper } from '@tanstack/vue-table';
 import { Studio } from '@/types';
+import { useRouter } from 'vue-router';
 
 const column = createColumnHelper<Studio>()
 const paginateRef = ref()
 const selected = ref<string>("")
 const openForm = ref<boolean>(false)
+const router = useRouter()
 
 const { delete: deleteStudio } = useDelete({
     onSuccess: paginateRef.value?.refetch()
@@ -27,6 +29,12 @@ const columns = [
     column.accessor('uuid', {
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
+            h('button', {
+                class: 'btn btn-success btn-sm',
+                onClick: () => router.push({ name: 'master.studio.seat', params: { uuid: cell.getValue() } })
+            }, [
+                'Seat '
+            ]),
             h('button', {
                 class: 'btn btn-sm btn-info',
                 onClick: () => {

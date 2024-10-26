@@ -23,7 +23,19 @@ class PermissionSeeder extends Seeder
         // create permissions
         $menuAdmin = [
             'master',
+            'admin-dashboard',
+            'website',
             'master-role',
+            'master-cinema',
+            'master-film',
+            'master-film-cast',
+            'master-film-review',
+            'master-genre',
+            'master-promotion',
+            'master-studio',
+            'master-studio-seat',
+            'master-studio-show-time',
+            'master-users',
         ];
 
         $permissionsByRole = [

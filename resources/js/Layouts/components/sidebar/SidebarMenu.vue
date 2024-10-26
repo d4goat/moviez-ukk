@@ -6,9 +6,11 @@ import SidebarItem from './SidebarItem.vue'
 import { useAuthStore } from '@/stores/auth'
 import MainMenuConfig from '@/Layouts/config/MainMenuConfig'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 
 const { user } = useAuthStore()
 const target = ref(null)
+const route = useRoute()
 const openSubmenus = ref<Set<string>>(new Set())
 
 const { t, te } = useI18n()
@@ -32,6 +34,7 @@ const hasActiveChildren = (route: string) => {
 }
 
 const checkPermission = (menu: string) => {
+  console.log(user.permission)
     if (user?.permission?.includes(menu)) {
         return true;
     }
@@ -87,12 +90,12 @@ const isSubmenuOpen = (menuItem: any) => {
       <!-- Sidebar Menu -->
       <nav class="mt-2 pb-2 px-3 lg:mt-4 lg:px-6">
         <template v-for="(item, i) in MainMenuConfig" :key="i">
-          <div v-if="item.heading ">
+          <div v-if="item.heading && checkPermission(item.name)">
             <h3 class="mb-2 ml-4 text-sm font-medium text-bodydark2">{{ translate(item.heading) }}</h3>
 
             <ul class="mb-3 flex flex-col gap-1.5">
               <template v-for="(menuItem, j) in item.pages" :key="j">
-                <li v-if="menuItem.heading ">
+                <li v-if="menuItem.heading && checkPermission(menuItem.name)">
                   <router-link
                     v-if="menuItem.route"
                     :to="menuItem.route"
@@ -102,7 +105,7 @@ const isSubmenuOpen = (menuItem: any) => {
                     <span>{{ translate(menuItem.heading) }}</span>
                   </router-link>
                 </li>
-                <li v-if="menuItem.sectionTitle && menuItem.route ">
+                <li v-if="menuItem.sectionTitle && menuItem.route && checkPermission(menuItem.name)">
                   <a
                     href="#"
                     class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
@@ -131,7 +134,7 @@ const isSubmenuOpen = (menuItem: any) => {
                     <ul class="mb-5.5 flex flex-col gap-2">
                       <li v-for="(subItem, k) in menuItem.sub" :key="k">
                         <router-link
-                          v-if="subItem.route "
+                          v-if="subItem.route && checkPermission(subItem.name)"
                           :to="subItem.route"
                           class="group relative flex items-center gap-2.5 rounded-md px-2 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                           :class="{ 'text-white': $route.path === subItem.route }"

@@ -71,6 +71,15 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/Pages/dashboard/master/film/Index.vue'),
             },
             {
+                path: '/admin/dashboard/master/film/:uuid/review',
+                name: 'master.film.review',
+                meta: {
+                    pageTitle: 'Film-Review',
+                    breadcrumbs: ['Master', 'Films', 'Review']
+                },
+                component: () => import('@/Pages/dashboard/master/film/reviews/Index.vue')
+            },
+            {
                 path: '/admin/dashboard/master/film/:uuid/cast',
                 name: 'master.film.cast',
                 meta: {
@@ -114,6 +123,15 @@ const routes: Array<RouteRecordRaw> = [
                     breadcrumbs: ['Master', 'Studio']
                 },
                 component: () => import('@/Pages/dashboard/master/studio/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/master/studio/:uuid/seat',
+                name: 'master.studio.seat',
+                meta: {
+                    pageTitle: 'Studio-Seat',    
+                    breadcrumbs: ['Master', 'Studio', 'Seat']
+                },
+                component: () => import('@/Pages/dashboard/master/studio/seat/Index.vue')
             }
         ]
     },

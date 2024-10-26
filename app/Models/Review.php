@@ -12,11 +12,11 @@ class Review extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
 
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function films(){
+    public function film(){
         return $this->belongsTo(Film::class);
     }
 }

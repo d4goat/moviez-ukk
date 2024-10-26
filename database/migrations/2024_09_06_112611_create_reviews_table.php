@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('film_id');
             $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
-            $table->string('review');
+            $table->text('review');
+            $table->double('rating');
             $table->timestamps();
         });
     }

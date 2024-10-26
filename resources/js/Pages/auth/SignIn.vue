@@ -108,6 +108,7 @@ function togglePass(ev: MouseEvent) {
             <!-- end:input -->
             <div class="flex w-full justify-center mt-4">
               <button type="submit" 
+                :disable="isLoading"
                 class="bg-cinema py-2.5 w-full sm:w-1/3 rounded-lg text-white text-md sm:text-base" :class="isLoading ? 'flex p-2 justify-center' : 'block'">
                 <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>

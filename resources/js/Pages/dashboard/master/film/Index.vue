@@ -39,6 +39,14 @@ const columns = [
         cell: (cell: any) => h('div', { class: 'flex gap-2' }, [
             h('button', 
             {
+                class: 'btn btn-sm btn-warning flex items-center',
+                onClick: () => router.push({name: 'master.film.review', params: { uuid: cell.getValue() }})
+            }, [
+                h('i', { class: 'fa-regular fa-star fs-5' }),
+                h('span', { class: 'ml-2' }, 'Review')
+            ]),
+            h('button', 
+            {
                 class: 'btn btn-sm btn-success flex items-center',
                 onClick: () => router.push({name: 'master.film.cast', params: { uuid: cell.getValue() }})
             }, [

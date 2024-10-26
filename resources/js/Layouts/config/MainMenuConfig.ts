@@ -10,22 +10,22 @@ interface MenuItem {
 const MainMenuConfig: Array<MenuItem> = [
     {
         heading: "Admin",
+        name: "dashboard", // Sesuaikan dengan permission
         pages: [
             {
                 heading: "Dashboard",
                 route: "/admin/dashboard",
-                name: "/admin/dashboard"
+                name: "admin-dashboard"
             },
         ],
     },
     {
         heading: "Website",
-        route: '/admin/dashboard',
-        name: 'website',
+        name: "website",
         pages: [
             {
                 sectionTitle: "Master",
-                route: "/admin/dashboard",
+                route: "/admin/dashboard/master",
                 name: "master",
                 sub: [
                     {
@@ -37,18 +37,6 @@ const MainMenuConfig: Array<MenuItem> = [
                         heading: "Film",
                         name: "master-film",
                         route: "/admin/dashboard/master/film",
-                        sub: [
-                            {
-                                heading: "Film Cast",
-                                name: "master-film-cast",
-                                route: "/admin/dashboard/master/film/cast",
-                            },
-                            {
-                                heading: "Review",
-                                name: "master-film-review",
-                                route: "/admin/dashboard/master/film/review",
-                            }
-                        ]
                     },
                     {
                         heading: "Genre",
@@ -62,20 +50,8 @@ const MainMenuConfig: Array<MenuItem> = [
                     },
                     {
                         heading: "Studio",
-                        name: "Studio",
+                        name: "master-studio",
                         route: "/admin/dashboard/master/studio",
-                        sub: [
-                            {
-                                heading: "Seat",
-                                name: "master-studio-seat",
-                                route: "/admin/dashboard/master/studio/seat",
-                            },
-                            {
-                                heading: "Show Time",
-                                name: "master-studio-show-time",
-                                route: "/admin/dashboard/master/studio/show-time",
-                            }
-                        ]
                     },
                     {
                         heading: 'Users',

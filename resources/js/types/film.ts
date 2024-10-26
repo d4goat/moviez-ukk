@@ -18,3 +18,12 @@ export interface FilmCast{
     cast_name: string;
     film_id: number;
 }
+
+export interface Review {
+    id: number;
+    uuid: string;
+    film_id: number;
+    user_id: number;
+    review: string;
+    rating: number;
+}

@@ -24,6 +24,8 @@ class SeatController extends Controller
             ->orWhereHas('studio.cinema', function ($query) use($search){
                 $query->where('name', 'LIKE', "%$search%");
             });
+        })->whereHas('studio', function ($q) use ($request){
+            $q->where('uuid', $request->uuid_studio);
         })->paginate($per, ['*', DB::raw("@no := @no + 1 AS no")]);
 
         return response()->json($data);
