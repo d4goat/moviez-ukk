@@ -59,7 +59,12 @@ const MainMenuConfig: Array<MenuItem> = [
                         route: '/admin/dashboard/master/users',
                     },
                 ]
-            }   
+            },
+            {
+                heading: 'Booking',
+                name: 'booking',
+                route: '/admin/dashboard/booking',
+            }
         ]
     }
 ]

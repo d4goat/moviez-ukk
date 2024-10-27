@@ -132,6 +132,15 @@ const routes: Array<RouteRecordRaw> = [
                     breadcrumbs: ['Master', 'Studio', 'Seat']
                 },
                 component: () => import('@/Pages/dashboard/master/studio/seat/Index.vue')
+            },
+            {
+                path: '/admin/dashboard/booking',
+                name: 'booking',
+                meta: {
+                    pageTitle: 'Booking',
+                    breadcrumbs: ['Booking']
+                },
+                component: () => import('@/Pages/dashboard/booking/Index.vue')
             }
         ]
     },

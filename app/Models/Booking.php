@@ -12,11 +12,11 @@ class Booking extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
 
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function show_times(){
+    public function show_time(){
         return $this->belongsTo(ShowTime::class);
     }
 

@@ -77,7 +77,6 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
 
    Route::post('review', [ReviewController::class, 'index']);
    Route::post('review/store', [ReviewController::class, 'store']);
-
    Route::apiResource('review', ReviewController::class)->except('index', 'store');
 
    Route::post('seat', [SeatController::class, 'index']);

@@ -36,6 +36,7 @@ class PermissionSeeder extends Seeder
             'master-studio-seat',
             'master-studio-show-time',
             'master-users',
+            'booking'
         ];
 
         $permissionsByRole = [

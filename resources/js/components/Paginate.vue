@@ -24,7 +24,7 @@
         </form>
       </div>
   
-      <div class="overflow-x-auto mt-4 table-responsive">
+      <div class="overflow-x-auto mt-4 table-auto">
         <table class="min-w-full rounded">
           <thead class="">
             <tr

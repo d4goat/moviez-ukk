@@ -2,7 +2,6 @@
 import { ref, h, watch, onMounted } from 'vue';
 import { createColumnHelper } from '@tanstack/vue-table';
 import { Review } from '@/types';
-import Form from './Form.vue'
 import { useDelete } from '@/libs/hooks';
 import { useRouter, useRoute } from 'vue-router';
 import { useQuery } from '@tanstack/vue-query';
@@ -36,21 +35,9 @@ const columns = [
     column.accessor('review', {
         header: 'Review'
     }),
-    column.accessor('rating', {
-        header: 'Rating'
-    }),
     column.accessor('uuid', {
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
-                h('button', {
-                    class: 'btn btn-md btn-info',
-                    onClick: () => {
-                        selected.value = cell.getValue()
-                        openForm.value = true
-                    }
-                }, [
-                    h('i', { class: 'fa fa-pencil fs-2' })
-                ]),
                 h('button', {
                     class: 'btn btn-md btn-danger',
                     onClick: () => deleteReview(`/master/review/${cell.getValue()}`)
@@ -79,8 +66,20 @@ onMounted(() => refetch())
 </script>
 
 <template>
-    <main class="border-b pb-3">
-        <Form :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
-        
+    <main class="border-b border-body pb-3">
+        <div class="w-full h-full flex flex-col rounded-lg space-y-4">
+            <!-- Title -->
+            <div class="border-b border-body flex items-center p-4">
+                <h2 class="text-xl"> {{ data?.title }} Reviews </h2>
+            </div>
+            <div class="w-full h-full py-2 px-4">
+                <paginate
+                    ref="paginateRef"
+                    id="table-reviews"
+                    url="/master/review"
+                    :columns="columns"
+                ></paginate>
+            </div>
+        </div>
     </main>
 </template>

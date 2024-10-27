@@ -20,23 +20,6 @@ const formSchema = Yup.object().shape({
     password: Yup.string().min(8, 'Password minimal harus diisi 8 karakter').required().label('Password'),
 })
 
-function submit() {
-    block(document.getElementById('form-login'));
-
-    axios.post("/auth/login", user.value)
-        .then((response: any) => {
-            store.setAuth(response.data.user, response.data.token);
-            toast.success("Login berhasil!");
-            router.push('/admin/dashboard')
-        })
-        .catch((err: any) => {
-            toast.error(err.response.data.message);
-        })
-        .finally(() => {
-            unblock(document.getElementById('form-login'));
-        })
-}
-
 const { mutate: login, isLoading, isSuccess } = useMutation(
   (data: any) => axios.post("/auth/login", data),
   {
@@ -46,7 +29,11 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
     onSuccess: async (res: any) => {
       store.setAuth(res.data.user, res.data.token);
       toast.success("Login berhasil!");
-      router.push('/admin/dashboard')
+      if(res.data.user.role.id === 1){
+        router.push('/admin/dashboard')
+      }  else {
+        router.push('/landing')
+      }
     },
     onError: (err: any) => {
       toast.error(err.response.data.message);
