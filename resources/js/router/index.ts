@@ -146,10 +146,11 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/',
+        redirect: '/landing/dashboard',
         component: () => import('@/Layouts/MainLayout.vue'),
         children: [
             {
-                path: '/landing',
+                path: '/landing/dashboard',
                 name: 'landing.page',
                 component: () => import('@/Pages/users/Landing.vue'),
             },

@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SeatController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowtimeController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,10 @@ Route::middleware(['auth', 'json'])->prefix('auth')->group(function () {
    Route::get('me', [AuthController::class, 'me']);
 });
 
+Route::prefix('setting')->group(function () {
+   Route::get('', [SettingController::class, 'get']);
+});
+
 Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {   
    Route::post('users', [UserController::class, 'index']);
    Route::post('users/store', [UserController::class, 'store']);
@@ -53,10 +58,14 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('booking/store', [BookingController::class, 'store']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
    
-   Route::get('film', [FilmController::class, 'get']);
-   Route::post('film', [FilmController::class, 'index']);
-   Route::post('film/store', [FilmController::class, 'store']);
-   Route::apiResource('film', FilmController::class)->except('index', 'store');
+   Route::prefix('film')->group(function (){
+      Route::get('', [FilmController::class, 'get']);
+      Route::post('', [FilmController::class, 'index']);
+      Route::post('store', [FilmController::class, 'store']);
+      Route::apiResource('', FilmController::class)->except('index', 'store');
+
+      Route::get('top-film', [FilmController::class, 'topFilm'])->withoutMiddleware(['auth', 'verified']);
+   });
 
    Route::post('film-cast', [FilmCastsController::class, 'index']);
    Route::post('film-cast/store', [FilmCastsController::class, 'store']);

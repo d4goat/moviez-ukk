@@ -75,6 +75,20 @@ class FilmController extends Controller
     }
 
     /**
+     * Show FIlm with highest rating
+     */
+
+     public function topFilm(){
+        $data = Film::with(['reviews'])->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'successfully fetch data Top Film',
+            'data' => $data
+        ]);
+     }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(FilmRequest $request, $uuid)

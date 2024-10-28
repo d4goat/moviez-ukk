@@ -19,5 +19,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('holy@shit'),
             'phone' => '08876245653',
         ])->assignRole('admin');
+
+        User::create([
+            'name' => 'User',
+            'email' => 'user@dmoviez.com',
+            'password' => bcrypt('12345678'),
+            'phone' => '08876845653',
+        ])->assignRole('user');
     }
 }

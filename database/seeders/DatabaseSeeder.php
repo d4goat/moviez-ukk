@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             FilmSeeder::class,
             GenreSeeder::class,
+            SettingSeeder::class,
+            ReviewSeeder::class,
             IndonesiaDatabaseSeeder::class,
         ]);
     }
