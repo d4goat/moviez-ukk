@@ -34,7 +34,6 @@ const hasActiveChildren = (route: string) => {
 }
 
 const checkPermission = (menu: string) => {
-  console.log(user.permission)
     if (user?.permission?.includes(menu)) {
         return true;
     }

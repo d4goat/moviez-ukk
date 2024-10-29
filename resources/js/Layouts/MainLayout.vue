@@ -6,7 +6,7 @@ export default {
     setup(){
         const { data, isLoading } = useQuery({
             queryKey: ['setting'],
-            queryFn: async () => axios.get('/setting').then((res) => res.data.data)
+            queryFn: async () => axios.get('/setting').then((res) => res.data)
         })
 
         return {

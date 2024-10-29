@@ -64,6 +64,11 @@ const MainMenuConfig: Array<MenuItem> = [
                 heading: 'Booking',
                 name: 'booking',
                 route: '/admin/dashboard/booking',
+            },
+            {
+                heading: 'Setting',
+                name: 'setting',
+                route: '/admin/dashboard/setting'
             }
         ]
     }

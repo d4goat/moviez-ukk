@@ -38,6 +38,7 @@ Route::middleware(['auth', 'json'])->prefix('auth')->group(function () {
 
 Route::prefix('setting')->group(function () {
    Route::get('', [SettingController::class, 'get']);
+   Route::post('update', [SettingController::class, 'update']);
 });
 
 Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {   

@@ -1,6 +1,6 @@
 <template>
     <div class="text-red-900">
-        cok
+        <img :src="setting.logo" alt="" srcset="">
     </div>
 </template>
 
@@ -10,8 +10,18 @@ import { useQuery } from '@tanstack/vue-query';
 import { Film } from '@/types';
 import axios from '@/libs/axios';
 
-const { data, refetch, isLoading } = useQuery({
+const { data: review, refetch, isLoading } = useQuery({
     queryKey: ['film', 'top-rate'],
     queryFn: () => axios.get('/master/film/top-film').then((res: any) => res.data.data)
+})
+
+const { data: setting, refetch: refetchSetting } = useQuery({
+    queryKey: ['setting', 'show'],
+    queryFn: async () => await axios.get('/setting').then((res: any) => res.data)
+})
+
+onMounted(() => {
+    refetch()
+    refetchSetting()
 })
 </script>
