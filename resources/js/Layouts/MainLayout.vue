@@ -26,7 +26,7 @@ export default {
             if(window.innerWidth >= 768){
                 this.isOpen = false
             }
-        }
+        },
     },
     mounted() {
         window.addEventListener('resize', this.handleResize)
@@ -38,9 +38,9 @@ export default {
 </script>
 
 <template>
-    <div class="dark:bg-dark-bg bg-white text-white">
-        <nav class="bg-dark-bg fixed w-full z-20 top-0 start-0 border-b-[3px] border-cinema dark:border-gray-600">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <main class="text-white">
+        <nav class="bg-dark-bg/70 backdrop-blur-md fixed w-full z-20 top-0 start-0">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
                 <span class="text-2xl text-cinema font-medium">{{ data?.name }}</span>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <router-link to="/sign-in" class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden">
@@ -95,7 +95,7 @@ export default {
                 </div>
             </div>
         </nav>
-        <RouterView class="mt-21 p-3" />
+        <RouterView class=" bg-component min-h-screen" />
         <footer class="h-32 bg-zinc-800 p-5">
             <div class="container mx-auto">
                 <div class="flex flex-col md:flex-row justify-between">
@@ -104,5 +104,5 @@ export default {
                 </div>
             </div>
         </footer>
-    </div>
+    </main>
 </template>

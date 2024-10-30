@@ -14,6 +14,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     </head>
     <body class="antialiased">
-        <div id="app"></div>
+        <div id="app" class="bg-dark-bg"></div>
     </body>
 </html>

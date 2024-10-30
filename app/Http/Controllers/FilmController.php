@@ -65,8 +65,6 @@ class FilmController extends Controller
     {
         $film = Film::with(['genreFilms'])->where('uuid', $uuid)->first();
 
-        $genre = $film->genre_film_id;
-
         return response()->json([
             'success' => true,
             'message' => 'successfully fetch data',
