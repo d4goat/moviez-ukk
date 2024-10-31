@@ -68,7 +68,7 @@ export default {
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/" class="block relative group">
+                            <router-link to="/#now-showing" class="block relative group">
                                 <span>Now Showing</span>
                                 <span class="absolute left-0 -bottom-1 w-full h-0.5 bg-gradient-to-r from-blue-500 to-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                             </router-link>
@@ -95,12 +95,24 @@ export default {
                 </div>
             </div>
         </nav>
-        <RouterView class=" bg-component min-h-screen" />
-        <footer class="h-32 bg-zinc-800 p-5">
-            <div class="container mx-auto">
-                <div class="flex flex-col md:flex-row justify-between">
-                    <div class="mb-6 md:mb-0">
-                    </div>
+        <RouterView class="bg-component min-h-screen" />
+        <footer class="h-30 bg-[#121212] mx-10 flex items-center justify-between">
+            <div class="flex flex-col">
+                <span class="text-title-xl2 font-semibold text-cinema"> {{ data?.name }} </span>
+                <span class="text-lg">© 2024 Cinema51. All Rights Reserved.</span>
+            </div>
+            <div class="flex space-x-11">
+                <div class="flex flex-col space-y-2">
+                    <router-link to="/" class="">Home</router-link>
+                    <router-link to="/" class="">Now Showing</router-link>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <router-link to="/" class="">Coming Soon</router-link>
+                    <router-link to="/" class="">Cinema</router-link>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <router-link to="/" class="">About Us</router-link>
+                    <router-link to="/" class="">Contact Us</router-link>
                 </div>
             </div>
         </footer>

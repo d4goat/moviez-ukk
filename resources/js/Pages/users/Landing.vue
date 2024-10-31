@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-5 py-4">
         <div class="flex">
             <img :src="setting?.logo" alt="background dashboard" class="object-cover h-115 w-full rounded-b-[2rem] brightness-50 contrast-[.85]">
             <div class="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
@@ -11,9 +11,9 @@
         </div>
 
         <!-- Top Rating Movie -->
-        <div class="flex flex-col mx-4 space-y-4">
-            <div class="p-2 rounded-3xl border w-1/6 flex justify-center">
-                <span class="text-xl font-semibold">Top Rating Movie</span>
+        <div class="flex flex-col mx-4 space-y-4" id="now-showing">
+            <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
+                <span class="lg:text-xl text-xs font-semibold">Top Rating Movie</span>
             </div>
             <div class="flex space-x-3" v-for="reviews in review" :key="reviews.uuid">
                 <div class="flex flex-col space-y-3">
