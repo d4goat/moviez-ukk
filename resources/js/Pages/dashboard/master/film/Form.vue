@@ -70,12 +70,13 @@
                     <!-- End:Input -->
 
                     <!-- Begin:Input -->
-                    <div class="col-md-4 flex flex-col mb-3">
+                    <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Release Date</label>
                         <Field autocomplete="off" name="release_date" type="text"
+                            placeholer="Insert film release date"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"
                             v-model="film.release_date">
-                            <date-picker v-model="film.release_date" class="rounded py-2.5" :config="{ enableTime: true, format: 'Y:m:d H:i'}"></date-picker>
+                            <date-picker v-model="film.release_date" placeholder="Insert film release date" class="rounded py-2.5" :config="{ enableTime: true, format: 'Y:m:d H:i'}"></date-picker>
                         </Field>
                         <ErrorMessage name="release_date" class="text-red-500" />
                     </div>
@@ -83,7 +84,7 @@
 
                     
                     <!-- Begin:Input -->
-                    <div class="col-md-4 flex flex-col mb-3">
+                    <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Trailer</label>
                         <Field autocomplete="off" name="trailer" type="text" placeholder="Masukkan Film Trailer"
                         class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"

@@ -13,17 +13,29 @@ class ReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        Review::create([
+        Review::updateOrCreate([
             'user_id' => 1,
             'film_id' => 1,
             'review' => 'Sangat Bagus',
             'rating' => 5
         ]);
-        Review::create([
+        Review::updateOrCreate([
             'user_id' => 2,
             'film_id' => 1,
             'review' => 'Lumayan',
             'rating' => 4.1
+        ]);
+        Review::updateOrCreate([
+            'user_id' => 1,
+            'film_id' => 2,
+            'review' => 'NAISSS',
+            'rating' => 4.4
+        ]);
+        Review::updateOrCreate([
+            'user_id' => 2,
+            'film_id' => 2,
+            'review' => 'GLOOKK',
+            'rating' => 4.9
         ]);
     }
 }

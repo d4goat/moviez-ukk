@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
-            FilmSeeder::class,
             GenreSeeder::class,
+            FilmSeeder::class,
             SettingSeeder::class,
             ReviewSeeder::class,
+            FilmCastSeeder::class,
             IndonesiaDatabaseSeeder::class,
         ]);
     }

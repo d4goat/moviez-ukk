@@ -27,8 +27,8 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
       block(document.getElementById('form-login'));
     },
     onSuccess: async (res: any) => {
-      store.setAuth(res.data.user, res.data.token);
       toast.success("Login berhasil!");
+      store.setAuth(res.data.user, res.data.token);
       if(res.data.user.role.id === 1){
         router.push('/admin/dashboard')
       }  else {

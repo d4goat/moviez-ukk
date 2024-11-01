@@ -16,7 +16,7 @@ class SettingSeeder extends Seeder
         Setting::create([
         'name' => 'Cinema51',
         'description' => 'Sebuah Website yang menyediakan fitur pemesanan tiket bioskop secara online',
-        'logo' => '/images/logo/react-redux.png',
+        'logo' => '/images/view-3d-cinema-theatre-room.jpg',
         'email' => 'cinema51@dmoviez.com',
         'phone' => '0827468638643'
         ]); 

@@ -12,29 +12,60 @@
 
         <!-- Top Rating Movie -->
         <div class="flex flex-col mx-4 space-y-4" id="now-showing">
+            <!-- HEADER -->
             <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
                 <span class="lg:text-xl text-xs font-semibold">Top Rating Movie</span>
             </div>
-            <div class="flex space-x-3" v-for="reviews in review" :key="reviews.uuid">
-                <div class="flex flex-col space-y-3">
-                    <img :src="`/storage/${reviews?.poster}`" class="h-64 object-cover rounded-2xl" alt="">
-                    <span class="text-center">{{ reviews.reviews_avg_rating }}</span>
+            <div class="flex space-x-7">
+                <div class="flex flex-col space-y-3"  v-for="reviews in review" :key="reviews.uuid">
+                    <img :src="reviews?.poster" class="h-64 object-cover rounded-2xl" alt="">
+                    <div class="text-center flex gap-3 justify-center"> <vue3starRatings :star-size="22" v-model="reviews.reviews_avg_rating" :disable-click="true" 
+                        star-color="#ffea06" inactive-color="#bdbdbd" /> </div>
                     <span class="text-center">{{ reviews.title }}</span>
                 </div>
             </div>
         </div>
+
+        <!-- Now Showing Movie -->
+         <div class="flex flex-col mx-4 space-y-4">
+            <!-- HEADER -->
+            <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
+                <span class="lg:text-xl text-xs font-semibold">Now Showing</span>
+            </div>
+
+            <!-- BODY -->
+            <div class="flex space-x-7">
+                <div class="flex flex-col space-y-3" v-for="films in film" :key="films.uuid">
+                    <img :src="films?.poster" class="h-64 object-cover rounded-2xl" alt="">
+                    <div class="text-center"> {{ films.title }} </div>
+                </div>
+            </div>
+         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineComponent } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { Film } from '@/types';
 import axios from '@/libs/axios';
+import vue3starRatings from "vue3-star-ratings";
+
+
+defineComponent({
+    components: {
+        vue3starRatings
+    }
+})
 
 const { data: review, refetch, isLoading } = useQuery({
     queryKey: ['film-top', 'top-rate-film'],
     queryFn: () => axios.get('/master/film/top-film').then((res: any) => res.data.data)
+})
+
+const { data: film, refetch: refetchFilm } = useQuery({
+    queryKey: ['film', 'all'],
+    queryFn: async ()  => await axios.get('/master/film').then((res: any) => res.data.data)
 })
 
 const { data: setting, refetch: refetchSetting } = useQuery({
@@ -47,3 +78,9 @@ onMounted(() => {
     refetchSetting()
 })
 </script>
+
+<style>
+.cas{
+    background-color: #ffea06;
+}
+</style>
