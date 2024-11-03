@@ -50,7 +50,7 @@ export default {
                         <i class="fa-regular fa-circle-user"></i>
                         Login
                     </router-link>
-                    <router-link v-else class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden" to="/" >
+                    <router-link v-else class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden" to="/landing/profile" >
                         <i class="fa-regular fa-circle-user"></i>
                         Account
                     </router-link>

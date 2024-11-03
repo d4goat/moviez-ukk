@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -37,6 +39,10 @@ class UserController extends Controller
         $validated['role_id'] = 2;
 
         $role = Role::findById($validated['role_id']);
+
+        if($request->hasFile('photo')){
+            $validated['image'] = '/storage/' . $request->file('photo')->store('users', 'public');
+        }
 
         $user = User::create($validated);
         $user->assignRole($role);
@@ -86,6 +92,18 @@ class UserController extends Controller
         $validate = $request->validated();
         $validate['role_id'] = 2;
 
+        if($request->hasFile('photo')){
+            if($data->photo){
+                Storage::delete('public/'.$data->photo);
+            }
+            $validate['photo'] = $request->file('photo')->store('image', 'public');
+        } else {
+            if($data->photo){
+                Storage::delete('public/'.$data->photo);
+                $validate['photo'] = null;
+            }
+        }
+
         $role = Role::findById($validate['role_id']);
 
         if($data->update($validate)){
@@ -102,6 +120,61 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function updateAkun (Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        $data = $request->all();
+
+        if(auth()->user()->photo != null && auth()->user()->photo != ''){
+            $old_photo = str_replace('/storage/', '', auth()->user()->photo);
+            Storage::disk('public')->delete($old_photo);
+        }
+
+        if($request->hasFile('photo')) {
+            $data['photo'] = '/storage/' . $request->file('photo')->store('users', 'public');
+        } else {
+            $data['photo'] = null;
+        }
+
+        auth()->user()->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success update data',
+            'data' => auth()->user()
+        ]);
+    }
+
+    public function updateSecurity(Request $request) {
+        $data = $request->validate([
+          'old_password' => 'required|string',
+          'password' => 'required|string|min:12|confirmed',
+        ]);
+    
+        $user = User::find(auth()->user()->id);
+        if (!Hash::check($data['old_password'], $user->password)) {
+          return response()->json([
+            'message' => 'Password Lama tidak valid'
+          ], 400);
+        }
+    
+        $user->password = bcrypt($data['password']);
+        if ($user->update()) {
+          return response()->json([
+            'message' => 'Berhasil memperbarui password'
+          ]);
+        } else {
+          return response()->json([
+            'message' => 'Gagal memperbarui password'
+          ]);
+        }
+      }
 
     /**
      * Remove the specified resource from storage.

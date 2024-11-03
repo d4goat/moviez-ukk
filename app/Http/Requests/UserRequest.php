@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => ['required', 'min:8', 'confirmed', Password::default()],
             'phone' => 'required|unique:users',
-            'photo' => 'nullable|image',
+            'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ];
     }
 }

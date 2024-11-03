@@ -44,6 +44,8 @@ Route::prefix('setting')->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {   
    Route::post('users', [UserController::class, 'index']);
    Route::post('users/store', [UserController::class, 'store']);
+   Route::post('users/update/akun', [UserController::class, 'updateAkun']);
+   Route::post('users/update/keamanan', [UserController::class, 'updateSecurity']);
    Route::apiResource('users', UserController::class)->except('index', 'store');
 
    Route::get('cinema', [CinemaController::class, 'get']);

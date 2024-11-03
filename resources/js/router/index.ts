@@ -150,7 +150,7 @@ const routes: Array<RouteRecordRaw> = [
                     breadcrumbs: ['Setting']
                 },
                 component: () => import('@/Pages/dashboard/setting/Index.vue')
-            }
+            },
         ]
     },
     {
@@ -163,6 +163,14 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'landing.page',
                 component: () => import('@/Pages/users/Landing.vue'),
             },
+            {
+                path: '/landing/profile',
+                name: 'landing.profile',
+                component: () => import('@/Pages/users/profile/Index.vue'),
+                meta: {
+                    middleware: 'auth'
+                }
+            }
         ]
     },
     {

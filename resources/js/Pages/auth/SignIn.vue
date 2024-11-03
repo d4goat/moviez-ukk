@@ -46,8 +46,6 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
 
 function togglePass(ev: MouseEvent) {
     const type = document.querySelector<HTMLInputElement>(["input[name=password]"]);
-
-
     if (type && type.type === 'password') {
         type.type = 'text';
         showPw.value = true
