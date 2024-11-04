@@ -7,9 +7,9 @@
         <div class="card-body flex flex-col space-y-6 my-3">
             <div class="form-group flex space-x-3 justify-between">
                 <label name="photo" class="form-label font-medium">Photo Profile</label>
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <Field name="photo"
-                        class="bg-[#232323] col-md-6 border-none  focus:ring-[#7C7C7C] rounded-xl p-[11px]"
+                        class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-[11px]"
                         v-model="user.photo" type="file">
                         <file-upload :files="photo" :accepted-file-types="fileTypes"
                             v-on:updatefiles="(file) => (photo = file)"></file-upload>
@@ -17,28 +17,34 @@
                 </div>
                 <ErrorMessage name="photo" class="text-red-500" />
             </div>
-            <div class="flex justify-between items-center">
-                <label name="name" class="form-label font-medium">Nama</label>
-                <Field class="bg-dropdown border-none col-md-10 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="name"
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-between items-center">
+                    <label name="name" class="form-label font-medium">Nama</label>
+                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="name"
                     v-model="user.name" placeholder="Masukkan nama anda" autocomplete="off" type="text" />
+                </div>
                 <ErrorMessage name="name" class="text-red-500" />
             </div>
-            <div class="flex justify-between items-center">
-                <label name="email" class="form-label font-medium">Email</label>
-                <Field class="bg-dropdown border-none col-md-10 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="email"
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-between items-center">
+                    <label name="email" class="form-label font-medium">Email</label>
+                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="email"
                     v-model="user.email" placeholder="Masukkan email anda" autocomplete="off" type="text" />
+                </div>
                 <ErrorMessage name="email" class="text-red-500" />
             </div>
-            <div class="flex justify-between items-center">
-                <label for="phone" name="phone" class="form-label font-medium">No Telepon</label>
-                <Field class="bg-dropdown border-none col-md-10 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="phone"
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-between items-center">
+                    <label for="phone" name="phone" class="form-label font-medium">No Telepon</label>
+                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="phone"
                     v-model="user.phone" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
                     placeholder="Masukkan phone anda" autocomplete="off" type="text" />
+                </div>
                 <ErrorMessage name="phone" class="text-red-500" />
             </div>
         </div>
         <div class="card-footer flex pt-3 border-t border-gray-700">
-            <button type="submit" class="btn btn-md text-white bg-cyan-600 hover:bg-cyan-700 shadow-3 shadow-cyan-300/60 ms-auto">Save</button>
+            <button type="submit" class="btn btn-md text-white bg-cyan-600 hover:bg-cyan-700 shadow-3 shadow-cyan-300/60 ms-auto">Save Profile</button>
         </div>
     </VForm>
 </template>

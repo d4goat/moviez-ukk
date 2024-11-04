@@ -1,19 +1,14 @@
 <script>
-import { RouterView } from 'vue-router'
-import { useQuery } from '@tanstack/vue-query';
-import axios from '@/libs/axios';
-import { useAuthStore } from '@/stores/auth';
+import { useSetting } from '@/services';
+import { RouterView } from 'vue-router';
+
 export default {
     setup(){
-        const { data, isLoading } = useQuery({
-            queryKey: ['setting'],
-            queryFn: async () => axios.get('/setting').then((res) => res.data)
-        })
+        const { data: setting = {} } = useSetting()
 
-        const { user } = useAuthStore()
-
+        const auth = localStorage.getItem('auth_key')
         return {
-            data, isLoading, user
+            setting, auth
         }
     },
     data() {
@@ -44,9 +39,9 @@ export default {
     <main class="text-white">
         <nav class="bg-dark-bg/20 backdrop-blur-md fixed w-full z-20 top-0 start-0">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
-                <span class="text-2xl text-cinema font-medium">{{ data?.name }}</span>
+                <span class="text-2xl text-cinema font-semibold">{{ setting?.name }}</span>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <router-link v-if="!user" to="/sign-in" class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden">
+                    <router-link v-if="!auth" to="/sign-in" class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden">
                         <i class="fa-regular fa-circle-user"></i>
                         Login
                     </router-link>
@@ -105,7 +100,7 @@ export default {
         <RouterView class="bg-component min-h-screen" />
         <footer class="h-30 bg-[#121212] mx-10 flex items-center justify-between">
             <div class="flex flex-col">
-                <span class="text-title-xl2 font-semibold text-cinema"> {{ data?.name }} </span>
+                <span class="text-title-xl2 font-semibold text-cinema"> {{ setting?.name }} </span>
                 <span class="text-lg">© 2024 Cinema51. All Rights Reserved.</span>
             </div>
             <div class="flex space-x-11">

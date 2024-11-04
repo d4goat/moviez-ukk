@@ -27,7 +27,7 @@ export default {
                 'dropdown': '#26272e',
                 'text': '#000000',
                 'border': '#414141',
-                'cinema': '#B9250C',
+                'cinema': '#229ae0',
                 'current': 'currentColor',
                 'transparent': 'transparent',
                 'white': '#FFFFFF',
@@ -222,6 +222,18 @@ export default {
                 99: '99',
                 9: '9',
                 1: '1'
+            },
+            gridTemplateColumns: {
+                '13': 'repeat(13, minmax(0, 1fr))',
+                '14': 'repeat(14, minmax(0, 1fr))',
+                '15': 'repeat(15, minmax(0, 1fr))',
+                '16': 'repeat(16, minmax(0, 1fr))'
+            },
+            gridColumn: {
+                'span-13': 'span 13 / span 13',
+                'span-14': 'span 14 / span 14',
+                'span-15': 'span 15 / span 15',
+                'span-16': 'span 16 / span 16',
             },
             opacity: {
                 65: '.65'

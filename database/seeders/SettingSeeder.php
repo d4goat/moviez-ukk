@@ -14,7 +14,7 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-        'name' => 'Cinema51',
+        'name' => 'Matix Cineplex',
         'description' => 'Sebuah Website yang menyediakan fitur pemesanan tiket bioskop secara online',
         'logo' => '/images/view-3d-cinema-theatre-room.jpg',
         'email' => 'cinema51@dmoviez.com',
