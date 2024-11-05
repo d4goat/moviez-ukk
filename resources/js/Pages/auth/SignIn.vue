@@ -32,7 +32,7 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
       if(res.data.user.role.id === 1){
         router.push('/admin/dashboard')
       }  else {
-        router.push('/landing')
+        router.push('/landing/dashboard')
       }
     },
     onError: (err: any) => {

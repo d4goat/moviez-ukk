@@ -74,7 +74,7 @@
                         transitionDelay: `${600 + (index * 100)}ms`
                       }"
                     >
-                      <img :src="reviews?.poster" class="h-64 object-cover rounded-2xl" alt="">
+                      <img :src="reviews?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
                       <div class="text-center flex gap-3 justify-center">
                         <vue3starRatings 
                           :star-size="22" 
@@ -90,7 +90,7 @@
                 </div>
       
                 <!-- Now Showing Section -->
-                <div class="flex flex-col mx-4 space-y-4">
+                <div id="now-showing" class="flex flex-col mx-4 space-y-4">
                   <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
                     <span class="lg:text-xl text-xs font-semibold">Now Showing</span>
                   </div>
@@ -100,11 +100,14 @@
                       :key="films.uuid"
                       class="flex flex-col space-y-3"
                       :style="{
-                        transition: 'all 0.7s ease',
-                        transitionDelay: `${800 + (index * 100)}ms`
+                        transition: 'all 0.4s ease-out',
+                        transitionDelay: `${100 + (index * 100)}ms`
                       }"
+                        data-aos="fade-up"
+                        data-aos-mirror="true"
+                        data-aos-anchor-placement="top-center"
                     >
-                      <img :src="films?.poster" class="h-64 object-cover rounded-2xl" alt="">
+                      <img :src="films?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
                       <div class="text-center">{{ films.title }}</div>
                     </div>
                   </div>
@@ -167,6 +170,7 @@ import axios from '@/libs/axios';
 import vue3starRatings from "vue3-star-ratings";
 import { useSetting } from '@/services';
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
+import AOS from 'aos'
 
 defineComponent({
     components: {
@@ -189,11 +193,11 @@ const { data: setting, refetch: refetchSetting } = useSetting()
 onMounted(() => {
     refetch()
     refetchSetting()
+    AOS.init({
+        duration: 100,
+        once: false,
+        mirror: true,
+        anchorPlacement: 'top-center',
+    })
 })
 </script>
-
-<style>
-.cas {
-    background-color: #ffea06;
-}
-</style>

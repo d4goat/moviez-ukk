@@ -21,6 +21,7 @@ import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
 import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import '@fortawesome/fontawesome-free/css/all.css'
+import 'aos/dist/aos.css'
 
 import FileUpload from '@/components/FileUpload.vue';
 import Select2 from '@/components/Select2.vue';

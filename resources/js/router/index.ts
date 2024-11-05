@@ -15,7 +15,8 @@ const routes: Array<RouteRecordRaw> = [
         path: '/sign-in',
         name: 'sign-in',
         meta: {
-            pageTitle: 'Sign-In'
+            pageTitle: 'Sign-In',
+            middleware: 'guest',
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },
@@ -23,7 +24,8 @@ const routes: Array<RouteRecordRaw> = [
         path: '/sign-up',
         name: 'sign-up',
         meta: {
-            pageTitle: 'Sign-Up'
+            pageTitle: 'Sign-Up',
+            middleware: 'guest',
         },
         component: () => import('@/Pages/auth/Index.vue'),
     },

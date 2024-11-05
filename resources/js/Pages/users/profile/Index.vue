@@ -32,17 +32,15 @@
                     </TransitionGroup>
                 </TabList>
                 <TabPanels class="w-full">
-                    <TransitionGroup enter-active-class="transition duration-300 ease-out"
-                        enter-from-class="transform opacity-0 translate-x-4"
-                        enter-to-class="transform opacity-100 translate-x-0"
-                        leave-active-class="transition duration-300 ease-in"
-                        leave-from-class="transform opacity-100 translate-x-0"
-                        leave-to-class="transform opacity-0 translate-x-4">
-                        <TabPanel>
-                            <Personal />
-                        </TabPanel>
-                        <TabPanel>
-                            <Security />
+                    <TransitionGroup enter-active-class="transition duration-500 ease-out"
+                        enter-from-class="transform opacity-0 translate-y-4"
+                        enter-to-class="transform opacity-100 translate-y-0"
+                        leave-active-class="transition duration-500 ease-in"
+                        leave-from-class="transform opacity-100 translate-y-0"
+                        leave-to-class="transform opacity-0 translate-y-4">
+                        <TabPanel v-for="(category, index) in categories" :key="category" class="tab-panel">
+                            <Personal v-if="index === 0" />
+                            <Security v-else />
                         </TabPanel>
                     </TransitionGroup>
                 </TabPanels>

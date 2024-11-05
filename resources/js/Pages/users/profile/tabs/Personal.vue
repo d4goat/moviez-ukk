@@ -60,7 +60,9 @@ import axios from '@/libs/axios';
 
 export default defineComponent({
     setup() {
-        const photo = ref([])
+
+        const { user, setAuth } = useAuthStore()
+        const photo = ref<Array<File | String>>(user.photo ? [user.photo] : [])
         const fileTypes = ref(['image/jpg', 'image/png', 'image/jpeg']);
 
         const formSchema = yup.object().shape({
@@ -68,8 +70,6 @@ export default defineComponent({
             email: yup.string().email('Invalid Email').required('Field email harus diisi'),
             phone: yup.string().matches(/^08[0-9]\d{8,11}$/, 'Invalid Phone Number').required('Field nomor telepon harus diisi'),
         })
-
-        const { user, setAuth } = useAuthStore()
         
         return {
             photo,
