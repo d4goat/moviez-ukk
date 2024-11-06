@@ -1,0 +1,1 @@
+import{_ as o,A as t,y as c,m as s,p as n}from"./main-B8dzZHEF.js";const r={},_={class:"d-flex flex-column"};function a(l,m){const e=s("router-view");return n(),t("div",_,[c(e)])}const d=o(r,[["render",a]]);export{d as default};
