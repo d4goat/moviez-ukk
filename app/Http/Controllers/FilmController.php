@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FilmRequest;
 use App\Models\Film;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +83,30 @@ class FilmController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'successfully fetch data Top Film',
+            'data' => $data
+        ]);
+     }
+
+     public function nowShowing(){
+        $data = Film::where('release_date', '<=', Carbon::now())
+        ->where('end_date', '>=', Carbon::now())
+        ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'successfully fetch data',
+            'data' => $data
+        ]);
+     }
+
+     public function comingSoon(Request $request){
+        $data = Film::where('release_date', '>', Carbon::now())->get();
+        
+        if(!$data)return response()->json([]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'successfully fetch data',
             'data' => $data
         ]);
      }

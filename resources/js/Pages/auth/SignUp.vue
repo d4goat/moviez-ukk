@@ -54,6 +54,7 @@ function submit() {
     })
     .catch((error: any) => {
       toast.error(error.response.data.message);
+      isLoading.value = false
     })
     .finally(() => {
       unblock(document.getElementById('form-register'));
@@ -75,9 +76,9 @@ function submit() {
       <!-- end:title -->
       <div class="flex flex-col gap-4">
         <TransitionGroup enter-active-class="transition duration-300 ease-out"
-          enter-from-class="transform opacity-0 translate-x-4" enter-to-class="transform opacity-100 translate-x-0"
+          enter-from-class="transform opacity-0 absolute translate-x-4" enter-to-class="transform opacity-100 translate-x-0"
           leave-active-class="transition duration-300 ease-in" leave-from-class="transform opacity-100 translate-x-0"
-          leave-to-class="transform opacity-0 translate-x-4">
+          leave-to-class="transform opacity-0 absolute translate-x-4">
           <div v-if="activeTab === 1">
             <div class="flex flex-col gap-2 mb-3">
               <label class="text-sm sm:text-base font-poppins">Nama</label>
@@ -134,7 +135,7 @@ function submit() {
           <button type='button'
             class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm"
             @click="activeTab = activeTab === 1 ? 2 : 1">{{ activeTab === 1 ? 'Next' : 'Previous' }}</button>
-          <button v-show="activeTab === 2" type="submit" @click="submit" :disabled="isLoading"
+          <button v-show="activeTab === 2" type="submit" @click="submit" :disabled="isLoading || !user"
             :class="isLoading ? 'flex p-2 justify-center' : 'block'"
             class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm">
             <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"

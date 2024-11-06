@@ -185,7 +185,7 @@ const { data: review, refetch, isLoading } = useQuery({
 
 const { data: film, refetch: refetchFilm, isLoading: isLoadingFilm } = useQuery({
     queryKey: ['film', 'all'],
-    queryFn: async () => await axios.get('/master/film').then((res: any) => res.data.data)
+    queryFn: async () => await axios.get('/master/film/now-showing').then((res: any) => res.data.data)
 })
 
 const { data: setting, refetch: refetchSetting } = useSetting()

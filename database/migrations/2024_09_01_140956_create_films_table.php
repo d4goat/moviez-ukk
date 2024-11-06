@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('poster')->nullable();
             $table->string('trailer')->nullable();
             $table->date('release_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

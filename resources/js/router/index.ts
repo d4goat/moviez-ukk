@@ -172,6 +172,11 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     middleware: 'auth'
                 }
+            },
+            {
+                path: '/landing/coming-soon',
+                name: 'landing.coming-soon',
+                component: () => import('@/Pages/users/coming-soon/Index.vue')
             }
         ]
     },

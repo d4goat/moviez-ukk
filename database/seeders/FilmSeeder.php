@@ -22,7 +22,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
                 'trailer' => 'https://www.youtube.com/watch?v=bK6ldnjE3Y0',
-                'release_date' => '2023-07-21',
+                'release_date' => '2024-07-21',
+                'end_date' => '2024-08-21',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -34,7 +35,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
                 'trailer' => 'https://www.youtube.com/watch?v=AWO7NOxnSaE',
-                'release_date' => '2023-10-20',
+                'release_date' => '2024-10-20',
+                'end_date' => '2024-11-20',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
             ],
             [
@@ -46,7 +48,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Megan McDonnell',
                 'poster' => '/images/posters/the_marvels.jpeg',
                 'trailer' => 'https://www.youtube.com/watch?v=go6GEIrcvFY',
-                'release_date' => '2023-11-10',
+                'release_date' => '2024-11-10',
+                'end_date' => '2024-12-10',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],
             [
@@ -58,9 +61,50 @@ class FilmSeeder extends Seeder
                 'writer' => 'Jon Spaihts, Denis Villeneuve',
                 'poster' => '/images/posters/dune_part_two.jpg',
                 'trailer' => 'https://www.youtube.com/watch?v=8g18jFHCLXk',
-                'release_date' => '2023-11-03',
+                'release_date' => '2024-11-03',
+                'end_date' => '2024-12-03',
                 'genre_film_id' => [6, 9, 1], // Sci-Fi, Adventure, Drama
             ],
+            [
+                'title' => 'The Creator',
+                'description' => 'A future war between the human race and artificial intelligence has far-reaching consequences as a former soldier is tasked with hunting down the Creator.',
+                'duration' => 133,
+                'producer' => 'Gareth Edwards',
+                'director' => 'Gareth Edwards',
+                'writer' => 'Gareth Edwards, Chris Weitz',
+                'poster' => '/images/posters/the_creator.jpg',
+                'trailer' => 'https://www.youtube.com/watch?v=8wQ2x-hjqyA',
+                'release_date' => '2024-11-25',
+                'end_date' => '2024-12-25',
+                'genre_film_id' => [2, 6], // Action, Sci-Fi
+            ],
+            [
+                'title' => 'The Fabelmans',
+                'description' => 'A semi-autobiographical story based on Spielberg’s early years in Arizona and his passion for filmmaking.',
+                'duration' => 151,
+                'producer' => 'Steven Spielberg, Kristie Macosko Krieger',
+                'director' => 'Steven Spielberg',
+                'writer' => 'Steven Spielberg, Tony Kushner',
+                'poster' => '/images/posters/the_fabelmans.jpg',
+                'trailer' => 'https://www.youtube.com/watch?v=D1G2iLSzOe8',
+                'release_date' => '2024-10-15',
+                'end_date' => '2024-11-15',
+                'genre_film_id' => [1, 13], // Drama, Biographical
+            ],
+            [
+                'title' => 'Blue Beetle',
+                'description' => 'An alien scarab chooses Jaime Reyes to be its symbiotic host, bestowing him with a powerful suit of armor capable of extraordinary powers.',
+                'duration' => 127,
+                'producer' => 'John Rickard, Zev Foreman',
+                'director' => 'Angel Manuel Soto',
+                'writer' => 'Gareth Dunnet-Alcocer',
+                'poster' => '/images/posters/blue_beetle.jpg',
+                'trailer' => 'https://www.youtube.com/watch?v=vP0cE-YEAAQ',
+                'release_date' => '2024-10-18',
+                'end_date' => '2024-11-18',
+                'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
+            ],
+            
         ];
 
         foreach ($films as $filmData) {
@@ -74,6 +118,7 @@ class FilmSeeder extends Seeder
                 'poster' => $filmData['poster'],
                 'trailer' => $filmData['trailer'],
                 'release_date' => $filmData['release_date'],
+                'end_date' => $filmData['end_date'],
             ]);
 
             $film->genreFilms()->sync($filmData['genre_film_id']);
