@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => {
                     },
                 },
             },
-            outDir: 'dist'
+            outDir: 'public/build'
         },
     };
 });
