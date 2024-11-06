@@ -7,6 +7,6 @@ import { RouterView } from 'vue-router';
     <RouterView class="font-poppins" />    
 </template>
 
-<style lang="scss">
+<style>
 @import "line-awesome/dist/line-awesome/css/line-awesome.css";
 </style>
