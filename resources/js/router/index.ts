@@ -177,6 +177,11 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/landing/coming-soon',
                 name: 'landing.coming-soon',
                 component: () => import('@/Pages/users/coming-soon/Index.vue')
+            },
+            {
+                path: '/landing/film-detail/:uuid',
+                name: 'landing.film-detail',
+                component: () => import('@/Pages/users/film-detail/Index.vue')
             }
         ]
     },

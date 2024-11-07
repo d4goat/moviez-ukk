@@ -13,6 +13,7 @@ class Film extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
     protected $appends = ['genre_film_id'];
+    protected $with = ['casts'];
 
     public function show_times()
     {

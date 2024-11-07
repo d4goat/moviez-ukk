@@ -78,7 +78,7 @@ class FilmController extends Controller
      */
 
      public function topFilm(){
-        $data = Film::whereHas('reviews')->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating')->get();
+        $data = Film::whereHas('reviews')->where('release_date', '<=', Carbon::now())->where('end_date', '>=', Carbon::now())->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating')->get();
 
         return response()->json([
             'success' => true,

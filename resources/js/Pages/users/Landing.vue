@@ -52,11 +52,11 @@
               <TransitionChild
                 as="div"
                 enter="transform transition-all duration-700 ease-out delay-500"
-                enter-from="opacity-0 translate-y-8 scale-95"
-                enter-to="opacity-100 translate-y-0 scale-100"
+                enter-from="opacity-0 translate-y-8"
+                enter-to="opacity-100 translate-y-0"
                 leave="transform transition-all duration-500 ease-in"
-                leave-from="opacity-100 translate-y-0 scale-100"
-                leave-to="opacity-0 translate-y-8 scale-95"
+                leave-from="opacity-100 translate-y-0"
+                leave-to="opacity-0 translate-y-8"
                 class="space-y-5"
               >
                 <!-- Top Rating Movies Section -->
@@ -74,7 +74,9 @@
                         transitionDelay: `${600 + (index * 100)}ms`
                       }"
                     >
+                    <router-link :to="`/landing/film-detail/${reviews.uuid}`">
                       <img :src="reviews?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
+                    </router-link>
                       <div class="text-center flex gap-3 justify-center">
                         <vue3starRatings 
                           :star-size="22" 
