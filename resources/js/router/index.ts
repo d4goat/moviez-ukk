@@ -182,6 +182,11 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/landing/film-detail/:uuid',
                 name: 'landing.film-detail',
                 component: () => import('@/Pages/users/film-detail/Index.vue')
+            },
+            {
+                path: '/landing/cinema',
+                name: 'landing.cinema',
+                component: () => import('@/Pages/users/cinema/Index.vue')
             }
         ]
     },

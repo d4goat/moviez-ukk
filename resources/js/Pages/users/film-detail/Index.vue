@@ -6,7 +6,7 @@
                 <img :src="data.poster" alt="" class="h-72 w-42 rounded-2xl">
                 <div class="flex flex-col gap-4 my-3">
                     <div class="flex flex-col gap-1">
-                        <span class=" text-title-md"> {{ data.title }} </span>
+                        <span class="text-title-md"> {{ data.title }} </span>
                         <span class="text-sm"><i class="fa-regular fa-clock mr-1"></i> {{ data.duration }} Minutes</span>
                     </div>
                     <div class="flex flex-col mt-4 gap-4">
@@ -26,6 +26,33 @@
                             {{ cast.cast_name }}{{ index < data.casts.length - 1 ? ', ' : '.' }}
                         </span>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div v-else class="animate-pulse">
+            <div class="flex flex-col gap-4">
+                <div class="col-md-12"></div>
+                <div class="flex space-x-10 mx-4">
+                    <div class="h-64 w-48 bg-zinc-800 rounded-2xl"></div>
+                    <div class="flex flex-col gap-4 my-3">
+                        <div class="flex flex-col gap-1">
+                            <div class="h-3 w-72 bg-zinc-800 rounded"></div>
+                            <div class="h-3 w-36 bg-zinc-800 rounded"></div>
+                        </div>
+                        <div class="flex flex-col mt-4 gap-4">
+                            <div class="bg-zinc-800 py-3 rounded-sm w-1/2"></div>
+                            <div class="bg-zinc-800 py-3 rounded-sm w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col mx-4 space-y-6">
+                    <div class="h-4 w-1/2 bg-zinc-800 rounded"></div>
+                    <div class="flex flex-col space-y-4">
+                        <div class="h-4 w-1/2 bg-zinc-800 rounded"></div>
+                        <div class="h-4 w-1/3 bg-zinc-800 rounded"></div>
+                    <div class="h-4 w-1/3 bg-zinc-800 rounded"></div>
+                    <div class="h-4 w-1/2 bg-zinc-800 rounded"></div>
+                </div>
                 </div>
             </div>
         </div>

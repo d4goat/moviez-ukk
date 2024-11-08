@@ -125,17 +125,17 @@ export default {
     /* Selection */
     box-shadow: none;
     outline: none !important;
-    @apply dark:bg-dropdown bg-white ;
+    @apply bg-dropdown;
 
     .select2-container--focus:not(.select2-container--disabled),
     .select2-container--open:not(.select2-container--disabled)
         .form-select-solid {
         min-width: 100% !important;
-        @apply dark:bg-dropdown bg-white ;
+        @apply bg-dropdown;
     }
 
     .select2-container--disabled .form-select {
-        @apply dark:bg-dropdown bg-white ;
+        @apply bg-dropdown;
     }
 
     .select2-search.select2-search--inline {
@@ -160,7 +160,7 @@ export default {
         align-items: center;
         padding: 0.775rem;
         border-radius: 0.375rem;
-        @apply dark:bg-dropdown bg-white border-[#6e6e6e] focus:ring-[#6e6e6e];
+        @apply bg-dropdown border-[#6e6e6e] focus:ring-[#6e6e6e];
     }
 
     .select2-selection__rendered {
@@ -185,7 +185,7 @@ export default {
 
     .select2-selection--multiple {
         display: flex;
-        @apply dark:bg-dropdown bg-white border-[#6e6e6e] focus:ring-[#6e6e6e];
+        @apply bg-dropdown border-[#6e6e6e] focus:ring-[#6e6e6e];
     }
 
     .select2-selection__choice {
@@ -205,7 +205,7 @@ export default {
 
     .select2-dropdown {
         border: 0;
-        @apply dark:bg-dropdown bg-white;
+        @apply bg-dropdown ;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 0.425rem;
         padding: 0.875rem;
@@ -214,7 +214,7 @@ export default {
             padding: 0.9rem 0.675rem;
 
             .select2-search__field {
-                @apply dark:bg-component bg-white dark:text-[#828594] text-black;
+                @apply bg-component text-[#828594];
                 padding: 0.4rem 0.5rem;
                 border: 1px solid #6e6e6e;
                 border-radius: 0.425rem;
@@ -223,18 +223,18 @@ export default {
         }
 
         .select2-results__option {
-            @apply text-dropdown dark:text-[#828594];
+            @apply text-[#828594];
             padding: 0.7rem 0.5rem;
             margin: 0 0;
 
             &.select2-results__option--highlighted {
-                @apply bg-sky-50 dark:bg-dropdown;
+                @apply bg-dropdown;
                 @apply text-sky-600;
             }
 
             &.select2-results__option--selected {
                 position: relative;
-                @apply dark:bg-dropdown text-sky-700;
+                @apply bg-dropdown text-sky-700;
 
                 &:after {
                     top: 50%;

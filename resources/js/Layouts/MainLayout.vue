@@ -82,7 +82,7 @@ export default {
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/" class="block relative group">
+                            <router-link to="/landing/cinema" class="block relative group">
                                 <span>Cinema</span>
                                 <span class="absolute left-0 -bottom-1 w-full h-0.5 bg-gradient-to-r from-blue-500 to-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                             </router-link>

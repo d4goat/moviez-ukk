@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::apiResource('users', UserController::class)->except('index', 'store');
 
    Route::get('cinema', [CinemaController::class, 'get']);
-   Route::post('cinema', [CinemaController::class, 'index']);
+   Route::post('cinema', [CinemaController::class, 'index'])->withoutMiddleware(['auth', 'verified']);
    Route::post('cinema/store', [CinemaController::class, 'store']);
    Route::apiResource('cinema', CinemaController::class)->except('index', 'store');
    

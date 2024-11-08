@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             FilmCastSeeder::class,
             IndonesiaDatabaseSeeder::class,
+            CinemaSeeder::class,
+            StudioSeeder::class,
+            ShowtimeSeeder::class,
         ]);
     }
 }
