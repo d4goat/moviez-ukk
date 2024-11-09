@@ -7,11 +7,14 @@ import { useAuthStore } from '@/stores/auth'
 import MainMenuConfig from '@/Layouts/config/MainMenuConfig'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+import { useSetting } from '@/services'
 
 const { user } = useAuthStore()
 const target = ref(null)
 const route = useRoute()
 const openSubmenus = ref<Set<string>>(new Set())
+
+  const { data: setting = {} } = useSetting()
 
 const { t, te } = useI18n()
 
@@ -65,7 +68,7 @@ const isSubmenuOpen = (menuItem: any) => {
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-4 lg:py-6.5">
         <router-link to="/" class="mx-3">
-            <span class="text-cinema text-3xl font-medium">Cinema51</span>
+            <span class="text-cinema text-3xl font-medium">{{ setting.name }}</span>
         </router-link>
       <button class="block lg:hidden" @click="sidebarStore.isSidebarOpen = false">
         <svg

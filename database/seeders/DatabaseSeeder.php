@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             ReviewSeeder::class,
             FilmCastSeeder::class,
-            IndonesiaDatabaseSeeder::class,
             CinemaSeeder::class,
             StudioSeeder::class,
             ShowtimeSeeder::class,
+            IndonesiaDatabaseSeeder::class,
         ]);
     }
 }

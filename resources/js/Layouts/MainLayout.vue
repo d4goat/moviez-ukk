@@ -106,11 +106,11 @@ export default {
             <div class="flex space-x-11">
                 <div class="flex flex-col space-y-2">
                     <router-link to="/" class="">Home</router-link>
-                    <router-link to="/" class="">Now Showing</router-link>
+                    <router-link to="/#now-showing" class="">Now Showing</router-link>
                 </div>
                 <div class="flex flex-col space-y-2">
-                    <router-link to="/" class="">Coming Soon</router-link>
-                    <router-link to="/" class="">Cinema</router-link>
+                    <router-link to="/landing/coming-soon" class="">Coming Soon</router-link>
+                    <router-link to="/landing/cinema" class="">Cinema</router-link>
                 </div>
                 <div class="flex flex-col space-y-2">
                     <router-link to="/" class="">About Us</router-link>

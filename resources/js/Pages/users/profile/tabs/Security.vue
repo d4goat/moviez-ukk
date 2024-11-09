@@ -45,7 +45,7 @@
                         name="password_confirmation" v-model="formData.password_confirmation" placeholder="Insert new password confrimation"
                         autocomplete="off" type="password_confirmation" />
                     <span class="absolute right-10 flex items-center pr-3 cursor-pointer">
-                        <i :class="['fa-regular text-lg sm:text-xl', show ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
+                        <i :class="['fa-regular text-lg sm:text-xl', showConfirm ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
                     </span>
                 </div>
                 <ErrorMessage name="password_confirmation" class="text-red-500 text-end" />

@@ -15,7 +15,7 @@ class FilmSeeder extends Seeder
         $films = [
             [
                 'title' => 'Oppenheimer',
-                'description' => 'The story of J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.',
+                'description' => 'Oppenheimer adalah kisah epik tentang kehidupan J. Robert Oppenheimer, fisikawan jenius yang memimpin Proyek Manhattan selama Perang Dunia II. Film ini menyajikan pandangan mendalam tentang perjalanan ilmiah dan moral seorang pria yang berjasa menciptakan senjata paling mematikan di dunia. Terperangkap dalam dilema moral, Oppenheimer harus menghadapi konsekuensi dari karyanya saat dunia menyaksikan kehancuran yang disebabkan oleh bom atom. Melalui konflik batin, hubungan pribadi, dan tekanan politik, film ini menelusuri dampak abadi dari penemuannya terhadap sejarah umat manusia.',
                 'duration' => 180,
                 'producer' => 'Emma Thomas',
                 'director' => 'Christopher Nolan',
@@ -28,7 +28,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'Killers of the Flower Moon',
-                'description' => 'Members of the Osage tribe in the United States are murdered under mysterious circumstances in the 1920s, sparking a major FBI investigation.',
+                'description' => 'Berdasarkan kisah nyata, film ini mengisahkan pembunuhan misterius anggota suku Osage di Oklahoma pada tahun 1920-an, yang dikenal sebagai "Reign of Terror". Saat suku yang kaya akan minyak mengalami serangkaian kematian mencurigakan, FBI baru terbentuk dan mengirim agen mereka untuk mengungkap dalang di balik konspirasi yang melibatkan korupsi, keserakahan, dan pengkhianatan. Film ini mengeksplorasi ketegangan budaya antara penduduk asli Amerika dan pengusaha kulit putih yang berusaha mengeksploitasi sumber daya mereka, dipimpin oleh investigasi yang menegangkan dan mengejutkan.',
                 'duration' => 206,
                 'producer' => 'Martin Scorsese',
                 'director' => 'Martin Scorsese',
@@ -41,7 +41,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'The Marvels',
-                'description' => 'Captain Marvel, Ms. Marvel, and Monica Rambeau team up to face a powerful intergalactic threat.',
+                'description' => 'The Marvels menggabungkan kekuatan Captain Marvel, Ms. Marvel, dan Monica Rambeau dalam sebuah petualangan epik untuk menghadapi ancaman intergalaksi yang dapat menghancurkan alam semesta. Ketika kekuatan mereka tiba-tiba terhubung secara misterius, trio ini harus bersatu untuk mengungkap asal-usul ancaman dan memecahkan konflik yang bisa mengubah keseimbangan galaksi. Film ini penuh dengan aksi intens, visual yang memukau, dan eksplorasi lebih dalam tentang latar belakang para pahlawan super yang saling berbeda, namun memiliki tujuan yang sama dalam melindungi dunia.',
                 'duration' => 105,
                 'producer' => 'Kevin Feige',
                 'director' => 'Nia DaCosta',
@@ -54,7 +54,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'Dune: Part Two',
-                'description' => 'Paul Atreides unites with Chani and the Fremen to seek revenge against those who destroyed his family.',
+                'description' => 'Melanjutkan kisah epik dari novel karya Frank Herbert, "Dune: Part Two" mengikuti perjalanan Paul Atreides saat ia bergabung dengan Chani dan suku Fremen untuk membalas dendam terhadap musuh-musuh yang menghancurkan keluarganya. Dalam pertempuran besar di gurun Arrakis yang tandus, Paul harus menghadapi takdirnya sebagai pemimpin dan "Messiah" yang dinubuatkan oleh rakyat Fremen. Film ini menggali lebih dalam intrik politik, pengkhianatan, dan peperangan yang memperebutkan rempah-rempah berharga, serta bagaimana Paul bergulat dengan takdirnya dan peran besar yang harus ia emban.',
                 'duration' => 155,
                 'producer' => 'Mary Parent, Denis Villeneuve',
                 'director' => 'Denis Villeneuve',
@@ -67,7 +67,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'The Creator',
-                'description' => 'A future war between the human race and artificial intelligence has far-reaching consequences as a former soldier is tasked with hunting down the Creator.',
+                'description' => 'Dalam dunia futuristik yang dilanda peperangan antara manusia dan kecerdasan buatan, seorang mantan prajurit diberi misi berbahaya untuk memburu "The Creator", sosok misterius yang menciptakan senjata AI mematikan dengan kekuatan untuk mengakhiri umat manusia. Dengan latar belakang dunia yang penuh kehancuran dan konflik, film ini mengeksplorasi hubungan antara manusia dan teknologi, serta konsekuensi dari ambisi manusia yang berusaha menciptakan sesuatu yang melebihi kendali mereka.',
                 'duration' => 133,
                 'producer' => 'Gareth Edwards',
                 'director' => 'Gareth Edwards',
@@ -80,7 +80,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'The Fabelmans',
-                'description' => 'A semi-autobiographical story based on Spielberg’s early years in Arizona and his passion for filmmaking.',
+                'description' => 'The Fabelmans adalah drama semi-otomatis yang terinspirasi dari masa kecil Steven Spielberg. Film ini mengikuti perjalanan seorang remaja bernama Sammy Fabelman yang menemukan cinta sejatinya terhadap dunia perfilman. Di tengah-tengah tantangan keluarga dan tekanan sosial, Sammy menggunakan kamera untuk mengabadikan momen-momen berharga dan mengatasi trauma emosionalnya. Film ini merupakan penghormatan Spielberg terhadap kekuatan seni dalam membentuk identitas dan mengejar mimpi, sambil menggali dinamika keluarga yang kompleks dan nostalgia masa kecilnya.',
                 'duration' => 151,
                 'producer' => 'Steven Spielberg, Kristie Macosko Krieger',
                 'director' => 'Steven Spielberg',
@@ -93,7 +93,7 @@ class FilmSeeder extends Seeder
             ],
             [
                 'title' => 'Blue Beetle',
-                'description' => 'An alien scarab chooses Jaime Reyes to be its symbiotic host, bestowing him with a powerful suit of armor capable of extraordinary powers.',
+                'description' => 'Blue Beetle mengikuti kisah Jaime Reyes, seorang pemuda biasa yang hidupnya berubah drastis ketika sebuah scarab alien misterius memilihnya sebagai inangnya. Dengan kemampuan baru berupa baju zirah canggih yang memberinya kekuatan luar biasa, Jaime harus belajar untuk mengendalikan kekuatannya dan melawan musuh yang ingin merebut scarab tersebut. Film ini mengeksplorasi tema keluarga, identitas, dan tanggung jawab pahlawan, sambil menampilkan aksi spektakuler dan visual yang memukau.',
                 'duration' => 127,
                 'producer' => 'John Rickard, Zev Foreman',
                 'director' => 'Angel Manuel Soto',
@@ -103,7 +103,7 @@ class FilmSeeder extends Seeder
                 'release_date' => '2024-10-18',
                 'end_date' => '2024-11-18',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
-            ],
+            ],            
             
         ];
 

@@ -61,7 +61,7 @@
               >
                 <!-- Top Rating Movies Section -->
                 <div class="flex flex-col mx-4 space-y-4">
-                  <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
+                  <div class="p-2 rounded-3xl border-2 border-zinc-700 md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
                     <span class="lg:text-xl text-xs font-semibold">Top Rating Movie</span>
                   </div>
                   <div class="flex space-x-7">
@@ -75,7 +75,7 @@
                       }"
                     >
                     <router-link :to="`/landing/film-detail/${reviews.uuid}`">
-                      <img :src="reviews?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
+                      <img :src="reviews?.poster" class="h-64 w-45 object-cover hover:scale-110 transition ease-in-out duration-300 rounded-2xl" alt="">
                     </router-link>
                       <div class="text-center flex gap-3 justify-center">
                         <vue3starRatings 
@@ -93,7 +93,7 @@
       
                 <!-- Now Showing Section -->
                 <div id="now-showing" class="flex flex-col mx-4 space-y-4">
-                  <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
+                  <div class="p-2 rounded-3xl border-2 border-zinc-700 md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
                     <span class="lg:text-xl text-xs font-semibold">Now Showing</span>
                   </div>
                   <div class="flex space-x-7">
@@ -109,7 +109,9 @@
                         data-aos-mirror="true"
                         data-aos-anchor-placement="top-center"
                     >
-                      <img :src="films?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
+                    <router-link :to="`/landing/film-detail/${films.uuid}`" >
+                      <img :src="films?.poster" class="h-64 w-45 object-cover hover:scale-110 transition ease-in-out duration-300 rounded-2xl" alt="">
+                    </router-link>
                       <div class="text-center">{{ films.title }}</div>
                     </div>
                   </div>
@@ -140,7 +142,7 @@
                 <!-- BODY -->
                  <div class="flex w-full">
                      <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 3" :key="i">
-                         <div class="h-64 w-45 bg-zinc-700 rounded-2xl"></div>
+                         <div class="h-64 w-45 bg-zinc-800 rounded-2xl"></div>
                          <div class="h-2.5 w-24 bg-zinc-700 rounded-2xl"></div>
                          <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
                         </div>
@@ -155,7 +157,7 @@
                 <!-- BODY -->
                  <div class="flex w-full">
                      <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 4" :key="i">
-                         <div class="h-64 w-45 bg-zinc-700 rounded-2xl"></div>
+                         <div class="h-64 w-45 bg-zinc-800 rounded-2xl"></div>
                          <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
                         </div>
                     </div>

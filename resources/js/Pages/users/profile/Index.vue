@@ -24,7 +24,7 @@
                         <Tab v-for="category in categories" :key="category" as="div" v-slot="{ selected }"
                             class="focus:outline-none focus:ring-0">
                             <button
-                                :class="['w-full flex items-center py-2 px-3 rounded-lg font-medium', selected ? 'bg-cyan-300/30 text-cyan-500' : 'bg-gray-300/10 text-gray-300']">
+                                :class="['w-full flex items-center py-2 px-3 rounded-lg md:text-sm lg:text-base font-medium', selected ? 'bg-cyan-300/30 text-cyan-500' : 'bg-gray-300/10 text-gray-300']">
                                 <i :class="['la fs-5 mr-2', category == 'Akun' ? 'la-user' : 'la-key']"></i>
                                 {{ category }}
                             </button>

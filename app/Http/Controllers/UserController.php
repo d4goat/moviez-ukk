@@ -154,7 +154,7 @@ class UserController extends Controller
     public function updateSecurity(Request $request) {
         $data = $request->validate([
           'old_password' => 'required|string',
-          'password' => 'required|string|min:12|confirmed',
+          'password' => 'required|string|min:8|confirmed',
         ]);
     
         $user = User::find(auth()->user()->id);

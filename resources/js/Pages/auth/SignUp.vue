@@ -7,11 +7,13 @@ import { toast } from 'vue3-toastify';
 import { block, unblock } from '@/libs/utils';
 import { useRouter } from 'vue-router';
 import { useSetting } from '@/services';
+import { useMutation } from '@tanstack/vue-query';
 
 const user = ref<User>({} as User);
 const formRef = ref()
 const router = useRouter()
 const isLoading = ref(false)
+const otpCode = ref(['', '', '', '', '', ''])
 
 const { data: setting = {} } = useSetting()
 
@@ -23,44 +25,66 @@ const formSchema = Yup.object().shape({
   phone: Yup.string().matches(/^08[0-9]\d{8,11}$/, 'Invalid nomor telepon').required(),
   password: Yup.string().min(8, 'Password minimal harus diisi 8 karakter').required().label('Password'),
   passwordConfirmation: Yup.string().oneOf([Yup.ref('password')], 'Passwords harus sesuai').required().label('Password Confirmation'),
+  otp: Yup.string().length(6, 'Kode OTP harus 6 digit').matches(/^[0-9]+$/, 'OTP hanya boleh berisi angka').required().label('OTP'),
 })
 
-function submit() {
-  block(document.getElementById('form-register'));
-  const formData = new FormData();
-  formData.append('name', user.value.name);
-  formData.append('phone', user.value.phone);
-  formData.append('email', user.value.email);
-
-  if (user.value?.password) {
-    formData.append('password', user.value.password);
-    formData.append('password_confirmation', user.value.passwordConfirmation);
-  }
-  isLoading.value = true
-
-  axios({
-    method: 'post',
-    url: 'auth/register',
-    data: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data'
+const { mutate: sendOtp } = useMutation({
+  mutationKey: ['send-otp'],
+  mutationFn: () => {
+    const data = new FormData()
+    data.append('name', user.value.name)
+    data.append('email', user.value.email)
+    data.append('phone', user.value.phone)
+    
+    if(user.value?.password){
+      data.append('password', user.value.password)
+      data.append('password_confirmation', user.value.passwordConfirmation)
     }
-  })
-    .then(() => {
-      toast.success("Registrasi berhasil!");
-      formRef.value.resetForm();
-      router.push('/sign-in')
-      isLoading.value = false
-    })
-    .catch((error: any) => {
-      toast.error(error.response.data.message);
-      isLoading.value = false
-    })
-    .finally(() => {
-      unblock(document.getElementById('form-register'));
-    })
-}
 
+    return axios.post("/auth/send-otp", data)
+  },
+  onMutate: () => block(document.getElementById('form-register')),
+  onSuccess: () => {
+    unblock(document.getElementById('form-register'))
+    toast.success("Kode verifikasi berhasil dikirim ke nomor telepon yang anda masukkan")
+    activeTab.value = 3
+  },
+  onError: (err: any)  => {
+    toast.error(err.response.data.message)
+    console.error(err.response.data.message)
+    unblock(document.getElementById('form-register'))
+  }
+})
+
+const { mutate: verifyOtp } = useMutation({
+  mutationKey: ['verify-otp'],
+  mutationFn: () => {
+    const data = new FormData()
+    data.append('otp', otpCode.value.join(''))
+    data.append('email', user.value.email)
+
+    return axios.post("/auth/register", data)
+  },
+  onMutate: () => block(document.getElementById('form-register')),
+  onSuccess: () => {
+    unblock(document.getElementById('form-register'))
+    toast.success("Registrasi berhasil")
+    router.push({ name: 'sign-in' })
+  },
+  onError: (err: any)  => {
+    toast.error(err.response.data.message)
+    console.error(err.response.data.message)
+    unblock(document.getElementById('form-register'))
+  }
+})
+
+const nextInput = (event: Event, index: number) => {
+  const input = event.target as HTMLInputElement
+  if (input.value.length === 1 && index !== otpCode.value.length - 1) {
+    const nextInput = document.querySelectorAll<HTMLInputElement>('#index')[index + 1];
+    if (nextInput) nextInput.focus();
+  }
+}
 
 </script>
 
@@ -76,8 +100,9 @@ function submit() {
       <!-- end:title -->
       <div class="flex flex-col gap-4">
         <TransitionGroup enter-active-class="transition duration-300 ease-out"
-          enter-from-class="transform opacity-0 absolute translate-x-4" enter-to-class="transform opacity-100 translate-x-0"
-          leave-active-class="transition duration-300 ease-in" leave-from-class="transform opacity-100 translate-x-0"
+          enter-from-class="transform opacity-0 absolute translate-x-4"
+          enter-to-class="transform opacity-100 translate-x-0" leave-active-class="transition duration-300 ease-in"
+          leave-from-class="transform opacity-100 translate-x-0"
           leave-to-class="transform opacity-0 absolute translate-x-4">
           <div v-if="activeTab === 1">
             <div class="flex flex-col gap-2 mb-3">
@@ -130,12 +155,28 @@ function submit() {
               </div>
             </div>
           </div>
+          <div v-if="activeTab === 3">
+            <div class="flex flex-row justify-center gap-4">
+              <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
+                @input="nextInput($event, index)" id="index" class="text-center text-black rounded h-10 w-10 text-lg mb-5" maxlength="1">
+            </div>
+          </div>
         </TransitionGroup>
         <div :class="['flex w-full', activeTab === 2 ? 'justify-between' : 'justify-end']">
-          <button type='button'
+          <button v-show="activeTab !== 3" type='button'
             class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm"
-            @click="activeTab = activeTab === 1 ? 2 : 1">{{ activeTab === 1 ? 'Next' : 'Previous' }}</button>
-          <button v-show="activeTab === 2" type="submit" @click="submit" :disabled="isLoading || !user"
+            @click="activeTab = activeTab === 1 ? 2 : 1">{{ activeTab === 1 ? 'Next' : 'Previous' }}
+          </button>
+          <button v-show="activeTab === 2" type="submit" @click="sendOtp" :disabled="isLoading || !user"
+            :class="isLoading ? 'flex p-2 justify-center' : 'block'"
+            class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm">
+            <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24">
+              <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+            <span v-if="!isLoading">Send OTP</span>
+          </button>
+          <button v-show="activeTab === 3" type="submit" @click="verifyOtp" :disabled="isLoading || !user || !otpCode"
             :class="isLoading ? 'flex p-2 justify-center' : 'block'"
             class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm">
             <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"

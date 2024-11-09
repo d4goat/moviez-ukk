@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterMail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -66,22 +70,63 @@ class AuthController extends Controller
         }
     }
 
+    public function sendOtp(Request $request){
+        $request->validate([
+            'name' => 'required|string',
+                'email' => 'required|string|email|max:255|unique:users',
+                'phone' => 'required|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $otp = rand(100000, 999999);
+
+        Cache::put('user_' . $request->email, [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'otp' => $otp
+        ], now()->addMinutes(2));
+
+        Mail::to($request->email)->send(new RegisterMail($request->name, $otp));
+
+        return response()->json([
+            'message' => 'OTP sent to your email, Please check the mail to verify',
+            'email' => $request->email
+        ]);
+    }
+
     public function register(Request $request)
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|string|email|max:255|unique:users',
-                'phone' => 'required|unique:users',
-                'password' => 'required|string|min:8|confirmed',
+                'email' => 'required|email',
+                'otp' => 'required|numeric'
             ]);
+
+            $cached = Cache::get('user_' . $request->email);
+
+
+            if(!$cached){
+                return response()->json([
+                    'message' => 'OTP is expired or invalid',
+                ], 400);
+            }
+
+            if($cached['otp'] != $validateData['otp']){
+                return response()->json([
+                    'message' => 'OTP is invalid',
+                ], 400);
+            }
 
             $validateData['role_id'] = 2;
 
-            $user = User::create($validateData);
+            $user = User::create($cached);
 
             $role = Role::findById($validateData['role_id']);
             $user->assignRole($role);
+
+            Cache::forget('user_' . $request->email);
 
             // $token = $user->createToken('auth_token')->plainTextToken;
 
