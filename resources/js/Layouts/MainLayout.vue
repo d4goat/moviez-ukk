@@ -98,7 +98,7 @@ export default {
             </div>
         </nav>
         <RouterView class="bg-component min-h-screen" />
-        <footer class="h-30 bg-[#121212] mx-10 flex items-center justify-between">
+        <footer class="py-6 bg-[#121212] mx-10 flex items-center justify-between">
             <div class="flex flex-col">
                 <span class="text-title-xl2 font-semibold text-cinema"> {{ setting?.name }} </span>
                 <span class="text-lg">© 2024 Cinema51. All Rights Reserved.</span>

@@ -17,6 +17,9 @@ const otpCode = ref(['', '', '', '', '', ''])
 
 const { data: setting = {} } = useSetting()
 
+const show = ref(false)
+const showConfirm = ref(false)
+
 const activeTab = ref(1)
 
 const formSchema = Yup.object().shape({
@@ -35,8 +38,8 @@ const { mutate: sendOtp } = useMutation({
     data.append('name', user.value.name)
     data.append('email', user.value.email)
     data.append('phone', user.value.phone)
-    
-    if(user.value?.password){
+
+    if (user.value?.password) {
       data.append('password', user.value.password)
       data.append('password_confirmation', user.value.passwordConfirmation)
     }
@@ -49,7 +52,7 @@ const { mutate: sendOtp } = useMutation({
     toast.success("Kode verifikasi berhasil dikirim ke nomor telepon yang anda masukkan")
     activeTab.value = 3
   },
-  onError: (err: any)  => {
+  onError: (err: any) => {
     toast.error(err.response.data.message)
     console.error(err.response.data.message)
     unblock(document.getElementById('form-register'))
@@ -71,7 +74,7 @@ const { mutate: verifyOtp } = useMutation({
     toast.success("Registrasi berhasil")
     router.push({ name: 'sign-in' })
   },
-  onError: (err: any)  => {
+  onError: (err: any) => {
     toast.error(err.response.data.message)
     console.error(err.response.data.message)
     unblock(document.getElementById('form-register'))
@@ -83,6 +86,28 @@ const nextInput = (event: Event, index: number) => {
   if (input.value.length === 1 && index !== otpCode.value.length - 1) {
     const nextInput = document.querySelectorAll<HTMLInputElement>('#index')[index + 1];
     if (nextInput) nextInput.focus();
+  }
+}
+
+function togglePassword() {
+  const passwordField = document.querySelector(["input[name='password']"]);
+  if (passwordField.type === 'password') {
+    passwordField.type = 'text';
+    show.value = true
+  } else {
+    passwordField.type = 'password';
+    show.value = false
+  }
+}
+
+function togglePasswordConfirmation() {
+  const passwordField = document.querySelector(["input[name='passwordConfirmation']"]);
+  if (passwordField.type === 'password') {
+    passwordField.type = 'text';
+    showConfirm.value = true
+  } else {
+    passwordField.type = 'password';
+    showConfirm.value = false
   }
 }
 
@@ -126,7 +151,7 @@ const nextInput = (event: Event, index: number) => {
             <div class="flex flex-col gap-2 mb-3">
               <label class="text-sm sm:text-base font-medium">No Telepon</label>
               <div class="flex flex-col">
-                <Field name="phone" type="text" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
+                <Field name="phone" type="text" oninput="value.value = value.value.replace(/[^\d,]/g, '')"
                   autocomplete="off" v-model="user.phone"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
                   placeholder="Masukkan No Telepon" />
@@ -137,20 +162,32 @@ const nextInput = (event: Event, index: number) => {
           <div v-if="activeTab === 2">
             <div class="flex flex-col gap-2 mb-3">
               <label class="text-sm sm:text-base font-medium">Password</label>
-              <div class="flex flex-col">
-                <Field name="password" type="password" autocomplete="off" v-model="user.password"
+              <div class="flex flex-col relative">
+                <div class="flex flex-col relative">
+                  <Field name="password" type="password" autocomplete="off" v-model="user.password"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
                   placeholder="Masukkan Password" />
-                <ErrorMessage name="password" class="text-red-500 text-xs sm:text-sm mt-1" />
+                  
+                  <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
+                    <i :class="['fa-regular text-lg sm:text-xl', show ? 'fa-eye' : 'fa-eye-slash']" @click="togglePassword"></i>
+                  </span>
+                </div>
+                  <ErrorMessage name="password" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
             <div class="flex flex-col gap-2 mb-3">
               <label class="text-sm sm:text-base font-medium">Konfirmasi Password</label>
-              <div class="flex flex-col">
-                <Field name="passwordConfirmation" type="password" autocomplete="off"
+              <div class="flex flex-col relative">
+                <div class="flex flex-col relative">
+                  <Field name="passwordConfirmation" type="password" autocomplete="off"
                   v-model="user.passwordConfirmation"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
                   placeholder="Masukkan Konfirmasi Password" />
+
+                  <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
+                    <i :class="['fa-regular text-lg sm:text-xl', showConfirm ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
+                  </span>
+                </div>
                 <ErrorMessage name="passwordConfirmation" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
@@ -158,7 +195,8 @@ const nextInput = (event: Event, index: number) => {
           <div v-if="activeTab === 3">
             <div class="flex flex-row justify-center gap-4">
               <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
-                @input="nextInput($event, index)" id="index" class="text-center text-black rounded h-10 w-10 text-lg mb-5" maxlength="1">
+                @input="nextInput($event, index)" id="index"
+                class="text-center text-black rounded h-10 w-10 text-lg mb-5" maxlength="1">
             </div>
           </div>
         </TransitionGroup>

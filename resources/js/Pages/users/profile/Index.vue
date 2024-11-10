@@ -9,6 +9,10 @@
                     </span>
                     <span class="font-medium text-gray-400"> <i class="fa-solid fa-phone mr-1"></i> {{ user.phone }}
                     </span>
+                    <div @click="logout" class="flex gap-3 border-t border-gray-700 mt-4 py-3 text-gray-300 font-medium cursor-pointer">
+                        <LogOut />
+                        <span>Log Out</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,8 +59,35 @@ import Personal from './tabs/Personal.vue';
 import Security from './tabs/Security.vue';
 import { useAuthStore } from '@/stores/auth';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
+import { LogOut } from 'lucide-vue-next';
+import Swal from 'sweetalert2';
 
 const categories = ref(['Akun', 'Password'])
 
 const { user } = useAuthStore();
+
+const logout = () => {
+    return Swal.fire({
+        title: "Are you sure to logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Logout",
+        cancelButtonText: "Cancel",
+        reverseButtons: true,
+        customClass: {
+            confirmButton: "btn btn-danger btn-md py-2 ml-3 font-medium",
+            cancelButton: "btn btn-secondary btn-md py-2 mr-3 font-medium",
+        },
+    }).then((result: Object) => {
+        if (result.isConfirmed) {
+            useAuthStore().purgeAuth();
+            Swal.fire({
+                icon: "success",
+                text: "Success logout",
+            }).then(() => {
+                window.location.reload()
+            });
+        }
+    });
+}
 </script>

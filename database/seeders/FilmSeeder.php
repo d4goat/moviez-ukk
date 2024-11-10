@@ -21,7 +21,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Christopher Nolan',
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=bK6ldnjE3Y0',
+                'trailer' => 'https://youtu.be/uYPbbksJxIg?si=jYPJB6SEcISSGNeo',
                 'release_date' => '2024-07-21',
                 'end_date' => '2024-08-21',
                 'genre_film_id' => [1, 13], // Drama, Biographical
@@ -34,7 +34,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Martin Scorsese',
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=AWO7NOxnSaE',
+                'trailer' => 'https://youtu.be/EP34Yoxs3FQ?si=e0a8v8ecSogGB2W3',
                 'release_date' => '2024-10-20',
                 'end_date' => '2024-11-20',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
@@ -47,7 +47,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Nia DaCosta',
                 'writer' => 'Megan McDonnell',
                 'poster' => '/images/posters/the_marvels.jpeg',
-                'trailer' => 'https://www.youtube.com/watch?v=go6GEIrcvFY',
+                'trailer' => 'https://youtu.be/wS_qbDztgVY?si=c3p8n9ubY7RcYOWc',
                 'release_date' => '2024-11-10',
                 'end_date' => '2024-12-10',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
@@ -60,7 +60,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Denis Villeneuve',
                 'writer' => 'Jon Spaihts, Denis Villeneuve',
                 'poster' => '/images/posters/dune_part_two.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=8g18jFHCLXk',
+                'trailer' => 'https://youtu.be/Way9Dexny3w?si=ifUaZCHhkKJ0rB8F',
                 'release_date' => '2024-11-03',
                 'end_date' => '2024-12-03',
                 'genre_film_id' => [6, 9, 1], // Sci-Fi, Adventure, Drama
@@ -73,7 +73,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Gareth Edwards',
                 'writer' => 'Gareth Edwards, Chris Weitz',
                 'poster' => '/images/posters/the_creator.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=8wQ2x-hjqyA',
+                'trailer' => 'https://youtu.be/ex3C1-5Dhb8?si=SckU6hlmbSXt1cKo',
                 'release_date' => '2024-11-25',
                 'end_date' => '2024-12-25',
                 'genre_film_id' => [2, 6], // Action, Sci-Fi
@@ -99,7 +99,7 @@ class FilmSeeder extends Seeder
                 'director' => 'Angel Manuel Soto',
                 'writer' => 'Gareth Dunnet-Alcocer',
                 'poster' => '/images/posters/blue_beetle.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=vP0cE-YEAAQ',
+                'trailer' => 'https://youtu.be/vS3_72Gb-bI?si=a-oRiJM2TFD0RY4p',
                 'release_date' => '2024-10-18',
                 'end_date' => '2024-11-18',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure

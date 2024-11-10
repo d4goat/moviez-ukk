@@ -12,7 +12,7 @@
                     </div>
                     <div class="flex flex-col mt-4 gap-4">
                         <button type="button" class="bg-cinema py-2 rounded-md text-white font-medium w-1/6">Playing At</button>
-                        <button type="button" class="bg-cinema py-2 rounded-md text-white font-medium w-1/6">Trailer</button>
+                        <a :href="data.trailer" type="button" class="bg-cinema text-center py-2 rounded-md text-white font-medium w-1/6">Trailer</a>
                     </div>
                 </div>
             </div>
@@ -25,9 +25,11 @@
                     </span>
                     <span class="font-semibold">Writter : <span class="font-normal"> {{ data.writer }} </span> 
                     </span>
-                    <div class="flex flex-row font-semibold">
-                        Cast : <span class="ml-2 font-normal" v-for="(cast, index) in data.casts" :key="cast.uuid">
-                            {{ cast.cast_name }}{{ index < data.casts.length - 1 ? ', ' : '.' }} </span>
+                    <div class="flex flex-row flex-wrap font-semibold">
+                        <span>Cast:</span>
+                        <span class="ml-2 font-normal" v-for="(cast, index) in data.casts" :key="cast.uuid">
+                            {{ cast.cast_name }}<span v-if="index < data.casts.length - 1">,</span>
+                        </span>
                     </div>
                 </div>
             </div>

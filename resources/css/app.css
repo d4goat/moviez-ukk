@@ -23,7 +23,7 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.modal-open
 	.swal2-title {
 		font-weight: 500;
 		font-size: 1.3rem;
-		color: #26272e;
+		color: #c7c7c7;
 	}
 
 	.swal2-html-container,
@@ -68,8 +68,8 @@ body.swal2-height-auto {
 
 .swal2-icon {
 	&.swal2-warning {
-    	border-color: yellow;
-    	color: yellow;
+    	border-color: #cccc00;
+    	color: #cccc00;
 	}
 
 	&.swal2-error {
