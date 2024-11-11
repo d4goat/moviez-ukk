@@ -11,8 +11,8 @@
                             Minutes</span>
                     </div>
                     <div class="flex flex-col mt-4 gap-4">
-                        <button type="button" class="bg-cinema py-2 rounded-md text-white font-medium w-1/6">Playing At</button>
-                        <a :href="data.trailer" type="button" class="bg-cinema text-center py-2 rounded-md text-white font-medium w-1/6">Trailer</a>
+                        <router-link :to="`/landing/${data.uuid}/playing-at`" type="button" class="hover:bg-cinema bg-cyan-600 transition-colors duration-300 py-2 rounded-md text-white text-center font-medium w-1/6">Playing At</router-link>
+                        <a :href="data.trailer" type="button" class="hover:bg-cinema bg-cyan-600 transition-colors duration-300 text-center py-2 rounded-md text-white font-medium w-1/6">Trailer</a>
                     </div>
                 </div>
             </div>

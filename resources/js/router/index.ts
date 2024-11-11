@@ -187,6 +187,11 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/landing/cinema',
                 name: 'landing.cinema',
                 component: () => import('@/Pages/users/cinema/Index.vue')
+            },
+            {
+                path: '/landing/:uuid/playing-at',
+                name: 'landing.playing-at',
+                component: () => import('@/Pages/users/film-detail/Playing-at.vue')
             }
         ]
     },

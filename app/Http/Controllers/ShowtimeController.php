@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Showtimerequest;
+use App\Models\Cinema;
 use App\Models\ShowTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -79,19 +80,31 @@ class ShowtimeController extends Controller
         ]);
     }
 
-    public function getShowtime(Request $request){
-        $data = ShowTime::with(['film', 'studio.cinema'])->whereHas('film', function ($query) use($request){
-            $query->where('uuid', $request->uuid);
-        })->get();
-
-        if(!$data) return response()->json(['message' => 'Data not found'], 204);
-
+    public function getShowtime(Request $request)
+    {
+        $data = Cinema::whereHas('studios', function ($query) use ($request) {
+            $query->whereHas('show_times', function ($q) use ($request){
+                $q->whereHas('film', function ($q) use ($request) {
+                    $q->where('uuid', $request->uuid);
+                });
+            });
+        })
+        ->with(['studios' => function ($query) {
+            $query->with(['show_times' => function ($q){
+                $q->with(['film']);
+            }]);
+        }])
+        ->get();
+    
+        if ($data->isEmpty()) {
+            return response()->json(['message' => 'Data not found'], 204);
+        }
+    
         return response()->json([
             'success' => true,
             'message' => 'Success fetch data',
             'data' => $data
         ]);
-
     }
 
     /**
