@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>D-Moviez</title>
+        <title>Matix Cineplex</title>
         <link rel="icon" href="/images/react-redux.png" type="image/x-icon">
 
         @vite('resources/js/main.ts')

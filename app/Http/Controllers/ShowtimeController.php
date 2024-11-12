@@ -82,22 +82,20 @@ class ShowtimeController extends Controller
 
     public function getShowtime(Request $request)
     {
-        $data = Cinema::whereHas('studios', function ($query) use ($request) {
+        $data = Cinema::when($request->city, function ($q) use ($request){
+            $q->where('city', $request->city);
+        })->whereHas('studios', function ($query) use ($request) {
             $query->whereHas('show_times', function ($q) use ($request){
                 $q->whereHas('film', function ($q) use ($request) {
                     $q->where('uuid', $request->uuid);
                 });
             });
         })
-        ->with(['studios' => function ($query) {
-            $query->with(['show_times' => function ($q){
-                $q->with(['film']);
-            }]);
-        }])
+        ->with('show_times')
         ->get();
     
         if ($data->isEmpty()) {
-            return response()->json(['message' => 'Data not found'], 204);
+            return response()->json(['message' => 'Data not found', 'data' => []]);
         }
     
         return response()->json([

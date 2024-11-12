@@ -16,4 +16,8 @@ class Cinema extends Model
         return $this->hasMany(Studio::class);
     }
 
+    public function show_times(){
+        return $this->hasManyThrough(ShowTime::class, Studio::class);
+    }
+
 }

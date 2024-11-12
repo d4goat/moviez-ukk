@@ -43,19 +43,17 @@
               <span class="lg:text-xl text-xs font-semibold">Top Rating Movie</span>
             </div>
             <div class="flex space-x-7">
-              <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3" :style="{
+              <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center" :style="{
                 transition: 'all 0.7s ease',
                 transitionDelay: `${600 + (index * 100)}ms`
               }">
                 <router-link :to="`/landing/film-detail/${reviews.uuid}`">
                   <img :src="reviews?.poster"
-                    class="h-64 w-45 object-cover hover:scale-110 transition ease-in-out duration-300 rounded-2xl"
+                    class="h-64 w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
                     alt="">
                 </router-link>
-                <div class="text-center flex gap-3 justify-center">
-                  <vue3starRatings :star-size="22" v-model="reviews.reviews_avg_rating" :disable-click="true"
-                    star-color="#ffea06" inactive-color="#bdbdbd" />
-                </div>
+                <vue3starRatings :star-size="22" v-model="reviews.reviews_avg_rating" :disable-click="true"
+                star-color="#ffea06" inactive-color="#bdbdbd" />
                 <span class="text-center">{{ reviews.title }}</span>
               </div>
             </div>
