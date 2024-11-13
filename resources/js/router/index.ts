@@ -191,7 +191,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/landing/:uuid/playing-at',
                 name: 'landing.playing-at',
-                component: () => import('@/Pages/users/film-detail/Playing-at.vue')
+                component: () => import('@/Pages/users/film-detail/Playing-at.vue'),
+                meta: {
+                    middleware: 'auth'
+                }
             }
         ]
     },

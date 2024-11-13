@@ -68,7 +68,7 @@ const isSubmenuOpen = (menuItem: any) => {
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-4 lg:py-6.5">
         <router-link to="/" class="mx-3">
-            <span class="text-cinema text-3xl font-medium">{{ setting.name }}</span>
+            <span class="text-cinema text-2xl font-medium">{{ setting?.name }}</span>
         </router-link>
       <button class="block lg:hidden" @click="sidebarStore.isSidebarOpen = false">
         <svg
