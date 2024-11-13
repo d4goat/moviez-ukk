@@ -26,7 +26,7 @@ export default {
                 'component': '#14171c',
                 'dropdown': '#26272e',
                 'text': '#000000',
-                'border': '#414141',
+                'border': '#212121',
                 'cinema': '#229ae0',
                 'current': 'currentColor',
                 'transparent': 'transparent',
