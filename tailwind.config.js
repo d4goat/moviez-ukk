@@ -74,7 +74,7 @@ export default {
                 'title-md2': ['26px', '30px'],
                 'title-sm': ['20px', '26px'],
                 'title-sm2': ['22px', '28px'],
-                'title-xsm': ['18px', '24px']
+                'title-xsm': ['8px', '12px']
             },
             spacing: {
                 4.5: '1.125rem',

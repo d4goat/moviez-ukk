@@ -59,7 +59,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
    
    Route::post('booking', [BookingController::class, 'index']);
-   Route::post('booking/store', [BookingController::class, 'store']);
+   Route::post('booking/store', [BookingController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
    
    Route::get('film', [FilmController::class, 'get'])->withoutMiddleware(['auth', 'verified']);
