@@ -102,6 +102,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
 
    Route::get('studio', [StudioController::class, 'get']);
    Route::post('studio', [StudioController::class, 'index']);
+   Route::post('studio/show-seat', [StudioController::class, 'show_seat'])->withoutMiddleware(['auth', 'verified']);
    Route::post('studio/store', [StudioController::class, 'store']);
    Route::apiResource('studio', StudioController::class)->except('index', 'store');
 });

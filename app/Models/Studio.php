@@ -23,4 +23,8 @@ class Studio extends Model
     public function show_times(){
         return $this->hasMany(ShowTime::class);
     }
+
+    public function booking(){
+        return $this->hasManyThrough(Booking::class,  ShowTime::class);
+    }
 }

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CinemaSeeder::class,
             StudioSeeder::class,
             ShowtimeSeeder::class,
+            SeatSeeder::class,
             IndonesiaDatabaseSeeder::class,
         ]);
     }

@@ -76,6 +76,15 @@ class StudioController extends Controller
         ]); 
     }
 
+    public function show_seat(Request $request){
+        $data = Studio::with(['booking', 'seats'])->get();
+
+        return response()->json([
+            'message' => 'success fething data',
+            'data' => $data
+        ], 200);
+    }
+
     /**
      * Update the specified resource in storage.
      */

@@ -61,7 +61,7 @@
                                         <span>Ticket Booking For : </span>
                                         <VForm @submit="booking" class="flex flex-col">
                                             <div class="flex flex-col mt-2 space-y-1">
-                                                <span>Movie : <span class="font-medium">{{ film?.title }}</span></span>
+                                                <span>Movie : <span class="font-medium">{{ route.query.title }}</span></span>
                                                 <span>Cinema : <span class="font-medium">{{ name }}</span></span>
                                                 <span>Date : <span class="font-medium">{{ date }} : {{ selected }}</span></span>
                                                 <div class="flex justify-between">
@@ -149,12 +149,6 @@ const { data, isFetching, refetch } = useQuery({
     queryKey: ['show-time', 'playing-at'],
     queryFn: async () => await axios.post('/master/show-time/get-list', { uuid: route.params.uuid, city: kota.value }).then((res: any) => res.data.data),
     onError: (err: any) => toast.error(err.response.data.message),
-    cacheTime: 0
-})
-
-const { data: film, isLoading } = useQuery({
-    queryKey: ['film', route.params.uuid],
-    queryFn: async () => await axios.get(`/master/film/${route.params.uuid}`).then((res: any) => res.data.data),
     cacheTime: 0
 })
 

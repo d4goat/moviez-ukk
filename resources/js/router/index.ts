@@ -189,7 +189,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/Pages/users/cinema/Index.vue')
             },
             {
-                path: '/landing/:uuid/playing-at',
+                path: '/landing/film-detail/:uuid/playing-at',
                 name: 'landing.playing-at',
                 component: () => import('@/Pages/users/film-detail/Playing-at.vue'),
                 meta: {
