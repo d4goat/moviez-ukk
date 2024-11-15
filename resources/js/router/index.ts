@@ -195,7 +195,15 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     middleware: 'auth'
                 }
-            }
+            },
+            {
+                path: '/landing/film-detail/playing-at/booking/:uuid/select-seat',
+                name: 'landing.booking.select-seat',
+                component: () => import('@/Pages/users/film-detail/select-seat/Index.vue'),
+                meta: {
+                    middleware: 'auth'
+                }
+            },
         ]
     },
     {

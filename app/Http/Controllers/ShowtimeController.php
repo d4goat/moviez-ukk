@@ -91,7 +91,7 @@ class ShowtimeController extends Controller
                 });
             });
         })
-        ->with('show_times')
+        ->with('show_times.studio')
         ->get();
     
         if ($data->isEmpty()) {

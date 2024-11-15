@@ -91,7 +91,9 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('review/store', [ReviewController::class, 'store']);
    Route::apiResource('review', ReviewController::class)->except('index', 'store');
 
+   Route::get('seat', [SeatController::class, 'get']);
    Route::post('seat', [SeatController::class, 'index']);
+   Route::get('seat/by-studio', [SeatController::class, 'getByStudio'])->withoutMiddleware(['auth', 'verified']);
    Route::post('seat/store', [SeatController::class, 'store']);
    Route::apiResource('seat', SeatController::class)->except('index', 'store');
 

@@ -23,11 +23,9 @@
                                 <span class="text-lg font-medium"> {{ cinema.name }} </span>
                                 <div class="flex flex-row gap-4">
                                     <template v-for="show in cinema.show_times" :key="show.uuid">
-                                        <div class="bg-gray-900 rounded-xl py-2 px-3">
-                                            <button type="button" @click="openModal(cinema.name, show)"
-                                                class="btn btn-sm text-white font-medium"> {{ show.start_time }}
-                                            </button>
-                                        </div>
+                                        <button type="button" @click="openModal(cinema.name, show)"
+                                            class=" bg-gray-900 rounded-xl py-2 px-3 text-white font-medium"> {{ show.start_time }}
+                                        </button>
                                     </template>
                                 </div>
                             </div>
@@ -63,7 +61,7 @@
                                             <div class="flex flex-col mt-2 space-y-1">
                                                 <span>Movie : <span class="font-medium">{{ route.query.title }}</span></span>
                                                 <span>Cinema : <span class="font-medium">{{ name }}</span></span>
-                                                <span>Date : <span class="font-medium">{{ date }} : {{ selected }}</span></span>
+                                                <span>Date : <span class="font-medium">{{ date }} : {{ selected.start_time }}</span></span>
                                                 <div class="flex justify-between">
                                                     <span>Ticket :</span>
                                                     <div class="flex flex-row items-center gap-3 text-gray-500">
@@ -90,6 +88,18 @@
                         </div>
                     </div>
                 </Dialog>
+            </TransitionRoot>
+            <TransitionRoot appear :show="isLoadingBooking" as="template">
+                <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0"
+                enter-to="opacity-100" leave="duration-200 ease-in" leave-from="opacity-100"
+                leave-to="opacity-0">
+
+                <div class="fixed flex items-center justify-center inset-0 bg-[#171717a2] z-99999">
+                    <svg class="animate-spin h-12 w-12 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path class="opacity-75" fill="cyan" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                </div>
+                </TransitionChild>
             </TransitionRoot>
         </section>
     </main>
@@ -126,6 +136,7 @@ const name = ref('')
 const selected = ref()
 const date = ref(moment().format('YYYY-MM-DD'))
 const quantity = ref(1)
+
 const form = ref<Booking>({
     ...user
 } as Booking)
@@ -140,7 +151,7 @@ function decrement() {
 
 const openModal = (cinema: string, show: ShowTime) => {
     form.value.show_time_id = show.id
-    selected.value = show.start_time
+    selected.value = show
     name.value = cinema
     isOpen.value = true
 }
@@ -164,8 +175,15 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         return await axios.post('/master/booking/store', formData)
     },
     onMutate: () => block(document.querySelector("#form-data")),
-    onSuccess: (res: any) => {
-        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.uuid } })
+    onSuccess: async (res: any) => {
+        const data = new FormData()
+
+        data.append('booking_id', res.data.data.id)
+        data.append('amount', selected.value.price * quantity.value)
+        data.append('status', 2)
+        
+        await axios.post('/master/payment/store', data)
+        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid } })
     },
     onError: (err: any) => {
         toast.error(err.response.data.message)

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class SeatController extends Controller
 {
+
+    public function get(){
+        return response()->json(['data' => Seats::all()]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -73,6 +77,26 @@ class SeatController extends Controller
             'data' => $seat
         ]);
     }
+
+    /**
+     * listing seat by studio
+     */
+
+     public function getByStudio(Request $request){
+        $data = Seats::whereHas('studio', function ($q) use ($request){
+            $q->where('uuid', $request->uuid_studio);
+        })->get();
+
+        if ($data->isEmpty()) {
+            return response()->json(['message' => 'Data not found', 'data' => []]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success fetch data',
+            'data' => $data
+        ]);
+     }
 
     /**
      * Update the specified resource in storage.

@@ -33,7 +33,7 @@ class BookedSeatController extends Controller
         if($booked){
             return response()->json([
                 'success' => true,
-                'message' => 'success menambahkan booked seat',
+                'message' => 'success booking',
                 'data' => $booked
             ]);
         } else {

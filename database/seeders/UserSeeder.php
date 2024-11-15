@@ -15,14 +15,14 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@dmoviez.com',
+            'email' => 'admin@matix.cineplex.com',
             'password' => bcrypt('holy@shit'),
             'phone' => '08876245653',
         ])->assignRole('admin');
 
         User::create([
             'name' => 'User',
-            'email' => 'user@dmoviez.com',
+            'email' => 'user@matix.com',
             'password' => bcrypt('12345678'),
             'phone' => '08876845653',
         ])->assignRole('user');
