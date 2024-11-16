@@ -5,6 +5,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import router from "./router";
 import ElementPlus from "element-plus";
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import './styles/dark/css-vars.css'
+import 'element-plus/dist/index.css'
 import App from './App.vue';
 import i18n from "@/core/plugins/i18n";
 import Inputmask from "inputmask";
@@ -100,3 +103,13 @@ initVeeValidate();
 app.use(i18n);
 
 app.mount("#app");
+
+let cssRule =
+    "display:block;width:200px;border-radius: 3px 0 0 3px;padding:3px 15px;background:#108bc3;color:#FFF;font-size: 30px;font-family:Arial, Helvetica, sans-seriffont-weight: bold;";
+let cssRule2 =
+    "display:block;border-radius: 0 3px 3px 0;padding:3px 15px;background:#fff;color:#666;font-size: 30px;font-family:Arial, Helvetica, sans-serif;";
+console.log(
+    "%cMatix Cineplex" + "%cMovie Ticket Booking",
+    cssRule,
+    cssRule2
+);

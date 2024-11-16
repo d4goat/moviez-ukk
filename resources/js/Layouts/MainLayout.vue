@@ -1,14 +1,16 @@
 <script>
 import { useSetting } from '@/services';
 import { RouterView } from 'vue-router';
+import { useDarkModeStore } from '@/stores/darkMode';
 
 export default {
     setup(){
         const { data: setting = {} } = useSetting()
 
         const auth = localStorage.getItem('auth_key')
+        const darkModeStore = useDarkModeStore()
         return {
-            setting, auth
+            setting, auth, darkModeStore
         }
     },
     data() {

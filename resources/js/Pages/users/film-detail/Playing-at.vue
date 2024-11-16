@@ -1,15 +1,27 @@
 <template>
     <main class="pt-21">
         <section class="mx-18 flex flex-col gap-5">
-            <div class="flex flex-row justify-between">
-                <div class="col-md-2">
-                    <select2 :options="cities" v-model="kota" class="form-select-solid" placeholder="Select City">
-                    </select2>
-                </div>
-                <div class="flex gap-2 bg-dropdown border-none focus:ring-dropdown rounded-lg px-2">
-                    <Field name="search" v-model="search" placeholder="Search Cinema.."
-                        class="bg-dropdown p-2.5 rounded-xl border-none focus:ring-dropdown" autocomplete="off" />
-                </div>
+            <div class="flex flex-row flex-wrap justify-between">
+                <el-select-v2
+                v-model="kota"
+                    style="width: 240px;"
+                    filterable
+                    remote
+                    clearable
+                    :remote-method="remoteMethod"
+                    :options="options"
+                    :loading="loading"
+                    size="large"
+                    placeholder="Search city"
+                >
+                <template #loading>
+                    <svg class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path class="opacity-50" fill="cyan" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  </template>
+            </el-select-v2>
+                <Field name="search" v-model="search" placeholder="Search Cinema.."
+                    class="bg-transparent p-2 rounded-lg text-sm border-[#46474a] focus:border-[#46474a] focus:ring-dropdown" autocomplete="off" />
             </div>
             <TransitionRoot appear :show="!isFetching" as="template">
                 <TransitionChild enter="transform transiton-all duration-500 delay-300 ease-out"
@@ -124,6 +136,11 @@ interface City {
     name: string
 }
 
+interface ListItem {
+    value: string;
+    label: string
+}
+
 const isOpen = ref(false)
 
 const route = useRoute()
@@ -192,12 +209,31 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
 })
 
 const city = useCities()
-const cities = computed(() =>
-    city.data.value?.map((item: City) => ({
-        id: item.code,
-        text: item.name
-    }))
-)
+const cities = computed(() => {
+    return Array.isArray(city.data.value)
+        ? city.data.value.map((item: City) => ({
+            value: item.code,
+            label: item.name
+        }))
+        : [];
+});
+
+const options = ref<ListItem[]>([])
+const loading = ref(false)
+
+const remoteMethod = (query: string) => {
+  if (query !== '') {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+      options.value = cities.value.filter((item: any) => {
+        return item.label.toLowerCase().includes(query.toLowerCase())
+      })
+    }, 1000)
+  } else {
+    options.value = []
+  }
+}
 
 const filtered = computed(() => {
     if (!search.value) return data.value
@@ -216,3 +252,37 @@ onMounted(() => refetch())
 
 watch(kota, () => refetch())
 </script>
+
+<style>
+.el-select-dropdown__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 10px;
+  }
+
+  .el-select-v2__wrapper:focus,
+  .el-select-v2__wrapper.is-focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .el-select-v2__wrapper:focus-within {
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: #46474a !important;
+  }
+  
+  /* Input di dalamnya */
+  .el-select-v2__input {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  /* Container input */
+  .el-input__wrapper {
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+</style>
