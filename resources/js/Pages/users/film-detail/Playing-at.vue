@@ -260,29 +260,18 @@ watch(kota, () => refetch())
     align-items: center;
     height: 100px;
     font-size: 10px;
-  }
+}
 
-  .el-select-v2__wrapper:focus,
-  .el-select-v2__wrapper.is-focus {
-    box-shadow: none !important;
-    outline: none !important;
-  }
+/**
+.el-select-dropdown{
+    border: 1px solid #626aef;
+}
 
-  .el-select-v2__wrapper:focus-within {
+  
+  /* Target the actual input */
+  .el-select__input {
+    border: none !important;
     box-shadow: none !important;
     outline: none !important;
-    border-color: #46474a !important;
-  }
-  
-  /* Input di dalamnya */
-  .el-select-v2__input {
-    box-shadow: none !important;
-    outline: none !important;
-  }
-  
-  /* Container input */
-  .el-input__wrapper {
-    box-shadow: none !important;
-    background: transparent !important;
   }
 </style>

@@ -14,8 +14,8 @@ class SeatSeeder extends Seeder
     public function run(): void
     {
         $studios = range(1, 11); // Studio ID dari 1 sampai 11
-        $rows = ['A', 'B', 'C', 'D', 'E']; // Baris kursi
-        $seatPerRow = 10; // Jumlah kursi per baris
+        $rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; // Baris kursi
+        $seatPerRow = 20; // Jumlah kursi per baris
 
         foreach ($studios as $studioId) {
             foreach ($rows as $row) {

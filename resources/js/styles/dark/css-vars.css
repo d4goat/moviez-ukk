@@ -1,6 +1,7 @@
     html.dark {
         --el-bg-color: #626aef;
-        --el-color-primary: #626aef;
+        --el-color-primary: #46474a;
         --el-color-secondary: #ff00ff;
         --el-input-color: #ff000f;
+        
     }
