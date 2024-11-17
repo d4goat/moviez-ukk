@@ -65,7 +65,11 @@ class PaymentController extends Controller
             ]);
         }
 
-        return response()->json($payment);
+        return response()->json([
+            'success' => true,
+            'message' =>  'sucessfully fetch',
+            'data' => $payment
+        ]);
     }
 
     /**

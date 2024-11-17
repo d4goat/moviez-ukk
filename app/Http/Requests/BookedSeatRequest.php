@@ -23,7 +23,8 @@ class BookedSeatRequest extends FormRequest
     {
         return [
             'booking_id' => 'required',
-            'seat_id' => 'required'
+            'seat_id' => 'required|array',
+            'seat_id.*' => 'required' 
         ];
     }
 }

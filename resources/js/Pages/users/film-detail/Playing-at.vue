@@ -191,7 +191,6 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
 
         return await axios.post('/master/booking/store', formData)
     },
-    onMutate: () => block(document.querySelector("#form-data")),
     onSuccess: async (res: any) => {
         const data = new FormData()
 
@@ -199,8 +198,8 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         data.append('amount', selected.value.price * quantity.value)
         data.append('status', 2)
         
-        await axios.post('/master/payment/store', data)
-        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid } })
+        const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
+        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_payment: response.uuid } })
     },
     onError: (err: any) => {
         toast.error(err.response.data.message)

@@ -29,17 +29,31 @@ class BookedSeatController extends Controller
      */
     public function store(BookedSeatRequest $request)
     {
-        $booked = BookedSeat::create($request->validated());
-        if($booked){
+        try {
+            $bookedSeats = collect($request->seat_id)->map(function ($seatId) use ($request) {
+                return BookedSeat::create([
+                    'booking_id' => $request->booking_id,
+                    'seat_id' => $seatId
+                ]);
+            });
+
+            if ($bookedSeats->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error occured while booking seat'
+                ], 500);
+            }
+    
             return response()->json([
                 'success' => true,
-                'message' => 'success booking',
-                'data' => $booked
+                'message' => 'Successfully booked seats',
+                'data' => $bookedSeats
             ]);
-        } else {
+    
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'terjadi kesalahan saat menambah data'
+                'message' => 'Error occurred while booking seats: ' . $e->getMessage()
             ], 500);
         }
     }
