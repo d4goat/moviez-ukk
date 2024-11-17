@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useQuery } from '@tanstack/vue-query';
+import { useMutation, useQuery } from '@tanstack/vue-query';
 import { useRoute } from 'vue-router';
 import axios from '@/libs/axios';
 import { Seat } from '@/types';
@@ -116,6 +116,10 @@ if (isSelected(seat)) {
   ElMessage.error(`Maximum ${booking.value.quantity} seats can be selected`);
 }
 };
+
+const { mutate: booked } = useMutation(
+  (data: any) => 
+)
 
 const filteredSeats = computed(() => {
 const seatGroups: { [key: string]: Seat[] } = {};
