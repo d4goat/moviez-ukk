@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->decimal('amount');
-            $table->boolean('status')->default(2);
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

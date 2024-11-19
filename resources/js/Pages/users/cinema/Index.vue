@@ -3,9 +3,24 @@
         <section class="flex flex-col mx-18 gap-5">
             <div class="flex flex-row justify-between">
                 <div class="col-md-2">
-                    <select2 :options="cities" v-model="kota" class="form-select-solid"
-                        placeholder="Select City">
-                    </select2>
+                    <el-select-v2
+                v-model="kota"
+                    style="width: 240px;"
+                    filterable
+                    remote
+                    clearable
+                    :remote-method="remoteMethod"
+                    :options="options"
+                    :loading="loading"
+                    size="large"
+                    placeholder="Search city"
+                >
+                <template #loading>
+                    <svg class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path class="opacity-50" fill="cyan" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  </template>
+            </el-select-v2>
                 </div>
                 <div class="flex gap-2 items-center bg-dropdown border-none  focus:ring-dropdown rounded px-2">
                     <Field name="search" v-model="search" autocomplete="off"
@@ -117,13 +132,36 @@ const filtered = computed(() => {
     })
 })
 
+interface ListItem {
+    label: string,
+    value: string
+}
+
+const options = ref<ListItem[]>([])
+const loading = ref(false)
+
+
 const city = useCities()
 const cities = computed(() =>
     city.data.value?.map((item: any) => ({
-        id: item.code,
-        text: item.name
+        value: item.code,
+        label: item.name
     }))
 )
+
+const remoteMethod = (query: string) => {
+  if (query !== '') {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+      options.value = cities.value.filter((item: any) => {
+        return item.label.toLowerCase().includes(query.toLowerCase())
+      })
+    }, 1000)
+  } else {
+    options.value = []
+  }
+}
 
 onMounted(() => refetch())
 </script>

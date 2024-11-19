@@ -56,6 +56,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    
    Route::post('booked-seat', [BookedSeatController::class, 'index']);
    Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
+   Route::post('payment/midtrans-notification', [BookedSeatController::class, 'callback'])->withoutMiddleware(['auth', 'verified']);
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
    
    Route::post('booking', [BookingController::class, 'index']);

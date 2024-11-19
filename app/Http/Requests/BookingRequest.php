@@ -25,6 +25,7 @@ class BookingRequest extends FormRequest
             'tanggal' => 'required',
             'quantity' => 'required|numeric',
             'user_id' => 'required',
+            'total_price' => 'required',
             'show_time_id' => 'required',
             'promotion_id' => 'nullable',
         ];

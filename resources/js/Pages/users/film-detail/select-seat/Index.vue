@@ -49,7 +49,7 @@
         </div>
         <button type="button" :disabled="selected.length == 0" @click="booked"
           class="bg-gray-600 rounded-lg mt-3 w-1/3 py-1 grid grid-cols-2 divide-x">
-          <div>{{ currency(payment.amount) }}</div>
+          <div>{{ currency(payment?.amount) }}</div>
           <div>Continue</div>
         </button>
       </div>
@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 import { useRoute, useRouter } from 'vue-router';
 import axios from '@/libs/axios';
@@ -144,13 +144,17 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
 
     return await axios.post('/master/booked-seat/store', {
       booking_id: booking.value.id,
-      seat_id: seatIds
-    }).then((res: any) => res.data.data)
+      seat_id: seatIds,
+      uuid: booking.value.uuid
+    }).then((res: any) => res.data)
   },
   onError: (err: any) => ElMessage.error(err.response.data.message),
   onSuccess: (res: any) => {
     ElMessage.success('Successfully select seat')
-    router.push({ name: 'landing.page' })
+    console.log(res.token)
+    window.snap.pay(res.token, {
+      onSuccess: () => router.push({ name: 'landing.invoice', params: res.data.data.uuid })
+    })
   }
 })
 
@@ -167,4 +171,17 @@ const filteredSeats = computed(() => {
 
   return Object.values(seatGroups);
 });
+
+onMounted(async () => {
+  let recaptchaScript = document.createElement('script')
+  recaptchaScript.setAttribute(
+    "src",
+    "https://app.sandbox.midtrans.com/snap/snap.js"
+  )
+  recaptchaScript.setAttribute(
+    "data-client-key",
+    "SB-Mid-client-jbGm4juhRnPp_wt1"
+  );
+  document.head.appendChild(recaptchaScript)
+})
 </script>

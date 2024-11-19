@@ -204,6 +204,11 @@ const routes: Array<RouteRecordRaw> = [
                     middleware: 'auth'
                 }
             },
+            {
+                path: '/landing/invoice/:uuid',
+                name: 'landing.invoice',
+                component: () => import('@/Pages/users/invoice/Index.vue')
+            }
         ]
     },
     {

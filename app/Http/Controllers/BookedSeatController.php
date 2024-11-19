@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookedSeatRequest;
 use App\Models\BookedSeat;
+use App\Models\Booking;
+use App\Models\Payment;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class BookedSeatController extends Controller
 {
@@ -37,6 +41,21 @@ class BookedSeatController extends Controller
                 ]);
             });
 
+            Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
+            Config::$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+
+            $booking = Booking::findByUuid($request->uuid);
+
+            $transaction_details = array(
+                'order_id' => $booking->id,
+                'gross_amount' => $booking->total_price,
+                'callback' => [
+                    "finish" => 'https://957a-2407-0-3002-5d13-d034-88ed-c467-9a87.ngrok-free.app/landing/invoice'
+                ]
+            );
+
+            $snapToken = Snap::getSnapToken(['transaction_details' => $transaction_details]);
+
             if ($bookedSeats->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -47,7 +66,8 @@ class BookedSeatController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Successfully booked seats',
-                'data' => $bookedSeats
+                'data' => $bookedSeats,
+                'token' => @$snapToken
             ]);
     
         } catch (\Exception $e) {
@@ -55,6 +75,20 @@ class BookedSeatController extends Controller
                 'success' => false,
                 'message' => 'Error occurred while booking seats: ' . $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function callback(Request $request){
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $payment = Payment::find($request->order_id);
+                $payment->update(['status' => 'Completed']);
+                return response()->json(['messagse' => 'berhasil membayar']);
+            } else {
+                return response()->json(['message' => 'gagal membayar']);
+            }
         }
     }
 

@@ -186,6 +186,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         const formData = new FormData()
         formData.append('tanggal', date.value)
         formData.append('quantity', quantity.value)
+        formData.append('total_price', selected.value.price * quantity.value)
         formData.append('user_id', user.id)
         formData.append('show_time_id', form.value.show_time_id)
 
@@ -195,7 +196,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         const data = new FormData()
 
         data.append('booking_id', res.data.data.id)
-        data.append('amount', selected.value.price * quantity.value)
+        data.append('amount', res.data.data.total_price)
         data.append('status', 2)
         
         const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
@@ -251,26 +252,3 @@ onMounted(() => refetch())
 
 watch(kota, () => refetch())
 </script>
-
-<style>
-.el-select-dropdown__loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    font-size: 10px;
-}
-
-/**
-.el-select-dropdown{
-    border: 1px solid #626aef;
-}
-
-  
-  /* Target the actual input */
-  .el-select__input {
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-</style>
