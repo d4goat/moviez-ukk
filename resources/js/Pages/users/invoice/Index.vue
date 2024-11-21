@@ -1,6 +1,6 @@
 <template>
     <main class="pt-21">
-
+        {{ data }}
     </main>
 </template>
 

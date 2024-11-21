@@ -26,6 +26,7 @@ class BookingRequest extends FormRequest
             'quantity' => 'required|numeric',
             'user_id' => 'required',
             'total_price' => 'required',
+            'invoice_number' => 'nullable',
             'show_time_id' => 'required',
             'promotion_id' => 'nullable',
         ];

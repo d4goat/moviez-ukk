@@ -151,9 +151,8 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
   onError: (err: any) => ElMessage.error(err.response.data.message),
   onSuccess: (res: any) => {
     ElMessage.success('Successfully select seat')
-    console.log(res.token)
     window.snap.pay(res.token, {
-      onSuccess: () => router.push({ name: 'landing.invoice', params: res.data.data.uuid })
+      onSuccess: () => router.push({ name: 'landing.invoice', params: res.data.uuid })
     })
   }
 })

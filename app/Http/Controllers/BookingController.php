@@ -36,6 +36,9 @@ class BookingController extends Controller
     {
         $validated = $request->validated();
 
+        $validated['invoice_number'] = 'INVOICE' . rand(1000000, 9999999);
+
+
         $booking = Booking::create($validated);
 
         if($booking){
