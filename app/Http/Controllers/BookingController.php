@@ -75,6 +75,23 @@ class BookingController extends Controller
         ]);
     }
 
+    public function history (Request $request){
+        $per = ($request->per) ?? 10;
+        $page = ($request->page) ? $request->page - 1 : 0;
+
+        DB::statement('set @no=0' . $per * $page);
+        $data = Booking::with(['user', 'payment', 'show_time.film'])->whereHas('user', function ($q) use ($request){
+            $q->where('uuid', $request->uuid);
+        })->when($request->search, function (Builder $query, string $search) {
+            $query->WhereHas('user', function ($q) use ($search){
+                $q->where('tanggal', 'LIKE', "%$search%")
+                ->orWhere('nama', 'LIKE', "%$search%");
+            });
+        })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
+
+        return response()->json($data);   
+    }
+
     /**
      * Update the specified resource in storage.
      */

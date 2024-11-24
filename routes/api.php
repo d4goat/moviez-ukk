@@ -55,12 +55,14 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::apiResource('cinema', CinemaController::class)->except('index', 'store');
    
    Route::post('booked-seat', [BookedSeatController::class, 'index']);
+   Route::post('booked-seat/show-by-booking', [BookedSeatController::class, 'showByBooking']);
    Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
    Route::post('payment/midtrans-notification', [BookedSeatController::class, 'callback'])->withoutMiddleware(['auth', 'verified']);
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
    
    Route::post('booking', [BookingController::class, 'index']);
    Route::post('booking/store', [BookingController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
+   Route::post('booking/history', [BookingController::class, 'history']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
    
    Route::get('film', [FilmController::class, 'get'])->withoutMiddleware(['auth', 'verified']);

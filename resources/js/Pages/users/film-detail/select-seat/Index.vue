@@ -15,9 +15,10 @@
             {
               'bg-orange-500': isSelected(seat),
               'bg-gray-200': !isSelected(seat) && canSelectMore,
-              'bg-gray-400 cursor-not-allowed': !isSelected(seat) && !canSelectMore
+              'bg-gray-400 cursor-not-allowed': !isSelected(seat) && !canSelectMore,
+              'bg-red-700': isBooked(seat)
             }
-          ]" @click="toggleSeat(seat)">
+          ]" @click="!isBooked(seat) && toggleSeat(seat)">
           </div>
         </div>
       </div>
@@ -83,6 +84,7 @@ import { currency } from '@/libs/utils';
 const route = useRoute();
 const router = useRouter();
 const selected = ref<Seat[]>([]);
+const bookedSeatUuid = ref<string[]>([])
 
 const { data, refetch, isLoading } = useQuery({
   queryKey: ['seat', route.params.uuid, route.query.uuid_studio],
@@ -107,6 +109,20 @@ const { data: payment, isLoading: isLoadingPayment } = useQuery({
   queryFn: async () => await axios.get(`/master/payment/${route.query.uuid_payment}`).then((res: any) => res.data.data)
 })
 
+const { data: booked_seat, isLoading: isLoadingBookedSeat } = useQuery({
+  queryKey: ['booked_seat', route.params.uuid],
+  queryFn: async () => await axios.post(`/master/booked-seat/show-by-booking`, { uuid: route.query.uuid_showtime }).then((res: any) => res.data.data),
+  onSuccess: (res: any) => {
+    const bookedSeats: string[] = [];
+    res.bookings.forEach((booking: any) => {
+      booking.booked_seats.forEach((bookedSeat: any) => {
+        bookedSeats.push(bookedSeat.seat.uuid);
+      });
+    });
+    bookedSeatUuid.value = bookedSeats;
+  }
+})
+
 // Computed property for remaining seats
 const remainingSeats = computed(() => {
   if (!booking.value?.quantity) return 0;
@@ -121,6 +137,13 @@ const canSelectMore = computed(() => {
 
 const isSelected = (seat: Seat) => selected.value.some(s => s.uuid === seat.uuid);
 
+/**
+ * Converts a number to its corresponding uppercase alphabet letter
+ * @example numberToAlphabet(1) => 'A'
+ * @example numberToAlphabet(26) => 'Z'
+ * @param {number} num
+ * @returns {string}
+ */
 const numberToAlphabet = (num: number): string => {
   return String.fromCharCode(65 + Number(num));
 };
@@ -136,6 +159,10 @@ const toggleSeat = (seat: Seat) => {
     ElMessage.error(`Maximum ${booking.value.quantity} seats can be selected`);
   }
 };
+
+const isBooked = (seat: Seat) => {
+  return bookedSeatUuid.value.includes(seat.uuid);
+}
 
 const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutation({
   mutationKey: ['booking-seat'],
@@ -157,17 +184,27 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
   }
 })
 
+/**
+ * This computed property takes the array of seats and groups them by their first letter (A, B, C, etc.)
+ * The result is an array of arrays, where each sub-array is a group of seats that start with the same letter.
+ * For example, if the input is [{seat_number: 'A1'}, {seat_number: 'A2'}, {seat_number: 'B1'}],
+ * the output will be [[{seat_number: 'A1'}, {seat_number: 'A2'}], [{seat_number: 'B1'}]]
+ */
 const filteredSeats = computed(() => {
   const seatGroups: { [key: string]: Seat[] } = {};
 
   data.value?.forEach((seat: Seat) => {
+    // Get the first letter of the seat number
     const group = seat.seat_number.charAt(0);
+    // If the group doesn't exist yet, create it
     if (!seatGroups[group]) {
       seatGroups[group] = [];
     }
+    // Add the seat to its group
     seatGroups[group].push(seat);
   });
 
+  // Return an array of the groups
   return Object.values(seatGroups);
 });
 

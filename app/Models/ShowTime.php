@@ -19,4 +19,8 @@ class ShowTime extends Model
     public function studio(){
         return $this->belongsTo(Studio::class);
     }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }

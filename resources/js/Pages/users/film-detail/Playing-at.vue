@@ -167,7 +167,6 @@ function decrement() {
 }
 
 const openModal = (cinema: string, show: ShowTime) => {
-    form.value.show_time_id = show.id
     selected.value = show
     name.value = cinema
     isOpen.value = true
@@ -188,7 +187,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         formData.append('quantity', quantity.value)
         formData.append('total_price', selected.value.price * quantity.value)
         formData.append('user_id', user.id)
-        formData.append('show_time_id', form.value.show_time_id)
+        formData.append('show_time_id', selected.value.id)
 
         return await axios.post('/master/booking/store', formData)
     },
@@ -200,7 +199,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         data.append('status', 2)
         
         const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
-        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_payment: response.uuid } })
+        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_payment: response.uuid, uuid_showtime: selected.value.uuid } })
     },
     onError: (err: any) => {
         toast.error(err.response.data.message)

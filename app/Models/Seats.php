@@ -15,4 +15,8 @@ class Seats extends Model
     public function studio(){
         return $this->belongsTo(Studio::class);
     }
+    
+    public function booked_seat(){
+        return $this->hasMany(BookedSeat::class);
+    }
 }

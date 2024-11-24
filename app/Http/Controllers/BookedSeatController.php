@@ -6,6 +6,7 @@ use App\Http\Requests\BookedSeatRequest;
 use App\Models\BookedSeat;
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Models\ShowTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -90,6 +91,29 @@ class BookedSeatController extends Controller
                 return response()->json(['message' => 'gagal membayar']);
             }
         }
+    }
+
+    public function showByBooking(Request $request){
+        $request->validate([
+            'uuid' => 'required|exists:show_times,uuid',
+        ]);
+        
+        $data = ShowTime::where('uuid', $request->uuid)->with(['bookings.booked_seats.seat'])->first();
+
+        if(!$data){
+            return response()->json([
+                'success' => false,
+                'message' => 'no data found',
+                'data' => []
+            ], 500);
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success fetch data',
+            'data' => $data,
+        ], 200);
     }
 
     /**

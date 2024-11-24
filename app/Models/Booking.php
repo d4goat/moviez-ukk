@@ -21,7 +21,7 @@ class Booking extends Model
     }
 
     public function booked_seats(){
-        return $this->hasOne(BookedSeat::class);
+        return $this->HasMany(BookedSeat::class);
     }
 
     public function payments(){

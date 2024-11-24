@@ -12,11 +12,11 @@ class BookedSeat extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
 
-    public function bookings (){
+    public function booking (){
         return $this->belongsTo(Booking::class);
     }
 
-    public function seats (){
+    public function seat (){
         return $this->belongsTo(Seats::class);
     }
 }
