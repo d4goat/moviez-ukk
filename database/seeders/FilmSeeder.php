@@ -22,8 +22,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
                 'trailer' => 'https://youtu.be/uYPbbksJxIg?si=jYPJB6SEcISSGNeo',
-                'release_date' => '2024-07-21',
-                'end_date' => '2024-08-21',
+                'release_date' => '2024-12-21',
+                'end_date' => '2025-01-21',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [

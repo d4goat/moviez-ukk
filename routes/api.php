@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookedSeatController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmCastsController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
@@ -110,4 +111,6 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('studio/show-seat', [StudioController::class, 'show_seat'])->withoutMiddleware(['auth', 'verified']);
    Route::post('studio/store', [StudioController::class, 'store']);
    Route::apiResource('studio', StudioController::class)->except('index', 'store');
+
+   Route::get('dashboard', [DashboardController::class, 'index']);
 });
