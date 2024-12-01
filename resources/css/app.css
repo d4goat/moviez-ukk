@@ -125,3 +125,9 @@ body.swal2-height-auto {
     box-shadow: none !important;
     outline: none !important;
   }
+
+  .el-input__inner {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }

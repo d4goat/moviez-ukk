@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             StudioSeeder::class,
             ShowtimeSeeder::class,
             SeatSeeder::class,
+            BookingSeeder::class,
+            PaymentSeeder::class,
             IndonesiaDatabaseSeeder::class,
         ]);
     }

@@ -80,7 +80,7 @@ class BookingController extends Controller
         $page = ($request->page) ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Booking::with(['user', 'payment', 'show_time.film'])->whereHas('user', function ($q) use ($request){
+        $data = Booking::with(['user', 'payments', 'show_time.film', 'show_time.studio.cinema'])->whereHas('user', function ($q) use ($request){
             $q->where('uuid', $request->uuid);
         })->when($request->search, function (Builder $query, string $search) {
             $query->WhereHas('user', function ($q) use ($search){

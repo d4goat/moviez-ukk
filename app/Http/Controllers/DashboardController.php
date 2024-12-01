@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index (Request $request) {
-        $dataPayment = Payment::whereMonth('created_at', Carbon::now())->get()->sum('amount');
+        $dataPayment = Payment::whereMonth('created_at', $request->month)->get()->sum('amount');
 
-        $dataBooking = Booking::whereMonth('tanggal', Carbon::now())->get()->count();
+        $dataBooking = Booking::whereMonth('tanggal', $request->month)->get()->count();
 
-        $data = [$dataBooking, $dataPayment];
         return response()->json([
             'success' => true,
-            'data' => $data
+            'data_booking' => $dataBooking,
+            'data_payment' => $dataPayment,
         ]);
     }
 }

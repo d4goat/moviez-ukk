@@ -193,7 +193,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
     },
     onSuccess: async (res: any) => {
         const data = new FormData()
-
+        
         data.append('booking_id', res.data.data.id)
         data.append('amount', res.data.data.total_price)
         data.append('status', 2)

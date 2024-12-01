@@ -35,8 +35,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
                 'trailer' => 'https://youtu.be/EP34Yoxs3FQ?si=e0a8v8ecSogGB2W3',
-                'release_date' => '2024-10-30',
-                'end_date' => '2024-11-30',
+                'release_date' => '2024-11-30',
+                'end_date' => '2024-12-30',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
             ],
             [

@@ -70,7 +70,7 @@ function togglePass(ev: MouseEvent) {
               <label class="text-base sm:text-lg font-poppins">Email</label>
               <div class="flex flex-col gap-1">
                 <Field autocomplete="off" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-base" name="email"
-                  type="email" placeholder="Masukkan Email Anda" v-model="user.email" />
+                  type="email" placeholder="matix@cineplex.co, etc..." v-model="user.email" />
                 <ErrorMessage class="text-red-500 text-sm" name="email" />
               </div>
             </div>
@@ -81,7 +81,7 @@ function togglePass(ev: MouseEvent) {
               <div class="relative flex flex-col gap-1">
                 <div class="flex relative flex-col">
                   <Field autocomplete="off" class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-base"
-                    name="password" type="password" placeholder="Masukkan Password Anda"
+                    name="password" type="password" placeholder="Insert Password..."
                     v-model="user.password" />
                   <span class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
                     <i class="fa-regular text-lg sm:text-xl" :class="{ 'fa-eye' : showPw, 'fa-eye-slash' : !showPw}" @click="togglePass"></i>

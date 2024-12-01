@@ -29,7 +29,7 @@
                             class="focus:outline-none focus:ring-0">
                             <button
                                 :class="['w-full flex items-center py-2 px-3 rounded-lg md:text-sm lg:text-base font-medium', selected ? 'bg-cyan-300/30 text-cyan-500' : 'bg-gray-300/10 text-gray-300']">
-                                <i :class="['la fs-5 mr-2', category == 'Akun' ? 'la-user' : 'la-key']"></i>
+                                <i :class="['la fs-5 mr-2', category == 'Akun' ? 'la-user' : category == 'Password' ? 'la-key' : 'la-history']"></i>
                                 {{ category }}
                             </button>
                         </Tab>
@@ -44,7 +44,8 @@
                         leave-to-class="transform opacity-0 translate-y-4">
                         <TabPanel v-for="(category, index) in categories" :key="category" class="tab-panel">
                             <Personal v-if="index === 0" />
-                            <Security v-else />
+                            <Security v-else-if="index === 1" />
+                            <History v-else/>
                         </TabPanel>
                     </TransitionGroup>
                 </TabPanels>
@@ -57,12 +58,13 @@
 import { ref, computed } from 'vue';
 import Personal from './tabs/Personal.vue';
 import Security from './tabs/Security.vue';
+import History from './tabs/History.vue';
 import { useAuthStore } from '@/stores/auth';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { LogOut } from 'lucide-vue-next';
 import Swal from 'sweetalert2';
 
-const categories = ref(['Akun', 'Password'])
+const categories = ref(['Akun', 'Password', 'History'])
 
 const { user } = useAuthStore();
 
