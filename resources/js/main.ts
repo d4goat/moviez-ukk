@@ -11,6 +11,9 @@ import 'element-plus/dist/index.css'
 import App from './App.vue';
 import i18n from "@/core/plugins/i18n";
 import Inputmask from "inputmask";
+import PrimeVue from 'primevue/config'
+import { definePreset } from '@primevue/themes';
+import Aura from '@primevue/themes/aura';
 
 //imports for app initialization
 import ApiService from './core/services/ApiService';
@@ -34,9 +37,32 @@ import DatePicker from '@/components/DatePicker.vue';
 // import "@/core/plugins/prismjs";
 const app = createApp(App);
 
+const customPreset = definePreset(Aura, {
+    semantic: {
+        primary: {
+            50: '{sky.50}',
+            100: '{sky.100}',
+            200: '{sky.200}',
+            300: '{sky.300}',
+            400: '{sky.400}',
+            500: '{sky.500}',
+            600: '{sky.600}',
+            700: '{sky.700}',
+            800: '{sky.800}',
+            900: '{sky.900}',
+            950: '{sky.950}'
+        }
+    }
+})
+
 app.use(createPinia());
 app.use(router);
 app.use(ElementPlus);
+app.use(PrimeVue, {
+    theme: {
+        preset: customPreset
+    }
+})
 
 app.component("file-upload", FileUpload);
 app.component("select2", Select2);

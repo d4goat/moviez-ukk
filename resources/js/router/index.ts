@@ -12,22 +12,33 @@ declare module 'vue-router' {
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/sign-in',
-        name: 'sign-in',
-        meta: {
-            pageTitle: 'Sign-In',
-            middleware: 'guest',
-        },
+        path: '/',
         component: () => import('@/Pages/auth/Index.vue'),
-    },
-    {
-        path: '/sign-up',
-        name: 'sign-up',
-        meta: {
-            pageTitle: 'Sign-Up',
-            middleware: 'guest',
-        },
-        component: () => import('@/Pages/auth/Index.vue'),
+        children: [
+            {
+                path: 'sign-in',
+                name: 'sign-in',
+                component: () => import('@/Pages/auth/SignIn.vue'),
+                meta: {
+                    pageTitle: 'Sign-In',
+                    middleware: 'guest'
+                }
+            },
+            {
+                path: 'sign-up',
+                name: 'sign-up',
+                component: () => import('@/Pages/auth/SignUp.vue'),
+                meta: {
+                    pageTitle: 'Sign-Up',
+                    middleware: 'guest'
+                }
+            },
+            {
+                path: 'forgot-password',
+                name: 'forgot-password',
+                component: () => import('@/Pages/auth/Forgot-Password.vue')
+            }
+        ]
     },
     {
         path: '/',

@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { toast } from 'vue3-toastify';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import { useSetting } from '@/services';
 import { useMutation } from '@tanstack/vue-query';
 
 const formRef = ref()
@@ -14,6 +15,7 @@ const user = ref<User>({} as User);
 const store = useAuthStore()
 const showPw = ref(false)
 const router = useRouter()
+const { data: setting = {} } = useSetting()
 
 const formSchema = Yup.object().shape({
     email: Yup.string().email('Invalid Email').required().label('Email'),
@@ -57,11 +59,11 @@ function togglePass(ev: MouseEvent) {
 </script>
 
 <template>
-    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="login" class="flex justify-center bg-[#171717] items-center min-h-screen w-full p-4">
+    <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="login" class="flex justify-center items-center min-h-screen w-full p-4">
         <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center rounded-xl space-y-6 p-6">
           <div class="font-medium text-center mb-4 flex flex-col">
             <span class="text-2xl sm:text-3xl">Login</span>
-            <i class="text-3xl sm:text-4xl text-cinema">Cinema51</i>
+            <i class="text-2xl sm:text-3xl text-cinema">{{ setting.name }}</i>
           </div>
           <!-- begin:form -->
           <div class="flex flex-col gap-6">
@@ -90,6 +92,7 @@ function togglePass(ev: MouseEvent) {
                 <ErrorMessage class="text-red-500 text-sm" name="password" />
               </div>
             </div>
+            <router-link to="/forgot-password" class="underline text-cinema">Forgot Password?</router-link>
             <!-- end:input -->
             <div class="flex w-full justify-center mt-4">
               <button type="submit" 

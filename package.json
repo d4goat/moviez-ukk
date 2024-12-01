@@ -38,6 +38,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.6.0",
         "@headlessui/vue": "^1.7.23",
+        "@primevue/themes": "^4.2.4",
         "@tanstack/vue-query": "^4.37.1",
         "@tanstack/vue-table": "^8.11.2",
         "@vueform/multiselect": "^2.6.9",
@@ -69,6 +70,7 @@
         "nprogress": "^0.2.0",
         "object-path": "^0.11.8",
         "pinia": "^2.2.2",
+        "primevue": "^4.2.4",
         "prism-themes": "^1.9.0",
         "prismjs": "^1.29.0",
         "qrcode-generator": "^1.4.4",

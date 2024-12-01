@@ -115,7 +115,7 @@ function togglePasswordConfirmation() {
 
 <template>
   <VForm :validation-schema="formSchema" ref="formRef" id="form-register"
-    class="w-full h-full min-h-screen flex justify-center bg-[#171717] items-center p-4">
+    class="w-full h-full min-h-screen flex justify-center items-center p-4">
     <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center md:space-y-2 sm:space-y-6">
       <!-- begin:title -->
       <div class="font-medium text-center flex flex-col mb-3">
