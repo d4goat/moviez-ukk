@@ -13,6 +13,7 @@ declare module 'vue-router' {
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
+        redirect: '/landing/dashboard',
         component: () => import('@/Pages/auth/Index.vue'),
         children: [
             {

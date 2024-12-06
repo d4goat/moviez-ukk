@@ -6,18 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Forgot Password OTP</title>
 </head>
-<body style="color: #252a61; text-align: center; background-color: #f4f4f4; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
-    <div style="max-width: 480px; margin: 0 auto; background-color: #ffffff; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #252a61;">Forgot Password Request</h1>
-        <p style="font-size: 1rem; color: #555;">Hello <strong>{{ $name }}</strong>,</p>
-        <p style="font-size: 1rem; color: #555;">We received a request to reset your password. Use the OTP code below to proceed:</p>
-        <div style="margin: 1.5rem 0; padding: 1rem; background-color: #e0f7fa; border-radius: 0.5rem; display: inline-block; text-align: center;">
-            <h2 style="margin: 0; font-size: 2rem; letter-spacing: 5px; color: #252a61;">{{ $otp }}</h2>
+<body style="color: #f4f4f4; text-align: center; background-color: #0f1014; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
+    <div style="max-width: 480px; margin: 0 auto">
+        <h1>Matix Cineplex - Movie Ticket Booking</h1>
+        <div style="border: 2px solid #26272e; padding: 2rem 1.5rem; border-radius: 0.5rem;">
+            <div>
+                <h2 style="font-weight: 500">Reset your account password</h2>
+                <p style="font-size: 1rem; color: #ddd;">We heard that you lost your Matix password. Sorry about that!</p>
+                <p style="font-size: 1rem; color: #ddd;">But don't worry! You can use the OTP code below to reset your password:</p>
+                <div style="margin: 1.5rem 0; padding: 1rem; background-color: #229ae0; border-radius: 0.5rem; display: inline-block; text-align: center;">
+                    <h2 style="margin: 0; font-size: 2rem; letter-spacing: 5px; color: white;">{{ $otp }}</h2>
+                </div>
+                <p>
+                    This OTP code will expire in <strong>2 minutes</strong>.
+                </p>
+                <p>
+                    <small>If you did not register at Matix Cineplex, please ignore this email.</small>
+                </p>
+            </div>
         </div>
-        <p style="font-size: 1rem; color: #555;">This OTP is valid for <strong>2 minutes</strong>.</p>
-        <p style="font-size: 0.9rem; color: #888; margin-top: 2rem;">If you did not request a password reset, please ignore this email or contact our support team.</p>
-        <hr style="border: none; border-top: 1px solid #ddd; margin: 2rem 0;">
-        <p style="font-size: 0.8rem; color: #aaa;">© {{ date('Y') }} Matix Cineplex. All rights reserved.</p>
+
+        <div style="margin-top: 2rem;">
+            <div>
+                <small>{{ date('Y') }} ©</small>
+                <small>Matix Cineplex - Movie Ticket Booking</small>
+            </div>
+        </div>
     </div>
 </body>
 </html>

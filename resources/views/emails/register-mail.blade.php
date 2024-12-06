@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OTP Verification</title>
 </head>
-<body style="color: #252a61; text-align: center; background-color: lightcyan; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
+<body style="color: #f4f4f4; text-align: center; background-color: 14171c; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
     <div style="max-width: 480px; margin: 0 auto">
         <h1>Matix Cineplex - Movie Ticket Booking</h1>
         <div style="border-top: 8px solid #252a61; background-color: #fff; padding: 2rem 1.5rem; border-radius: 0.5rem;">

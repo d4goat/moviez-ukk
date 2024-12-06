@@ -52,6 +52,11 @@ const customPreset = definePreset(Aura, {
             900: '{sky.900}',
             950: '{sky.950}'
         }
+    },
+    components: {
+        inputtext: {
+            background: "#232323"
+        }
     }
 })
 

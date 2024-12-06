@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
 use App\Mail\RegisterMail;
 use App\Models\Role;
 use App\Models\User;
@@ -140,6 +141,78 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => $e->getMessage()
             ], 422);
+        }
+    }
+
+    public function sendOtpForgotPassword(Request $request)
+    {
+        // Validasi input email
+        $request->validate([
+            'email' => 'required|email|max:255|exists:users,email'
+        ]);
+    
+        // Cari user berdasarkan email
+        $user = User::where('email', $request->email)->first();
+    
+        // Generate OTP 6 digit
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+    
+        // Simpan OTP di cache dengan waktu kadaluarsa 15 menit
+        Cache::put('forgot_password_' . $user->email, [
+            'email' => $user->email,
+            'otp' => $otp
+        ], now()->addMinutes(15));
+    
+        try {
+            // Kirim OTP melalui email
+            Mail::to($user->email)->send(new ForgotPasswordMail($otp));
+    
+            // Kembalikan respons berhasil
+            return response()->json([
+                'message' => 'OTP telah dikirim ke email Anda',
+                'status' => true
+            ], 200);
+        } catch (\Exception $e) {
+            // Tangani kesalahan pengiriman email
+            return response()->json([
+                'message' => 'Failed send OTP, Try Again',
+                'status' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function matchOtpForgotPassword(Request $request){
+        try {
+            $validate = $request->validate([
+                'email' => 'required',
+                'otp' => 'required',
+            ]);
+
+            $cached = Cache::get('forgot_password_' . $request->email);
+
+            if(!$cached){
+                return response()->json([
+                    'message' => 'OTP is expired or invalid',
+                ], 400);
+            }
+
+            if($cached['otp'] != $validate['otp']){
+                return response()->json([
+                    'message' => 'OTP is invalid',
+                ], 400);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'success match otp'
+            ]);
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Failed Match OTP, Try Again',
+                'status' => false,
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
