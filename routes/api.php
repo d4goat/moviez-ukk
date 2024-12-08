@@ -35,6 +35,7 @@ Route::middleware(['auth', 'json'])->prefix('auth')->group(function () {
    Route::post('send-otp', [AuthController::class, 'sendOtp'])->withoutMiddleware('auth');
    Route::post('send-otp-forgot', [AuthController::class, 'sendOtpForgotPassword'])->withoutMiddleware('auth');
    Route::post('match-otp-forgot', [AuthController::class, 'matchOtpForgotPassword'])->withoutMiddleware('auth');
+   Route::post('update-forgot-password', [AuthController::class, 'updateForgotPassword'])->withoutMiddleware('auth');
    Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth');
    Route::delete('logout', [AuthController::class, 'logout']);
    Route::get('me', [AuthController::class, 'me']);

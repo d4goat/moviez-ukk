@@ -161,7 +161,7 @@ class AuthController extends Controller
         Cache::put('forgot_password_' . $user->email, [
             'email' => $user->email,
             'otp' => $otp
-        ], now()->addMinutes(15));
+        ], now()->addMinutes(5));
     
         try {
             // Kirim OTP melalui email
@@ -214,6 +214,28 @@ class AuthController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function updateForgotPassword(Request $request){
+        $validate = $request->validate([
+            'password' => 'required|confirmed|min:8'
+        ]);
+
+        $user = User::where('email', $request->email);
+
+        $user->update(['password' => bcrypt($validate['password'])]);
+
+        if(!$user){
+            return response()->json([
+                'message' => 'Failed to update password',
+                'success' => false
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success update password'
+        ]);
     }
 
     public function logout(){
