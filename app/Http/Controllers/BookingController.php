@@ -60,7 +60,7 @@ class BookingController extends Controller
      */
     public function show($uuid)
     {
-        $booking = Booking::findByUuid($uuid);
+        $booking = Booking::with(['show_time.film', 'booked_seats.seat', 'user'])->where('uuid', $uuid)->first();
 
         if(!$booking){
           return response()->json([

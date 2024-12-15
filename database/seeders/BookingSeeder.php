@@ -18,7 +18,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-01',
                 'quantity' => 2,
                 'total_price' => 2 * 50000, // 2 tiket x 50,000
-                'invoice_number' => 'INV-0001',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 1,
                 'show_time_id' => 1,
             ],
@@ -26,7 +26,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-02',
                 'quantity' => 3,
                 'total_price' => 3 * 50000, // 3 tiket x 50,000
-                'invoice_number' => 'INV-0002',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 2,
                 'show_time_id' => 2,
             ],
@@ -34,7 +34,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-03',
                 'quantity' => 1,
                 'total_price' => 1 * 60000, // 1 tiket x 60,000
-                'invoice_number' => 'INV-0003',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 2,
                 'show_time_id' => 3,
             ],
@@ -42,7 +42,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-04',
                 'quantity' => 4,
                 'total_price' => 4 * 60000, // 4 tiket x 60,000
-                'invoice_number' => 'INV-0004',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 2,
                 'show_time_id' => 4,
             ],
@@ -50,7 +50,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-05',
                 'quantity' => 2,
                 'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INV-0005',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 2,
                 'show_time_id' => 5,
             ],
@@ -58,7 +58,7 @@ class BookingSeeder extends Seeder
                 'tanggal' => '2024-12-06',
                 'quantity' => 5,
                 'total_price' => 5 * 55000, // 5 tiket x 55,000
-                'invoice_number' => 'INV-0006',
+                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
                 'user_id' => 2,
                 'show_time_id' => 6,
             ],

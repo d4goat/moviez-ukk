@@ -9,3 +9,5 @@ export type { Review } from './film'
 export type { ShowTime } from './showtime'
 export type { Seat } from './studio'
 export type { Booking } from './booking'
+export type { BookedSeat } from './booking'
+export type { ApiResponse } from "./ApiResponse"
