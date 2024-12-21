@@ -24,7 +24,8 @@ class ReviewRequest extends FormRequest
         return [
             'user_id' => 'required',
             'film_id' => 'required',
-            'review' => 'required'
+            'review' => 'required',
+            'rating' => 'required',
         ];
     }
 }

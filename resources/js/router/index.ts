@@ -220,6 +220,11 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/landing/invoice/:uuid',
                 name: 'landing.invoice',
                 component: () => import('@/Pages/users/invoice/Index.vue')
+            },
+            {
+                path: "/landing/review/:uuid",
+                name: "landing.review",
+                component: () => import('@/Pages/users/review/Index.vue')
             }
         ]
     },

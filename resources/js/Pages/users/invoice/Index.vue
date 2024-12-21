@@ -83,6 +83,15 @@
                         Print Invoice
                     </button>
                 </div>
+                <div id="route" class="text-right mb-4 px-4">
+                    <router-link 
+                        :to="{name: 'landing.review', params: { uuid: data.uuid }}" 
+                        class="text-indigo-500 hover:text-indigo-700 transition-colors underline"
+                    >
+                        Review
+                    </router-link>
+                </div>
+                
             </div>
 
             <!-- Loading Overlay -->
@@ -118,7 +127,6 @@ interface Bookings extends Booking {
 }
 
 const route = useRoute()
-const router = useRouter()
 const invoiceRef = ref()
 
 const { data, isLoading, error } = useQuery({
@@ -129,12 +137,13 @@ const { data, isLoading, error } = useQuery({
     },
     onError: (err: any) => {
         ElMessage.error(err.response?.data?.message || 'An error occurred')
-        router.push('/bookings') // Redirect if error occurs
     }
 })
 
 const generatePDF = async () => {
     if (!invoiceRef.value) return;
+    
+    document.querySelector('#route')?.classList.add('hidden')
     
     const element = invoiceRef.value;
     const invoice_number = data.value?.invoice_number || 'ticket';
@@ -161,26 +170,9 @@ const generatePDF = async () => {
     } catch (err) {
         ElMessage.error('Failed to generate PDF. Please try again.');
         console.error('PDF generation error:', err);
+    } finally {
+        document.querySelector('#route')?.classList.remove('hidden')
     }
 };
 
-const printInvoice = () => {
-    window.print()
-}
 </script>
-
-<style>
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    .container {
-        visibility: visible;
-    }
-    main {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-}
-</style>
