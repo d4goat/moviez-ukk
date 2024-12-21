@@ -38,6 +38,12 @@
                 <p class="font-medium text-base">{{ currency(history.total_price) }}</p>
               </div>
             </div>
+            <div class="border-t border-gray-500 mt-2 py-2">
+              <router-link :to="{name: 'landing.invoice', params: { uuid: history.uuid }}" class="flex justify-between items-center">
+                <span>Detail</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </router-link>
+            </div>
           </div>
         </div>
       </main>

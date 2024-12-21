@@ -59,6 +59,7 @@
         "filepond-plugin-image-transform": "^3.8.7",
         "filepond-plugin-pdf-preview": "^1.0.4",
         "flatpickr": "^4.6.13",
+        "html2pdf.js": "^0.10.2",
         "inputmask": "^5.0.8",
         "jquery": "^3.7.1",
         "jspdf": "^2.5.1",

@@ -1,7 +1,7 @@
 <template>
     <main class="text-gray-100 pt-21 pb-10 px-4 sm:px-6 lg:px-8">
         <div class="container mx-auto max-w-2xl">
-            <div class="bg-dropdown shadow-2xl rounded-lg overflow-hidden">
+            <div ref="invoiceRef" class="bg-dropdown shadow-2xl rounded-lg overflow-hidden">
                 <div class="bg-gray-850 p-6 border-b border-gray-700">
                     <h2 class="text-3xl font-bold text-center text-white">Cinema Ticket Invoice</h2>
                     <p class="text-center text-gray-400 mt-2">
@@ -77,7 +77,7 @@
 
                 <div class="bg-gray-850 p-6 border-t border-gray-700 text-center">
                     <button 
-                        @click="printInvoice" 
+                        @click="generatePDF" 
                         class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
                     >
                         Print Invoice
@@ -101,6 +101,7 @@ import axios from '@/libs/axios';
 import { ElMessage } from 'element-plus';
 import type { ApiResponse, Booking, ShowTime, Film, BookedSeat, User, Seat } from '@/types';
 import { currency } from '@/libs/utils';
+import html2pdf from 'html2pdf.js';
 
 interface Showtimes extends ShowTime {
     film: Film
@@ -118,6 +119,7 @@ interface Bookings extends Booking {
 
 const route = useRoute()
 const router = useRouter()
+const invoiceRef = ref()
 
 const { data, isLoading, error } = useQuery({
     queryKey: ['invoice', route.params.uuid],
@@ -130,6 +132,37 @@ const { data, isLoading, error } = useQuery({
         router.push('/bookings') // Redirect if error occurs
     }
 })
+
+const generatePDF = async () => {
+    if (!invoiceRef.value) return;
+    
+    const element = invoiceRef.value;
+    const invoice_number = data.value?.invoice_number || 'ticket';
+    
+    const options = {
+        filename: `cinema-ticket-${invoice_number}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            letterRendering: true
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait'
+        }
+    };
+
+    try {
+        ElMessage.info('Generating PDF...');
+        await html2pdf().set(options).from(element).save();
+        ElMessage.success('PDF generated successfully!');
+    } catch (err) {
+        ElMessage.error('Failed to generate PDF. Please try again.');
+        console.error('PDF generation error:', err);
+    }
+};
 
 const printInvoice = () => {
     window.print()
