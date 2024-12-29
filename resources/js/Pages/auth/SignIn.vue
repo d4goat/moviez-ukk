@@ -63,7 +63,7 @@ function togglePass(ev: MouseEvent) {
         <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center rounded-xl space-y-6 p-6">
           <div class="font-medium text-center mb-4 flex flex-col">
             <span class="text-2xl sm:text-3xl">Login</span>
-            <i class="text-2xl sm:text-3xl text-cinema">{{ setting.name }}</i>
+            <i class="text-2xl sm:text-3xl text-cinema">{{ setting?.name }}</i>
           </div>
           <!-- begin:form -->
           <div class="flex flex-col gap-6">

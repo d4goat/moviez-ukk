@@ -91,7 +91,12 @@ class ShowtimeController extends Controller
                 });
             });
         })
-        ->with('show_times.studio')
+        ->with(['show_times' => function ($q) use ($request) {
+            $q->whereHas('film', function ($q) use ($request) {
+                $q->where('uuid', $request->uuid);
+            });
+            $q->with('studio');
+        }])
         ->get();
     
         if ($data->isEmpty()) {

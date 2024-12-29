@@ -39,9 +39,7 @@
           leave-to="opacity-0 translate-y-8" class="space-y-5">
           <!-- Top Rating Movies Section -->
           <div class="flex flex-col mx-4 space-y-4">
-            <div class="p-2 rounded-3xl border-2 border-zinc-700 md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
-              <span class="lg:text-xl text-xs font-semibold">Top Rating Movie</span>
-            </div>
+            <div class="lg:text-3xl m-3 text-xs font-semibold">Top Rating Movie</div>
             <div class="flex space-x-7">
               <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center"
                 :style="{
@@ -62,9 +60,7 @@
 
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
-            <div class="p-2 rounded-3xl border-2 border-zinc-700 md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
-              <span class="lg:text-xl text-xs font-semibold">Now Showing</span>
-            </div>
+            <div class="lg:text-3xl m-3 text-xs font-semibold">Now Showing</div>
             <div class="flex space-x-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
@@ -72,7 +68,7 @@
               }" data-aos="fade-up" data-aos-mirror="true" data-aos-anchor-placement="top-center">
                 <router-link :to="`/landing/film-detail/${films.uuid}`">
                   <img :src="films?.poster"
-                    class="h-64 w-45 object-cover hover:scale-110 transition ease-in-out duration-300 rounded-2xl"
+                    class="h-64 w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
                     alt="">
                 </router-link>
                 <div class="text-center">{{ films.title }}</div>
@@ -80,9 +76,7 @@
             </div>
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
-            <div class="p-2 rounded-3xl border md:w-1/6 sm:w-1/5 w-1/4 flex justify-center">
-              <span class="lg:text-xl text-xs font-semibold">Coming Soon Movie</span>
-            </div>
+            <div class="lg:text-3xl m-3 text-xs font-semibold">Coming Soon Movie</div>
             <div class="flex space-x-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
@@ -129,9 +123,7 @@
       <!-- ANIMATE SHOWING -->
       <div class="flex flex-col mx-4 space-y-4">
         <!-- HEADER -->
-        <div class="p-3 rounded-3xl md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-800 grid grid-cols-10">
-          <div class="h-2.5 bg-zinc-700 rounded col-span-10"></div>
-        </div>
+        <div class="h-3 m-3 md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-700 rounded col-span-10"></div>
 
         <!-- BODY -->
         <div class="flex w-full">
@@ -144,9 +136,7 @@
       </div>
       <div class="flex flex-col mx-4 space-y-4">
         <!-- HEADER -->
-        <div class="p-3 rounded-3xl md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-800 grid grid-cols-10">
-          <div class="h-2.5 bg-zinc-700 rounded col-span-10"></div>
-        </div>
+        <div class="h-3 m-3 md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-700 rounded col-span-10"></div>
 
         <!-- BODY -->
         <div class="flex w-full">
@@ -158,9 +148,7 @@
       </div>
       <div class="flex flex-col mx-4 space-y-4">
         <!-- HEADER -->
-        <div class="p-3 rounded-3xl md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-800 grid grid-cols-10">
-          <div class="h-2.5 bg-zinc-700 rounded col-span-10"></div>
-        </div>
+        <div class="h-3 m-3 md:w-1/6 sm:w-1/5 w-1/4 bg-zinc-700 rounded col-span-10"></div>
 
         <!-- BODY -->
         <div class="flex w-full">

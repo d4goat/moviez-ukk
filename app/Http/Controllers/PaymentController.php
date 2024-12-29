@@ -51,6 +51,24 @@ class PaymentController extends Controller
         ]);
     }
 
+    public function changeStatusToSuccess(Request $request, $uuid) {
+        $data = Payment::findByUuid($uuid);
+
+        if(!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'data not found'
+            ]);
+        }
+
+        $data->update(['status' => 'success']);
+
+        return response()->json([
+            'message' => 'success update data',
+            'success' => true
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

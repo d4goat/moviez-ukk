@@ -12,7 +12,7 @@ class Cinema extends Model
 
     protected $guarded = ['id', 'uuid', 'created_at', 'updated_at'];
 
-    public function studios (){
+    public function studios(){
         return $this->hasMany(Studio::class);
     }
 

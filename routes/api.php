@@ -88,6 +88,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    
    Route::post('payment', [PaymentController::class, 'index']);
    Route::post('payment/store', [PaymentController::class, 'store']);
+   Route::post('payment/{uuid}/update-status', [PaymentController::class, 'changeStatusToSuccess']);
    Route::apiResource('payment', PaymentController::class)->except('index', 'store');
 
    Route::post('promotion', [PromotionController::class, 'index']);

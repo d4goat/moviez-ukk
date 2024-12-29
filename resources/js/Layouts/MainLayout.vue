@@ -41,7 +41,7 @@ export default {
     <main class="text-white">
         <nav class="bg-dark-bg/20 backdrop-blur-md fixed w-full z-20 top-0 start-0">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
-                <span class="text-2xl text-cinema font-semibold">{{ setting?.name }}</span>
+                <router-link to="/" class="text-2xl text-cinema font-semibold">{{ setting?.name }}</router-link>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <router-link v-if="!auth" to="/sign-in" class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden">
                         <i class="fa-regular fa-circle-user"></i>
