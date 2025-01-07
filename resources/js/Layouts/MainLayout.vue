@@ -45,11 +45,11 @@ export default {
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <router-link v-if="!auth" to="/sign-in" class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden">
                         <i class="fa-regular fa-circle-user"></i>
-                        Login
+                        <span class="mb-1">Login</span>
                     </router-link>
                     <router-link v-else class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 sm:hidden" to="/landing/profile" >
                         <i class="fa-regular fa-circle-user"></i>
-                        Account
+                        <span class="mb-1">Account</span>
                     </router-link>
                     <button @click="toggle" type="button"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

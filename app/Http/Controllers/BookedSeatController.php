@@ -48,7 +48,7 @@ class BookedSeatController extends Controller
             $booking = Booking::findByUuid($request->uuid);
 
             $transaction_details = array(
-                'order_id' => $booking->id,
+                'order_id' => $booking->uuid,
                 'gross_amount' => $booking->total_price,
                 'callback' => [
                     "finish" => 'https://957a-2407-0-3002-5d13-d034-88ed-c467-9a87.ngrok-free.app/landing/invoice'

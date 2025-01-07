@@ -40,7 +40,7 @@
           <!-- Top Rating Movies Section -->
           <div class="flex flex-col mx-4 space-y-4">
             <div class="lg:text-3xl m-3 text-xs font-semibold">Top Rating Movie</div>
-            <div class="flex space-x-7">
+            <div class="flex flex-wrap gap-7">
               <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center"
                 :style="{
                   transition: 'all 0.7s ease',
@@ -61,7 +61,7 @@
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
             <div class="lg:text-3xl m-3 text-xs font-semibold">Now Showing</div>
-            <div class="flex space-x-7">
+            <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
                 transitionDelay: `${100 + (index * 100)}ms`
@@ -77,10 +77,10 @@
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
             <div class="lg:text-3xl m-3 text-xs font-semibold">Coming Soon Movie</div>
-            <div class="flex space-x-7">
+            <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
-                transitionDelay: `${600 + (index * 100)}ms`
+                transitionDelay: `${200 + (index * 100)}ms`
               }" data-aos="fade-up" data-aos-mirror="true" data-aos-anchor-placement="top-center">
                 <img :src="films?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
                 <span class="text-center">{{ films.title }}</span>

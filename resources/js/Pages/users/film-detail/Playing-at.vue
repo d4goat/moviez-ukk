@@ -196,7 +196,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         
         data.append('booking_id', res.data.data.id)
         data.append('amount', res.data.data.total_price)
-        data.append('status', 2)
+        data.append('status', 'pending')
         
         const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
         router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_payment: response.uuid, uuid_showtime: selected.value.uuid } })
