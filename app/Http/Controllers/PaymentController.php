@@ -61,7 +61,7 @@ class PaymentController extends Controller
             ]);
         }
 
-        $data->update(['status' => 'success']);
+        $data->update(['status' => $request->status]);
 
         return response()->json([
             'message' => 'success update data',

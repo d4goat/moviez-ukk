@@ -180,9 +180,13 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
     ElMessage.success('Successfully select seat')
     window.snap.pay(res.token, {
       onSuccess: () => {
-        axios.post(`master/payment/${route.params.uuid_payment}`).then((res: any) => res.data.data)
+        axios.post(`master/payment/${route.params.uuid_payment}`, { status: 'success' }).then((res: any) => res.data.data)
         router.push({ name: 'landing.invoice', params: res.data.uuid })
       },
+      onError: (err: any) {
+        axios.post(`master/payment/${route.params.uuid_payment}`, { status: 'error' }).then((res: any) => res.data.data)
+        console.error(err.response.data.message)
+      }
     })
   }
 })
