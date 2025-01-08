@@ -196,7 +196,7 @@ function togglePasswordConfirmation() {
             <div class="flex flex-row justify-center gap-4">
               <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
                 @input="nextInput($event, index)" id="index"
-                class="text-center text-black rounded h-10 w-10 text-lg mb-5" maxlength="1">
+                class="text-center text-white bg-[#232323] rounded h-10 w-10 text-lg mb-5" maxlength="1">
             </div>
           </div>
         </TransitionGroup>

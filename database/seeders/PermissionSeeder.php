@@ -24,7 +24,7 @@ class PermissionSeeder extends Seeder
         $menuAdmin = [
             'master',
             'admin-dashboard',
-            'website',
+            'master',
             'master-role',
             'master-cinema',
             'master-film',

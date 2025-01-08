@@ -18,14 +18,14 @@
               <TransitionChild as="h1" enter="transform transition-all duration-1000 ease-out"
                 enter-from="opacity-0 -translate-y-8" enter-to="opacity-100 translate-y-0"
                 leave="transform transition-all duration-300 ease-in" leave-from="opacity-100 translate-y-0"
-                leave-to="opacity-0 -translate-y-8" class="text-title-xl font-semibold tracking-wide">
+                leave-to="opacity-0 -translate-y-8" class="lg:text-title-xl text-2xl font-semibold tracking-wide">
                 Get Your Cinema Ticket
               </TransitionChild>
 
               <TransitionChild as="h1" enter="transform transition-all duration-1000 ease-out delay-200"
                 enter-from="opacity-0 translate-y-8" enter-to="opacity-100 translate-y-0"
                 leave="transform transition-all duration-300 ease-in" leave-from="opacity-100 translate-y-0"
-                leave-to="opacity-0 translate-y-8" class="text-title-sm">
+                leave-to="opacity-0 translate-y-8" class="lg:text-title-sm text-sm">
                 Anytime, Anywhere with {{ setting?.name }}
               </TransitionChild>
             </div>

@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OTP Verification</title>
 </head>
-<body style="color: #f4f4f4; text-align: center; background-color: 14171c; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
+<body style="color: #f4f4f4; text-align: center; background-color: #0f1014; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
     <div style="max-width: 480px; margin: 0 auto">
-        <h1>Matix Cineplex - Movie Ticket Booking</h1>
-        <div style="border-top: 8px solid #252a61; background-color: #fff; padding: 2rem 1.5rem; border-radius: 0.5rem;">
+        <h1 style="color: #ddd;">Matix Cineplex - Movie Ticket Booking</h1>
+        <div style="border: 2px solid #26272e; padding: 2rem 1.5rem; border-radius: 0.5rem;">
             <div>
                 <h2 style="font-weight: 500">Welcome to Matix Cineplex, {{ $name }}!</h2>
-                <p>To confirm it's you who registered, here is the <strong>OTP Code</strong> for your registration verification:</p>
-                <div style="padding: 0.75rem 1.5rem; background-color: lightcyan; border-radius: 0.5rem; display: inline-block; margin: 1.25rem 0; overflow: hidden;">
-                    <h1 style="letter-spacing: 5px; margin: 0">{{ $otp }}</h1>
+                <p style="font-size: 1rem; color: #ddd;">To confirm it's you who registered, here is the <strong>OTP Code</strong> for your registration verification:</p>
+                <div style="margin: 1.5rem 0; padding: 1rem; background-color: #229ae0; border-radius: 0.5rem; display: inline-block; text-align: center;">
+                    <h1 style="margin: 0; font-size: 2rem; letter-spacing: 5px; color: white;">{{ $otp }}</h1>
                 </div>
-                <p>
+                <p style="color: #ddd;">
                     This OTP code will expire in <strong>2 minutes</strong>.
                 </p>
-                <p>
+                <p style="color: #ddd;">
                     <small>If you did not register at Matix Cineplex, please ignore this email.</small>
                 </p>
             </div>

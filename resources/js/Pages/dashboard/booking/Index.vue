@@ -2,10 +2,21 @@
 import { ref, h } from 'vue';
 import { createColumnHelper } from '@tanstack/vue-table';
 import { useQuery } from '@tanstack/vue-query';
-import { Booking } from '@/types';
+import type { Booking, User, ShowTime, Film, Payment } from '@/types';
 import { useDelete } from '@/libs/hooks';
 
-const column = createColumnHelper<Booking>()
+interface ShowTimes extends ShowTime {
+    film: Film
+}
+
+interface Bookings extends Booking {
+    no: number
+    user: User,
+    payment: Payment,
+    show_time: ShowTimes
+}
+
+const column = createColumnHelper<Bookings>()
 const paginateRef = ref<any>(null)
 
 const { delete: deleteBooking } = useDelete({

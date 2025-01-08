@@ -20,7 +20,7 @@
                     <label for="email">Email</label>
                 </FloatLabel>
                 <button type="submit" @click="() => forgotPassword()" :disable="isLoading"
-                    class="bg-cinema/80 py-2 w-1/3 sm:w-full  rounded-lg text-white text-md sm:text-base"
+                    class="bg-cinema/80 py-2 w-1/3 sm:w-full rounded-lg text-white text-md sm:text-base"
                     :class="isLoading ? 'flex p-2 justify-center' : 'block'">
                     <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
                     <Message variant="simple" severity="secondary" size="small">We sent a code to {{ email }}, check the email and verify the otp
                     </Message>
                 </div>
-                <div class="flex gap-4">
+                <div class="flex justify-center gap-4">
                     <input v-for="(item, index) in otpCode" :key="item" v-model="otpCode[index]" type="text"
                         @input="nextInput($event, index)" id="index"
                         class="text-center text-white bg-[#232323] rounded h-10 w-10 text-lg mb-5" maxlength="1">

@@ -20,14 +20,9 @@ const MainMenuConfig: Array<MenuItem> = [
         ],
     },
     {
-        heading: "Website",
-        name: "website",
+        heading: "Master",
+        name: "master",
         pages: [
-            {
-                sectionTitle: "Master",
-                route: "/admin/dashboard/master",
-                name: "master",
-                sub: [
                     {
                         heading: "Cinema",
                         name: "master-cinema",
@@ -58,8 +53,6 @@ const MainMenuConfig: Array<MenuItem> = [
                         name: 'master-users',
                         route: '/admin/dashboard/master/users',
                     },
-                ]
-            },
             {
                 heading: 'Booking',
                 name: 'booking',
