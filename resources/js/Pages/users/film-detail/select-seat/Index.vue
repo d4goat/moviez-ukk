@@ -80,6 +80,7 @@ import { toast } from 'vue3-toastify';
 import { ElMessage } from 'element-plus';
 import { TransitionRoot, TransitionChild } from '@headlessui/vue';
 import { currency } from '@/libs/utils';
+import Swal from 'sweetalert2';
 
 const route = useRoute();
 const router = useRouter();
@@ -164,6 +165,16 @@ const isBooked = (seat: Seat) => {
   return bookedSeatUuid.value.includes(seat.uuid);
 }
 
+const mySwal = Swal.mixin(
+        {
+            customClass: {
+                confirmButton: "btn btn-danger btn-md py-2 ml-3",
+                cancelButton: "btn btn-secondary btn-md py-2 mr-3",
+            },
+            buttonsStyling: false,
+        },
+    );
+
 const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutation({
   mutationKey: ['booking-seat'],
   mutationFn: async () => {
@@ -180,12 +191,29 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
     ElMessage.success('Successfully select seat')
     window.snap.pay(res.token, {
       onSuccess: () => {
-        axios.post(`master/payment/${route.params.uuid_payment}`, { status: 'success' }).then((res: any) => res.data.data)
+        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'success' }).then((res: any) => res.data.data)
         router.push({ name: 'landing.invoice', params: res.data.uuid })
       },
-      onError: (err: any) {
-        axios.post(`master/payment/${route.params.uuid_payment}`, { status: 'error' }).then((res: any) => res.data.data)
+      onError: (err: any) => {
+        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
         console.error(err.response.data.message)
+      },
+      onClose: () => {
+        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
+      },
+      onPending: () => {
+        Swal.fire({
+          title: "Are you sure to cancel the payment",
+          text: "Canceled payment cannot be returned!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, Cancel",
+          reverseButtons: true,
+        }).then((result: any) => {
+          if(result.isConfirmed){
+            axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data).catch((err: any) => Swal.showValidationMessage(err.response.data.message))
+          }
+        })
       }
     })
   }

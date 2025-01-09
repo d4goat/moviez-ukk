@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentRequest;
+use App\Models\BookedSeat;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -54,11 +55,15 @@ class PaymentController extends Controller
     public function changeStatusToSuccess(Request $request, $uuid) {
         $data = Payment::findByUuid($uuid);
 
-        if(!$data) {
+        if(!isset($data)) {
             return response()->json([
                 'success' => false,
                 'message' => 'data not found'
             ]);
+        }
+
+        if($request->status == 'failed'){
+            $bookedSeat = BookedSeat::where("booking_id", $data->booking_id)->delete();
         }
 
         $data->update(['status' => $request->status]);

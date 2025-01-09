@@ -35,7 +35,7 @@
                                 <span class="text-lg font-medium"> {{ cinema.name }} </span>
                                 <div class="flex flex-row gap-4">
                                     <template v-for="show in cinema.show_times" :key="show.uuid">
-                                        <button type="button" @click="openModal(cinema.name, show)"
+                                        <button :disabled="moment(show.end_time, 'HH:mm').isBefore(timeNow)" type="button" @click="openModal(cinema.name, show)"
                                             class=" bg-gray-900 rounded-xl py-2 px-3 text-white font-medium"> {{ show.start_time }}
                                         </button>
                                     </template>
@@ -145,6 +145,7 @@ const isOpen = ref(false)
 
 const route = useRoute()
 const router = useRouter()
+const timeNow = moment()
 const kota = ref()
 const search = ref('')
 const { user } = useAuthStore()
@@ -247,7 +248,9 @@ const filtered = computed(() => {
     })
 })
 
-onMounted(() => refetch())
+onMounted(() => {
+    refetch()
+})
 
 watch(kota, () => refetch())
 </script>

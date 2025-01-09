@@ -2,6 +2,7 @@
 import { useSetting } from '@/services';
 import { RouterView } from 'vue-router';
 import { useDarkModeStore } from '@/stores/darkMode';
+import { useAuthStore } from '@/stores/auth';
 
 export default {
     setup() {
@@ -9,8 +10,9 @@ export default {
 
         const auth = localStorage.getItem('auth_key')
         const darkModeStore = useDarkModeStore()
+        const { user } = useAuthStore()
         return {
-            setting, auth, darkModeStore
+            setting, auth, darkModeStore, user
         }
     },
     data() {
@@ -92,6 +94,13 @@ export default {
                         <li>
                             <router-link to="/landing/cinema" class="block relative group">
                                 <span>Cinema</span>
+                                <span
+                                    class="absolute left-0 -bottom-1 w-full h-0.5 bg-gradient-to-r from-blue-500 to-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link v-if="user.role?.full_name == 'Administrator'" to="/admin/dashboard" class="block relative group">
+                                <span>Admin</span>
                                 <span
                                     class="absolute left-0 -bottom-1 w-full h-0.5 bg-gradient-to-r from-blue-500 to-green-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                             </router-link>

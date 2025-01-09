@@ -1,5 +1,5 @@
 <template>
-    <main class="pt-19 flex flex-row space-x-6 px-2">
+    <main class="pt-19 pb-5 flex flex-row space-x-6 px-2">
         <div class="w-1/3 h-full p-3 rounded card bg-component text-white shadow-3 shadow-cyan-500/30">
             <div class="card-body flex flex-col">
                 <img :src="user.photo ?? '/images/user/blank.png'" class="h-44 w-44 object-cover rounded-lg" alt="">

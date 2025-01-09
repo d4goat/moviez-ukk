@@ -119,7 +119,7 @@ function togglePasswordConfirmation() {
     <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center md:space-y-2 sm:space-y-6">
       <!-- begin:title -->
       <div class="font-medium text-center flex flex-col mb-3">
-        <span class="text-lg sm:text-xl">Registrasi</span>
+        <span class="text-lg sm:text-xl">Registration</span>
         <i class="text-2xl sm:text-3xl text-cinema">{{ setting?.name }}</i>
       </div>
       <!-- end:title -->
@@ -131,7 +131,7 @@ function togglePasswordConfirmation() {
           leave-to-class="transform opacity-0 absolute translate-x-4">
           <div v-if="activeTab === 1">
             <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-poppins">Nama</label>
+              <label class="text-sm sm:text-base font-poppins">Name</label>
               <div class="flex flex-col">
                 <Field name="name" type="text" autocomplete="off" v-model="user.name"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
@@ -149,9 +149,9 @@ function togglePasswordConfirmation() {
               </div>
             </div>
             <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">No Telepon</label>
+              <label class="text-sm sm:text-base font-medium">Phone Number</label>
               <div class="flex flex-col">
-                <Field name="phone" type="text" oninput="value.value = value.value.replace(/[^\d,]/g, '')"
+                <Field name="phone" type="text" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
                   autocomplete="off" v-model="user.phone"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
                   placeholder="Masukkan No Telepon" />
@@ -176,7 +176,7 @@ function togglePasswordConfirmation() {
               </div>
             </div>
             <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">Konfirmasi Password</label>
+              <label class="text-sm sm:text-base font-medium">Password Confirmation</label>
               <div class="flex flex-col relative">
                 <div class="flex flex-col relative">
                   <Field name="passwordConfirmation" type="password" autocomplete="off"
@@ -193,10 +193,17 @@ function togglePasswordConfirmation() {
             </div>
           </div>
           <div v-if="activeTab === 3">
-            <div class="flex flex-row justify-center gap-4">
-              <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
+            <div class="flex flex-col gap-4 mb-5">
+              <div class="flex flex-col text-center">
+                <label class="text-2xl mb-2 font-semibold">Register Account</label>
+                <label class="text-sm">We are sending the OTP into your email</label>
+                <label for="" class="text-sm">to validate your registration</label>
+              </div>
+              <div class="flex flex-row justify-center gap-4">
+                <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
                 @input="nextInput($event, index)" id="index"
-                class="text-center text-white bg-[#232323] rounded h-10 w-10 text-lg mb-5" maxlength="1">
+                class="text-center text-white bg-[#232323] rounded w-13 h-13 text-lg" maxlength="1">
+              </div>
             </div>
           </div>
         </TransitionGroup>

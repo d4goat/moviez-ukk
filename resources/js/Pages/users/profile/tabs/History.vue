@@ -1,6 +1,6 @@
 <template>
     <main class="w-full">
-        <div class="card-header border-b pb-3 flex justify-between border-gray-700">
+        <div class="card-header border-b pb-3 flex justify-between items-center border-gray-700">
           <span class="font-medium">History Booking</span>
           <el-input v-model="search" placeholder="Oppenheimer, The Marvels, etc.." style="width: 240px;" />
         </div>

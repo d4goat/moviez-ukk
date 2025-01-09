@@ -84,7 +84,7 @@ class BookedSeatController extends Controller
         $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if($hashed == $request->signature_key){
             if($request->transaction_status == 'capture'){
-                $payment = Payment::find($request->order_id);
+                $payment = Payment::findByUuid($request->order_id);
                 $payment->update(['status' => 'Completed']);
                 return response()->json(['messagse' => 'berhasil membayar']);
             } else {

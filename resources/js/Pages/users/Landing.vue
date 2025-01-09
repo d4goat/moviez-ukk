@@ -7,7 +7,7 @@
             enter-to="opacity-100" leave="transform transition-all duration-500 ease-in" leave-from="opacity-100"
             leave-to="opacity-0" class="w-full" as="div">
             <img :src="setting?.logo" alt="background dashboard"
-              class="object-cover h-115 w-full rounded-b-[2rem] brightness-50 contrast-[.85]">
+              class="object-cover h-125 w-full rounded-b-[2rem] brightness-50 contrast-[.85]">
           </TransitionChild>
           <TransitionChild as="div" enter="transform transition-all duration-1000 ease-out delay-300"
             enter-from="opacity-0 translate-y-12 scale-90" enter-to="opacity-100 translate-y-0 scale-100"
