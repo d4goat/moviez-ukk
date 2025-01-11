@@ -35,7 +35,7 @@
                                 <span class="text-lg font-medium"> {{ cinema.name }} </span>
                                 <div class="flex flex-row gap-4">
                                     <template v-for="show in cinema.show_times" :key="show.uuid">
-                                        <button :disabled="moment(show.end_time, 'HH:mm').isBefore(timeNow)" type="button" @click="openModal(cinema.name, show)"
+                                        <button  type="button" @click="openModal(cinema.name, show)"
                                             class=" bg-gray-900 rounded-xl py-2 px-3 text-white font-medium"> {{ show.start_time }}
                                         </button>
                                     </template>
@@ -193,14 +193,7 @@ const { mutate: booking, isLoading: isLoadingBooking } = useMutation({
         return await axios.post('/master/booking/store', formData)
     },
     onSuccess: async (res: any) => {
-        const data = new FormData()
-        
-        data.append('booking_id', res.data.data.id)
-        data.append('amount', res.data.data.total_price)
-        data.append('status', 'pending')
-        
-        const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
-        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_payment: response.uuid, uuid_showtime: selected.value.uuid } })
+        router.push({ name: 'landing.booking.select-seat', params: { uuid: res.data.data.uuid }, query: { uuid_studio: selected.value.studio.uuid, uuid_showtime: selected.value.uuid } })
     },
     onError: (err: any) => {
         toast.error(err.response.data.message)

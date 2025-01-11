@@ -88,6 +88,9 @@
             </div>
           </div>
         </TransitionChild>
+        <button @click="() => download(`master/booking/report?tahun=${new Date().getFullYear()}`)">
+          download
+        </button>
       </div>
     </TransitionRoot>
     <div v-if="isLoading" class="animate-pulse flex flex-col gap-5 py-4">
@@ -171,6 +174,9 @@ import vue3starRatings from "vue3-star-ratings";
 import { useSetting } from '@/services';
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import AOS from 'aos'
+import { useDownloadExcel } from '@/libs/hooks';
+
+const { download } = useDownloadExcel()
 
 defineComponent({
   components: {

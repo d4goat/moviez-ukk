@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Excel\ReportBookingExcel;
 use App\Http\Requests\BookingRequest;
 use App\Models\Booking;
 use Illuminate\Database\Eloquent\Builder;
@@ -90,6 +91,22 @@ class BookingController extends Controller
         })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
         return response()->json($data);   
+    }
+
+    public function report(Request $request){
+        $data = Booking::whereYear('tanggal', $request->tahun)->whereHas('payments', function ($q) {
+            $q->where("status", "success");
+        })->with(['user', 'show_time', 'booked_seats.seat'])->get();
+
+        $data->map(function ($a) {
+            $a->seat = $a->booked_seats->map(function ($b) {
+                return $b->seat->seat_number;
+            })->implode(", ");
+        });
+
+        $excel = new ReportBookingExcel($data, $request->tahun);
+
+        $excel->download("Report Booking Tahun $request->tahun");
     }
 
     /**

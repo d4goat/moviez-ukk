@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "midtrans/midtrans-php": "^2.6",
         "php-open-source-saver/jwt-auth": "^2.3",
+        "phpoffice/phpspreadsheet": "^3.7",
         "spatie/laravel-permission": "^6.9",
         "spatie/laravel-sluggable": "^3.6",
         "staudenmeir/eloquent-has-many-deep": "1.18"

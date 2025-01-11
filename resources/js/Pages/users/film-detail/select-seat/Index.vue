@@ -50,7 +50,7 @@
         </div>
         <button type="button" :disabled="selected.length == 0" @click="booked"
           class="bg-gray-600 rounded-lg mt-3 w-1/3 py-1 grid grid-cols-2 divide-x">
-          <div>{{ currency(payment?.amount) }}</div>
+          <div>{{ currency(booking?.total_price) }}</div>
           <div>Continue</div>
         </button>
       </div>
@@ -104,11 +104,6 @@ const { data: booking, isLoading: isLoadingBooking } = useQuery({
   queryKey: ['booking', route.params.uuid],
   queryFn: async () => await axios.get(`/master/booking/${route.params.uuid}`).then((res: any) => res.data.data)
 });
-
-const { data: payment, isLoading: isLoadingPayment } = useQuery({
-  queryKey: ['payment', route.query.uuid_payment],
-  queryFn: async () => await axios.get(`/master/payment/${route.query.uuid_payment}`).then((res: any) => res.data.data)
-})
 
 const { data: booked_seat, isLoading: isLoadingBookedSeat } = useQuery({
   queryKey: ['booked_seat', route.params.uuid],
@@ -180,26 +175,35 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
   mutationFn: async () => {
     const seatIds = selected.value.map(seat => seat.id);
 
+    const data = new FormData()
+
+    data.append('booking_id', booking.value.id)
+    data.append('amount', booking.value.total_price)
+    data.append('status', 'pending')
+
+    const response = await axios.post('/master/payment/store', data).then((res: any) => res.data.data)
+
     return await axios.post('/master/booked-seat/store', {
       booking_id: booking.value.id,
       seat_id: seatIds,
-      uuid: booking.value.uuid
+      uuid: response.uuid
     }).then((res: any) => res.data)
   },
   onError: (err: any) => ElMessage.error(err.response.data.message),
-  onSuccess: (res: any) => {
+  onSuccess: async (res: any) => {
     ElMessage.success('Successfully select seat')
+
     window.snap.pay(res.token, {
       onSuccess: () => {
-        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'success' }).then((res: any) => res.data.data)
+        axios.post(`master/payment/${res.uuid}/update-status`, { status: 'success' }).then((res: any) => res.data.data)
         router.push({ name: 'landing.invoice', params: res.data.uuid })
       },
       onError: (err: any) => {
-        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
+        axios.post(`master/payment/${res.uuid}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
         console.error(err.response.data.message)
       },
       onClose: () => {
-        axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
+        axios.post(`master/payment/${res.uuid}/update-status`, { status: 'failed' }).then((res: any) => res.data.data)
       },
       onPending: () => {
         Swal.fire({
@@ -211,7 +215,7 @@ const { mutate: booked, isLoading: isLoadingBookingSeat, isSuccess } = useMutati
           reverseButtons: true,
         }).then((result: any) => {
           if(result.isConfirmed){
-            axios.post(`master/payment/${route.query.uuid_payment}/update-status`, { status: 'failed' }).then((res: any) => res.data.data).catch((err: any) => Swal.showValidationMessage(err.response.data.message))
+            axios.post(`master/payment/${res.uuid}/update-status`, { status: 'failed' }).then((res: any) => res.data.data).catch((err: any) => Swal.showValidationMessage(err.response.data.message))
           }
         })
       }

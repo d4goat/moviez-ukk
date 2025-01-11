@@ -66,6 +66,7 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    
    Route::post('booking', [BookingController::class, 'index']);
    Route::post('booking/store', [BookingController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
+   Route::get("booking/report", [BookingController::class, "report"])->withoutMiddleware(['auth', 'verified']);
    Route::post('booking/history', [BookingController::class, 'history']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
    

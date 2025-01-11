@@ -17,7 +17,7 @@ class PaymentSeeder extends Seeder
             [
                 'booking_id' => 1,
                 'amount' => 2 * 50000, // sesuai quantity dan harga show_time
-                'status' => 'paid',
+                'status' => 'success',
             ],
             [
                 'booking_id' => 2,
@@ -27,7 +27,7 @@ class PaymentSeeder extends Seeder
             [
                 'booking_id' => 3,
                 'amount' => 1 * 60000, // sesuai quantity dan harga show_time
-                'status' => 'paid',
+                'status' => 'success',
             ],
             [
                 'booking_id' => 4,
@@ -37,7 +37,7 @@ class PaymentSeeder extends Seeder
             [
                 'booking_id' => 5,
                 'amount' => 2 * 55000, // sesuai quantity dan harga show_time
-                'status' => 'paid',
+                'status' => 'success',
             ],
             [
                 'booking_id' => 6,

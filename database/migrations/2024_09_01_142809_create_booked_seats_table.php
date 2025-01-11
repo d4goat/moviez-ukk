@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('seat_id');
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
-            $table->string("status");
             $table->timestamps();
         });
     }

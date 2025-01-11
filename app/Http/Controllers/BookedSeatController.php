@@ -7,6 +7,7 @@ use App\Models\BookedSeat;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\ShowTime;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,11 +46,11 @@ class BookedSeatController extends Controller
             Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
             Config::$clientKey = getenv('MIDTRANS_CLIENT_KEY');
 
-            $booking = Booking::findByUuid($request->uuid);
+            $payment = Payment::findByUuid($request->uuid);
 
             $transaction_details = array(
-                'order_id' => $booking->uuid,
-                'gross_amount' => $booking->total_price,
+                'order_id' => $payment->uuid,
+                'gross_amount' => $payment->amount,
                 'callback' => [
                     "finish" => 'https://957a-2407-0-3002-5d13-d034-88ed-c467-9a87.ngrok-free.app/landing/invoice'
                 ]
@@ -68,6 +69,7 @@ class BookedSeatController extends Controller
                 'success' => true,
                 'message' => 'Successfully booked seats',
                 'data' => $bookedSeats,
+                'uuid' => $payment->uuid,
                 'token' => @$snapToken
             ]);
     
@@ -97,8 +99,11 @@ class BookedSeatController extends Controller
         $request->validate([
             'uuid' => 'required|exists:show_times,uuid',
         ]);
-        
-        $data = ShowTime::where('uuid', $request->uuid)->with(['bookings.booked_seats.seat'])->first();
+
+        $data = ShowTime::where('uuid', $request->uuid)->with(['bookings' => function ($q) {
+            $q->where('tanggal', Carbon::now());
+            $q->with(['booked_seats.seat']);
+        }])->first();
 
         if(!$data){
             return response()->json([
