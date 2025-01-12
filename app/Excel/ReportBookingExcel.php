@@ -43,7 +43,7 @@ class ReportBookingExcel extends ReportExcel
         $sheet->setCellValue("B$row", "NO");
         $sheet->getStyle("B$row")->getAlignment()->setHorizontal("center");
 
-        $sheet->setCellValue("C$row", "TANGGAL");
+        $sheet->setCellValue("C$row", "DATE");
         $sheet->mergeCells("C$row:E$row");
         $sheet->getStyle("C$row:E$row")->getAlignment()->setHorizontal("center");
 

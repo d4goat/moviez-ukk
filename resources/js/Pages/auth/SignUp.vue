@@ -135,7 +135,7 @@ function togglePasswordConfirmation() {
               <div class="flex flex-col">
                 <Field name="name" type="text" autocomplete="off" v-model="user.name"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Masukkan Nama" />
+                  placeholder="Chris John, etc.." />
                 <ErrorMessage name="name" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
@@ -144,7 +144,7 @@ function togglePasswordConfirmation() {
               <div class="flex flex-col">
                 <Field name="email" type="text" autocomplete="off" v-model="user.email"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Masukkan Email" />
+                  placeholder="chris@jhon.com, etc.." />
                 <ErrorMessage name="email" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
@@ -154,7 +154,7 @@ function togglePasswordConfirmation() {
                 <Field name="phone" type="text" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
                   autocomplete="off" v-model="user.phone"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Masukkan No Telepon" />
+                  placeholder="0812345678, etc.." />
                 <ErrorMessage name="phone" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
@@ -166,7 +166,7 @@ function togglePasswordConfirmation() {
                 <div class="flex flex-col relative">
                   <Field name="password" type="password" autocomplete="off" v-model="user.password"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Masukkan Password" />
+                  placeholder="Insert Password.." />
                   
                   <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
                     <i :class="['fa-regular text-lg sm:text-xl', show ? 'fa-eye' : 'fa-eye-slash']" @click="togglePassword"></i>
@@ -182,7 +182,7 @@ function togglePasswordConfirmation() {
                   <Field name="passwordConfirmation" type="password" autocomplete="off"
                   v-model="user.passwordConfirmation"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Masukkan Konfirmasi Password" />
+                  placeholder="Insert Password Confirmation.." />
 
                   <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
                     <i :class="['fa-regular text-lg sm:text-xl', showConfirm ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
