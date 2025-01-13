@@ -77,7 +77,7 @@
 
                 <div class="bg-gray-850 p-6 border-t border-gray-700 text-center">
                     <button 
-                        @click="generatePDF" 
+                        @click="() => generatePDF(data)" 
                         class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
                     >
                         Print Invoice
@@ -111,6 +111,7 @@ import { ElMessage } from 'element-plus';
 import type { ApiResponse, Booking, ShowTime, Film, BookedSeat, User, Seat } from '@/types';
 import { currency } from '@/libs/utils';
 import html2pdf from 'html2pdf.js';
+import {jsPDF} from "jspdf" 
 
 interface Showtimes extends ShowTime {
     film: Film
@@ -140,39 +141,101 @@ const { data, isLoading, error } = useQuery({
     }
 })
 
-const generatePDF = async () => {
-    if (!invoiceRef.value) return;
+const generateInvoice = (booking: Bookings) => {
+    // Initialize PDF with A4 size
+    const doc = new jsPDF();
     
-    document.querySelector('#route')?.classList.add('hidden')
-    
-    const element = invoiceRef.value;
-    const invoice_number = data.value?.invoice_number || 'ticket';
-    
-    const options = {
-        filename: `cinema-ticket-${invoice_number}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2,
-            useCORS: true,
-            letterRendering: true
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait'
-        }
-    };
+    doc.setFillColor(18, 18, 18); // Darker background
+    doc.rect(0, 0, 210, 297, 'F');
 
-    try {
-        ElMessage.info('Generating PDF...');
-        await html2pdf().set(options).from(element).save();
-        ElMessage.success('PDF generated successfully!');
-    } catch (err) {
-        ElMessage.error('Failed to generate PDF. Please try again.');
-        console.error('PDF generation error:', err);
-    } finally {
-        document.querySelector('#route')?.classList.remove('hidden')
-    }
+    // Calculate card dimensions (centered, slightly smaller than page width)
+    const pageWidth = 210;
+    const cardWidth = 180;
+    const cardHeight = 200;
+    const cardX = (pageWidth - cardWidth) / 2;
+    const cardY = 40;
+
+    // Draw dark card background
+    doc.setFillColor(28, 28, 36);
+    doc.roundedRect(cardX, cardY, cardWidth, cardHeight, 8, 8, 'F');
+
+    // Calculate content margins
+    const leftMargin = cardX + 20;
+    const rightMargin = cardX + cardWidth - 20;
+    const centerX = cardX + (cardWidth / 2);
+
+    // Add title
+    doc.setFontSize(24);
+    doc.setTextColor(255, 255, 255);
+    doc.text('Cinema Ticket Invoice', centerX, cardY + 20, { align: 'center' });
+
+    // Add booking ID
+    doc.setFontSize(12);
+    doc.setTextColor(156, 163, 175);
+    doc.text(`Booking ID: ${booking.invoice_number}`, centerX, cardY + 30, { align: 'center' });
+
+    // Customer Details Section
+    let currentY = cardY + 50;
+    doc.setFontSize(14);
+    
+    // Left column labels
+    doc.setTextColor(156, 163, 175);
+    doc.text('Customer Name', leftMargin, currentY);
+    doc.text('Purchase Date', leftMargin, currentY + 10);
+    
+    // Right column values
+    doc.setTextColor(255, 255, 255);
+    doc.text(booking.user.name, rightMargin - 60, currentY);
+    doc.text(booking.tanggal, rightMargin - 60, currentY + 10);
+
+    // Movie Details Section
+    currentY += 30;
+    doc.setFontSize(18);
+    doc.setTextColor(255, 255, 255);
+    doc.text('Movie Details', leftMargin, currentY);
+
+    // Movie information
+    currentY += 15;
+    doc.setFontSize(14);
+    doc.setTextColor(156, 163, 175);
+    doc.text('Movie', leftMargin, currentY);
+    doc.text('Showtime', leftMargin, currentY + 10);
+    doc.text('Seats', leftMargin, currentY + 20);
+
+    doc.setTextColor(255, 255, 255);
+    doc.text(booking.show_time.film.title, rightMargin - 60, currentY);
+    doc.text(`${booking.tanggal} - ${booking.show_time.start_time}`, rightMargin - 60, currentY + 10);
+    doc.text(booking.booked_seats.map(seat => seat.seat.seat_number).join(', '), rightMargin - 60, currentY + 20);
+
+    // Payment Details Section
+    currentY += 40;
+    doc.setFontSize(18);
+    doc.setTextColor(255, 255, 255);
+    doc.text('Payment Details', leftMargin, currentY);
+
+    // Payment information
+    currentY += 15;
+    doc.setFontSize(14);
+    doc.setTextColor(156, 163, 175);
+    doc.text('Ticket Price (1 seats)', leftMargin, currentY);
+    doc.text('Total Amount', leftMargin, currentY + 10);
+
+    doc.setTextColor(255, 255, 255);
+    doc.text(currency(booking.show_time.price), rightMargin - 60, currentY);
+    doc.text(currency(booking.quantity * booking.show_time.price), rightMargin - 60, currentY + 10);
+
+    // Add divider lines
+    doc.setDrawColor(75, 85, 99);
+    doc.line(leftMargin, cardY + 70, rightMargin, cardY + 70);  // After customer details
+    doc.line(leftMargin, currentY - 25, rightMargin, currentY - 25); // After movie details
+
+    return doc;
+};
+
+const generatePDF = async (data: Bookings) => {
+    const invoice = generateInvoice(data)
+
+    invoice.save(`Cinema-ticket-${data.invoice_number}.pdf`)
 };
 
 </script>

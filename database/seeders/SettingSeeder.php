@@ -16,7 +16,7 @@ class SettingSeeder extends Seeder
         Setting::create([
         'name' => 'Matix Cineplex',
         'description' => 'Sebuah Website yang menyediakan fitur pemesanan tiket bioskop secara online',
-        'logo' => '/images/view-3d-cinema-theatre-room.jpg',
+        'logo' => '/images/logo_matix.png',
         'email' => 'cinema51@dmoviez.com',
         'phone' => '0827468638643'
         ]); 

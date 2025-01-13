@@ -118,7 +118,7 @@ function togglePasswordConfirmation() {
     class="w-full h-full min-h-screen flex justify-center items-center p-4">
     <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center md:space-y-2 sm:space-y-6">
       <!-- begin:title -->
-      <div class="font-medium text-center flex flex-col mb-3">
+      <div v-if="activeTab !== 3" class="font-medium text-center flex flex-col mb-3">
         <span class="text-lg sm:text-xl">Registration</span>
         <i class="text-2xl sm:text-3xl text-cinema">{{ setting?.name }}</i>
       </div>

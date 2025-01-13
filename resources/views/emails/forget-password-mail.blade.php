@@ -7,13 +7,13 @@
     <title>Forgot Password OTP</title>
 </head>
 <body style="color: #f4f4f4; text-align: center; background-color: #0f1014; font-family: 'Poppins', sans-serif; padding: 2rem 1rem;">
-    <div style="max-width: 480px; margin: 0 auto">
-        <h1>Matix Cineplex - Movie Ticket Booking</h1>
+    <div style="max-width: 480px; margin: 0 auto; color: #ddd;">
+        <h1 style="">Matix Cineplex - Movie Ticket Booking</h1>
         <div style="border: 2px solid #26272e; padding: 2rem 1.5rem; border-radius: 0.5rem;">
             <div>
-                <h2 style="font-weight: 500">Reset your account password</h2>
-                <p style="font-size: 1rem; color: #ddd;">We heard that you lost your Matix password. Sorry about that!</p>
-                <p style="font-size: 1rem; color: #ddd;">But don't worry! You can use the OTP code below to reset your password:</p>
+                <h2 style="font-weight: 500; ">Reset your account password</h2>
+                <p style="font-size: 1rem; ">We heard that you lost your Matix password. Sorry about that!</p>
+                <p style="font-size: 1rem; ">But don't worry! You can use the OTP code below to reset your password:</p>
                 <div style="margin: 1.5rem 0; padding: 1rem; background-color: #229ae0; border-radius: 0.5rem; display: inline-block; text-align: center;">
                     <h2 style="margin: 0; font-size: 2rem; letter-spacing: 5px; color: white;">{{ $otp }}</h2>
                 </div>

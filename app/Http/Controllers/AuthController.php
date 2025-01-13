@@ -221,7 +221,15 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8'
         ]);
 
-        $user = User::where('email', $request->email);
+        $user = User::where('email', $request->email)->first();
+
+        if (Hash::check($request->password, $user->password)) {
+            // Password cocok
+            dd('Password matches!');
+        } else {
+            // Password tidak cocok
+            dd('Password does not match!');
+        }
 
         $user->update(['password' => bcrypt($validate['password'])]);
 

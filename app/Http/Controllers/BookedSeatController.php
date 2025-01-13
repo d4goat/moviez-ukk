@@ -51,9 +51,7 @@ class BookedSeatController extends Controller
             $transaction_details = array(
                 'order_id' => $payment->uuid,
                 'gross_amount' => $payment->amount,
-                'callback' => [
-                    "finish" => 'https://957a-2407-0-3002-5d13-d034-88ed-c467-9a87.ngrok-free.app/landing/invoice'
-                ]
+                
             );
 
             $snapToken = Snap::getSnapToken(['transaction_details' => $transaction_details]);
@@ -101,7 +99,10 @@ class BookedSeatController extends Controller
         ]);
 
         $data = ShowTime::where('uuid', $request->uuid)->with(['bookings' => function ($q) {
-            $q->where('tanggal', Carbon::now());
+            $q->whereDay('tanggal', Carbon::now());
+            $q->whereHas('payments', function ($q) {
+                $q->where("status", 'success');
+            });
             $q->with(['booked_seats.seat']);
         }])->first();
 

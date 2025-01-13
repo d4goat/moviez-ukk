@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index (Request $request) {
-        $dataPayment = Payment::whereHas("booking", function ($q) use ($request){
+        $dataPayment = Payment::where('status', 'success')->whereHas("booking", function ($q) use ($request){
             $q->whereMonth("tanggal", $request->month);
         })->get()->sum('amount');
 
-        $dataBooking = Booking::whereMonth('tanggal', $request->month)->get()->count();
+        $dataBooking = Booking::whereMonth('tanggal', $request->month)->whereHas('payments', function ($q) {
+            $q->where('status', 'success');
+        })->get()->count();
 
         return response()->json([
             'success' => true,
