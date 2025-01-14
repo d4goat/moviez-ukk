@@ -19,6 +19,7 @@ class SettingController extends Controller
             $request->validate([
                 'name' => 'nullable',
                 'description' => 'nullable',
+                'image' => 'nullable|file|mimes:jpg,png,jpeg',
                 'logo' => 'nullable|file|mimes:jpg,png,jpeg',
                 'email' => 'nullable|email',
                 'phone' => 'nullable'
@@ -31,10 +32,19 @@ class SettingController extends Controller
                 Storage::disk('public')->delete($old_photo);
             }
 
+            if($setting->image != null && $setting->image != ''){
+                $old_image = str_replace('/storage/', '', $setting->image);
+                Storage::disk('public')->delete($old_image);
+            }
+
             $data = $request->all();
 
             if ($request->hasFile('logo')) {
                 $data['logo'] = '/storage/' . $request->file('logo')->store('setting', 'public');
+            }
+
+            if($request->hasFile('image')){
+                $data['image'] = '/storage/' . $request->file('image')->store('setting', 'public');
             }
 
             $setting->update($data);

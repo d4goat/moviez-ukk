@@ -38,7 +38,7 @@
                             type="text" />
                         <ErrorMessage name="phone" class="text-red-500" />
                     </div>
-                    <div class="col-md-12 flex flex-col mb-3">
+                    <div class="col-md-6 flex flex-col mb-3">
                         <label name="logo" class="form-label">Logo</label>
                         <Field class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-[11px]" name="logo"
                             v-model="setting.logo" placeholder="Insert setting logo" autocomplete="off"
@@ -47,6 +47,13 @@
                                 v-on:updatefiles="(file) => (logo = file)"></file-upload>
                         </Field>
                         <ErrorMessage name="logo" class="text-red-500" />
+                    </div>
+                    <div class="col-md-6 flex flex-col mb-3">
+                        <label name="image" class="form-label">Image</label>
+                        <Field class="" name="image" v-model="setting.image" placeholder="Insert setting image" type="text">
+                            <file-upload :files="image" :accepted-file-types="fileTypes" v-on:update-files="(file) => (image = file)" ></file-upload>
+                        </Field>
+                        <ErrorMessage name="image" class="text-red-500" />
                     </div>
                 </div>
             </div>
@@ -70,6 +77,7 @@ interface Setting {
     name: string;
     description: string;
     logo: string;
+    image: string;
     email: string;
     phone: number;
 }
@@ -81,12 +89,14 @@ const formSchema = Yup.object().shape({
     name: Yup.string().required('Name cannot be null'),
     description: Yup.string().required('Description cannot be null'),
     logo: Yup.string().required('Logo cannot be null'),
+    image: Yup.string().required('Image cannot be null'),
     email: Yup.string().email().required('Email cannot be null'),
     phone: Yup.string().matches(/^08[0-9]\d{9,11}$/, 'Invalid Phone Number').required('Phone cannot be null'),
 })
 
 const fileTypes = ref(['image/jpg', 'image/png', 'image/jpeg']);
 const logo = ref<any>([])
+const image = ref<any>([])
 
 function submit() {
     const formData = new FormData()
@@ -97,6 +107,8 @@ function submit() {
     formData.append('phone', setting.value.phone)
 
     if(logo.value.length) formData.append('logo', logo.value[0].file)
+    if(image.value.length) formData.append('image', image.value[0].file)
+
 
     block(document.getElementById('form-setting'))
 

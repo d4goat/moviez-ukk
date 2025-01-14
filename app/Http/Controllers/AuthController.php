@@ -224,11 +224,10 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (Hash::check($request->password, $user->password)) {
-            // Password cocok
-            dd('Password matches!');
-        } else {
-            // Password tidak cocok
-            dd('Password does not match!');
+            return response()->json([
+                'success' => false,
+                'message' => "Password cannot same with the last password"
+            ]);
         }
 
         $user->update(['password' => bcrypt($validate['password'])]);

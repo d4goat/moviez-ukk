@@ -28,11 +28,21 @@ import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'aos/dist/aos.css'
+import 'primeicons/primeicons.css'
 
 import FileUpload from '@/components/FIleUpload.vue';
 import Select2 from '@/components/Select2.vue';
 import Paginate from '@/components/Paginate.vue';
 import DatePicker from '@/components/DatePicker.vue';
+
+import FloatLabel from 'primevue/floatlabel';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Message from 'primevue/message';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import Steps from 'primevue/steps';
+import Button from 'primevue/button';
 
 // import "@/core/plugins/prismjs";
 const app = createApp(App);
@@ -55,7 +65,12 @@ const customPreset = definePreset(Aura, {
     },
     components: {
         inputtext: {
-            background: "#232323"
+            background: "#222222"
+        },
+        iconfield: {
+            icon: {
+                color: "#53535c"
+            }
         }
     }
 })
@@ -73,6 +88,14 @@ app.component("file-upload", FileUpload);
 app.component("select2", Select2);
 app.component("paginate", Paginate);
 app.component("date-picker", DatePicker);
+app.component("FloatLabel", FloatLabel)
+app.component("InputText", InputText)
+app.component("Password", Password)
+app.component("Message", Message)
+app.component("IconField", IconField)
+app.component("InputIcon", InputIcon)
+app.component("Steps", Steps)
+app.component("Button", Button)
 
 app.use(vueDebounce, {
     lock: true,

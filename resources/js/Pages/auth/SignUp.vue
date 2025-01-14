@@ -9,11 +9,20 @@ import { useRouter } from 'vue-router';
 import { useSetting } from '@/services';
 import { useMutation } from '@tanstack/vue-query';
 
-const user = ref<User>({} as User);
+interface Users extends User{
+  passwordConfirmation: string
+}
+
+const user = ref<Users>({} as Users);
 const formRef = ref()
 const router = useRouter()
-const isLoading = ref(false)
 const otpCode = ref(['', '', '', '', '', ''])
+
+const steps = [
+  { label: "Personal Info", icon: 'pi pi-user' },
+  { label: "Password", icon: 'pi pi-lock' },
+  { label: "OTP Verification", icon: 'pi pi-key' },
+]
 
 const { data: setting = {} } = useSetting()
 
@@ -31,7 +40,7 @@ const formSchema = Yup.object().shape({
   otp: Yup.string().length(6, 'Kode OTP harus 6 digit').matches(/^[0-9]+$/, 'OTP hanya boleh berisi angka').required().label('OTP'),
 })
 
-const { mutate: sendOtp } = useMutation({
+const { mutate: sendOtp, isLoading: isLoadingSendOtp } = useMutation({
   mutationKey: ['send-otp'],
   mutationFn: () => {
     const data = new FormData()
@@ -59,7 +68,7 @@ const { mutate: sendOtp } = useMutation({
   }
 })
 
-const { mutate: verifyOtp } = useMutation({
+const { mutate: verifyOtp, isLoading: isLoadingVerifyOtp } = useMutation({
   mutationKey: ['verify-otp'],
   mutationFn: () => {
     const data = new FormData()
@@ -89,151 +98,140 @@ const nextInput = (event: Event, index: number) => {
   }
 }
 
-function togglePassword() {
-  const passwordField = document.querySelector(["input[name='password']"]);
-  if (passwordField.type === 'password') {
-    passwordField.type = 'text';
-    show.value = true
-  } else {
-    passwordField.type = 'password';
-    show.value = false
+const prevInput = (event: KeyboardEvent, index: number) => {
+  if (event.key === 'Backspace' && index > 0) {
+    const prevInput = document.querySelectorAll('#index')[index - 1] as HTMLInputElement;
+    if (prevInput) prevInput.focus();
   }
 }
-
-function togglePasswordConfirmation() {
-  const passwordField = document.querySelector(["input[name='passwordConfirmation']"]);
-  if (passwordField.type === 'password') {
-    passwordField.type = 'text';
-    showConfirm.value = true
-  } else {
-    passwordField.type = 'password';
-    showConfirm.value = false
-  }
-}
-
 </script>
 
 <template>
   <VForm :validation-schema="formSchema" ref="formRef" id="form-register"
     class="w-full h-full min-h-screen flex justify-center items-center p-4">
-    <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center md:space-y-2 sm:space-y-6">
+    <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center bg-border p-8 rounded-xl space-y-8">
       <!-- begin:title -->
       <div v-if="activeTab !== 3" class="font-medium text-center flex flex-col mb-3">
-        <span class="text-lg sm:text-xl">Registration</span>
-        <i class="text-2xl sm:text-3xl text-cinema">{{ setting?.name }}</i>
+        <h1 class="text-3xl font-semibold tracking-tight">Create Account</h1>
+        <p class="text-xl">Welcome to <i class="text-cinema">{{ setting?.name }}</i></p>
       </div>
+      <Steps class="mb-3" :model="steps" :active-step="activeTab - 1" />
       <!-- end:title -->
-      <div class="flex flex-col gap-4">
-        <TransitionGroup enter-active-class="transition duration-300 ease-out"
-          enter-from-class="transform opacity-0 absolute translate-x-4"
-          enter-to-class="transform opacity-100 translate-x-0" leave-active-class="transition duration-300 ease-in"
-          leave-from-class="transform opacity-100 translate-x-0"
-          leave-to-class="transform opacity-0 absolute translate-x-4">
-          <div v-if="activeTab === 1">
-            <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-poppins">Name</label>
+      <div class="flex flex-col gap-6">
+          <div v-if="activeTab === 1" class="flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
               <div class="flex flex-col">
                 <Field name="name" type="text" autocomplete="off" v-model="user.name"
-                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Chris John, etc.." />
+                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm">
+                  <FloatLabel variant="in">
+                    <InputText v-model="user.name" class="w-full" autocomplete="off" id="name" />
+                    <label for="name">Name</label>
+                  </FloatLabel>
+                </Field>
                 <ErrorMessage name="name" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
-            <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">Email</label>
+            <div class="flex flex-col gap-2">
               <div class="flex flex-col">
                 <Field name="email" type="text" autocomplete="off" v-model="user.email"
-                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="chris@jhon.com, etc.." />
+                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm">
+                  <FloatLabel variant="in">
+                    <InputText v-model="user.email" autocomplete="off" class="w-full" id="email" />
+                    <label for="email">Email</label>
+                  </FloatLabel>  
+                </Field>
                 <ErrorMessage name="email" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
-            <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">Phone Number</label>
+            <div class="flex flex-col gap-2">
               <div class="flex flex-col">
-                <Field name="phone" type="text" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
+                <Field name="phone" type="text"
                   autocomplete="off" v-model="user.phone"
-                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="0812345678, etc.." />
+                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm">
+                  <FloatLabel variant="in">
+                    <InputText v-model="user.phone" oninput="this.value = this.value.replace(/[^\d,]/g, '')" class="w-full" autocomplete="off" id="phone" />
+                    <label for="phone">Phone</label>
+                  </FloatLabel>  
+                </Field>
                 <ErrorMessage name="phone" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
           </div>
           <div v-if="activeTab === 2">
             <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">Password</label>
               <div class="flex flex-col relative">
                 <div class="flex flex-col relative">
                   <Field name="password" type="password" autocomplete="off" v-model="user.password"
-                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Insert Password.." />
-                  
-                  <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
-                    <i :class="['fa-regular text-lg sm:text-xl', show ? 'fa-eye' : 'fa-eye-slash']" @click="togglePassword"></i>
-                  </span>
+                  class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm">
+                  <FloatLabel variant="in">
+                    <Password class="w-full" input-class="w-full" v-model="user.password" toggle-mask input-id="password" :feedback="false" />
+                    <label for="password">Password</label>
+                  </FloatLabel>  
+                </Field>
                 </div>
                   <ErrorMessage name="password" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
             <div class="flex flex-col gap-2 mb-3">
-              <label class="text-sm sm:text-base font-medium">Password Confirmation</label>
               <div class="flex flex-col relative">
                 <div class="flex flex-col relative">
                   <Field name="passwordConfirmation" type="password" autocomplete="off"
                   v-model="user.passwordConfirmation"
                   class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-sm"
-                  placeholder="Insert Password Confirmation.." />
-
-                  <span class="absolute right-0 top-4 flex pr-3 cursor-pointer">
-                    <i :class="['fa-regular text-lg sm:text-xl', showConfirm ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
-                  </span>
+                  placeholder="Insert Password Confirmation..">
+                  <FloatLabel variant="in">
+                    <Password v-model="user.passwordConfirmation" class="w-full" input-class="w-full" toggle-mask input-id="password-confirmation" :feedback="false" />
+                    <label for="password-confirmation">Password Confirmation</label>
+                  </FloatLabel>  
+                </Field>
                 </div>
                 <ErrorMessage name="passwordConfirmation" class="text-red-500 text-xs sm:text-sm mt-1" />
               </div>
             </div>
           </div>
-          <div v-if="activeTab === 3">
+          <div v-show="activeTab === 3">
             <div class="flex flex-col gap-4 mb-5">
-              <div class="flex flex-col text-center">
-                <label class="text-2xl mb-2 font-semibold">Register Account</label>
-                <label class="text-sm">We are sending the OTP into your email</label>
-                <label for="" class="text-sm">to validate your registration</label>
+              <div class="text-center">
+                <h2 class="text-2xl font-semibold">Verify Your Email</h2>
+                <p class="text-sm">We've sent a verification code to your email</p>
               </div>
-              <div class="flex flex-row justify-center gap-4">
-                <input v-for="(i, index) in otpCode" :key="i" type="text" v-model="otpCode[index]"
-                @input="nextInput($event, index)" id="index"
-                class="text-center text-white bg-[#232323] rounded w-13 h-13 text-lg" maxlength="1">
+              <div class="flex flex-row justify-center gap-2">
+                <InputText v-for="(i, index) in otpCode" :key="index" type="text" v-model="otpCode[index]"
+                @input="nextInput($event, index)" @keydown="prevInput($event, index)" id="index"
+                class="text-center text-white bg-[#232323] rounded w-13 h-13 text-lg" maxlength="1" />
               </div>
             </div>
           </div>
-        </TransitionGroup>
-        <div :class="['flex w-full', activeTab === 2 ? 'justify-between' : 'justify-end']">
-          <button v-show="activeTab !== 3" type='button'
-            class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm"
-            @click="activeTab = activeTab === 1 ? 2 : 1">{{ activeTab === 1 ? 'Next' : 'Previous' }}
-          </button>
-          <button v-show="activeTab === 2" type="submit" @click="sendOtp" :disabled="isLoading || !user"
-            :class="isLoading ? 'flex p-2 justify-center' : 'block'"
-            class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm">
-            <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 24 24">
-              <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-            </svg>
-            <span v-if="!isLoading">Send OTP</span>
-          </button>
-          <button v-show="activeTab === 3" type="submit" @click="verifyOtp" :disabled="isLoading || !user || !otpCode"
-            :class="isLoading ? 'flex p-2 justify-center' : 'block'"
-            class="bg-cinema py-2.5 px-4 w-full sm:w-2/4 md:w-1/4 rounded-lg text-white font-semibold text-sm sm:text-sm">
-            <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 24 24">
-              <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-            </svg>
-            <span v-if="!isLoading">Register</span>
-          </button>
+        <div class="flex justify-between space-x-4">
+          <Button
+            v-if="activeTab > 1 && activeTab < 3"
+            label="Previous"
+            class="p-button-outlined w-1/3"
+            @click="activeTab--"
+          />
+          <Button
+            v-if="activeTab < 2"
+            label="Next"
+            class="p-button-outlined w-1/3 ml-auto"
+            @click="activeTab++"
+          />
+          <Button
+            v-if="activeTab === 2"
+            label="Send OTP"
+            class="p-button-outlined w-1/3"
+            :loading="isLoadingSendOtp"
+            @click="() => sendOtp()"
+          />
+          <Button
+            v-if="activeTab === 3"
+            label="Verify & Register"
+            class="p-button-outlined w-full"
+            :loading="isLoadingVerifyOtp"
+            @click="() => verifyOtp()"
+          />
         </div>
         <div class="flex w-full justify-center text-center sm:text-base">
-          <span>Already have an account? <router-link :to="{ name: 'sign-in' }" class="text-cinema">Login
-              Now</router-link></span>
+          <span>Already have an account? <router-link :to="{ name: 'sign-in' }" class="text-cinema font-medium">Sign in</router-link></span>
         </div>
       </div>
     </div>

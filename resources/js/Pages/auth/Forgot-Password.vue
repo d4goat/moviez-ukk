@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center min-h-screen w-full items-center">
-        <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center rounded-xl p-8">
+        <div class="w-full max-w-md lg:max-w-lg flex flex-col bg-border  justify-center rounded-xl p-8">
             <div class="flex justify-center mb-10">
                 <div class="bg-blue-500/20 p-3 rounded-full">
                     <Key v-if="activeTab === 1" class="text-blue-400 w-7 h-7" />
@@ -15,19 +15,14 @@
                     <Message size="small" severity="secondary" variant="simple">No worries, we'll send you the reset
                         instructions</Message>
                 </div>
-                <FloatLabel variant="on">
-                    <InputText id="email" class="w-full p-3" v-model="email" autocomplete="off" />
+                <FloatLabel variant="in">
+                    <IconField>
+                        <InputIcon class="pi pi-envelope" />
+                        <InputText id="email" class="w-full" v-model="email" autocomplete="off" />
+                    </IconField>
                     <label for="email">Email</label>
                 </FloatLabel>
-                <button type="submit" @click="() => forgotPassword()" :disable="isLoading"
-                    class="bg-cinema/80 py-2 w-1/3 sm:w-full rounded-lg text-white text-md sm:text-base"
-                    :class="isLoading ? 'flex p-2 justify-center' : 'block'">
-                    <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24">
-                        <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                    </svg>
-                    <span v-if="!isLoading">Send OTP</span>
-                </button>
+                <Button label="Send OTP" type="button" class="w-full" @click="() => forgotPassword()" variant="outlined" :loading="isLoading" />
                 <span class="text-center">Remember password? <router-link class="underline text-cinema"
                         to="/sign-in">Sign-In</router-link></span>
             </div>
@@ -38,48 +33,38 @@
                     </Message>
                 </div>
                 <div class="flex justify-center gap-4">
-                    <input v-for="(item, index) in otpCode" :key="item" v-model="otpCode[index]" type="text"
-                        @input="nextInput($event, index)" id="index"
-                        class="text-center text-white bg-[#232323] rounded h-10 w-10 text-lg mb-5" maxlength="1">
+                    <InputText v-for="(item, index) in otpCode" :key="index" v-model="otpCode[index]" type="text"
+                        @input="nextInput($event, index)" @keydown="prevInput($event, index)" id="index"
+                        class="text-center text-white  rounded h-10 w-10 text-lg mb-5" maxlength="1" />
                 </div>
-                <button type="submit" @click="() => verifyOtp()" :disable="isLoadingVerify"
-                    class="bg-cinema/80 py-2.5 w-1/3 sm:w-full  rounded-lg text-white text-md sm:text-base"
-                    :class="isLoadingVerify ? 'flex p-2 justify-center' : 'block'">
-                    <svg v-if="isLoadingVerify" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24">
-                        <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                    </svg>
-                    <span v-if="!isLoadingVerify">Verify OTP</span>
-                </button>
+                <Button label="Verify OTP" variant="outlined" class="w-full" @click="() => verifyOtp()" :loading="isLoadingVerify" />
             </div>
-            <div v-if="activeTab === 3" class="flex flex-col space-y-6">
+            <VForm v-if="activeTab === 3" :validation-schema="formSchema" class="flex flex-col space-y-6">
                 <div class="space-y-1 flex flex-col items-center">
                     <span class="text-2xl font-medium text-gray-200">Set New Password</span>
-                    <Message variant="simple" severity="secondary" size="small">Password at least must be 8 character
-                    </Message>
+                    <!-- <Message variant="simple" severity="secondary" size="small">Password at least must be 8 character
+                    </Message> -->
                 </div>
-                <div class="flex flex-col space-y-3">
-                    <Message variant="simple" severity="contrast">Password</Message>
-                    <el-input v-model="password" class="w-full" size="large" minlength="8" type="password"
-                        placeholder="Please input password" show-password />
+                <div>
+                    <Field name="password" v-model="password">
+                        <FloatLabel variant="in">
+                            <Password v-model="password" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password" />
+                            <label for="password">Password</label>
+                        </FloatLabel>
+                        <ErrorMessage name="password" class="text-red-500" />
+                    </Field>
                 </div>
-                <div class="flex flex-col space-y-3">
-                    <Message variant="simple" severity="contrast">Password Confirmation</Message>
-                    <el-input v-model="password_confirmation" class="w-full" size="large" minlength="8" type="password"
-                        placeholder="Please input password confirmation" show-password />
-                    <span v-if="password_confirmation && password_confirmation != password"
-                        class="text-red-500 text-sm">Password confirmation must be match</span>
+                <div>
+                    <Field name="password_confirmation" v-model="password_confirmation" class="flex flex-col space-y-3">
+                        <FloatLabel variant="in">
+                            <Password v-model="password_confirmation" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password_confirmation" />
+                            <label for="password_confirmation">Password Confirmation</label>
+                        </FloatLabel>
+                        <ErrorMessage name="password_confirmation" class="text-red-500" />
+                    </Field>
                 </div>
-                <button type="submit" @click="() => updatePassword()" :disable="isLoadingUpdate"
-                    class="bg-cinema/80 py-2.5 w-1/3 sm:w-full  rounded-lg text-white text-md sm:text-base"
-                    :class="isLoadingUpdate ? 'flex p-2 justify-center' : 'block'">
-                    <svg v-if="isLoadingUpdate" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24">
-                        <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                    </svg>
-                    <span v-if="!isLoadingUpdate">Update Password</span>
-                </button>
-            </div>
+                <Button label="Update Password" type="submit" @click="() => updatePassword()" :loading="isLoadingUpdate" class="w-full" variant="outlined" />
+            </VForm>
         </div>
     </div>
 </template>
@@ -90,13 +75,15 @@ import { useMutation } from '@tanstack/vue-query';
 import axios from '@/libs/axios';
 import { useRouter } from 'vue-router';
 import { useSetting } from '@/services';
-import InputText from 'primevue/inputtext';
-import FloatLabel from 'primevue/floatlabel';
-import Password from 'primevue/password';
-import Message from 'primevue/message';
 import { ElMessage } from 'element-plus';
 import { useDarkModeStore } from '@/stores/darkMode';
 import { Key, MailOpen, Lock, ArrowRight } from 'lucide-vue-next';
+import * as Yup from "yup"
+
+const formSchema = Yup.object().shape({
+    password: Yup.string().min(8, 'Password must be contain at least 8 character').required().label('Password'),
+    password_confirmation: Yup.string().oneOf([Yup.ref('password')], 'Password confirmation must be match').required().label('Password Confirmation'),
+})
 
 const darkMode = useDarkModeStore()
 const { data: setting = {} } = useSetting()
@@ -143,6 +130,13 @@ const nextInput = (event: Event, index: number) => {
     if (input.value.length === 1 && index !== otpCode.value.length - 1) {
         const nextInput = document.querySelectorAll<HTMLInputElement>('#index')[index + 1]
         if (nextInput) nextInput.focus()
+    }
+}
+
+const prevInput = (event: KeyboardEvent, index: number) => {
+    if(event.key === "Backspace" && index > 0 && !otpCode.value[index]) {
+      const prevInput = document.querySelectorAll("#index")[index - 1] as HTMLInputElement
+      if(prevInput) prevInput.focus()
     }
 }
 

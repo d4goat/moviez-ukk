@@ -9,10 +9,7 @@ import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import { useSetting } from '@/services';
 import { useMutation } from '@tanstack/vue-query';
-import FloatLabel from 'primevue/floatlabel';
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import Message from 'primevue/message';
+import { Mail } from 'lucide-vue-next';
 
 const formRef = ref()
 const user = ref<User>({} as User);
@@ -65,11 +62,10 @@ function togglePass(ev: MouseEvent) {
 <template>
   <VForm :validation-schema="formSchema" ref="formRef" id="form-login" @submit="login"
     class="flex justify-center items-center min-h-screen w-full p-4">
-    <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center rounded-xl space-y-6 p-6">
+    <div class="w-full max-w-md lg:max-w-lg flex flex-col justify-center bg-border shadow-lg rounded-2xl space-y-8 p-8">
       <div class="font-medium text-center mb-4 flex flex-col">
-        <span class="text-2xl sm:text-3xl">Login</span>
-        <i class="text-2xl sm:text-3xl text-cinema">{{ setting?.name }}</i>
-        <img :src="setting?.logo" alt="">
+        <h1 class="text-3xl text-gray-300 font-semibold tracking-tight sm:text-3xl">Welcome Back</h1>
+        <p>Please enter your details to sign in</p>
       </div>
       <!-- begin:form -->
       <div class="flex flex-col gap-6">
@@ -78,8 +74,11 @@ function togglePass(ev: MouseEvent) {
           <Field autocomplete="off"
             class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-base"
             name="email" type="email" placeholder="matix@cineplex.co, etc..." v-model="user.email">
-            <FloatLabel variant="on">
-              <InputText id="email" v-model="user.email" class="w-full" autocomplete="off" />
+            <FloatLabel variant="in">
+              <IconField>
+                <InputIcon class="pi pi-envelope" />
+                <InputText id="email" v-model="user.email" class="w-full" autocomplete="off" />
+              </IconField>
               <label for="email">Email</label>
             </FloatLabel>
           </Field>
@@ -91,30 +90,21 @@ function togglePass(ev: MouseEvent) {
           <Field autocomplete="off"
             class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-base"
             name="password" type="password" placeholder="Insert Password..." v-model="user.password">
-            <FloatLabel variant="on">
+            <FloatLabel variant="in">
               <Password v-model="user.password" :input-class="'w-full'" size="large" class="w-full" :feedback="false" toggle-mask input-id="password" />
               <label for="password">Password</label>
             </FloatLabel>
           </Field>
           <ErrorMessage class="text-red-500 text-sm" name="password" />
         </div>
-        <router-link to="/forgot-password" class="underline text-cinema w-fit"><span>Forgot
+        <router-link to="/forgot-password" class="underline text-cinema w-fit ml-auto"><span>Forgot
             Password?</span></router-link>
         <!-- end:input -->
         <div class="flex w-full justify-center mt-4">
-          <button type="submit" :disable="isLoading"
-            class="bg-cinema py-2.5 w-full sm:w-1/3 rounded-lg text-white text-md sm:text-base"
-            :class="isLoading ? 'flex p-2 justify-center' : 'block'">
-            <svg v-if="isLoading" class="animate-spin h-7 w-7 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 24 24">
-              <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-            </svg>
-            <span v-if="!isLoading">Login</span>
-          </button>
+         <Button type="submit" label="Sign in" class="w-full" variant="outlined" :loading="isLoading"  />
         </div>
         <div class="flex w-full justify-center text-center text-sm sm:text-base">
-          <span>Don't have an account yet? <router-link :to="{ name: 'sign-up' }" class="text-cinema"><br> Register
-              Now</router-link></span>
+          <span>Don't have an account yet? <router-link :to="{ name: 'sign-up' }" class="text-cinema font-medium">Create one now</router-link></span>
         </div>
       </div>
     </div>
