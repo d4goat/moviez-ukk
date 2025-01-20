@@ -29,7 +29,7 @@ const columns = [
         cell: (cell : any) => h('div', { class: 'flex gap-4' }, [
             h('button', 
             {
-                class: 'btn btn-sm btn-info',
+                class: 'btn btn-sm bg-purple-600 hover:bg-purple-700',
                 onClick: () => {
                     openForm.value = true,
                     selected.value = cell.getValue()
@@ -39,7 +39,7 @@ const columns = [
             ]),
             h('button', 
             {
-                class: 'btn btn-sm btn-danger',
+                class: 'btn btn-sm bg-red-600 hover:bg-red-700',
                 onClick: () => {
                     deleteGenre(`/master/genre/${cell.getValue()}`)
                 }

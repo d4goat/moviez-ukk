@@ -90,7 +90,7 @@ onMounted(()  => {
         <div class="card bg-dark-bg shadow-3 shadow-white text-bodydark1">
             <div class="card-header align-items-center flex justify-between my-3">
                 <h2> {{ selected ? 'Edit' : 'Tambah' }} Cinema </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700" @click="$emit('close')">
                     <i class="fa-solid fa-circle-xmark"></i> Batal
                 </button>
             </div>

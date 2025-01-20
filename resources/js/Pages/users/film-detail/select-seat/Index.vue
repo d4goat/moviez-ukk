@@ -163,7 +163,7 @@ const isBooked = (seat: Seat) => {
 const mySwal = Swal.mixin(
         {
             customClass: {
-                confirmButton: "btn btn-danger btn-md py-2 ml-3",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3",
                 cancelButton: "btn btn-secondary btn-md py-2 mr-3",
             },
             buttonsStyling: false,

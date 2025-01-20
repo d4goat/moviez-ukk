@@ -40,7 +40,7 @@ const columns = [
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
             h('button', 
             {
-                 class: 'btn btn-md btn-info',
+                 class: 'btn btn-md bg-purple-600 hover:bg-purple-700',
                  onClick: () => {
                     selected.value = cell.getValue()
                     openForm.value = true
@@ -50,7 +50,7 @@ const columns = [
             ]),
             h('button', 
             {
-                class: 'btn btn-md btn-danger',
+                class: 'btn btn-md bg-red-600 hover:bg-red-700',
                 onClick: () => deleteSeat(`/master/seat/${cell.getValue()}`)
             }, [
                 h('i', { class: 'la la-trash fs-2' })

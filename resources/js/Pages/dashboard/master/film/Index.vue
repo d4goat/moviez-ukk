@@ -63,21 +63,21 @@ const columns = [
             ]),
             h('button', 
                 {
-                    class: 'btn btn-sm btn-info',
+                    class: 'btn btn-sm bg-purple-600 hover:bg-purple-700',
                     onClick: () => {
                         selected.value = cell.getValue(),
                         openForm.value = true
                     }
                 }, [
-                    h('i', { class: 'la la-pencil fs-3' })
+                    h('i', { class: 'la la-pencil fs-4' })
                 ]
             ),
             h('button', 
                 {
-                    class: 'btn btn-sm btn-danger',
+                    class: 'btn btn-sm bg-red-600 hover:bg-red-700',
                     onClick: () => deleteFilm(`/master/film/${cell.getValue()}`)
                 },[
-                    h('i', { class: 'la la-trash fs-3' })   
+                    h('i', { class: 'la la-trash fs-4' })   
                 ]
             )
         ])

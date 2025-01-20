@@ -34,23 +34,23 @@ const columns = [
                 h(
                     "button", 
                     {
-                        class: "btn btn-sm bg-purple-400 hover:bg-purple-600",
+                        class: "btn btn-sm bg-purple-600 hover:bg-purple-700",
                         onClick: () => {
                             selected.value = cell.getValue()
                             openForm.value = true
                         },
                     },
-                    h("i", { class: "la la-pencil fs-2" })
+                    h("i", { class: "la la-pencil fs-4" })
                 ),
                 h(
                     "button",
                     {
-                        class: "btn btn-sm bg-red-400 hover:bg-red-600",
+                        class: "btn btn-sm bg-red-600 hover:bg-red-700",
                         onClick: () => {
                             deleteCinema(`/master/cinema/${cell.getValue()}`)
                         }
                     },
-                    h('i', { class: "la la-trash fs-2" })
+                    h('i', { class: "la la-trash fs-4" })
                 )
             ])
     })

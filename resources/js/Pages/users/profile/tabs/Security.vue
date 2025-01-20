@@ -6,55 +6,57 @@
         </div>
 
         <!-- Body -->
-        <div class="card-body flex flex-col space-y-6 my-3">
+        <div class="card-body flex flex-col gap-6 my-3">
             <!-- Input Begin -->
             <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label name="old_password" class="form-label font-medium">Old Password</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
-                        name="old_password" v-model="formData.old_password" placeholder="Insert old password"
-                        autocomplete="off" type="password" />
-                    <span class="absolute right-10 flex items-center pr-3 cursor-pointer">
-                        <i :class="['fa-regular text-lg sm:text-xl', showOld ? 'fa-eye' : 'fa-eye-slash']" @click="toggleOldPassword"></i>
-                    </span>
-                </div>
-                <ErrorMessage name="old_password" class="text-red-500 text-end" />
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
+                    name="old_password" v-model="formData.old_password" placeholder="Insert old password"
+                    autocomplete="off" type="password">
+                    <FloatLabel variant="in">
+                        <Password v-model="formData.old_password" :input-class="'w-full'"
+                            style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
+                            input-id="old_password" />
+                            <label for="old_password">Old Password</label>
+                    </FloatLabel>
+                </Field>
+                <ErrorMessage name="old_password" class="text-red-500" />
+            </div>
+            <!-- Input End -->
+            <!-- Input Begin -->
+            <div class="flex flex-col gap-2">
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
+                    name="password" v-model="formData.password" placeholder="Insert old password"
+                    autocomplete="off" type="password">
+                    <FloatLabel variant="in">
+                        <Password v-model="formData.password" :input-class="'w-full'"
+                            style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
+                            input-id="password" />
+                            <label for="password">Password</label>
+                    </FloatLabel>
+                </Field>
+                <ErrorMessage name="password" class="text-red-500" />
+            </div>
+            <!-- Input End -->
+            <!-- Input Begin -->
+            <div class="flex flex-col gap-2">
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
+                    name="password_confirmation" v-model="formData.password_confirmation" placeholder="Insert old password"
+                    autocomplete="off" type="password">
+                    <FloatLabel variant="in">
+                        <Password v-model="formData.password_confirmation" :input-class="'w-full'"
+                            style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
+                            input-id="password_confirmation" />
+                            <label for="password_confirmation">Password Confirmation</label>
+                    </FloatLabel>
+                </Field>
+                <ErrorMessage name="password_confirmation" class="text-red-500" />
             </div>
             <!-- Input End -->
 
-            <!-- Input Begin -->
-            <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label name="password" class="form-label font-medium">New Password</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
-                        name="password" v-model="formData.password" placeholder="Insert new password"
-                        autocomplete="off" type="password" />
-                    <span class="absolute right-10 flex items-center pr-3 cursor-pointer">
-                        <i :class="['fa-regular text-lg sm:text-xl', show ? 'fa-eye' : 'fa-eye-slash']" @click="togglePassword"></i>
-                    </span>
-                </div>
-                <ErrorMessage name="password" class="text-red-500 text-end" />
-            </div>
-            <!-- Input End -->
-
-            <!-- Input Begin -->
-            <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label name="password_confrimation" class="form-label font-medium">New Password Confirmation</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
-                        name="password_confirmation" v-model="formData.password_confirmation" placeholder="Insert new password confrimation"
-                        autocomplete="off" type="password_confirmation" />
-                    <span class="absolute right-10 flex items-center pr-3 cursor-pointer">
-                        <i :class="['fa-regular text-lg sm:text-xl', showConfirm ? 'fa-eye' : 'fa-eye-slash']" @click="togglePasswordConfirmation"></i>
-                    </span>
-                </div>
-                <ErrorMessage name="password_confirmation" class="text-red-500 text-end" />
-            </div>
-            <!-- Input End -->
         </div>
-        
+
         <div class="card-footer flex py-3 border-t border-gray-700">
-            <button type="submit" class="btn btn-md text-white bg-cyan-600 hover:bg-cyan-700 shadow-3 shadow-cyan-300/60 ms-auto">Save Password</button>
+           <Button type="submit" label="Save Password" class="ml-auto" variant="outlined" />
         </div>
     </VForm>
 </template>
@@ -97,37 +99,13 @@ export default defineComponent({
                 toast.error(err.response.data.message)
                 console.error(err.response.data.message)
             }).finally(() => unblock(document.getElementById('form-security')))
-        },
-        toggleOldPassword() {
-            const oldPasswordField = document.querySelector(["input[name='old_password']"]);
-            if (oldPasswordField.type === 'password') {
-                oldPasswordField.type = 'text';
-                this.showOld = true
-            } else {
-                oldPasswordField.type = 'password';
-                this.showOld = false
-            }
-        },
-        togglePassword() {
-            const passwordField = document.querySelector(["input[name='password']"]);
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                this.show = true
-            } else {
-                passwordField.type = 'password';
-                this.show = false
-            }
-        },
-        togglePasswordConfirmation() {
-            const passwordField = document.querySelector(["input[name='password_confirmation']"]);
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                this.showConfirm = true
-            } else {
-                passwordField.type = 'password';
-                this.showConfirm = false
-            }
-        },
+        }
     }
 })
 </script>
+
+<style scoped>
+:deep(.p-password input) {
+  background-color: #19191c !important;
+}
+</style>

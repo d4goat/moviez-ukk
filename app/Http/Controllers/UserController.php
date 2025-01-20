@@ -163,6 +163,12 @@ class UserController extends Controller
             'message' => 'Password Lama tidak valid'
           ], 400);
         }
+
+        if(Hash::check($data['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Password baru tidak boleh sama dengan password lama'
+            ], 500);
+        }
     
         $user->password = bcrypt($data['password']);
         if ($user->update()) {

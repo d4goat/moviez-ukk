@@ -46,17 +46,6 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
     }
   }
 )
-
-function togglePass(ev: MouseEvent) {
-  const type = document.querySelector<HTMLInputElement>(["input[name=password]"]);
-  if (type && type.type === 'password') {
-    type.type = 'text';
-    showPw.value = true
-  } else if (type) {
-    type.type = 'password';
-    showPw.value = false
-  }
-}
 </script>
 
 <template>
@@ -75,10 +64,7 @@ function togglePass(ev: MouseEvent) {
             class="w-full bg-[#232323] border-none focus:border-2 focus:border-[#7C7C7C] focus:ring-2 focus:ring-[#7C7C7C] rounded-xl p-3 text-sm sm:text-base"
             name="email" type="email" placeholder="matix@cineplex.co, etc..." v-model="user.email">
             <FloatLabel variant="in">
-              <IconField>
-                <InputIcon class="pi pi-envelope" />
                 <InputText id="email" v-model="user.email" class="w-full" autocomplete="off" />
-              </IconField>
               <label for="email">Email</label>
             </FloatLabel>
           </Field>

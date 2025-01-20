@@ -11,7 +11,7 @@ export const useDelete = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn btn-danger btn-md py-2 ml-3",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3",
                 cancelButton: "btn btn-secondary btn-md py-2 mr-3",
             },
             buttonsStyling: false,
@@ -55,7 +55,7 @@ export const useDownloadWord = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn btn-danger btn-sm",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
                 cancelButton: "btn btn-secondary btn-sm",
             },
             buttonsStyling: false,
@@ -186,7 +186,7 @@ export const useDownloadPdf = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn btn-danger btn-sm",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
                 cancelButton: "btn btn-secondary btn-sm",
             },
             buttonsStyling: false,
@@ -317,7 +317,7 @@ export const useDownloadExcel = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn btn-danger btn-sm",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
                 cancelButton: "btn btn-secondary btn-sm",
             },
             buttonsStyling: false,
@@ -452,7 +452,7 @@ export const useSwalConfirm = (
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn btn-danger btn-md py-2 ml-3",
+                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3",
                 cancelButton: "btn btn-secondary btn-md py-2 mr-3",
             },
             buttonsStyling: false,

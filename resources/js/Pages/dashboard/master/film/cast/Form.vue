@@ -4,7 +4,7 @@
             <!-- Header -->
              <div class="card-header flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Film Cast </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700" @click="$emit('close')">
                     <i class="fa-solid fa-circle-xmark"></i> Cancel
                 </button>
              </div>

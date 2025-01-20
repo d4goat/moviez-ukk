@@ -3,7 +3,7 @@
         <div class="card bg-component shadow-3 shadow-white text-bodydark1">
             <div class="card-header flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Tambah' }} Film </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700" @click="$emit('close')">
                     <i class="fa-solid fa-circle-xmark"></i> Batal
                 </button>
             </div>

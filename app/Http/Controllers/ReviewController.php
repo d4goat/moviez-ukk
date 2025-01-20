@@ -19,7 +19,7 @@ class ReviewController extends Controller
         $page = $request->page ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Review::when($request->search, function (Builder $query, string $search){
+        $data = Review::with(['user', 'film'])->when($request->search, function (Builder $query, string $search){
             $query->whereHas('user', function (Builder $query) use ($search){
                 $query->where('name', 'LIKE', "%$search%");
             });

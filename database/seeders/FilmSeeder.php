@@ -100,8 +100,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Gareth Dunnet-Alcocer',
                 'poster' => '/images/posters/blue_beetle.jpg',
                 'trailer' => 'https://youtu.be/vS3_72Gb-bI?si=a-oRiJM2TFD0RY4p',
-                'release_date' => '2025-01-18',
-                'end_date' => '2025-02-18',
+                'release_date' => '2025-02-18',
+                'end_date' => '2025-03-18',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],            
             

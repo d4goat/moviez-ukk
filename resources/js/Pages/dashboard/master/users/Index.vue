@@ -39,7 +39,7 @@ const columns = [
                 h(
                     "button",
                     {
-                        class: "btn btn-sm btn-icon btn-danger",
+                        class: "btn btn-sm btn-icon bg-red-600 hover:bg-red-700",
                         onClick: () =>
                             deleteUser(`/master/users/${cell.getValue()}`),
                     },
