@@ -160,24 +160,24 @@ class UserController extends Controller
         $user = User::find(auth()->user()->id);
         if (!Hash::check($data['old_password'], $user->password)) {
           return response()->json([
-            'message' => 'Password Lama tidak valid'
+            'message' => 'Old Password is invalid'
           ], 400);
         }
 
         if(Hash::check($data['password'], $user->password)) {
             return response()->json([
-                'message' => 'Password baru tidak boleh sama dengan password lama'
+                'message' => "New Password can't same with the Old Password"
             ], 500);
         }
     
         $user->password = bcrypt($data['password']);
         if ($user->update()) {
           return response()->json([
-            'message' => 'Berhasil memperbarui password'
+            'message' => 'Success update password'
           ]);
         } else {
           return response()->json([
-            'message' => 'Gagal memperbarui password'
+            'message' => 'failed update password'
           ]);
         }
       }

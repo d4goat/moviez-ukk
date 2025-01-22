@@ -22,8 +22,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
                 'trailer' => 'https://www.youtube.com/embed/uYPbbksJxIg?si=6-E90-ZiZAwMvmkP',
-                'release_date' => '2024-12-21',
-                'end_date' => '2025-01-21',
+                'release_date' => '2024-01-21',
+                'end_date' => '2025-02-21',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -35,8 +35,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
                 'trailer' => 'https://www.youtube.com/embed/EP34Yoxs3FQ?si=--K-tOgiX0QX20gx',
-                'release_date' => '2024-12-30',
-                'end_date' => '2024-01-30',
+                'release_date' => '2024-01-28',
+                'end_date' => '2024-02-28',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
             ],
             [
@@ -48,8 +48,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Megan McDonnell',
                 'poster' => '/images/posters/the_marvels.jpeg',
                 'trailer' => 'https://www.youtube.com/embed/wS_qbDztgVY?si=HgxfbFYptEuKULjX',
-                'release_date' => '2024-12-10',
-                'end_date' => '2025-01-10',
+                'release_date' => '2024-01-10',
+                'end_date' => '2025-02-10',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],
             [
@@ -61,8 +61,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Jon Spaihts, Denis Villeneuve',
                 'poster' => '/images/posters/dune_part_two.jpg',
                 'trailer' => 'https://www.youtube.com/embed/Way9Dexny3w?si=H52r4mBA9u2n8-3z',
-                'release_date' => '2024-12-03',
-                'end_date' => '2025-01-03',
+                'release_date' => '2024-01-03',
+                'end_date' => '2025-02-03',
                 'genre_film_id' => [6, 9, 1], // Sci-Fi, Adventure, Drama
             ],
             [
@@ -74,8 +74,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Gareth Edwards, Chris Weitz',
                 'poster' => '/images/posters/the_creator.jpg',
                 'trailer' => 'https://www.youtube.com/embed/ex3C1-5Dhb8?si=JF3SEgTEI1NtFWWC',
-                'release_date' => '2024-12-25',
-                'end_date' => '2025-01-25',
+                'release_date' => '2024-01-25',
+                'end_date' => '2025-02-25',
                 'genre_film_id' => [2, 6], // Action, Sci-Fi
             ],
             [

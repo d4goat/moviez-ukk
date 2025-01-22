@@ -7,9 +7,9 @@
         <div class="card-body flex flex-col space-y-6 my-3">
             <div class="flex flex-col gap-2">
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="name"
-                    v-model="user.name" placeholder="Insert Name" autocomplete="off" type="text">
+                    v-model="users.name" placeholder="Insert Name" autocomplete="off" type="text">
                     <FloatLabel variant="in">
-                        <InputText v-model="user.name" style="background-color: #19191c;" class="w-full" id="name" />
+                        <InputText v-model="users.name" style="background-color: #19191c;" class="w-full" id="name" />
                         <label for="name">Name</label>
                     </FloatLabel>
                 </Field>
@@ -17,9 +17,9 @@
             </div>
             <div class="flex flex-col gap-2">
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="email"
-                    v-model="user.email" placeholder="Insert Email" autocomplete="off" type="text">
+                    v-model="users.email" placeholder="Insert Email" autocomplete="off" type="text">
                     <FloatLabel variant="in">
-                        <InputText v-model="user.email" style="background-color: #19191c;" class="w-full" id="email" />
+                        <InputText v-model="users.email" style="background-color: #19191c;" class="w-full" id="email" />
                         <label for="email">Email</label>
                     </FloatLabel>
                 </Field>
@@ -27,16 +27,16 @@
             </div>
             <div class="flex flex-col gap-2">
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="phone"
-                    v-model="user.phone" placeholder="Insert Phone" autocomplete="off" type="text">
+                    v-model="users.phone" placeholder="Insert Phone" autocomplete="off" type="text">
                     <FloatLabel variant="in">
-                        <InputText v-model="user.phone" style="background-color: #19191c;" class="w-full" id="phone" />
+                        <InputText v-model="users.phone" style="background-color: #19191c;" class="w-full" id="phone" />
                         <label for="phone">Phone</label>
                     </FloatLabel>
                 </Field>
                 <ErrorMessage name="phone" class="text-red-500" />
             </div>
             <div class="">
-                <Field name="photo" class="card" v-model="user.photo" type="file">
+                <Field name="photo" class="card" v-model="users.photo" type="file">
                     <FileUpload accept="image/*" choose-label="Choose" severity="secondary" class="p-button-outlined"
                         ref="filupload" @select="upload">
                         <template #empty>
@@ -58,7 +58,7 @@ import { ref, defineComponent } from 'vue';
 import * as yup from 'yup';
 import { useMutation } from '@tanstack/vue-query';
 import { block, unblock } from '@/libs/utils';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore, User } from '@/stores/auth';
 import { toast } from 'vue3-toastify';
 import axios from '@/libs/axios';
 import FileUpload from "primevue/fileupload"
@@ -70,6 +70,7 @@ export default defineComponent({
     setup() {
 
         const { user, setAuth } = useAuthStore()
+        const users = ref<User>({} as User)
         const photo = ref<Array<File | String>>(user.photo ? [user.photo] : [])
         const fileTypes = ref(['image/jpg', 'image/png', 'image/jpeg']);
         const fileupload = ref()
@@ -92,6 +93,7 @@ export default defineComponent({
             fileTypes,
             formSchema,
             user,
+            users,
             setAuth,
             fileupload, upload
         }
@@ -100,9 +102,9 @@ export default defineComponent({
         submit() {
             const data = new FormData()
             
-            data.append('name', this.user.name)
-            data.append('email', this.user.email)
-            data.append('phone', this.user.phone)  
+            data.append('name', this.users.name)
+            data.append('email', this.users.email)
+            data.append('phone', this.users.phone)  
 
             console.log(this.photo)
 
@@ -120,6 +122,10 @@ export default defineComponent({
                 console.error(err.response.data.message)
             }).finally(() => unblock(document.getElementById('form-user') as HTMLFormElement))
         }
+    },
+    mounted() {
+        this.users = this.user
+        console.log(this.users)
     }
 })
 </script>

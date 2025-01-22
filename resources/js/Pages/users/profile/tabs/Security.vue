@@ -64,39 +64,33 @@
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import axios from '@/libs/axios';
-import { toast } from 'vue3-toastify';
 import { block, unblock } from '@/libs/utils';
 import * as yup from 'yup';
+import { ElMessage } from 'element-plus';
 
 export default defineComponent({
     setup() {
         const formData = ref<any>({})
         const formSchema = yup.object().shape({
-            old_password: yup.string().required('Field password lama harus diisi'),
-            password: yup.string().min(8, 'Password minimal harus diisi 8 karakter').required('Field password baru harus diisi'),
-            password_confirmation: yup.string().oneOf([yup.ref('password')], 'Passwords harus sesuai').required('Field konfirmasi password harus diisi'),
+            old_password: yup.string().required('Old Password field must be filled'),
+            password: yup.string().min(8, 'Password must be contain at least 8 character').required('New Password field must be filled'),
+            password_confirmation: yup.string().oneOf([yup.ref('password')], 'Password is not match').required('Confirmation Password field must be filled'),
         })
-
-        const showOld = ref(false)
-        const show = ref(false)
-        const showConfirm = ref(false)
 
         return {
             formData,
             formSchema,
-            showOld,
-            show,
-            showConfirm
         }
     },
     methods: {
         submit() {
             block(document.getElementById('form-security'))
             axios.post('/master/users/update/keamanan', this.formData).then((res: any) => {
-                toast.success(res.data.message)
+                ElMessage.success(res.data.message)
                 this.formData = {}
+                window.location.reload()
             }).catch((err: any) => {
-                toast.error(err.response.data.message)
+                ElMessage.error(err.response.data.message)
                 console.error(err.response.data.message)
             }).finally(() => unblock(document.getElementById('form-security')))
         }

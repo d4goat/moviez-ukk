@@ -39,7 +39,7 @@
           leave-to="opacity-0 translate-y-8" class="space-y-5">
           <!-- Top Rating Movies Section -->
           <div class="flex flex-col mx-4 space-y-4">
-            <div class="lg:text-3xl lg:m-3 font-semibold">Top Rating Movie</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center"
                 :style="{
@@ -60,7 +60,7 @@
 
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
-            <div class="lg:text-3xl lg:m-3 font-semibold">Now Showing</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
-            <div class="lg:text-3xl lg:m-3 font-semibold">Coming Soon Movie</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
@@ -171,10 +171,12 @@ import vue3starRatings from "vue3-star-ratings";
 import { useSetting } from '@/services';
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import AOS from 'aos'
+import Chip from 'primevue/chip';
 
 defineComponent({
   components: {
-    vue3starRatings
+    vue3starRatings,
+    Chip
   }
 })
 
