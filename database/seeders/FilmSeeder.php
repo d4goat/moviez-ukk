@@ -22,8 +22,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
                 'trailer' => 'https://youtu.be/uYPbbksJxIg?si=jYPJB6SEcISSGNeo',
-                'release_date' => '2024-12-21',
-                'end_date' => '2025-01-21',
+                'release_date' => '2025-01-28',
+                'end_date' => '2025-02-28',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -35,8 +35,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
                 'trailer' => 'https://youtu.be/EP34Yoxs3FQ?si=e0a8v8ecSogGB2W3',
-                'release_date' => '2024-12-30',
-                'end_date' => '2024-01-30',
+                'release_date' => '2025-01-30',
+                'end_date' => '2025-03-01',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
             ],
             [
@@ -48,8 +48,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Megan McDonnell',
                 'poster' => '/images/posters/the_marvels.jpeg',
                 'trailer' => 'https://youtu.be/wS_qbDztgVY?si=c3p8n9ubY7RcYOWc',
-                'release_date' => '2024-12-10',
-                'end_date' => '2025-01-10',
+                'release_date' => '2025-03-10',
+                'end_date' => '2025-04-10',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],
             [
@@ -61,8 +61,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Jon Spaihts, Denis Villeneuve',
                 'poster' => '/images/posters/dune_part_two.jpg',
                 'trailer' => 'https://youtu.be/Way9Dexny3w?si=ifUaZCHhkKJ0rB8F',
-                'release_date' => '2024-12-03',
-                'end_date' => '2025-01-03',
+                'release_date' => '2025-03-03',
+                'end_date' => '2025-04-03',
                 'genre_film_id' => [6, 9, 1], // Sci-Fi, Adventure, Drama
             ],
             [
@@ -74,8 +74,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Gareth Edwards, Chris Weitz',
                 'poster' => '/images/posters/the_creator.jpg',
                 'trailer' => 'https://youtu.be/ex3C1-5Dhb8?si=SckU6hlmbSXt1cKo',
-                'release_date' => '2024-12-25',
-                'end_date' => '2025-01-25',
+                'release_date' => '2025-03-25',
+                'end_date' => '2025-04-25',
                 'genre_film_id' => [2, 6], // Action, Sci-Fi
             ],
             [
@@ -87,8 +87,8 @@ class FilmSeeder extends Seeder
                 'writer' => 'Steven Spielberg, Tony Kushner',
                 'poster' => '/images/posters/the_fabelmans.jpg',
                 'trailer' => 'https://www.youtube.com/watch?v=D1G2iLSzOe8',
-                'release_date' => '2025-01-15',
-                'end_date' => '2025-02-15',
+                'release_date' => '2025-03-15',
+                'end_date' => '2025-04-15',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -100,11 +100,11 @@ class FilmSeeder extends Seeder
                 'writer' => 'Gareth Dunnet-Alcocer',
                 'poster' => '/images/posters/blue_beetle.jpg',
                 'trailer' => 'https://youtu.be/vS3_72Gb-bI?si=a-oRiJM2TFD0RY4p',
-                'release_date' => '2025-01-18',
-                'end_date' => '2025-02-18',
+                'release_date' => '2025-03-18',
+                'end_date' => '2025-04-18',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
-            ],            
-            
+            ],
+
         ];
 
         foreach ($films as $filmData) {
