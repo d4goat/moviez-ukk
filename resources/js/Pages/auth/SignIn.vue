@@ -4,12 +4,12 @@ import axios from '@/libs/axios';
 import { User } from '@/types';
 import { block, unblock } from '@/libs/utils';
 import * as Yup from "yup";
-import { toast } from 'vue3-toastify';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 import { useSetting } from '@/services';
 import { useMutation } from '@tanstack/vue-query';
 import { Mail } from 'lucide-vue-next';
+import { ElMessage } from 'element-plus';
 
 const formRef = ref()
 const user = ref<User>({} as User);
@@ -29,7 +29,7 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
       block(document.getElementById('form-login'));
     },
     onSuccess: async (res: any) => {
-      toast.success("Login berhasil!");
+      ElMessage.success("Login berhasil!");
       store.setAuth(res.data.user, res.data.token);
       if (res.data.user.role.id === 1) {
         router.push('/admin/dashboard')
@@ -38,7 +38,7 @@ const { mutate: login, isLoading, isSuccess } = useMutation(
       }
     },
     onError: (err: any) => {
-      toast.error(err.response.data.message);
+      ElMessage.error(err.response.data.message);
     },
     onSettled: () => {
       unblock(document.getElementById('form-login'));

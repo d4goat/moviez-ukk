@@ -3,8 +3,8 @@
         <div class="card bg-component text-bodydark1">
             <div class="card-header flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Promotion </h2>
-                <button type='button' class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa fa-solid fa-circle-xmark"></i> Batal
+                <button type='button' class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="fa la la-times-circle"></i> Batal
                 </button>
             </div>
 

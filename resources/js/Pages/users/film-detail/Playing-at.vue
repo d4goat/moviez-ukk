@@ -35,7 +35,7 @@
                                 <span class="text-lg font-medium"> {{ cinema.name }} </span>
                                 <div class="flex flex-row gap-4">
                                     <template v-for="show in cinema.show_times" :key="show.uuid">
-                                        <button  type="button" @click="openModal(cinema.name, show)"
+                                        <button  :disabled="moment(show.end_time, 'HH:mm').isBefore(timeNow)" type="button" @click="openModal(cinema.name, show)"
                                             class=" bg-gray-900 rounded-xl py-2 px-3 text-white font-medium"> {{ show.start_time }}
                                         </button>
                                     </template>
@@ -49,6 +49,9 @@
                     </div>
                 </TransitionChild>
             </TransitionRoot>
+            <div v-if="isFetching" class="animate-pulse">
+                <div v-for="item in 3" :key="item" class="w-full mb-3 h-16 rounded-lg bg-dropdown"></div>
+            </div>
             <TransitionRoot appear :show="isOpen" as="template">
                 <Dialog as="div" @close="isOpen = false" class="relative z-10">
                     <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0"

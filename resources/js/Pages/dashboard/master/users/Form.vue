@@ -1,10 +1,10 @@
 <template>
     <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" id="form-user">
-        <div class="card bg-component text-bodydark1">
-            <div class="card-header align-items-center flex justify-between my-3">
+        <div class="card bg-dark-bg text-bodydark1">
+            <div class="card-header align-items-center border-b border-white flex justify-between my-3">
                 <h2> {{ selected ? 'Edit' : 'Tambah' }} User </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Batal
                 </button>
             </div>
             <div class="card-body">
@@ -129,7 +129,7 @@ function submit (){
     formData.append('name', user.value.name);
     formData.append('email', user.value.email);
     formData.append('phone', user.value.phone);
-    
+
     if(user.value?.password){
         formData.append('password', user.value.password)
         formData.append('password_confirmation', user.value.passwordConfirmation)

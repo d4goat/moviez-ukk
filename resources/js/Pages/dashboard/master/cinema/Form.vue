@@ -27,11 +27,11 @@ const formSchema = Yup.object().shape({
 
 function getEdit(){
     block(document.getElementById('form-cinema'))
-    
+
     axios.get(`/master/cinema/${props.selected}`)
     .then(({ data } : any) => {
         cinema.value = data.data
-    }).catch((error: any) => 
+    }).catch((error: any) =>
         toast.error(error.response.data.message)
     ).finally(() => unblock(document.getElementById('form-cinema')))
 }
@@ -71,7 +71,7 @@ function submit (){
 }
 
 const city = useCities()
-const cities = computed(() => 
+const cities = computed(() =>
     city.data.value?.map((item: any) => ({
         id: item.code,
         text: item.name
@@ -87,18 +87,18 @@ onMounted(()  => {
 
 <template>
     <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" id="form-cinema">
-        <div class="card bg-dark-bg shadow-3 shadow-white text-bodydark1">
-            <div class="card-header align-items-center flex justify-between my-3">
+        <div class="card bg-dark-bg text-bodydark1">
+            <div class="card-header align-items-center flex border-b border-gray-400 justify-between my-3">
                 <h2> {{ selected ? 'Edit' : 'Tambah' }} Cinema </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Batal
                 </button>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">Name</label>
-                        <Field 
+                        <Field
                             autocomplete="off"
                             name="name"
                             type="text"
@@ -127,7 +127,7 @@ onMounted(()  => {
                     </div>
                     <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">Address</label>
-                        <Field 
+                        <Field
                             autocomplete="off"
                             name="address"
                             type="text"

@@ -4,8 +4,8 @@
             <!-- Header -->
             <div class="card-header flex justify-between items-center my-2">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Show Time</h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i>
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700" @click="$emit('close')">
+                    <i class="la la-times-circle"></i>
                     Cancel
                 </button>
             </div>
@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-3 flex flex-col mb-3">
                         <label class="form-label">Film</label>
-                        <Field name='film_id' v-model="show_time.film_id" 
+                        <Field name='film_id' v-model="show_time.film_id"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
                             <select2 :options="films" v-model="show_time.film_id" class="form-select-solid" placeholder="Select Film" ></select2>
                         </Field>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-3 flex flex-col mb-3">
                         <label class="form-label">Studio</label>
-                        <Field name='studio_id' v-model="show_time.studio_id" 
+                        <Field name='studio_id' v-model="show_time.studio_id"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
                             <select2 :options="studios" v-model="show_time.studio_id" class="form-select-solid" placeholder="Select Film" ></select2>
                         </Field>
@@ -128,7 +128,7 @@ function submit (){
 }
 
 const film = useFilm()
-const films = computed(() => 
+const films = computed(() =>
     film.data.value?.map((item: any) => ({
         id: item.id,
         text: item.title
@@ -136,7 +136,7 @@ const films = computed(() =>
 )
 
 const studio = useStudio()
-const studios = computed(() => 
+const studios = computed(() =>
     studio.data.value?.map((item: any) => ({
         id: item.id,
         text: item.name

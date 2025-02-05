@@ -58,7 +58,7 @@ const isSubmenuOpen = (menuItem: any) => {
 
 <template>
     <aside
-    class="absolute left-0 top-0 z-9999 flex h-screen w-60 flex-col overflow-y-hidden bg-sidebar border-r-2 border-gray-600 duration-300 ease-linear dark:bg-dark-bg lg:static lg:translate-x-0"
+    class="absolute left-0 top-0 z-9999 flex h-screen w-60 flex-col overflow-y-hidden bg-sidebar border-r-2 border-gray-600 duration-300 ease-linear dark:bg-sidebar lg:static lg:translate-x-0"
     :class="{
       'translate-x-0': sidebarStore.isSidebarOpen,
       '-translate-x-full': !sidebarStore.isSidebarOpen
@@ -101,8 +101,8 @@ const isSubmenuOpen = (menuItem: any) => {
                   <router-link
                     v-if="menuItem.route"
                     :to="menuItem.route"
-                    class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                  :class="{ 'bg-graydark dark:bg-meta-4': $route.path === menuItem.route }"
+                    class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-black/90 dark:hover:bg-black/90"
+                  :class="{ 'bg-black/90 dark:bg-black/90': $route.path === menuItem.route }"
                   >
                     <span>{{ translate(menuItem.heading) }}</span>
                   </router-link>

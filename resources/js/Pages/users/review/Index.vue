@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="mt-4 border-t flex justify-end border-gray-500 pt-3">
-                    <button @click="review" :disabled="status == 'loading'" class="bg-cinema hover:bg-cinema/70 transition-colors font-medium text-sm p-2.5 rounded-lg">Send Review</button>
+                    <Button @click="review" :loading="status == 'loading'" variant="outlined" >Send Review</button>
                 </div>
             </div>
         </div>

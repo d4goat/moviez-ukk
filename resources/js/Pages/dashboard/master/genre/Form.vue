@@ -1,10 +1,10 @@
 <template>
     <VForm :validation-schema="formSchema" ref="formRef" @submit="submit" id="form-genre">
-        <div class="card bg-component text-bodydark1">
-            <div class="card-header flex justify-between items-center my-3">
+        <div class="card bg-dark-bg text-bodydark1">
+            <div class="card-header border-b border-gray-400 flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Genre </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Batal
                 </button>
             </div>
 
@@ -13,7 +13,7 @@
                     <div class="mb-3 col-md-6 flex flex-col">
                         <label class="form-label">Name</label>
                         <Field autocomplete="off" name="name" type="text" placeholder="Masukkan Genre Name"
-                        class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" 
+                        class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"
                         v-model="genre.name" />
                     <ErrorMessage name="name" class="text-red-500" />
                 </div>

@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn-info {
-    background-color: #883FFF;
-    border-color: #883FFF;
-}
-
 html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown),
 body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.modal-open) {
 	overflow-y: initial !important;

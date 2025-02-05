@@ -39,10 +39,10 @@ const columns = [
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
                 h('button', {
-                    class: 'btn btn-md btn-danger',
+                    class: 'btn btn-md bg-red-600 hover:bg-red-700',
                     onClick: () => deleteReview(`/master/review/${cell.getValue()}`)
                 }, [
-                    h('i', { class: 'fa fa-trash fs-2' })
+                    h('i', { class: 'fa fa-trash text-sm' })
                 ])
             ])
     }) 
@@ -78,6 +78,7 @@ onMounted(() => refetch())
                     id="table-reviews"
                     url="/master/review"
                     :columns="columns"
+                    :payload="{uuid_film: $route.params.uuid}"
                 ></paginate>
             </div>
         </div>

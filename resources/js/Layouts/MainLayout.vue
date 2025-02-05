@@ -46,14 +46,14 @@ export default {
                 <router-link to="/" class="text-2xl text-cinema font-semibold">{{ setting?.name }}</router-link>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <router-link v-if="!auth" to="/sign-in"
-                        class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 hidden">
+                        class="md:flex items-center gap-2 border-[2.5px] rounded-xl py-1 px-2 hidden">
                         <i class="fa-regular fa-circle-user"></i>
-                        <span class="mb-1">Login</span>
+                        <span class="mb-1 font-medium">Login</span>
                     </router-link>
-                    <router-link v-else class="md:flex items-center gap-2 border-[2.3px] rounded-xl py-1 px-2 hidden"
+                    <router-link v-else class="md:flex items-center gap-2 border-[2.5px] rounded-xl py-1 px-2 hidden"
                         to="/landing/profile">
                         <i class="fa-regular fa-circle-user"></i>
-                        <span class="mb-1">Account</span>
+                        <span class="mb-1 font-medium">Account</span>
                     </router-link>
                     <button @click="toggle" type="button"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -137,7 +137,7 @@ export default {
                     Experience movies like never before. Your perfect cinema partner.
                   </span>
                 </div>
-        
+
                 <!-- Navigation Links -->
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   <router-link to="/" class="hover:text-cinema transition">Home</router-link>
@@ -148,17 +148,17 @@ export default {
                   <router-link to="/contact" class="hover:text-cinema transition">Contact Us</router-link>
                 </div>
               </div>
-        
+
               <!-- Divider -->
               <div class="my-6 border-t border-gray-700"></div>
-        
+
               <!-- Lower Section -->
               <div class="flex flex-wrap justify-between items-center gap-4 lg:gap-0">
                 <!-- Copyright -->
                 <span class="text-sm lg:text-base text-gray-400">
                   © 2024 Matix Cineplex. All Rights Reserved.
                 </span>
-        
+
                 <!-- Social Media Links -->
                 <div class="flex space-x-4">
                   <a href="https://facebook.com" target="_blank" class="hover:text-cinema transition">

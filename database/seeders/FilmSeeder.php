@@ -21,9 +21,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Christopher Nolan',
                 'writer' => 'Christopher Nolan',
                 'poster' => '/images/posters/Oppenheimer.jpg',
-                'trailer' => 'https://youtu.be/uYPbbksJxIg?si=jYPJB6SEcISSGNeo',
-                'release_date' => '2025-01-28',
-                'end_date' => '2025-02-28',
+                'trailer' => 'https://www.youtube.com/embed/uYPbbksJxIg?si=6-E90-ZiZAwMvmkP',
+                'release_date' => '2024-02-21',
+                'end_date' => '2025-03-21',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -34,9 +34,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Martin Scorsese',
                 'writer' => 'Eric Roth, Martin Scorsese',
                 'poster' => '/images/posters/Killers_of_the_Flower_Moon.jpg',
-                'trailer' => 'https://youtu.be/EP34Yoxs3FQ?si=e0a8v8ecSogGB2W3',
-                'release_date' => '2025-01-30',
-                'end_date' => '2025-03-01',
+                'trailer' => 'https://www.youtube.com/embed/EP34Yoxs3FQ?si=--K-tOgiX0QX20gx',
+                'release_date' => '2024-03-28',
+                'end_date' => '2024-04-28',
                 'genre_film_id' => [1, 12, 17], // Drama, Crime, Mystery
             ],
             [
@@ -47,9 +47,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Nia DaCosta',
                 'writer' => 'Megan McDonnell',
                 'poster' => '/images/posters/the_marvels.jpeg',
-                'trailer' => 'https://youtu.be/wS_qbDztgVY?si=c3p8n9ubY7RcYOWc',
-                'release_date' => '2025-03-10',
-                'end_date' => '2025-04-10',
+                'trailer' => 'https://www.youtube.com/embed/wS_qbDztgVY?si=HgxfbFYptEuKULjX',
+                'release_date' => '2024-02-10',
+                'end_date' => '2025-03-10',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],
             [
@@ -60,9 +60,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Denis Villeneuve',
                 'writer' => 'Jon Spaihts, Denis Villeneuve',
                 'poster' => '/images/posters/dune_part_two.jpg',
-                'trailer' => 'https://youtu.be/Way9Dexny3w?si=ifUaZCHhkKJ0rB8F',
-                'release_date' => '2025-03-03',
-                'end_date' => '2025-04-03',
+                'trailer' => 'https://www.youtube.com/embed/Way9Dexny3w?si=H52r4mBA9u2n8-3z',
+                'release_date' => '2024-02-03',
+                'end_date' => '2025-03-03',
                 'genre_film_id' => [6, 9, 1], // Sci-Fi, Adventure, Drama
             ],
             [
@@ -73,9 +73,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Gareth Edwards',
                 'writer' => 'Gareth Edwards, Chris Weitz',
                 'poster' => '/images/posters/the_creator.jpg',
-                'trailer' => 'https://youtu.be/ex3C1-5Dhb8?si=SckU6hlmbSXt1cKo',
-                'release_date' => '2025-03-25',
-                'end_date' => '2025-04-25',
+                'trailer' => 'https://www.youtube.com/embed/ex3C1-5Dhb8?si=JF3SEgTEI1NtFWWC',
+                'release_date' => '2024-02-25',
+                'end_date' => '2025-03-25',
                 'genre_film_id' => [2, 6], // Action, Sci-Fi
             ],
             [
@@ -86,9 +86,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Steven Spielberg',
                 'writer' => 'Steven Spielberg, Tony Kushner',
                 'poster' => '/images/posters/the_fabelmans.jpg',
-                'trailer' => 'https://www.youtube.com/watch?v=D1G2iLSzOe8',
-                'release_date' => '2025-03-15',
-                'end_date' => '2025-04-15',
+                'trailer' => 'https://www.youtube.com/embed/D1G2iLSzOe8?si=_J3OxR8Bhxu8QeCF',
+                'release_date' => '2025-02-15',
+                'end_date' => '2025-03-15',
                 'genre_film_id' => [1, 13], // Drama, Biographical
             ],
             [
@@ -99,9 +99,9 @@ class FilmSeeder extends Seeder
                 'director' => 'Angel Manuel Soto',
                 'writer' => 'Gareth Dunnet-Alcocer',
                 'poster' => '/images/posters/blue_beetle.jpg',
-                'trailer' => 'https://youtu.be/vS3_72Gb-bI?si=a-oRiJM2TFD0RY4p',
-                'release_date' => '2025-03-18',
-                'end_date' => '2025-04-18',
+                'trailer' => 'https://www.youtube.com/embed/vS3_72Gb-bI?si=IHF6Lo1dH-rrx3Ck',
+                'release_date' => '2025-02-18',
+                'end_date' => '2025-03-18',
                 'genre_film_id' => [2, 6, 9], // Action, Sci-Fi, Adventure
             ],
 

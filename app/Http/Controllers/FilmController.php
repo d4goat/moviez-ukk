@@ -27,7 +27,7 @@ class FilmController extends Controller
         $data = Film::when($request->search, function (Builder $query, string $search){
             $query->where('title', 'LIKE', "%$search%");
         })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
-        
+
         return response()->json($data);
     }
 
@@ -39,7 +39,7 @@ class FilmController extends Controller
         $validate = $request->validated();
 
         if($request->hasFile('poster')){
-            $validate['poster'] = $request->file('poster')->store('poster', 'public');
+            $validate['poster'] = '/storage/' . $request->file('poster')->store('poster', 'public');
         }
 
         $film = Film::create($validate);
@@ -91,7 +91,7 @@ class FilmController extends Controller
         $data = Film::where('release_date', '<=', Carbon::now())
         ->where('end_date', '>=', Carbon::now())
         ->get();
-        
+
         return response()->json([
             'success' => true,
             'message' => 'successfully fetch data',
@@ -101,7 +101,7 @@ class FilmController extends Controller
 
      public function comingSoon(Request $request){
         $data = Film::where('release_date', '>', Carbon::now())->get();
-        
+
         if(!$data)return response()->json([]);
 
         return response()->json([
@@ -125,7 +125,7 @@ class FilmController extends Controller
             if($film->poster){
                 Storage::delete('public/'.$film->poster);
             }
-            $validate['poster'] = $request->file('poster')->store('image', 'public');
+            $validate['poster'] = '/storage/' . $request->file('poster')->store('image', 'public');
         } else {
             if($film->poster){
                 Storage::delete('public/'.$film->poster);
@@ -137,7 +137,7 @@ class FilmController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Sukses mengubah data film',
-                'data' => $film 
+                'data' => $film
             ]);
         } else {
             return response()->json([

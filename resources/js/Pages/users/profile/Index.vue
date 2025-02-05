@@ -77,7 +77,7 @@ const logout = () => {
         cancelButtonText: "Cancel",
         reverseButtons: true,
         customClass: {
-            confirmButton: "btn btn-danger btn-md py-2 ml-3 font-medium",
+            confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3 font-medium",
             cancelButton: "btn btn-secondary btn-md py-2 mr-3 font-medium",
         },
     }).then((result: Object) => {

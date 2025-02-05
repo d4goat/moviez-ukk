@@ -39,7 +39,7 @@
           leave-to="opacity-0 translate-y-8" class="space-y-5">
           <!-- Top Rating Movies Section -->
           <div class="flex flex-col mx-4 space-y-4">
-            <div class="lg:text-3xl m-3 text-xs font-semibold">Top Rating Movie</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center"
                 :style="{
@@ -48,19 +48,19 @@
                 }">
                 <router-link :to="`/landing/film-detail/${reviews.uuid}`">
                   <img :src="reviews?.poster"
-                    class="h-64 w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
+                    class="h-48 w-36 lg:h-64 lg:w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
                     alt="">
                 </router-link>
-                <vue3starRatings :star-size="22" v-model="reviews.reviews_avg_rating" :disable-click="true"
+                <vue3starRatings :star-size="20" v-model="reviews.reviews_avg_rating" :disable-click="true"
                   star-color="#ffea06" inactive-color="#bdbdbd" />
-                <span class="text-center">{{ reviews.title }}</span>
+                <span class="text-center lg:text-base text-sm">{{ reviews.title }}</span>
               </div>
             </div>
           </div>
 
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
-            <div class="lg:text-3xl m-3 text-xs font-semibold">Now Showing</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
@@ -68,22 +68,22 @@
               }" data-aos="fade-up" data-aos-mirror="true" data-aos-anchor-placement="top-center">
                 <router-link :to="`/landing/film-detail/${films.uuid}`">
                   <img :src="films?.poster"
-                    class="h-64 w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
+                    class="h-48 w-36 lg:h-64 lg:w-45 object-cover hover:scale-105 transition ease-in-out duration-300 rounded-2xl"
                     alt="">
                 </router-link>
-                <div class="text-center">{{ films.title }}</div>
+                <div class="text-center lg:text-base text-sm">{{ films.title }}</div>
               </div>
             </div>
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
-            <div class="lg:text-3xl m-3 text-xs font-semibold">Coming Soon Movie</div>
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
                 transitionDelay: `${200 + (index * 100)}ms`
               }" data-aos="fade-up" data-aos-mirror="true" data-aos-anchor-placement="top-center">
-                <img :src="films?.poster" class="h-64 w-45 object-cover rounded-2xl" alt="">
-                <span class="text-center">{{ films.title }}</span>
+                <img :src="films?.poster" class="h-48 w-36 lg:h-64 lg:w-45 hover:scale-105 transition ease-in-out duration-300 object-cover rounded-2xl" alt="">
+                <span class="text-center lg:text-base text-sm">{{ films.title }}</span>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
         <!-- BODY
           <div class="flex w-full">
               <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 3" :key="i">
-                  <div class="h-64 w-45 bg-zinc-700 rounded-2xl"></div>
+                  <div class="h-48 w-36 lg:h-64 lg:w-45 bg-zinc-700 rounded-2xl"></div>
                   <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
               </div>
           </div> -->
@@ -128,7 +128,7 @@
         <!-- BODY -->
         <div class="flex w-full">
           <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 3" :key="i">
-            <div class="h-64 w-45 bg-zinc-800 rounded-2xl"></div>
+            <div class="h-48 w-36 lg:h-64 lg:w-45 bg-zinc-800 rounded-2xl"></div>
             <div class="h-2.5 w-24 bg-zinc-700 rounded-2xl"></div>
             <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
           </div>
@@ -141,7 +141,7 @@
         <!-- BODY -->
         <div class="flex w-full">
           <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 4" :key="i">
-            <div class="h-64 w-45 bg-zinc-800 rounded-2xl"></div>
+            <div class="h-48 w-36 lg:h-64 lg:w-45 bg-zinc-800 rounded-2xl"></div>
             <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
           </div>
         </div>
@@ -153,7 +153,7 @@
         <!-- BODY -->
         <div class="flex w-full">
           <div class="flex flex-col gap-2 items-center mr-5" v-for="i in 4" :key="i">
-            <div class="h-64 w-45 bg-zinc-800 rounded-2xl"></div>
+            <div class="h-48 w-36 lg:h-64 lg:w-45 bg-zinc-800 rounded-2xl"></div>
             <div class="h-2.5 w-36 bg-zinc-700 rounded-2xl"></div>
           </div>
         </div>
@@ -171,10 +171,12 @@ import vue3starRatings from "vue3-star-ratings";
 import { useSetting } from '@/services';
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import AOS from 'aos'
+import Chip from 'primevue/chip';
 
 defineComponent({
   components: {
-    vue3starRatings
+    vue3starRatings,
+    Chip
   }
 })
 
@@ -201,8 +203,8 @@ onMounted(() => {
   refetchSetting()
   AOS.init({
     duration: 100,
-    once: false,
-    mirror: true,
+    once: true,
+    mirror: false,
     anchorPlacement: 'top-center',
   })
 })

@@ -38,7 +38,7 @@ const columns = [
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
             h('button', {
-                class: 'btn btn-sm btn-info',
+                class: 'btn btn-sm bg-purple-600 hover:bg-purple-700',
                 onClick: () => {
                     selected.value = cell.getValue()
                     openForm.value = true
@@ -47,7 +47,7 @@ const columns = [
                 h('i', { class: 'la la-pencil fs-2' })
             ]),
             h('button', {
-                class: 'btn btn-sm btn-danger',
+                class: 'btn btn-sm bg-red-600 hover:bg-red-700',
                 onClick: () => deleteCast(`/master/film-cast/${cell.getValue()}`)
             }, [
                 h('i', { class: 'las la-trash fs-2' })
@@ -70,7 +70,7 @@ onMounted(() => refetch())
 
 <template>
     <main class="border-b-[1px] border-body pb-3">
-        <Form :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
+        <Form :parentId="data.id" :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
 
         <div class="w-full h-full flex flex-col rounded-xl space-y-4">
             <div class="border-b-[1px] border-body flex justify-between items-center p-4">

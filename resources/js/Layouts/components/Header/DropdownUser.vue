@@ -25,7 +25,7 @@ const logOut = () => {
         buttonsStyling: false,
         customClass: {
           confirmButton: 'btn font-medium btn-primary',
-          cancelButton: 'btn font-medium btn-danger',
+          cancelButton: 'btn font-medium bg-red-600 hover:bg-red-700',
         }
     }).then((result: any) => {
         if (result.isConfirmed) {

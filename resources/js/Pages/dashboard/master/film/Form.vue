@@ -1,10 +1,10 @@
 <template>
     <VForm @submit="submit" :validation-schema="formSchema" ref="formRef" id="form-film">
-        <div class="card bg-component shadow-3 shadow-white text-bodydark1">
-            <div class="card-header flex justify-between items-center my-3">
+        <div class="card bg-dark-bg text-bodydark1">
+            <div class="card-header flex justify-between border-b border-white items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Tambah' }} Film </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Batal
                 </button>
             </div>
             <div class="card-body">
@@ -82,7 +82,7 @@
                     </div>
                     <!-- End:Input -->
 
-                    
+
                     <!-- Begin:Input -->
                     <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Trailer</label>
@@ -96,14 +96,14 @@
                     <div class="flex flex-col mb-3">
                         <label class="form-label">Film Genre</label>
                         <div class="space-x-2">
-                            <label 
-                                v-for="genre in genres" 
-                                :key="genre.id" 
+                            <label
+                                v-for="genre in genres"
+                                :key="genre.id"
                                 :for="'genre_' + genre.id"
-                                class="" 
+                                class=""
                                 id="genres"
                             >
-                                <input 
+                                <input
                                     type="checkbox"
                                     :id="'genre_' + genre.id"
                                     :value="genre.id"
@@ -143,6 +143,7 @@ import axios from '@/libs/axios';
 import { toast } from 'vue3-toastify';
 import { unblock, block } from '@/libs/utils';
 import { useGenre } from '@/services';
+import { ElMessage } from 'element-plus';
 
 const props = defineProps({
     selected: {
@@ -223,19 +224,19 @@ function submit() {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
-    }).then(() => {
-        toast.success('Success create data film')
+    }).then((res: any) => {
+        ElMessage.success(res.data.message)
         formRef.value.resetForm()
         emit('close')
         emit('refresh')
     }).catch((error: any) => {
-        toast.error(error.response.data.message)
+        ElMessage.error(error.response.data.message)
         console.error(error.response.data.message)
     }).finally(() => unblock(document.getElementById('form-film')))
 }
 
 const film_genre = useGenre()
-const genres = computed(() => 
+const genres = computed(() =>
     film_genre.data.value?.map((item: any) => ({
         id: item.id,
         text: item.name

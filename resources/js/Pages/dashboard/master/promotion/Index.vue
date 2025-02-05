@@ -34,7 +34,7 @@ const columns = [
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
             h('button', {
-                class: 'btn btn-sm btn-info',
+                class: 'btn btn-sm bg-purple-700 hover:bg-purple-800 text-white',
                 onClick: () => {
                     openForm.value = true
                     selected.value = cell.getValue()
@@ -43,7 +43,7 @@ const columns = [
                 h('i', { class: 'la la-pencil fs-2' })
             ]),
             h('button', {
-                class: 'btn btn-sm btn-danger',
+                class: 'btn btn-sm bg-red-700 hover:bg-red-800 text-white',
                 onClick: () => deletePromotion(`/master/promotion/${cell.getValue()}`)
             }, [
                 h('i', { class: 'las la-trash fs-2' })

@@ -1,11 +1,11 @@
 <template>
     <VForm :validation-schema="formSchema" ref="formRef" @submit="submit" id="form-cast">
-        <div class="card bg-component text-bodydark">
+        <div class="card bg-dark-bg text-bodydark">
             <!-- Header -->
              <div class="card-header flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Film Cast </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Cancel
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Cancel
                 </button>
              </div>
 
@@ -14,16 +14,16 @@
                 <div class="row">
                     <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Cast Name</label>
-                        <Field name="cast_name" v-model="cast.cast_name" autocomplete="off" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert Cast Name" />
+                        <Field name="cast_name" v-model="cast.cast_name" autocomplete="off" class="bg-[#242424] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert Cast Name" />
                         <ErrorMessage name="cast_name" class="text-red-500" />
                     </div>
-                    <div class="col-md-6 flex flex-col mb-3">
+                    <!-- <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Film</label>
-                        <Field name="film_id" v-model="cast.film_id" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
-                            <select2 class="form-select-solid" placeholder="Select FIlm" :options="films" v-model="cast.film_id" ></select2>
+                        <Field name="film_id" v-model="cast.film_id" class="bg-[#232323] border-none focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
+                            <select2 class="form-select-solid" disabled placeholder="Select FIlm" :options="films" v-model="cast.film_id" ></select2>
                         </Field>
                         <ErrorMessage name="film_id" class="text-red-500" />
-                    </div>
+                    </div> -->
                 </div>
               </div>
 
@@ -48,16 +48,22 @@ const props = defineProps({
     selected: {
         type: String,
         default: null
+    },
+    parentId: {
+        type: Number,
+        default: null
     }
 })
 
 const emit = defineEmits(['close', 'refresh'])
 
-const cast = ref<FilmCast>({} as FilmCast)
+const cast = ref<FilmCast>({
+    film_id: props.parentId
+} as FilmCast)
 
 const formSchema = Yup.object().shape({
     cast_name: Yup.string().required('Name cannot be empty'),
-    film_id: Yup.string().required('Film cannot be empty'),
+    // film_id: Yup.string().required('Film cannot be empty'),
 })
 
 const formRef = ref()
@@ -106,7 +112,7 @@ function submit(){
 }
 
 const film = useFilm()
-const films = computed(() => 
+const films = computed(() =>
     film.data.value?.map((item: any) => ({
         id: item.id,
         text: item.title
@@ -115,7 +121,7 @@ const films = computed(() =>
 
 onMounted(() => {
     if(props.selected){
-       getEdit() 
+       getEdit()
     }
 })
 </script>

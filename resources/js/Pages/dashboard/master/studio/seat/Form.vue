@@ -4,8 +4,8 @@
             <!-- Header -->
             <div class="card-header flex justify-between items-center my-3">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Seat </h2>
-                <button type="button" @click="$emit('close')" class="btn btn-md btn-danger">
-                    <i class="fa-solid fa-circle-xmark"></i> Cancel
+                <button type="button" @click="$emit('close')" class="btn btn-md bg-red-600 hover:bg-red-700">
+                    <i class="la la-times-circle"></i> Cancel
                 </button>
             </div>
 
@@ -101,7 +101,7 @@ function submit () {
 }
 
 const studio = useStudio()
-const studios = computed(() => 
+const studios = computed(() =>
     studio.data.value?.map((item: any) => ({
         id: item.id,
         text: item.name

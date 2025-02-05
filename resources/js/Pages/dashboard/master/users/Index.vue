@@ -28,7 +28,7 @@ const columns = [
                 h(
                     "button",
                     {
-                        class: "btn btn-sm bg-purple-400 hover:bg-purple-600",
+                        class: "btn btn-sm bg-purple-700 hover:bg-purple-800 text-white",
                         onClick: () => {
                             selected.value = cell.getValue();
                             openForm.value = true;
@@ -39,7 +39,7 @@ const columns = [
                 h(
                     "button",
                     {
-                        class: "btn btn-sm btn-icon btn-danger",
+                        class: "btn btn-sm btn-icon bg-red-700 hover:bg-red-800 text-white",
                         onClick: () =>
                             deleteUser(`/master/users/${cell.getValue()}`),
                     },
@@ -67,11 +67,11 @@ watch(openForm, (val) => {
         @refresh="refresh"
         />
 
-        <div class="w-full h-full flex-col rounded-lg space-y-4"> 
+        <div class="w-full h-full flex-col rounded-lg space-y-4">
             <div class="border-b-[1px] border-body flex justify-between items-center p-4">
                 <h2>Users List</h2>
-                <button 
-                    type="button" 
+                <button
+                    type="button"
                     class="bg-blue-600 text-bodydark1 py-2 px-4 rounded hover:bg-blue-700"
                     v-if="!openForm"
                     @click="openForm = true"
@@ -79,9 +79,9 @@ watch(openForm, (val) => {
                 Add
                 <i class="fa-solid fa-plus"></i>
                 </button>
-            </div>   
+            </div>
             <div class="w-full h-full py-2 px-4">
-                <paginate 
+                <paginate
                     ref="paginateRef"
                     id="table-user"
                     url="/master/users"

@@ -49,7 +49,7 @@ const columns = [
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-4' }, [
             h('button', {
-                class: 'btn btn-md btn-danger',
+                class: 'btn btn-md bg-red-700 hover:bg-red-800 text-white',
                 onClick: () => deleteBooking(`/master/booking/${cell.getValue()}`)
             }, [
                 h('i', { class: 'la la-trash fs-2' })

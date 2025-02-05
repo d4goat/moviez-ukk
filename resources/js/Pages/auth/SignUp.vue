@@ -111,9 +111,13 @@ const prevInput = (event: KeyboardEvent, index: number) => {
     class="w-full h-full min-h-screen flex justify-center items-center p-4">
     <div class="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center bg-border p-8 rounded-xl space-y-8">
       <!-- begin:title -->
-      <div v-if="activeTab !== 3" class="font-medium text-center flex flex-col mb-3">
-        <h1 class="text-3xl font-semibold tracking-tight">Create Account</h1>
-        <p class="text-xl">Welcome to <i class="text-cinema">{{ setting?.name }}</i></p>
+      <div v-if="activeTab == 3" class="text-center">
+        <h2 class="text-2xl font-semibold">Verify Your Email</h2>
+        <p class="text-sm">We've sent a verification code to your email</p>
+      </div>
+      <div v-else class="font-medium text-center flex flex-col mb-3">
+        <h1 class="text-2xl font-semibold tracking-tight">Create Account</h1>
+        <p class="text-lg">Welcome to <i class="text-cinema">{{ setting?.name }}</i></p>
       </div>
       <Steps class="mb-3" :model="steps" :active-step="activeTab - 1" />
       <!-- end:title -->
@@ -189,12 +193,8 @@ const prevInput = (event: KeyboardEvent, index: number) => {
               </div>
             </div>
           </div>
-          <div v-show="activeTab === 3">
+          <div v-if="activeTab === 3">
             <div class="flex flex-col gap-4 mb-5">
-              <div class="text-center">
-                <h2 class="text-2xl font-semibold">Verify Your Email</h2>
-                <p class="text-sm">We've sent a verification code to your email</p>
-              </div>
               <div class="flex flex-row justify-center gap-2">
                 <InputText v-for="(i, index) in otpCode" :key="index" type="text" v-model="otpCode[index]"
                 @input="nextInput($event, index)" @keydown="prevInput($event, index)" id="index"

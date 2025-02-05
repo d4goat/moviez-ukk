@@ -37,7 +37,7 @@ const columns = [
     column.accessor('uuid', {
         header: 'Action',
         cell: (cell: any) => h('div', { class: 'flex gap-2' }, [
-            h('button', 
+            h('button',
             {
                 class: 'btn btn-sm btn-warning flex items-center',
                 onClick: () => router.push({name: 'master.film.review', params: { uuid: cell.getValue() }})
@@ -45,7 +45,7 @@ const columns = [
                 h('i', { class: 'fa-regular fa-star fs-5' }),
                 h('span', { class: 'ml-2' }, 'Review')
             ]),
-            h('button', 
+            h('button',
             {
                 class: 'btn btn-sm btn-success flex items-center',
                 onClick: () => router.push({name: 'master.film.cast', params: { uuid: cell.getValue() }})
@@ -53,7 +53,7 @@ const columns = [
                 h('i', { class: 'la la-users fs-3' }),
                 h('span', { class: 'ml-2' }, 'Cast')
             ]),
-            h('button', 
+            h('button',
             {
                 class: 'btn btn-sm btn-primary flex items-center',
                 onClick: () => router.push({name: 'master.film.show-time', params: { uuid_film: cell.getValue(), uuid_studio: 0 }})
@@ -61,23 +61,23 @@ const columns = [
                 h('i', { class: 'la la-clock fs-3' }),
                 h('span', { class: 'ml-2' }, 'Showtime')
             ]),
-            h('button', 
+            h('button',
                 {
-                    class: 'btn btn-sm btn-info',
+                    class: 'btn btn-sm bg-purple-700 hover:bg-purple-800 text-white',
                     onClick: () => {
                         selected.value = cell.getValue(),
                         openForm.value = true
                     }
                 }, [
-                    h('i', { class: 'la la-pencil fs-3' })
+                    h('i', { class: 'la la-pencil fs-4' })
                 ]
             ),
-            h('button', 
+            h('button',
                 {
-                    class: 'btn btn-sm btn-danger',
+                    class: 'btn btn-sm bg-red-700 hover:bg-red-800 text-white',
                     onClick: () => deleteFilm(`/master/film/${cell.getValue()}`)
                 },[
-                    h('i', { class: 'la la-trash fs-3' })   
+                    h('i', { class: 'la la-trash fs-4' })
                 ]
             )
         ])
@@ -98,21 +98,21 @@ watch(openForm, (val: any) => {
     <div class="border-b-[1px] border-body pb-3">
         <Form :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
 
-        <div class="w-full h-full flex-col rounded-lg space-y-4"> 
+        <div class="w-full h-full flex-col rounded-lg space-y-4">
             <div class="border-b-[1px] border-body flex justify-between items-center p-4">
                 <h2 class="text-xl">Films List</h2>
-                <button 
-                    type="button" 
+                <button
+                    type="button"
                     class="bg-blue-600 text-bodydark1 py-2 px-4 rounded hover:bg-blue-700"
                     v-if="!openForm"
-                    @click="openForm = true"    
+                    @click="openForm = true"
                 >
                 Add
                 <i class="fa-solid fa-plus"></i>
                 </button>
-            </div>   
+            </div>
             <div class="w-full h-full py-2 px-4">
-                <paginate 
+                <paginate
                     ref="paginateRef"
                     id="table-films"
                     url="/master/film"

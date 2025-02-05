@@ -5,46 +5,50 @@
             <span class="text-sm text-gray-300">Update Profile</span>
         </div>
         <div class="card-body flex flex-col space-y-6 my-3">
-            <div class="form-group flex space-x-3 justify-between">
-                <label name="photo" class="form-label font-medium">Photo Profile</label>
-                <div class="col-md-9">
-                    <Field name="photo"
-                        class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-[11px]"
-                        v-model="user.photo" type="file">
-                        <file-upload :files="photo" :accepted-file-types="fileTypes"
-                            v-on:updatefiles="(file) => (photo = file)"></file-upload>
-                    </Field>
-                </div>
-                <ErrorMessage name="photo" class="text-red-500" />
-            </div>
             <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label name="name" class="form-label font-medium">Nama</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="name"
-                    v-model="user.name" placeholder="Masukkan nama anda" autocomplete="off" type="text" />
-                </div>
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="name"
+                    v-model="users.name" placeholder="Insert Name" autocomplete="off" type="text">
+                    <FloatLabel variant="in">
+                        <InputText v-model="users.name" style="background-color: #19191c;" class="w-full" id="name" />
+                        <label for="name">Name</label>
+                    </FloatLabel>
+                </Field>
                 <ErrorMessage name="name" class="text-red-500" />
             </div>
             <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label name="email" class="form-label font-medium">Email</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="email"
-                    v-model="user.email" placeholder="Masukkan email anda" autocomplete="off" type="text" />
-                </div>
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="email"
+                    v-model="users.email" placeholder="Insert Email" autocomplete="off" type="text">
+                    <FloatLabel variant="in">
+                        <InputText v-model="users.email" style="background-color: #19191c;" class="w-full" id="email" />
+                        <label for="email">Email</label>
+                    </FloatLabel>
+                </Field>
                 <ErrorMessage name="email" class="text-red-500" />
             </div>
             <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <label for="phone" name="phone" class="form-label font-medium">No Telepon</label>
-                    <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="phone"
-                    v-model="user.phone" oninput="this.value = this.value.replace(/[^\d,]/g, '')"
-                    placeholder="Masukkan phone anda" autocomplete="off" type="text" />
-                </div>
+                <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]" name="phone"
+                    v-model="users.phone" placeholder="Insert Phone" autocomplete="off" type="text">
+                    <FloatLabel variant="in">
+                        <InputText v-model="users.phone" style="background-color: #19191c;" class="w-full" id="phone" />
+                        <label for="phone">Phone</label>
+                    </FloatLabel>
+                </Field>
                 <ErrorMessage name="phone" class="text-red-500" />
+            </div>
+            <div class="">
+                <Field name="photo" class="card" v-model="users.photo" type="file">
+                    <FileUpload accept="image/*" choose-label="Choose" severity="secondary" class="p-button-outlined"
+                        ref="filupload" @select="upload">
+                        <template #empty>
+                            <span>Drag and drop files to here to upload</span>
+                        </template>
+                    </FileUpload>
+                </Field>
+                <ErrorMessage name="photo" class="text-red-500" />
             </div>
         </div>
         <div class="card-footer flex pt-3 border-t border-gray-700">
-            <button type="submit" class="btn btn-md text-white bg-cyan-600 hover:bg-cyan-700 shadow-3 shadow-cyan-300/60 ms-auto">Save Profile</button>
+            <Button type="submit" label="Save Profile" class="ml-auto" variant="outlined" />
         </div>
     </VForm>
 </template>
@@ -54,37 +58,58 @@ import { ref, defineComponent } from 'vue';
 import * as yup from 'yup';
 import { useMutation } from '@tanstack/vue-query';
 import { block, unblock } from '@/libs/utils';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore, User } from '@/stores/auth';
 import { toast } from 'vue3-toastify';
 import axios from '@/libs/axios';
+import FileUpload from "primevue/fileupload"
 
 export default defineComponent({
+    components: {
+        FileUpload
+    },
     setup() {
 
         const { user, setAuth } = useAuthStore()
+        const users = ref<User>({} as User)
         const photo = ref<Array<File | String>>(user.photo ? [user.photo] : [])
         const fileTypes = ref(['image/jpg', 'image/png', 'image/jpeg']);
+        const fileupload = ref()
+
+        const upload = (event: any) => {
+            console.log(event.files)
+            if (event.files && event.files[0]) {
+                photo.value = event.files[0];
+            }
+        }
 
         const formSchema = yup.object().shape({
             name: yup.string().required('Field nama harus diisi'),
             email: yup.string().email('Invalid Email').required('Field email harus diisi'),
             phone: yup.string().matches(/^08[0-9]\d{8,11}$/, 'Invalid Phone Number').required('Field nomor telepon harus diisi'),
         })
-        
+
         return {
             photo,
             fileTypes,
             formSchema,
             user,
-            setAuth
+            users,
+            setAuth,
+            fileupload, upload
         }
     },
     methods: {
-        submit(){
-            const data = new FormData(document.getElementById('form-user') as HTMLFormElement)
+        submit() {
+            const data = new FormData()
+            
+            data.append('name', this.users.name)
+            data.append('email', this.users.email)
+            data.append('phone', this.users.phone)  
 
-            if(this.photo.length > 0){
-                data.append('photo', this.photo[0].file)
+            console.log(this.photo)
+
+            if (this.photo) {
+                data.append('photo', this.photo)
             }
 
             block(document.getElementById('form-user') as HTMLFormElement)
@@ -97,6 +122,10 @@ export default defineComponent({
                 console.error(err.response.data.message)
             }).finally(() => unblock(document.getElementById('form-user') as HTMLFormElement))
         }
+    },
+    mounted() {
+        this.users = this.user
+        console.log(this.users)
     }
 })
 </script>

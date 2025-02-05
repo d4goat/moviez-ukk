@@ -1,11 +1,11 @@
 <template>
     <VForm :validation-schema="formSchema" ref="formRef" @submit="submit" id="form-studio">
-        <div class="card bg-component text-bodydark1">
+        <div class="card bg-dark-bg text-bodydark1">
             <!-- Header -->
-            <div class="card-header flex justify-between items-center my-3">
+            <div class="card-header flex justify-between items-center my-3 border-b border-white">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Studio </h2>
-                <button type="button" class="btn btn-md btn-danger" @click="$emit('close')">
-                    <i class="fa-solid fa-circle-xmark"></i> Batal
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
+                    <i class="la la-times-circle"></i> Batal
                 </button>
             </div>
 
@@ -84,7 +84,7 @@ function submit(){
 
     formData.append('name', studio.value.name)
     formData.append('cinema_id', studio.value.cinema_id)
-    
+
     if(props.selected){
         formData.append('_method', 'PUT')
     }
@@ -109,12 +109,12 @@ function submit(){
 }
 
 const cinema = useCinema()
-const cinemas = computed(() => 
+const cinemas = computed(() =>
     cinema.data.value?.map((item: any) => ({
         id: item.id,
         text: item.name
     }))
-) 
+)
 
 onMounted(() => {
     if(props.selected) edit()

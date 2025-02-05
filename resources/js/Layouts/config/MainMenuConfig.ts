@@ -38,11 +38,11 @@ const MainMenuConfig: Array<MenuItem> = [
                         name: "master-genre",
                         route: "/admin/dashboard/master/genre",
                     },
-                    {
-                        heading: "Promotion",
-                        name: "master-promotion",
-                        route: "/admin/dashboard/master/promotion",
-                    },
+                    // {
+                    //     heading: "Promotion",
+                    //     name: "master-promotion",
+                    //     route: "/admin/dashboard/master/promotion",
+                    // },
                     {
                         heading: "Studio",
                         name: "master-studio",
