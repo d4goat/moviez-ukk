@@ -13,7 +13,7 @@
           <div v-for="seat in seatGroup" :key="seat.uuid" :class="[
             'rounded-xl h-8 w-8 cursor-pointer',
             {
-              'bg-orange-500': isSelected(seat),
+              'bg-yellow-500': isSelected(seat),
               'bg-gray-200': !isSelected(seat) && canSelectMore,
               'bg-gray-400 cursor-not-allowed': !isSelected(seat) && !canSelectMore,
               'bg-red-700': isBooked(seat)
@@ -43,13 +43,13 @@
           </div>
           <div class="flex">
             <span>Chosen seats: </span>
-            <span v-for="seat in selected" :key="seat.uuid" class="ml-2">
-              {{ seat.seat_number }}
+            <span class="ml-2">
+              {{ selected.map(item => item.seat_number).join(', ') }}
             </span>
           </div>
         </div>
         <button type="button" :disabled="selected.length == 0" @click="booked"
-          class="bg-gray-600 rounded-lg mt-3 w-1/3 py-1 grid grid-cols-2 divide-x">
+          class="bg-gray-600 rounded-lg mt-3 w-1/3 py-1 grid grid-cols-2 divide-x" :class="{'cursor-not-allowed' : selected.length === 0}">
           <div>{{ currency(booking?.total_price) }}</div>
           <div>Continue</div>
         </button>

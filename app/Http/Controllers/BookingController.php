@@ -37,7 +37,7 @@ class BookingController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['invoice_number'] = 'INVOICE' . rand(1000000, 9999999);
+        $validated['invoice_number'] = 'INVOICE-' . rand(1000000, 9999999);
 
 
         $booking = Booking::create($validated);
@@ -67,7 +67,7 @@ class BookingController extends Controller
           return response()->json([
             'success' => false,
             'message' => 'error fetching data / no data found'
-          ]);  
+          ]);
         }
 
         return response()->json([
@@ -88,9 +88,9 @@ class BookingController extends Controller
                 $q->where('tanggal', 'LIKE', "%$search%")
                 ->orWhere('nama', 'LIKE', "%$search%");
             });
-        })->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
+        })->orderBy('tanggal', 'desc')->paginate($per, ['*', DB::raw('@no := @no +  1 AS no')]);
 
-        return response()->json($data);   
+        return response()->json($data);
     }
 
     public function report(Request $request){

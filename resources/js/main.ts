@@ -43,6 +43,9 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import Steps from 'primevue/steps';
 import Button from 'primevue/button';
+import Chart from 'primevue/chart';
+import ChartData from 'chart.js/auto'
+
 
 // import "@/core/plugins/prismjs";
 const app = createApp(App);
@@ -96,6 +99,7 @@ app.component("IconField", IconField)
 app.component("InputIcon", InputIcon)
 app.component("Steps", Steps)
 app.component("Button", Button)
+app.component("Chart", Chart)
 
 app.use(vueDebounce, {
     lock: true,

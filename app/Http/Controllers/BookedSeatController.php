@@ -51,7 +51,9 @@ class BookedSeatController extends Controller
             $transaction_details = array(
                 'order_id' => $payment->uuid,
                 'gross_amount' => $payment->amount,
-                
+                'callback' => [
+                    "finish" => 'https://957a-2407-0-3002-5d13-d034-88ed-c467-9a87.ngrok-free.app/landing/invoice'
+                ]
             );
 
             $snapToken = Snap::getSnapToken(['transaction_details' => $transaction_details]);
@@ -62,7 +64,7 @@ class BookedSeatController extends Controller
                     'message' => 'Error occured while booking seat'
                 ], 500);
             }
-    
+
             return response()->json([
                 'success' => true,
                 'message' => 'Successfully booked seats',
@@ -70,7 +72,7 @@ class BookedSeatController extends Controller
                 'uuid' => $payment->uuid,
                 'token' => @$snapToken
             ]);
-    
+
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

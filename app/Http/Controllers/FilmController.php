@@ -64,7 +64,7 @@ class FilmController extends Controller
      */
     public function show($uuid)
     {
-        $film = Film::with(['genreFilms'])->where('uuid', $uuid)->first();
+        $film = Film::with(['genreFilms', 'reviews.user'])->where('uuid', $uuid)->first();
 
         return response()->json([
             'success' => true,

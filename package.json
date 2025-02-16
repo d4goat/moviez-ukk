@@ -46,6 +46,7 @@
         "animate.css": "^4.1.1",
         "aos": "^2.3.4",
         "apexcharts": "^3.41.1",
+        "chart.js": "^4.4.7",
         "clipboard": "^2.0.11",
         "core-js": "^3.38.1",
         "element-plus": "^2.8.8",

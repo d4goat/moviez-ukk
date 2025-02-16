@@ -23,7 +23,7 @@
           />
         </form>
       </div>
-  
+
       <div class="overflow-x-auto mt-4 table-auto">
         <table class="min-w-full rounded">
           <thead class="">
@@ -71,10 +71,10 @@
           </tbody>
         </table>
       </div>
-  
+
       <div class="flex justify-between mt-4 flex-wrap gap-2">
         <div class="text-gray-700 text-sm">
-          Showing {{ data?.from }} from {{ data?.to }} of {{ data?.total }} results
+          Showing {{ data?.from }} to {{ data?.to }} of {{ data?.total }} results
         </div>
         <ul class="flex gap-2">
           <li
@@ -112,8 +112,8 @@
       </div>
     </div>
   </template>
-  
-  
+
+
 <script>
 import { useQuery } from "@tanstack/vue-query";
 import { ref, defineComponent } from "vue";
@@ -238,7 +238,7 @@ export default defineComponent({
     }
 })
 </script>
-  
+
 <style scoped>
 :deep(.select2-container--default) {
   width: auto !important;

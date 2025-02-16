@@ -46,17 +46,17 @@
                         <ul class="flex gap-2 justify-end">
                             <li class="py-1 px-[12px] rounded-md"
                                 :class="{ 'opacity-50 pointer-events-none': data?.current_page == 1 || !data }">
-                                <span @click="page = data?.current_page - 1" class="page-link cursor-pointer">
+                                <span @click="page = data?.current_page - 1; refetch()" class="page-link cursor-pointer">
                                     <i class="fa fa-angle-left"></i>
                                 </span>
                             </li>
-                            <li v-for="item in pagination" :key="item" @click="page = item"
+                            <li v-for="item in pagination" :key="item" @click="page = item; refetch()"
                                 class="py-1 px-[12px] rounded-md" :class="{ 'bg-blue-600 text-white': item === page }">
                                 <span class="page-link cursor-pointer">{{ item }}</span>
                             </li>
                             <li class="py-1 px-[12px] rounded-md"
                                 :class="{ 'opacity-50 pointer-events-none': data?.current_page == data?.last_page || !data }">
-                                <span @click="page = data?.current_page + 1" class="page-link cursor-pointer">
+                                <span @click="page = data?.current_page + 1; refetch()" class="page-link cursor-pointer">
                                     <i class="fa fa-angle-right"></i>
                                 </span>
                             </li>

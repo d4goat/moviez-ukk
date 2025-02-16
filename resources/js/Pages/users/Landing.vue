@@ -60,7 +60,7 @@
 
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
-            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Now Showing Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
-            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
+            <Chip class="w-fit font-semibold text-xl lg:m-3" label="Coming Soon Movie" />
             <div class="flex flex-wrap gap-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
