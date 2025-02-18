@@ -64,7 +64,7 @@ const routes: Array<RouteRecordRaw> = [
                     pageTitle: 'Users',
                     breadcrumbs: ['Master', 'Users']
                 },
-                component: () => import('@/Pages/dashboard/master/users/Index.vue'), 
+                component: () => import('@/Pages/dashboard/master/users/Index.vue'),
             },
             {
                 path: '/admin/dashboard/master/cinema',
@@ -142,7 +142,7 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/admin/dashboard/master/studio/:uuid/seat',
                 name: 'master.studio.seat',
                 meta: {
-                    pageTitle: 'Studio-Seat',    
+                    pageTitle: 'Studio-Seat',
                     breadcrumbs: ['Master', 'Studio', 'Seat']
                 },
                 component: () => import('@/Pages/dashboard/master/studio/seat/Index.vue')
@@ -225,7 +225,12 @@ const routes: Array<RouteRecordRaw> = [
                 path: "/landing/review/:uuid",
                 name: "landing.review",
                 component: () => import('@/Pages/users/review/Index.vue')
-            }
+            },
+            {
+                path: "/landing/contact-us",
+                name: "landing.contact-us",
+                component: () => import('@/Pages/users/contact/Index.vue')
+            },
         ]
     },
     {
@@ -237,7 +242,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: '404',
                 component: () => import('@/Pages/errors/Error404.vue'),
             },
-        
+
         ]
     },
     {

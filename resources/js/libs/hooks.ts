@@ -11,8 +11,8 @@ export const useDelete = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3",
-                cancelButton: "btn btn-secondary btn-md py-2 mr-3",
+                confirmButton: "bg-red-600 hover:bg-red-700 p-2 text-white rounded",
+                cancelButton: "bg-gray-600 hover:bg-gray-700 p-2 text-white ml-2 rounded",
             },
             buttonsStyling: false,
         },
@@ -55,8 +55,8 @@ export const useDownloadWord = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
-                cancelButton: "btn btn-secondary btn-sm",
+                confirmButton: "bg-red-600 hover:bg-red-700 p-2 text-white rounded",
+                cancelButton: "bg-gray-600 hover:bg-gray-700 p-2 text-white ml-2 rounded",
             },
             buttonsStyling: false,
         }
@@ -186,8 +186,8 @@ export const useDownloadPdf = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
-                cancelButton: "btn btn-secondary btn-sm",
+                confirmButton: "bg-red-600 hover:bg-red-700 p-2 text-white rounded",
+                cancelButton: "bg-gray-600 hover:bg-gray-700 p-2 text-white ml-2 rounded",
             },
             buttonsStyling: false,
         }
@@ -317,8 +317,8 @@ export const useDownloadExcel = (callback?: ICallback, swalMixin?: any) => {
     const mySwal = Swal.mixin(
         swalMixin || {
             customClass: {
-                confirmButton: "btn bg-red-600 hover:bg-red-700 btn-sm",
-                cancelButton: "btn btn-secondary btn-sm",
+                confirmButton: "bg-red-600 hover:bg-red-700 p-2 text-white rounded",
+                cancelButton: "bg-gray-600 hover:bg-gray-700 p-2 text-white ml-2 rounded",
             },
             buttonsStyling: false,
         }

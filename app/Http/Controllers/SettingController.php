@@ -10,7 +10,7 @@ class SettingController extends Controller
 {
     public function get()
     {
-        return response()->json(Setting::first());
+        return response()->json(Setting::with('photos')->first());
     }
 
     public function update(Request $request)
@@ -19,7 +19,6 @@ class SettingController extends Controller
             $request->validate([
                 'name' => 'nullable',
                 'description' => 'nullable',
-                'image' => 'nullable|file|mimes:jpg,png,jpeg',
                 'logo' => 'nullable|file|mimes:jpg,png,jpeg',
                 'email' => 'nullable|email',
                 'phone' => 'nullable'
@@ -44,7 +43,14 @@ class SettingController extends Controller
             }
 
             if($request->hasFile('image')){
-                $data['image'] = '/storage/' . $request->file('image')->store('setting', 'public');
+                $images = [];
+
+                foreach($request->file('image') as $image){
+                    $images[] = ['image' => $image->store('image', 'public')];
+                }
+
+                $setting->photos()->delete();
+                $setting->photos()->createMany($images);
             }
 
             $setting->update($data);

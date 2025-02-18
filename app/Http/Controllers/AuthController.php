@@ -37,7 +37,7 @@ class AuthController extends Controller
             if (!$token = auth()->attempt($validator->validated())) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email / Password salah!'
+                    'message' => 'Invalid Email / Password!'
                 ], 401);
             }
 
@@ -48,7 +48,7 @@ class AuthController extends Controller
             if ($role->id === 1) {
                 return response()->json([
                     'status' => true,
-                    'message' => 'Login Berhasil',
+                    'message' => 'Successfully Login',
                     'user' => auth()->user(),
                     'token' => $token,
                     'role' => $role
@@ -56,7 +56,7 @@ class AuthController extends Controller
             } elseif ($role->id === 2) { {
                     return response()->json([
                         'status' => true,
-                        'message' => 'Login Berhasil',
+                        'message' => 'Successfully Login',
                         'user' => auth()->user(),
                         'token' => $token,
                         'role' => $role
@@ -146,30 +146,26 @@ class AuthController extends Controller
 
     public function sendOtpForgotPassword(Request $request)
     {
-        // Validasi input email
         $request->validate([
             'email' => 'required|email|max:255|exists:users,email'
         ]);
-    
-        // Cari user berdasarkan email
+
         $user = User::where('email', $request->email)->first();
-    
-        // Generate OTP 6 digit
+
         $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
-    
-        // Simpan OTP di cache dengan waktu kadaluarsa 15 menit
+
         Cache::put('forgot_password_' . $user->email, [
             'email' => $user->email,
             'otp' => $otp
         ], now()->addMinutes(5));
-    
+
         try {
             // Kirim OTP melalui email
             Mail::to($user->email)->send(new ForgotPasswordMail($otp));
-    
+
             // Kembalikan respons berhasil
             return response()->json([
-                'message' => 'OTP telah dikirim ke email Anda',
+                'message' => 'The OTP has been sent to your email',
                 'status' => true
             ], 200);
         } catch (\Exception $e) {
@@ -205,7 +201,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'success match otp'
+                'message' => 'Success match otp'
             ]);
         } catch(\Exception $e){
             return response()->json([
@@ -227,7 +223,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "Password cannot same with the last password"
-            ]);
+            ], 500);
         }
 
         $user->update(['password' => bcrypt($validate['password'])]);
@@ -247,6 +243,6 @@ class AuthController extends Controller
 
     public function logout(){
         auth()->logout();
-        return response()->json(['success' => true, 'message' => 'berhasil logout']);
+        return response()->json(['success' => true, 'message' => 'Successfully Logout']);
     }
 }

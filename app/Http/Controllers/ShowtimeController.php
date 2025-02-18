@@ -98,11 +98,11 @@ class ShowtimeController extends Controller
             $q->with('studio');
         }])
         ->get();
-    
+
         if ($data->isEmpty()) {
             return response()->json(['message' => 'Data not found', 'data' => []]);
         }
-    
+
         return response()->json([
             'success' => true,
             'message' => 'Success fetch data',
@@ -131,7 +131,7 @@ class ShowtimeController extends Controller
                 'message' => 'Success update data',
                 'data' => $data
             ]);
-        } else {   
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed update data'

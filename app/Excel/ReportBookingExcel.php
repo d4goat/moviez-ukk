@@ -58,19 +58,19 @@ class ReportBookingExcel extends ReportExcel
         $sheet->setCellValue("L$row", "NAME");
         $sheet->mergeCells("L$row:N$row");
         $sheet->getStyle("L$row:N$row")->getAlignment()->setHorizontal("center");
-        
+
         $sheet->setCellValue("O$row", "SEAT");
         $sheet->mergeCells("O$row:Q$row");
         $sheet->getStyle("O$row:Q$row")->getAlignment()->setHorizontal("center");
-        
+
         $sheet->setCellValue("R$row", "START TIME");
         $sheet->mergeCells("R$row:T$row");
         $sheet->getStyle("R$row:T$row")->getAlignment()->setHorizontal("center");
-        
+
         $sheet->setCellValue("U$row", "END TIME");
         $sheet->mergeCells("U$row:W$row");
         $sheet->getStyle("U$row:W$row")->getAlignment()->setHorizontal("center");
-        
+
         $sheet->setCellValue("X$row", "TOTAL PRICE");
         $sheet->mergeCells("X$row:Z$row");
         $sheet->getStyle("X$row:Z$row")->getAlignment()->setHorizontal("center");

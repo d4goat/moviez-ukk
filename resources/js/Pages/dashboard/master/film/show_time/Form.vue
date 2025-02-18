@@ -4,7 +4,7 @@
             <!-- Header -->
             <div class="card-header flex justify-between items-center my-2">
                 <h2> {{ selected ? 'Edit' : 'Add' }} Show Time</h2>
-                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700" @click="$emit('close')">
+                <button type="button" class="btn btn-md bg-red-600 hover:bg-red-700 text-white" @click="$emit('close')">
                     <i class="la la-times-circle"></i>
                     Cancel
                 </button>
@@ -13,7 +13,7 @@
             <!-- Body -->
              <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 flex flex-col mb-3">
+                    <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Film</label>
                         <Field name='film_id' v-model="show_time.film_id"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
@@ -21,7 +21,7 @@
                         </Field>
                         <ErrorMessage name="film_id" class="text-red-500" />
                     </div>
-                    <div class="col-md-3 flex flex-col mb-3">
+                    <div class="col-md-6 flex flex-col mb-3">
                         <label class="form-label">Studio</label>
                         <Field name='studio_id' v-model="show_time.studio_id"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Select Film">
@@ -29,19 +29,24 @@
                         </Field>
                         <ErrorMessage name="studio_id" class="text-red-500" />
                     </div>
-                    <div class="col-md-3 flex flex-col mb-3">
+                    <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">Start Time</label>
                         <Field name="start_time" autocomplete="off" v-model="show_time.start_time" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert Start Time">
                             <date-picker v-model="show_time.start_time" class="rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
                         </Field>
                         <ErrorMessage name="start_time" class="text-red-500" />
                     </div>
-                    <div class="col-md-3 flex flex-col mb-3">
+                    <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">End Time</label>
                         <Field name="end_time" autocomplete="off" v-model="show_time.end_time" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert End Time">
                             <date-picker v-model="show_time.end_time" class="rounded py-2.5" :config="{ enableTime: true, noCalendar: true, dateFormat: 'H:i'}"></date-picker>
                         </Field>
                         <ErrorMessage name="end_time" class="text-red-500" />
+                    </div>
+                    <div class="col-md-4 flex flex-col mb-3">
+                        <label class="form-label">Price</label>
+                        <Field name="price" autocomplete="off" oninput="this.value = this.value.replace(/[^\d]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');" v-model="show_time.price" class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5" placeholder="Insert Price" />
+                        <ErrorMessage name="price" class="text-red-500" />
                     </div>
                 </div>
              </div>
@@ -69,18 +74,25 @@ const props = defineProps({
     selected: {
         type: String,
         default: null
+    },
+    film_id: {
+        type: Number,
+        default: null
     }
 })
 
 const emit = defineEmits(['close', 'refresh'])
 
-const show_time = ref<ShowTime>({} as ShowTime)
+const show_time = ref<ShowTime>({
+    film_id: props.film_id
+} as ShowTime)
 const formRef = ref()
 const formSchema = Yup.object().shape({
     film_id: Yup.number().required('Film cannot be empty'),
     studio_id: Yup.number().required('Studio cannot be empty'),
     start_time: Yup.string().required('Start Time cannot be empty'),
     end_time: Yup.string().required('End Time cannot be empty'),
+    price: Yup.string().required('Price cannot be empty'),
 })
 
 function getEdit(){
@@ -102,6 +114,7 @@ function submit (){
     formData.append('studio_id', show_time.value.studio_id)
     formData.append('start_time', show_time.value.start_time)
     formData.append('end_time', show_time.value.end_time)
+    formData.append('price', show_time.value.price)
 
     if(props.selected){
         formData.append('_method', 'PUT')

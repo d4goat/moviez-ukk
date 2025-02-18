@@ -70,21 +70,33 @@
                     <!-- End:Input -->
 
                     <!-- Begin:Input -->
-                    <div class="col-md-6 flex flex-col mb-3">
+                    <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">Release Date</label>
                         <Field autocomplete="off" name="release_date" type="text"
                             placeholer="Insert film release date"
                             class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"
                             v-model="film.release_date">
-                            <date-picker v-model="film.release_date" placeholder="Insert film release date" class="rounded py-2.5" :config="{ enableTime: true, format: 'Y:m:d H:i'}"></date-picker>
+                            <el-date-picker type="date" size="large" v-model="film.release_date" placeholder="Insert film release date" class="w-full"/>
                         </Field>
                         <ErrorMessage name="release_date" class="text-red-500" />
                     </div>
                     <!-- End:Input -->
 
+                    <!-- Begin:Input -->
+                    <div class="col-md-4 flex flex-col mb-3">
+                        <label class="form-label">End Date</label>
+                        <Field autocomplete="off" name="end_date" type="text"
+                            placeholer="Insert film end date"
+                            class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"
+                            v-model="film.end_date">
+                            <el-date-picker type="date" size="large" v-model="film.end_date" placeholder="Insert film end date" class="w-full"/>
+                        </Field>
+                        <ErrorMessage name="end_date" class="text-red-500" />
+                    </div>
+                    <!-- End:Input -->
 
                     <!-- Begin:Input -->
-                    <div class="col-md-6 flex flex-col mb-3">
+                    <div class="col-md-4 flex flex-col mb-3">
                         <label class="form-label">Trailer</label>
                         <Field autocomplete="off" name="trailer" type="text" placeholder="Masukkan Film Trailer"
                         class="bg-[#232323] border-none  focus:ring-[#7C7C7C] rounded-xl p-2.5"
@@ -96,7 +108,7 @@
                     <div class="flex flex-col mb-3">
                         <label class="form-label">Film Genre</label>
                         <div class="space-x-2">
-                            <label
+                            <!-- <label
                                 v-for="genre in genres"
                                 :key="genre.id"
                                 :for="'genre_' + genre.id"
@@ -112,7 +124,8 @@
                                     class="form-check-input focus:ring-0 mb-2 p-1.5"
                                     >
                                     <span class="text-lg font-semibold pl-2 "> {{ genre.text }} </span>
-                            </label>
+                            </label> -->
+                            <el-select-v2 v-model="film.genre_film_id" multiple placeholder="Select Genre" :options="genres" />
                         </div>
                     </div>
                     <!-- Begin:Input -->
@@ -136,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import * as Yup from 'yup'
 import type { Film } from '@/types'
 import axios from '@/libs/axios';
@@ -144,6 +157,13 @@ import { toast } from 'vue3-toastify';
 import { unblock, block } from '@/libs/utils';
 import { useGenre } from '@/services';
 import { ElMessage } from 'element-plus';
+import DatePicker from 'primevue/datepicker';
+
+defineComponent({
+    components: {
+        DatePicker
+    }
+})
 
 const props = defineProps({
     selected: {
@@ -172,6 +192,7 @@ const formSchema = Yup.object().shape({
     poster: Yup.string().nullable(),
     trailer: Yup.string().nullable(),
     release_date: Yup.string().nullable(),
+    end_date: Yup.string().nullable(),
 })
 
 function getEdit() {
@@ -199,6 +220,7 @@ function submit() {
     formData.append('director', film.value.director)
     formData.append('writer', film.value.writer)
     formData.append('release_date', film.value.release_date)
+    formData.append('end_date', film.value.end_date)
     film.value.genre_film_id.forEach((gen: any) => {
         formData.append('genre_film_id[]', gen)
     })
@@ -238,12 +260,13 @@ function submit() {
 const film_genre = useGenre()
 const genres = computed(() =>
     film_genre.data.value?.map((item: any) => ({
-        id: item.id,
-        text: item.name
-    }))
+        value: item.id,
+        label: item.name
+    })) || []
 )
 
 onMounted(() => {
     if (props.selected) getEdit()
 })
 </script>
+

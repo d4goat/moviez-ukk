@@ -19,7 +19,7 @@ const router = useRouter()
 
 const { data, refetch } = useQuery({
     queryKey: ['films'],
-    queryFn: async () => await axios.get(`/master/film/${route.params.uuid}`).then((res: any) => res.data.data),
+    queryFn: async () => await axios.get(`/master/film/${route.params.uuid_film}`).then((res: any) => res.data.data),
 })
 
 const { delete: deleteShowTime } = useDelete({
@@ -85,7 +85,7 @@ onMounted(() => refetch())
 
 <template>
     <main class="border-b-[1px] border-body pb-3">
-        <Form :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
+        <Form :film_id="data.id" :selected="selected" @close="openForm = false" v-if="openForm" @refresh="refresh" />
 
         <div class="w-full h-full flex flex-col rounded-xl space-y-4">
             <div class="border-b-[1px] border-body flex justify-between items-center p-4">

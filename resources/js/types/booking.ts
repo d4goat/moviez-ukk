@@ -6,6 +6,7 @@ export interface Booking {
     user_id: number;
     show_time_id: number;
     invoice_number: string;
+    total_price: number;
 }
 
 export interface BookedSeat {

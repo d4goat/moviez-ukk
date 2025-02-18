@@ -45,6 +45,12 @@ class BookedSeatController extends Controller
 
             Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
             Config::$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+            Config::$isProduction = false; // Set false for sandbox mode
+            // Config::$curlOptions = array(
+            //     CURLOPT_SSL_VERIFYHOST => 0,
+            //     CURLOPT_SSL_VERIFYPEER => 0,
+            // );
+
 
             $payment = Payment::findByUuid($request->uuid);
 

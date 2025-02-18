@@ -25,7 +25,17 @@ class Showtimerequest extends FormRequest
             'film_id' => 'required',
             'studio_id' => 'required',
             'start_time' => 'required',
-            'end_time' => 'required'
+            'end_time' => 'required',
+            'price' => 'required'
         ];
+    }
+
+    protected function prepareForValidation() {
+        $price = str_replace('.', '', $this->price);
+        $price = str_replace(',', '.', $price);
+
+        $this->merge([
+            'price' => $price,
+        ]);
     }
 }

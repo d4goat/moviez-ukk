@@ -24,10 +24,11 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => ['required', 'min:8', 'confirmed', Password::default()],
-            'phone' => 'required|unique:users',
+            'phone' => 'required',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'role_id' => 'required'
         ];
     }
 }

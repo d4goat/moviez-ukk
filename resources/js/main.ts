@@ -30,7 +30,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import 'aos/dist/aos.css'
 import 'primeicons/primeicons.css'
 
-import FileUpload from '@/components/FIleUpload.vue';
+import FileUploadComponent from '@/components/FIleUpload.vue';
 import Select2 from '@/components/Select2.vue';
 import Paginate from '@/components/Paginate.vue';
 import DatePicker from '@/components/DatePicker.vue';
@@ -43,8 +43,14 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import Steps from 'primevue/steps';
 import Button from 'primevue/button';
+import Select from 'primevue/select';
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
 import Chart from 'primevue/chart';
 import ChartData from 'chart.js/auto'
+import FileUpload from 'primevue/fileupload';
+import Carousel from 'primevue/carousel';
+
 
 
 // import "@/core/plugins/prismjs";
@@ -74,6 +80,14 @@ const customPreset = definePreset(Aura, {
             icon: {
                 color: "#53535c"
             }
+        },
+        inputgroup: {
+            addon: {
+                background: '#222222'
+            }
+        },
+        textarea: {
+            background: '#222222'
         }
     }
 })
@@ -87,7 +101,7 @@ app.use(PrimeVue, {
     }
 })
 
-app.component("file-upload", FileUpload);
+app.component("file-upload", FileUploadComponent);
 app.component("select2", Select2);
 app.component("paginate", Paginate);
 app.component("date-picker", DatePicker);
@@ -100,6 +114,12 @@ app.component("InputIcon", InputIcon)
 app.component("Steps", Steps)
 app.component("Button", Button)
 app.component("Chart", Chart)
+app.component("Select", Select)
+app.component("InputGroup", InputGroup)
+app.component("InputGroupAddon", InputGroupAddon)
+app.component("Textarea", Textarea)
+app.component("FileUploadPrime", FileUpload)
+app.component("Carousel", Carousel)
 
 app.use(vueDebounce, {
     lock: true,
@@ -149,6 +169,7 @@ app.use(Vue3Toastify, {
 
 
 import { Form as VForm, Field, ErrorMessage } from "vee-validate";
+import Textarea from 'primevue/textarea';
 app.component("VForm", VForm);
 app.component("Field", Field);
 app.component("ErrorMessage", ErrorMessage);

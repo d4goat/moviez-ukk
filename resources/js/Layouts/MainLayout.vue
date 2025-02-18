@@ -144,8 +144,7 @@ export default {
                   <router-link to="/#now-showing" class="hover:text-cinema transition">Now Showing</router-link>
                   <router-link to="/landing/coming-soon" class="hover:text-cinema transition">Coming Soon</router-link>
                   <router-link to="/landing/cinema" class="hover:text-cinema transition">Cinema</router-link>
-                  <router-link to="/about" class="hover:text-cinema transition">About Us</router-link>
-                  <router-link to="/contact" class="hover:text-cinema transition">Contact Us</router-link>
+                  <router-link to="/landing/contact-us" class="hover:text-cinema transition">Contact Us</router-link>
                 </div>
               </div>
 

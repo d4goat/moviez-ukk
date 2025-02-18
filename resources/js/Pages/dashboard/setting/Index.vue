@@ -50,10 +50,14 @@
                     </div>
                     <div class="col-md-6 flex flex-col mb-3">
                         <label name="image" class="form-label">Image</label>
-                        <Field class="" name="image" v-model="setting.image" placeholder="Insert setting image" type="text">
-                            <file-upload :files="image" :accepted-file-types="fileTypes" v-on:update-files="(file) => (image = file)" ></file-upload>
+                        <Field name="photo" class="card" v-model="setting.image" type="file">
+                            <FileUploadPrime accept="image/*" name="image" choose-label="Choose" severity="secondary" class="p-button-outlined"
+                                ref="filupload" @select="upload" multiple>
+                                <template #empty>
+                                    <span>Drag and drop files to here to upload</span>
+                                </template>
+                            </FileUploadPrime>
                         </Field>
-                        <ErrorMessage name="image" class="text-red-500" />
                     </div>
                 </div>
             </div>
@@ -67,7 +71,7 @@
 
 <script setup lang="ts">
 import { useMutation, useQuery } from '@tanstack/vue-query';
-import { ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import axios from '@/libs/axios';
 import * as Yup from 'yup'
 import { block, unblock } from '@/libs/utils';
@@ -84,12 +88,18 @@ interface Setting {
 
 const setting = ref<Setting>({} as Setting);
 const formRef = ref<any>(null)
+const fileupload = ref()
+
+const upload = (event: any) => {
+    if (event.files && event.files.length > 0) {
+        image.value = event.files;
+    }
+}
 
 const formSchema = Yup.object().shape({
     name: Yup.string().required('Name cannot be null'),
     description: Yup.string().required('Description cannot be null'),
     logo: Yup.string().required('Logo cannot be null'),
-    image: Yup.string().required('Image cannot be null'),
     email: Yup.string().email().required('Email cannot be null'),
     phone: Yup.string().matches(/^08[0-9]\d{9,11}$/, 'Invalid Phone Number').required('Phone cannot be null'),
 })
@@ -107,7 +117,13 @@ function submit() {
     formData.append('phone', setting.value.phone)
 
     if(logo.value.length) formData.append('logo', logo.value[0].file)
-    if(image.value.length) formData.append('image', image.value[0].file)
+
+    if(image.value.length) {
+        image.value.forEach((image: any) => {
+            console.log(image)
+            formData.append('image[]', image) // Tambahkan setiap file ke FormData
+        })
+    }
 
 
     block(document.getElementById('form-setting'))
@@ -122,6 +138,7 @@ function submit() {
     }).then(() => {
         toast.success('Data saved successfully')
         formRef.value.resetForm()
+        edit.refetch()
     }).catch((error: any) => {
         console.error(error.response.data.message)
         toast.error(error.response.data.message)
@@ -133,7 +150,6 @@ const edit = useQuery({
     queryFn: async () => axios.get('/setting'),
     onSuccess: (data: any) => {
         setting.value = data.data
-        console.log(setting.value)
         unblock(document.getElementById('form-setting'))
     },
     onError: (err: any) => {

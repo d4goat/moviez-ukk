@@ -6,8 +6,11 @@
           <TransitionChild enter="transform transition-all duration-1000 ease-out" enter-from="opacity-0"
             enter-to="opacity-100" leave="transform transition-all duration-500 ease-in" leave-from="opacity-100"
             leave-to="opacity-0" class="w-full" as="div">
-            <img :src="setting?.image" alt="background dashboard"
-              class="object-cover h-150 w-full brightness-[.40] contrast-[.9] shadow-inner">
+              <Carousel :value="setting.photos" :responsive-options="responsiveOptions" circular :showNavigators="false" :showIndicators="false" :autoplayInterval="4000">
+                <template #item="props">
+                    <img :src="'/storage/' + props.data.image" alt="" class="object-cover h-150 w-full brightness-[.40] contrast-[.9] shadow-inner">
+                </template>
+              </Carousel>
           </TransitionChild>
           <TransitionChild as="div" enter="transform transition-all duration-1000 ease-out delay-300"
             enter-from="opacity-0 translate-y-12 scale-90" enter-to="opacity-100 translate-y-0 scale-100"
@@ -40,7 +43,7 @@
           <!-- Top Rating Movies Section -->
           <div class="flex flex-col mx-4 space-y-4">
             <Chip class="w-fit font-semibold text-xl lg:m-3" label="Top Rating Movie" />
-            <div class="flex flex-wrap gap-7">
+            <div class="flex lg:flex-row flex-col flex-wrap gap-7">
               <div v-for="(reviews, index) in review" :key="reviews.uuid" class="flex flex-col space-y-3 items-center"
                 :style="{
                   transition: 'all 0.7s ease',
@@ -61,7 +64,7 @@
           <!-- Now Showing Section -->
           <div id="now-showing" class="flex flex-col mx-4 space-y-4">
             <Chip class="w-fit font-semibold text-xl lg:m-3" label="Now Showing Movie" />
-            <div class="flex flex-wrap gap-7">
+            <div class="flex lg:flex-row flex-col flex-wrap gap-7">
               <div v-for="(films, index) in film" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.4s ease-out',
                 transitionDelay: `${100 + (index * 100)}ms`
@@ -77,7 +80,7 @@
           </div>
           <div id="coming-soon" class="flex flex-col mx-4 space-y-4 py-4">
             <Chip class="w-fit font-semibold text-xl lg:m-3" label="Coming Soon Movie" />
-            <div class="flex flex-wrap gap-7">
+            <div class="flex lg:flex-row flex-col flex-wrap gap-7">
               <div v-for="(films, index) in data" :key="films.uuid" class="flex flex-col space-y-3" :style="{
                 transition: 'all 0.7s ease',
                 transitionDelay: `${200 + (index * 100)}ms`
@@ -179,6 +182,29 @@ defineComponent({
     Chip
   }
 })
+
+const responsiveOptions = ref([
+    {
+        breakpoint: '1400px',
+        numVisible: 2,
+        numScroll: 1
+    },
+    {
+        breakpoint: '1199px',
+        numVisible: 3,
+        numScroll: 1
+    },
+    {
+        breakpoint: '767px',
+        numVisible: 2,
+        numScroll: 1
+    },
+    {
+        breakpoint: '575px',
+        numVisible: 1,
+        numScroll: 1
+    }
+]);
 
 const { data: review, refetch, isLoading } = useQuery({
   queryKey: ['film-top', 'top-rate-film'],

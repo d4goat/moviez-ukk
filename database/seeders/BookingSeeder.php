@@ -62,54 +62,6 @@ class BookingSeeder extends Seeder
                 'user_id' => 2,
                 'show_time_id' => 5,
             ],
-            [
-                'tanggal' => '2024-11-05',
-                'quantity' => 2,
-                'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 5,
-            ],
-            [
-                'tanggal' => '2024-12-05',
-                'quantity' => 2,
-                'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 5,
-            ],
-            [
-                'tanggal' => '2024-12-05',
-                'quantity' => 2,
-                'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 5,
-            ],
-            [
-                'tanggal' => '2024-12-05',
-                'quantity' => 2,
-                'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 5,
-            ],
-            [
-                'tanggal' => '2024-12-05',
-                'quantity' => 2,
-                'total_price' => 2 * 55000, // 2 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 5,
-            ],
-            [
-                'tanggal' => '2024-12-06',
-                'quantity' => 5,
-                'total_price' => 5 * 55000, // 5 tiket x 55,000
-                'invoice_number' => 'INVOICE-' . rand(1000000, 9999999),
-                'user_id' => 2,
-                'show_time_id' => 6,
-            ],
         ];
 
         foreach($bookings as $book){

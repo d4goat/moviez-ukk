@@ -5,7 +5,7 @@
                 <div class="bg-gray-850 p-6 border-b border-gray-700">
                     <h2 class="text-3xl font-bold text-center text-white">Cinema Ticket Invoice</h2>
                     <p class="text-center text-gray-400 mt-2">
-                        Booking ID: 
+                        Booking ID:
                         <span class="font-semibold text-gray-200">
                             {{ data?.invoice_number || 'Loading...' }}
                         </span>
@@ -30,7 +30,7 @@
 
                     <div class="border-t border-gray-700 pt-6">
                         <h3 class="text-2xl font-semibold text-white mb-4">Movie Details</h3>
-                        
+
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 font-medium">Movie</span>
@@ -38,14 +38,14 @@
                                     {{ data?.show_time.film.title || 'Loading...' }}
                                 </span>
                             </div>
-                            
+
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 font-medium">Showtime</span>
                                 <span class="text-lg font-semibold text-gray-100">
                                     {{ data?.tanggal }} {{ data?.show_time.start_time || 'N/A' }}
                                 </span>
                             </div>
-                            
+
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 font-medium">Seats</span>
                                 <div class="text-lg font-semibold text-gray-100">
@@ -76,22 +76,22 @@
                 </div>
 
                 <div class="bg-gray-850 p-6 border-t border-gray-700 text-center">
-                    <button 
-                        @click="() => generatePDF(data)" 
+                    <button
+                        @click="() => generatePDF(data)"
                         class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
                     >
                         Print Invoice
                     </button>
                 </div>
                 <div id="route" class="text-right mb-4 px-4">
-                    <router-link 
-                        :to="{name: 'landing.review', params: { uuid: data.uuid }}" 
+                    <router-link
+                        :to="{name: 'landing.review', params: { uuid: data?.uuid }}"
                         class="text-indigo-500 hover:text-indigo-700 transition-colors underline"
                     >
                         Review
                     </router-link>
                 </div>
-                
+
             </div>
 
             <!-- Loading Overlay -->
@@ -111,7 +111,7 @@ import { ElMessage } from 'element-plus';
 import type { ApiResponse, Booking, ShowTime, Film, BookedSeat, User, Seat } from '@/types';
 import { currency } from '@/libs/utils';
 import html2pdf from 'html2pdf.js';
-import {jsPDF} from "jspdf" 
+import {jsPDF} from "jspdf"
 
 interface Showtimes extends ShowTime {
     film: Film
@@ -144,7 +144,7 @@ const { data, isLoading, error } = useQuery({
 const generateInvoice = (booking: Bookings) => {
     // Initialize PDF with A4 size
     const doc = new jsPDF();
-    
+
     doc.setFillColor(18, 18, 18); // Darker background
     doc.rect(0, 0, 210, 297, 'F');
 
@@ -177,12 +177,12 @@ const generateInvoice = (booking: Bookings) => {
     // Customer Details Section
     let currentY = cardY + 50;
     doc.setFontSize(14);
-    
+
     // Left column labels
     doc.setTextColor(156, 163, 175);
     doc.text('Customer Name', leftMargin, currentY);
     doc.text('Purchase Date', leftMargin, currentY + 10);
-    
+
     // Right column values
     doc.setTextColor(255, 255, 255);
     doc.text(booking.user.name, rightMargin - 60, currentY);

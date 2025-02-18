@@ -25,7 +25,21 @@ const columns = [
         header: 'Title'
     }),
     column.accessor('description', {
-        header: 'Description'
+        header: 'Description',
+        cell: (cell: any) => {
+            const description = cell.getValue();
+            const maxWords = 10;
+            const trimmedDescription = description
+                .split(' ')
+                .slice(0, maxWords)
+                .join(' ');
+
+            const displayText = description.split(' ').length > maxWords
+                ? `${trimmedDescription}...`
+                : trimmedDescription;
+
+            return h('span', { class: '' }, displayText);
+        }
     }),
     column.accessor('duration', {
         header: 'Duration',

@@ -20,7 +20,7 @@ class BookingController extends Controller
         $page = ($request->page) ? $request->page - 1 : 0;
 
         DB::statement('set @no=0' . $per * $page);
-        $data = Booking::with(['user', 'payments', 'show_time.film'])->when($request->search, function (Builder $query, string $search) {
+        $data = Booking::with(['user', 'payments', 'show_time.film'])->whereYear('tanggal', $request->tahun)->when($request->search, function (Builder $query, string $search) {
             $query->WhereHas('user', function ($q) use ($search){
                 $q->where('tanggal', 'LIKE', "%$search%")
                 ->orWhere('nama', 'LIKE', "%$search%");
@@ -83,6 +83,8 @@ class BookingController extends Controller
         DB::statement('set @no=0' . $per * $page);
         $data = Booking::with(['user', 'payments', 'show_time.film', 'show_time.studio.cinema'])->whereHas('user', function ($q) use ($request){
             $q->where('uuid', $request->uuid);
+        })->whereHas('payments', function ($q){
+            $q->where("status", "success");
         })->when($request->search, function (Builder $query, string $search) {
             $query->WhereHas('user', function ($q) use ($search){
                 $q->where('tanggal', 'LIKE', "%$search%")

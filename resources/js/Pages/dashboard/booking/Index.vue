@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/vue-query';
 import type { Booking, User, ShowTime, Film, Payment } from '@/types';
 import { useDelete } from '@/libs/hooks';
 import { useDownloadExcel } from '@/libs/hooks';
+import { currency } from '@/libs/utils';
 
 const { download } = useDownloadExcel()
 
@@ -15,7 +16,7 @@ interface ShowTimes extends ShowTime {
 interface Bookings extends Booking {
     no: number
     user: User,
-    payment: Payment,
+    payments: Payment,
     show_time: ShowTimes
 }
 
@@ -25,6 +26,12 @@ const paginateRef = ref<any>(null)
 const { delete: deleteBooking } = useDelete({
     onSuccess: paginateRef.value?.refetch()
 })
+
+const tahun = ref(new Date().getFullYear())
+const tahuns = ref<Array<Number>>([])
+for (let i = new Date().getFullYear(); i >= new Date().getFullYear() - 2; i--) {
+    tahuns.value.push(i)
+}
 
 const columns = [
     column.accessor('no', {
@@ -39,8 +46,9 @@ const columns = [
     column.accessor('quantity', {
         header: 'Quantity'
     }),
-    column.accessor('payment.amount', {
-        header: 'Total Price'
+    column.accessor('total_price', {
+        header: 'Total Price',
+        cell: (cell: any) => currency(cell.getValue())
     }),
     column.accessor('show_time.film.title', {
         header: 'Film'
@@ -66,9 +74,12 @@ const columns = [
             <!-- Title -->
             <div class="border-b border-body flex justify-between items-center p-4">
                 <h2 class="text-xl">Booking List</h2>
-                <button @click="download(`/master/booking/report?tahun=${new Date().getFullYear()}`)" class="bg-green-600 p-2.5 rounded-md flex items-center gap-2">
-                    <span class="font-medium">Report</span> <i class="fa-regular fa-file-excel text-lg"></i>
-                </button>
+                <div class="flex gap-3">
+                    <Select :options="tahuns" v-model="tahun" style="--p-select-background: #222222"></Select>
+                    <button @click="download(`/master/booking/report?tahun=${tahun}`)" class="bg-green-600 p-2.5 rounded-md flex items-center gap-2">
+                        <span class="font-medium">Report</span> <i class="fa-regular fa-file-excel text-lg"></i>
+                    </button>
+                </div>
             </div>
             <!-- Body -->
              <div class="py-2 px-4">
@@ -77,6 +88,7 @@ const columns = [
                     url="/master/booking"
                     id="table-booking"
                     :columns="columns"
+                    :payload="{ tahun: tahun }"
                 ></paginate>
              </div>
         </div>

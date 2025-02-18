@@ -10,6 +10,7 @@ export interface Film {
     poster?: string;
     trailer?: string;
     release_date?: Date;
+    end_date?: Date;
 }
 
 export interface FilmCast{

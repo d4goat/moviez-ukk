@@ -69,10 +69,17 @@
                         />
                         <ErrorMessage name="passwordConfirmation" class="text-red-500"/>
                     </div>
+                    <div class="col-md-6 flex flex-col mb-3">
+                        <label class="form-label">Role</label>
+                        <Field v-model="user.role_id" autocomplete="off" name="role" type="text" class="bg-[#232323] border-none focus:ring-[#7c7c7c] rounded-xl p-3">
+                            <Select :options="role" style="--p-select-background: #222222" option-value="id" option-label="name" name="role_id" v-model="user.role_id" placeholder="Select Role" />
+                        </Field>
+                        <ErrorMessage name="role_id" class="text-red-500" />
+                    </div>
                 </div>
             </div>
             <div class="card-footer flex">
-                <button type="submit" class="btn btn-md my-3 ms-auto bg-blue-600 text-white">Submit</button>
+                <button type="submit" class="btn btn-md my-3 ms-auto bg-blue-600 hover:bg-blue-700 text-white">Submit</button>
             </div>
         </div>
     </VForm>
@@ -85,6 +92,8 @@ import axios from '@/libs/axios';
 import { toast } from 'vue3-toastify';
 import { unblock, block } from '@/libs/utils';
 import type { User } from '@/types';
+import { useQuery } from '@tanstack/vue-query';
+import { ElMessage } from 'element-plus';
 
 const props = defineProps({
     selected: {
@@ -92,6 +101,14 @@ const props = defineProps({
         default: null
     }
 })
+
+interface Role {
+    id: number,
+    uuid: string,
+    full_name: string,
+    name: string,
+    guard_name: string
+}
 
 const user = ref<User>({} as User)
 const emit = defineEmits(["close", "refresh"])
@@ -112,6 +129,7 @@ function getEdit(){
     axios.get(`/master/users/${props.selected}`)
     .then(({data}: any) => {
         user.value = data.data
+        user.value.role_id = data.data.role.id
     })
     .catch((error: any) => {
         toast.error(error.response.data.message)
@@ -129,6 +147,7 @@ function submit (){
     formData.append('name', user.value.name);
     formData.append('email', user.value.email);
     formData.append('phone', user.value.phone);
+    formData.append('role_id', user.value.role_id);
 
     if(user.value?.password){
         formData.append('password', user.value.password)
@@ -161,6 +180,19 @@ function submit (){
         unblock(document.getElementById('form-user'))
     })
 }
+
+const { data: role } = useQuery({
+    queryKey: ['role'],
+    queryFn: async () => axios.get('/master/role').then((res: any) => res.data),
+    onError: (err: any) => ElMessage.error(err.response.data.message)
+})
+
+const roles = computed(() =>
+    role.value?.map((item: Role) => ({
+        id: item.id,
+        text: item.name
+    }))
+)
 
 onMounted(() => {
     if(props.selected){

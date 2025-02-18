@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookedSeatController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmCastsController;
 use App\Http\Controllers\FilmController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowtimeController;
@@ -46,7 +48,10 @@ Route::prefix('setting')->group(function () {
    Route::post('update', [SettingController::class, 'update']);
 });
 
-Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {   
+Route::post('contact-us', [ContactController::class, 'index'])->middleware((['throttle:3,1']));
+
+
+Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('users', [UserController::class, 'index']);
    Route::post('users/store', [UserController::class, 'store']);
    Route::post('users/update/akun', [UserController::class, 'updateAkun']);
@@ -57,19 +62,19 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('cinema', [CinemaController::class, 'index'])->withoutMiddleware(['auth', 'verified']);
    Route::post('cinema/store', [CinemaController::class, 'store']);
    Route::apiResource('cinema', CinemaController::class)->except('index', 'store');
-   
+
    Route::post('booked-seat', [BookedSeatController::class, 'index']);
    Route::post('booked-seat/show-by-booking', [BookedSeatController::class, 'showByBooking']);
    Route::post('booked-seat/store', [BookedSeatController::class, 'store']);
    Route::post('payment/midtrans-notification', [BookedSeatController::class, 'callback'])->withoutMiddleware(['auth', 'verified']);
    Route::apiResource('booked-seat', BookedSeatController::class)->except('index', 'store');
-   
+
    Route::post('booking', [BookingController::class, 'index']);
    Route::post('booking/store', [BookingController::class, 'store'])->withoutMiddleware(['auth', 'verified']);
    Route::get("booking/report", [BookingController::class, "report"])->withoutMiddleware(['auth', 'verified']);
    Route::post('booking/history', [BookingController::class, 'history']);
    Route::apiResource('booking', BookingController::class)->except('index', 'store');
-   
+
    Route::get('film', [FilmController::class, 'get'])->withoutMiddleware(['auth', 'verified']);
    Route::get('film/top-film', [FilmController::class, 'topFilm'])->withoutMiddleware(['auth', 'verified']);
    Route::get('film/now-showing', [FilmController::class, 'nowShowing'])->withoutMiddleware(['auth', 'verified']);
@@ -81,12 +86,12 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('film-cast', [FilmCastsController::class, 'index']);
    Route::post('film-cast/store', [FilmCastsController::class, 'store']);
    Route::apiResource('film-cast', FilmCastsController::class)->except('index', 'store');
-   
+
    Route::get('genre', [GenreController::class, 'get']);
    Route::post('genre', [GenreController::class, 'index']);
    Route::post('genre/store', [GenreController::class, 'store']);
    Route::apiResource('genre', GenreController::class)->except('index', 'store');
-   
+
    Route::post('payment', [PaymentController::class, 'index']);
    Route::post('payment/store', [PaymentController::class, 'store']);
    Route::post('payment/{uuid}/update-status', [PaymentController::class, 'changeStatusToSuccess']);
@@ -117,5 +122,8 @@ Route::middleware(['auth', 'verified'])->prefix('master')->group(function() {
    Route::post('studio/store', [StudioController::class, 'store']);
    Route::apiResource('studio', StudioController::class)->except('index', 'store');
 
+   Route::get('role', [RoleController::class, 'get']);
+
    Route::get('dashboard', [DashboardController::class, 'index']);
+
 });

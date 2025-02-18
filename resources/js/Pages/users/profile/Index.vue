@@ -77,8 +77,8 @@ const logout = () => {
         cancelButtonText: "Cancel",
         reverseButtons: true,
         customClass: {
-            confirmButton: "btn bg-red-600 hover:bg-red-700 btn-md py-2 ml-3 font-medium",
-            cancelButton: "btn btn-secondary btn-md py-2 mr-3 font-medium",
+            confirmButton: "bg-red-600 hover:bg-red-700 mt-4 text-white py-2 ml-3 font-medium",
+            cancelButton: "bg-gray-600 hover:bg-gray-700 mt-4 text-white py-2 mr-3 font-medium",
         },
     }).then((result: Object) => {
         if (result.isConfirmed) {

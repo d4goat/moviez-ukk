@@ -12,12 +12,17 @@
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
                     name="old_password" v-model="formData.old_password" placeholder="Insert old password"
                     autocomplete="off" type="password">
-                    <FloatLabel variant="in">
-                        <Password v-model="formData.old_password" :input-class="'w-full'"
+                    <InputGroup>
+                        <InputGroupAddon>
+                            <i class="pi pi-lock"></i>
+                        </InputGroupAddon>
+                        <FloatLabel variant="in">
+                            <Password v-model="formData.old_password" :input-class="'w-full'"
                             style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
                             input-id="old_password" />
                             <label for="old_password">Old Password</label>
-                    </FloatLabel>
+                        </FloatLabel>
+                    </InputGroup>
                 </Field>
                 <ErrorMessage name="old_password" class="text-red-500" />
             </div>
@@ -27,12 +32,17 @@
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
                     name="password" v-model="formData.password" placeholder="Insert old password"
                     autocomplete="off" type="password">
-                    <FloatLabel variant="in">
-                        <Password v-model="formData.password" :input-class="'w-full'"
+                    <InputGroup>
+                        <InputGroupAddon>
+                            <i class="pi pi-lock"></i>
+                        </InputGroupAddon>
+                        <FloatLabel variant="in">
+                            <Password v-model="formData.password" :input-class="'w-full'"
                             style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
                             input-id="password" />
                             <label for="password">Password</label>
-                    </FloatLabel>
+                        </FloatLabel>
+                    </InputGroup>
                 </Field>
                 <ErrorMessage name="password" class="text-red-500" />
             </div>
@@ -42,12 +52,17 @@
                 <Field class="bg-dropdown border-none col-md-9 focus:ring-[#7C7C7C] rounded-xl p-[12px]"
                     name="password_confirmation" v-model="formData.password_confirmation" placeholder="Insert old password"
                     autocomplete="off" type="password">
-                    <FloatLabel variant="in">
-                        <Password v-model="formData.password_confirmation" :input-class="'w-full'"
+                    <InputGroup>
+                        <InputGroupAddon>
+                            <i class="pi pi-lock"></i>
+                        </InputGroupAddon>
+                        <FloatLabel variant="in">
+                            <Password v-model="formData.password_confirmation" :input-class="'w-full'"
                             style="background-color: #19191c;" class="w-full" :feedback="false" toggle-mask
                             input-id="password_confirmation" />
                             <label for="password_confirmation">Password Confirmation</label>
-                    </FloatLabel>
+                        </FloatLabel>
+                    </InputGroup>
                 </Field>
                 <ErrorMessage name="password_confirmation" class="text-red-500" />
             </div>
@@ -67,6 +82,7 @@ import axios from '@/libs/axios';
 import { block, unblock } from '@/libs/utils';
 import * as yup from 'yup';
 import { ElMessage } from 'element-plus';
+import InputGroup from 'primevue/inputgroup';
 
 export default defineComponent({
     setup() {

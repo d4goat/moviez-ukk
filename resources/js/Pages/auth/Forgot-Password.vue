@@ -15,13 +15,15 @@
                     <Message size="small" severity="secondary" variant="simple">No worries, we'll send you the reset
                         instructions</Message>
                 </div>
-                <FloatLabel variant="in">
-                    <IconField>
-                        <InputIcon class="pi pi-envelope" />
+                <InputGroup>
+                    <InputGroupAddon>
+                        <i class="pi pi-at"></i>
+                    </InputGroupAddon>
+                    <FloatLabel variant="in">
                         <InputText id="email" class="w-full" v-model="email" autocomplete="off" />
-                    </IconField>
-                    <label for="email">Email</label>
-                </FloatLabel>
+                        <label for="email">Email</label>
+                    </FloatLabel>
+                </InputGroup>
                 <Button label="Send OTP" type="button" class="w-full" @click="() => forgotPassword()" variant="outlined" :loading="isLoading" />
                 <span class="text-center">Remember password? <router-link class="underline text-cinema"
                         to="/sign-in">Sign-In</router-link></span>
@@ -47,19 +49,29 @@
                 </div>
                 <div>
                     <Field name="password" v-model="password">
-                        <FloatLabel variant="in">
-                            <Password v-model="password" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password" />
-                            <label for="password">Password</label>
-                        </FloatLabel>
+                        <InputGroup>
+                            <InputGroupAddon>
+                                <i class="pi pi-lock"></i>
+                            </InputGroupAddon>
+                            <FloatLabel variant="in">
+                                <Password v-model="password" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password" />
+                                <label for="password">Password</label>
+                            </FloatLabel>
+                        </InputGroup>
                         <ErrorMessage name="password" class="text-red-500" />
                     </Field>
                 </div>
                 <div>
                     <Field name="password_confirmation" v-model="password_confirmation" class="flex flex-col space-y-3">
-                        <FloatLabel variant="in">
-                            <Password v-model="password_confirmation" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password_confirmation" />
-                            <label for="password_confirmation">Password Confirmation</label>
-                        </FloatLabel>
+                        <InputGroup>
+                            <InputGroupAddon>
+                                <i class="pi pi-lock"></i>
+                            </InputGroupAddon>
+                                <FloatLabel variant="in">
+                                <Password v-model="password_confirmation" toggle-mask minlength="8" :feedback="false" class="w-full" input-class="w-full" input-id="password_confirmation" />
+                                <label for="password_confirmation">Password Confirmation</label>
+                            </FloatLabel>
+                        </InputGroup>
                         <ErrorMessage name="password_confirmation" class="text-red-500" />
                     </Field>
                 </div>
@@ -122,7 +134,7 @@ const { mutate: updatePassword, isLoading: isLoadingUpdate } = useMutation({
                 router.push({ name: 'sign-in' })
             }, 500)
     },
-    onError: (err: any) => ElMessage.error(err.response.data.errors.password[0])
+    onError: (err: any) => ElMessage.error(err.response.data.message)
 })
 
 const nextInput = (event: Event, index: number) => {

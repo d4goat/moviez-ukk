@@ -38,12 +38,12 @@ class UserController extends Controller
 
         $validated['role_id'] = 2;
 
-        $role = Role::findById($validated['role_id']);
 
         if($request->hasFile('photo')){
             $validated['image'] = '/storage/' . $request->file('photo')->store('users', 'public');
         }
 
+        $role = Role::findById($validated['role_id']);
         $user = User::create($validated);
         $user->assignRole($role);
 
@@ -90,7 +90,6 @@ class UserController extends Controller
         }
 
         $validate = $request->validated();
-        $validate['role_id'] = 2;
 
         if($request->hasFile('photo')){
             if($data->photo){
@@ -156,7 +155,7 @@ class UserController extends Controller
           'old_password' => 'required|string',
           'password' => 'required|string|min:8|confirmed',
         ]);
-    
+
         $user = User::find(auth()->user()->id);
         if (!Hash::check($data['old_password'], $user->password)) {
           return response()->json([
@@ -169,7 +168,7 @@ class UserController extends Controller
                 'message' => "New Password can't same with the Old Password"
             ], 500);
         }
-    
+
         $user->password = bcrypt($data['password']);
         if ($user->update()) {
           return response()->json([
@@ -188,7 +187,7 @@ class UserController extends Controller
     public function destroy(string $uuid)
     {
         $data = User::findByUuid($uuid);
-        
+
         if(!$data){
             return response()->json([
                 'message' => 'No data found'

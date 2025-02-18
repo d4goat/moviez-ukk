@@ -7,12 +7,12 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.modal-open
 	overflow-y: initial !important;
 
 	&:not(.sweetalert2-nopadding) {
-		padding-right: 0 !important; 
+		padding-right: 0 !important;
 	}
 }
 
 .swal2-popup {
-	background-color: #26272e;
+	background-color: #131313;
 	padding: 2rem;
 
 	.swal2-title {
@@ -63,7 +63,7 @@ body.swal2-height-auto {
 
 .swal2-icon {
 	&.swal2-warning {
-    	border-color: #cccc00;
+    	border-color: #ccb800;
     	color: #cccc00;
 	}
 
@@ -113,7 +113,7 @@ body.swal2-height-auto {
     border: 1px solid #626aef;
 }
 
-  
+
   /* Target the actual input */
   .el-select__input {
     border: none !important;
